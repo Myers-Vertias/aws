@@ -131,4 +131,4 @@ A centralized, secure platform replaces scattered document storage, with authent
 The serverless design scales automatically without server maintenance.
 #### Long-term Value
 A reusable serverless foundation that can be extended with full-text search, document versioning, sharing, notifications, or AI-based analysis.  
-A practical reference project for building secure, low-cost applications on AWS.
+A practical reference project for building secure, low-cost applications on AWS
