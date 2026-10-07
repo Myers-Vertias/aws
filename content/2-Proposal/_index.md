@@ -25,7 +25,7 @@ The solution gives users a single, secure place to manage documents, reduces the
 ### 3. Solution Architecture
 The platform follows a serverless AWS architecture. Users access a web app hosted on AWS Amplify and sign in through Amazon Cognito. Requests pass through Amazon API Gateway to AWS Lambda, which manages metadata in Amazon DynamoDB and issues pre-signed URLs for files stored in Amazon S3. Amazon CloudWatch monitors the system, and GitHub with AWS Amplify provides automated frontend deployment. The architecture is detailed below:
 
-![Serverless Document Management System Architecture](/images/2-Proposal/platform_architecture.png)
+![Serverless Document Management System Architecture](../../static/images/2-Proposal/platform_architecture.jpeg)
 
 **Request Flow**
 1. The user opens the web app hosted on AWS Amplify over HTTPS.
