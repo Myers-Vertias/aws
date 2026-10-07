@@ -25,7 +25,7 @@ Giải pháp mang lại cho người dùng một nơi tập trung và an toàn �
 ### 3. Kiến trúc giải pháp
 Nền tảng theo kiến trúc serverless trên AWS. Người dùng truy cập web app được host trên AWS Amplify và đăng nhập qua Amazon Cognito. Các request đi qua Amazon API Gateway đến AWS Lambda, nơi quản lý metadata trong Amazon DynamoDB và cấp pre-signed URL cho các file lưu trong Amazon S3. Amazon CloudWatch giám sát hệ thống, còn GitHub kết hợp AWS Amplify giúp deploy frontend tự động. Kiến trúc chi tiết như sau:
 
-![Kiến trúc hệ thống quản lý tài liệu Serverless](../../static/images/2-Proposal/platform_architecture.jpeg)
+![Kiến trúc hệ thống quản lý tài liệu Serverless](../../static/images/2-Proposal/platform_architecture.jpg)
 
 **Luồng xử lý request**
 1. Người dùng mở web app được host trên AWS Amplify qua HTTPS.
