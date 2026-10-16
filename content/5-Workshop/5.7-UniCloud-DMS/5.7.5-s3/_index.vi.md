@@ -14,7 +14,7 @@ Tạo bucket riêng tư để lưu object tài liệu. DynamoDB lưu metadata v�
 
 1. Mở [Amazon S3 console](https://console.aws.amazon.com/s3/).
 2. Chọn **Create bucket**.
-3. Đặt tên development duy nhất toàn cầu, ví dụ **unicloud-dms-dev-<unique-suffix>**. Tên bucket là duy nhất trên toàn cầu; thay ví dụ bằng tên còn khả dụng với tài khoản.
+3. Đặt tên development duy nhất toàn cầu, ví dụ **unicloud-dms-dev-your-unique-suffix**. Tên bucket là duy nhất trên toàn cầu; thay ví dụ bằng tên còn khả dụng với tài khoản.
 4. Chọn cùng Region đã chọn ở mục 5.7.1.
 5. Giữ bật **Block all public access**.
 6. Giữ bật mã hóa mặc định. Với workshop này, mã hóa do S3 quản lý là đủ, trừ khi thiết kế đã duyệt yêu cầu KMS key do khách hàng quản lý.
