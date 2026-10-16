@@ -1,59 +1,27 @@
 ---
 title: "Worklog Tuần 4"
-date: 2024-01-01
+date: 2026-10-07
 weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 4:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Tìm hiểu vai trò và chức năng của Amazon Cognito trong việc xác thực và quản lý người dùng.
+* Tìm hiểu AWS Amplify và cách dịch vụ này hỗ trợ phát triển, triển khai ứng dụng frontend.
+* Tìm hiểu Amazon API Gateway và vai trò của dịch vụ trong việc tạo, quản lý các API.
+* Hiểu sơ bộ cách các dịch vụ trên có thể phối hợp trong kiến trúc của dự án.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Các công việc đã thực hiện trong tuần:
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| Thứ 4 | **Tìm hiểu các dịch vụ AWS phục vụ dự án**<br>• Học về Amazon Cognito, tập trung vào vai trò xác thực và quản lý danh tính người dùng trong ứng dụng.<br>• Tìm hiểu AWS Amplify và cách dịch vụ hỗ trợ quá trình phát triển, xây dựng và triển khai ứng dụng frontend.<br>• Tìm hiểu Amazon API Gateway, chức năng cung cấp và quản lý API để kết nối frontend với các thành phần xử lý phía backend.<br>• Xem xét vai trò của từng dịch vụ và cách chúng có thể được kết hợp trong kiến trúc dự án. | 07/10/2026 | 07/10/2026 | [Amazon Cognito – AWS Study Group](https://000141.awsstudygroup.com/); [AWS Amplify – AWS Study Group](https://000134.awsstudygroup.com/); [Amazon API Gateway – AWS Study Group](https://000135.awsstudygroup.com/) |
 
 ### Kết quả đạt được tuần 4:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Nắm được mục đích sử dụng cơ bản của Amazon Cognito trong việc xác thực và quản lý người dùng.
+* Hiểu được vai trò của AWS Amplify trong việc hỗ trợ phát triển và triển khai ứng dụng frontend.
+* Hiểu được chức năng của Amazon API Gateway trong việc cung cấp và quản lý các API.
+* Có thêm kiến thức nền tảng về cách các dịch vụ này có thể phối hợp để hỗ trợ luồng hoạt động của dự án.
