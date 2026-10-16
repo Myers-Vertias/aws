@@ -14,7 +14,7 @@ Create a private bucket to store document objects. DynamoDB will store metadata 
 
 1. Open the [Amazon S3 console](https://console.aws.amazon.com/s3/).
 2. Choose **Create bucket**.
-3. Use a globally unique development bucket name, such as **unicloud-dms-dev-<unique-suffix>**. Bucket names are globally unique; replace the example with a name available to your account.
+3. Use a globally unique development bucket name, such as **unicloud-dms-dev-your-unique-suffix**. Bucket names are globally unique; replace the example with a name available to your account.
 4. Select the same Region chosen in section 5.7.1.
 5. Keep **Block all public access** enabled.
 6. Keep default encryption enabled. For this workshop, the default S3-managed encryption is sufficient unless the approved design requires a customer-managed KMS key.
