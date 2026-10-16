@@ -1,59 +1,30 @@
 ---
 title: "Worklog Tuần 3"
-date: 2024-01-01
+date: 2026-09-30
 weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 3:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+* Lựa chọn đề tài dự án phù hợp với mục tiêu, tính khả thi và phạm vi triển khai.
+* Phân tích cách dự án dự kiến hoạt động và xác định các thành phần chức năng chính.
+* Tìm hiểu, đánh giá các dịch vụ AWS có thể sử dụng để xây dựng kiến trúc dự án.
+* Xây dựng sơ đồ luồng hoạt động ban đầu nhằm minh họa cách hệ thống vận hành và sự tương tác giữa các thành phần.
+* Đặt nền tảng kiến trúc sơ bộ phục vụ cho quá trình lập kế hoạch và phát triển dự án ở các giai đoạn tiếp theo.
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Các công việc thực hiện trong tuần này:
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| Thứ Tư | **Lựa chọn dự án và phân tích các dịch vụ AWS**<br>• Tìm hiểu và đánh giá các ý tưởng dự án dựa trên mục tiêu, tính khả thi và phạm vi thực hiện.<br>• Lựa chọn hướng triển khai dự án và phân tích vấn đề mà dự án hướng đến giải quyết.<br>• Tìm hiểu cách hệ thống dự kiến vận hành, bao gồm các chức năng chính và cách người dùng tương tác với hệ thống.<br>• Nghiên cứu các dịch vụ AWS có thể hỗ trợ dự án, bao gồm AWS Amplify, Amazon Cognito, Amazon API Gateway, AWS Lambda, Amazon S3, Amazon DynamoDB và Amazon CloudWatch.<br>• Phân tích vai trò dự kiến của từng dịch vụ và cách các dịch vụ có thể phối hợp trong kiến trúc serverless. | 30/09/2026 | 30/09/2026 | [AWS Architecture Center](https://aws.amazon.com/architecture/); [AWS Serverless](https://aws.amazon.com/serverless/) |
+| Thứ Năm | **Phân tích luồng hoạt động và thiết kế sơ đồ**<br>• Phân tích luồng hoạt động tổng thể của dự án, từ thao tác của người dùng đến xử lý ở backend và lưu trữ dữ liệu.<br>• Vẽ sơ đồ luồng hoạt động ban đầu để mô tả trình tự xử lý và sự tương tác giữa các thành phần chính của hệ thống.<br>• Xác định mối liên hệ dự kiến giữa frontend, xác thực người dùng, lớp API, xử lý nghiệp vụ, lưu trữ tệp và lưu trữ metadata.<br>• Rà soát sơ đồ để bảo đảm thể hiện đúng luồng hoạt động dự kiến và hỗ trợ cho việc thiết kế kiến trúc chi tiết ở các giai đoạn tiếp theo. | 01/10/2026 | 01/10/2026 | [AWS Architecture Center](https://aws.amazon.com/architecture/); [AWS Serverless](https://aws.amazon.com/serverless/) |
 
 ### Kết quả đạt được tuần 3:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
-
+* Đánh giá và lựa chọn được hướng dự án để tiếp tục phát triển trong thời gian thực tập.
+* Hiểu rõ hơn về mục tiêu, luồng hoạt động dự kiến và các thành phần chức năng chính của dự án.
+* Tìm hiểu các dịch vụ AWS phù hợp và xác định vai trò dự kiến của chúng trong giải pháp.
+* Xây dựng sơ đồ luồng hoạt động ban đầu để trực quan hóa cách dự án vận hành và sự tương tác giữa các thành phần.
+* Hình thành hiểu biết ban đầu về kiến trúc hệ thống, làm cơ sở cho các bước lập kế hoạch và thiết kế kỹ thuật tiếp theo.
