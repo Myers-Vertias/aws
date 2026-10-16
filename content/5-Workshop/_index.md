@@ -1,29 +1,37 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-10-16
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Workshop Overview
+# Workshop: Building UniCloud DMS on AWS
 
-This chapter contains hands-on AWS labs. It retains the existing exercises on private S3 access through VPC endpoints and adds a project-based workshop for **UniCloud DMS**, a serverless document management application.
-
-The UniCloud DMS workshop is designed to guide learners from the existing React/Vite frontend prototype to an AWS-backed application using managed authentication, private object storage, a REST API, and serverless business logic.
+This workshop guides learners from the existing React/Vite frontend to an AWS-backed document-management application.
 
 {{% notice warning %}}
-**Implementation status:** The UniCloud DMS instructions are a guided implementation plan until each AWS step has been performed and verified. Screenshot placeholders are intentional. Replace them with genuine screenshots from the learner's own environment after completing each step.
+**Status:** This is a guide framework prepared before backend implementation. Screenshot positions are placeholders; replace them with real images only after performing and verifying each step. Expected results are not deployment evidence.
 {{% /notice %}}
 
-#### Workshop content
+## Workshop contents
 
-1. [Workshop overview](5.1-Workshop-overview/)
-2. [Prerequisites](5.2-Prerequiste/)
-3. [Access S3 from a VPC](5.3-S3-vpc/)
-4. [Access S3 from on-premises](5.4-S3-onprem/)
-5. [VPC endpoint policies (bonus)](5.5-Policy/)
-6. [Clean up the hybrid S3 lab](5.6-Cleanup/)
-7. [Build UniCloud DMS on AWS](5.7-UniCloud-DMS/)
+- [5.1 Prerequisites](5.1-Prerequisites/)
+- [5.2 Backend Design](5.2-Backend-Design/)
+- [5.3 Amazon Cognito](5.3-Amazon-Cognito/)
+- [5.4 Amazon DynamoDB](5.4-Amazon-DynamoDB/)
+- [5.5 Amazon S3](5.5-Amazon-S3/)
+- [5.6 IAM and AWS Lambda](5.6-IAM-and-Lambda/)
+- [5.7 Amazon API Gateway](5.7-API-Gateway/)
+- [5.8 Frontend Integration](5.8-Frontend-Integration/)
+- [5.9 AWS Amplify Hosting](5.9-Amplify-Hosting/)
+- [5.10 End-to-End Testing](5.10-End-to-End-Testing/)
+- [5.11 Monitoring and Security](5.11-Monitoring-and-Security/)
+- [5.12 Cleanup](5.12-Cleanup/)
 
-The UniCloud DMS workshop covers authentication, DynamoDB metadata, private S3 storage, Lambda, API Gateway, frontend integration, hosting, testing, monitoring, and cleanup. Use the steps in order and keep all resources in a consistent AWS Region unless a step explicitly says otherwise.
+## General principles
+
+- Use one AWS Region unless there is a documented reason not to.
+- Keep S3 private and check backend authorization before issuing file URLs.
+- Do not include credentials, full JWTs, or presigned URLs in screenshots or Git.
+- Mark tests as passed only after actual execution, and clean up resources after evidence is saved.

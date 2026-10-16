@@ -1,29 +1,37 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-10-16
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
 
-# Tổng quan Workshop
+# Workshop: Xây dựng UniCloud DMS trên AWS
 
-Chương này tập hợp các bài thực hành AWS. Các bài lab về truy cập S3 riêng tư thông qua VPC Endpoint được giữ nguyên, đồng thời bổ sung workshop xây dựng **UniCloud DMS** — ứng dụng quản lý tài liệu theo kiến trúc serverless.
-
-Workshop UniCloud DMS hướng dẫn người học phát triển từ frontend React/Vite hiện có thành ứng dụng sử dụng dịch vụ AWS cho xác thực, lưu trữ đối tượng riêng tư, REST API và xử lý nghiệp vụ serverless.
+Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite hiện có đến ứng dụng quản lý tài liệu được backend AWS hỗ trợ.
 
 {{% notice warning %}}
-**Trạng thái triển khai:** Các hướng dẫn UniCloud DMS là kế hoạch thực hành cho đến khi từng bước AWS được thực hiện và kiểm chứng. Những vị trí đánh dấu ảnh chụp màn hình là có chủ đích; hãy thay bằng ảnh thật từ môi trường của người học sau khi hoàn thành bước tương ứng.
+**Trạng thái:** Đây là khung hướng dẫn chuẩn bị trước khi triển khai backend. Các vị trí ảnh là placeholder; chỉ thay bằng ảnh thật sau khi thực hiện và xác minh bước tương ứng. Không coi kết quả mong đợi là bằng chứng triển khai.
 {{% /notice %}}
 
-#### Nội dung workshop
+## Nội dung Workshop
 
-1. [Tổng quan workshop](5.1-Workshop-overview/)
-2. [Điều kiện tiên quyết](5.2-Prerequiste/)
-3. [Truy cập S3 từ VPC](5.3-S3-vpc/)
-4. [Truy cập S3 từ môi trường on-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policy (mở rộng)](5.5-Policy/)
-6. [Dọn dẹp lab S3 hybrid](5.6-Cleanup/)
-7. [Xây dựng UniCloud DMS trên AWS](5.7-UniCloud-DMS/)
+- [5.1 Điều kiện tiên quyết](5.1-Prerequisites/)
+- [5.2 Thiết kế Backend](5.2-Backend-Design/)
+- [5.3 Amazon Cognito](5.3-Amazon-Cognito/)
+- [5.4 Amazon DynamoDB](5.4-Amazon-DynamoDB/)
+- [5.5 Amazon S3](5.5-Amazon-S3/)
+- [5.6 IAM và AWS Lambda](5.6-IAM-and-Lambda/)
+- [5.7 Amazon API Gateway](5.7-API-Gateway/)
+- [5.8 Tích hợp Frontend](5.8-Frontend-Integration/)
+- [5.9 AWS Amplify Hosting](5.9-Amplify-Hosting/)
+- [5.10 Kiểm thử End-to-End](5.10-End-to-End-Testing/)
+- [5.11 Giám sát và Bảo mật](5.11-Monitoring-and-Security/)
+- [5.12 Dọn dẹp](5.12-Cleanup/)
 
-Workshop UniCloud DMS bao gồm xác thực, metadata trên DynamoDB, lưu trữ S3 riêng tư, Lambda, API Gateway, tích hợp frontend, hosting, kiểm thử, giám sát và dọn dẹp. Hãy thực hiện các bước theo thứ tự và sử dụng cùng một AWS Region cho toàn bộ tài nguyên, trừ khi hướng dẫn yêu cầu khác.
+## Nguyên tắc chung
+
+- Dùng cùng AWS Region trừ khi có lý do rõ ràng khác.
+- Giữ S3 riêng tư; kiểm tra phân quyền backend trước khi cấp URL file.
+- Không đưa credentials, JWT đầy đủ hoặc presigned URL vào ảnh/Git.
+- Chỉ ghi test đạt sau khi đã chạy thực tế và dọn dẹp resource sau khi lưu minh chứng.
