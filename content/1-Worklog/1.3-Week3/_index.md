@@ -1,57 +1,30 @@
 ---
 title: "Week 3 Worklog"
-date: 2024-01-01
+date: 2026-09-30
 weight: 1
 chapter: false
 pre: " <b> 1.3. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 3 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+* Select a suitable project topic based on its objectives, feasibility, and implementation requirements.
+* Analyze how the proposed project will work and identify its main functional components.
+* Research and evaluate AWS services that can support the proposed project architecture.
+* Develop an initial workflow diagram to illustrate how the project operates and how its components interact.
+* Establish a preliminary architectural foundation for further project planning and development.
 
 ### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| Wednesday | **Project Selection & AWS Service Analysis**<br>• Explore and evaluate potential project ideas based on their objectives, feasibility, and scope.<br>• Select a project direction and analyze the problem it aims to solve.<br>• Study how the proposed system is expected to operate, including its main functions and user interactions.<br>• Research AWS services that could support the project, including AWS Amplify, Amazon Cognito, Amazon API Gateway, AWS Lambda, Amazon S3, Amazon DynamoDB, and Amazon CloudWatch.<br>• Analyze the potential roles of these services and how they could work together in a serverless architecture. | 09/30/2026 | 09/30/2026 | [AWS Architecture Center](https://aws.amazon.com/architecture/); [AWS Serverless](https://aws.amazon.com/serverless/) |
+| Thursday | **Project Workflow Analysis & Diagram Design**<br>• Analyze the project's end-to-end workflow, from user interaction to backend processing and data storage.<br>• Draw an initial workflow diagram to illustrate the sequence of operations and interactions between the main system components.<br>• Map the proposed relationships between the frontend, authentication, API layer, business logic, file storage, and metadata storage.<br>• Review the diagram to ensure that it represents the intended system workflow and supports further architecture design. | 10/01/2026 | 10/01/2026 | [AWS Architecture Center](https://aws.amazon.com/architecture/); [AWS Serverless](https://aws.amazon.com/serverless/) |
 
 ### Week 3 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+* Evaluated and selected a project direction for further development during the internship.
+* Developed a clearer understanding of the project's objectives, expected workflow, and main functional components.
+* Researched relevant AWS services and identified their potential roles in the proposed solution.
+* Created an initial workflow diagram to visualize the project's operation and the interactions between its components.
+* Established a preliminary understanding of the system architecture to support the next stages of project planning and technical design.
