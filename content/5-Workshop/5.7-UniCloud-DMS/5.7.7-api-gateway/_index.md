@@ -26,7 +26,7 @@ Capture the route list and integration targets.
 
 Create a JWT authorizer for the Cognito User Pool:
 
-- **Issuer URL:** https://cognito-idp.<region>.amazonaws.com/<user-pool-id>
+- **Issuer URL example:** https://cognito-idp.REGION.amazonaws.com/USER_POOL_ID (replace REGION and USER_POOL_ID with the actual values).
 - **Audience:** the Cognito App Client ID used by the application.
 - Attach the authorizer to all routes that access user documents or change application data.
 
