@@ -1,31 +1,37 @@
 ---
 title: "Workshop"
-date: 2024-01-01
+date: 2026-10-16
 weight: 5
 chapter: false
 pre: " <b> 5. </b> "
 ---
+
+# Workshop: Building UniCloud DMS on AWS
+
+This workshop guides learners from the existing React/Vite frontend to an AWS-backed document-management application.
+
 {{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
+**Status:** This is a guide framework prepared before backend implementation. Screenshot positions are placeholders; replace them with real images only after performing and verifying each step. Expected results are not deployment evidence.
 {{% /notice %}}
 
-# Secure Hybrid Access to S3 using VPC Endpoints
+## Workshop contents
 
-#### Overview
+- [5.1 Prerequisites](5.1-Prerequisites/)
+- [5.2 Backend Design](5.2-Backend-Design/)
+- [5.3 Amazon Cognito](5.3-Amazon-Cognito/)
+- [5.4 Amazon DynamoDB](5.4-Amazon-DynamoDB/)
+- [5.5 Amazon S3](5.5-Amazon-S3/)
+- [5.6 IAM and AWS Lambda](5.6-IAM-and-Lambda/)
+- [5.7 Amazon API Gateway](5.7-API-Gateway/)
+- [5.8 Frontend Integration](5.8-Frontend-Integration/)
+- [5.9 AWS Amplify Hosting](5.9-Amplify-Hosting/)
+- [5.10 End-to-End Testing](5.10-End-to-End-Testing/)
+- [5.11 Monitoring and Security](5.11-Monitoring-and-Security/)
+- [5.12 Cleanup](5.12-Cleanup/)
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+## General principles
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
-
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
-+ **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-+ **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
-
-#### Content
-
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+- Use one AWS Region unless there is a documented reason not to.
+- Keep S3 private and check backend authorization before issuing file URLs.
+- Do not include credentials, full JWTs, or presigned URLs in screenshots or Git.
+- Mark tests as passed only after actual execution, and clean up resources after evidence is saved.
