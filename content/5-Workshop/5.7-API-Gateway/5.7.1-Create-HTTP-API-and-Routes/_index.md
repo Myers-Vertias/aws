@@ -7,7 +7,7 @@ pre: " <b> 5.7.1 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
@@ -21,13 +21,19 @@ Connect API Gateway routes to their intended Lambda integrations.
 3. Ensure API Gateway has permission to invoke the selected Lambda functions.
 4. Keep route methods, path parameters, and response expectations consistent with frontend code.
 
-## Screenshot placeholder
+## Deployed routes and integrations
 
-**[Screenshot placeholder 5.7.1 — API route list and Lambda integration mapping.]**
+![Screenshot 5.7.1: API Gateway health, proxy, and CORS preflight routes](/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
+
+The deployed API exposes `GET /health` through its dedicated `dms-dev-health` Lambda integration; document routes are dispatched through `ANY /{proxy+}` to `dms-dev-documents`, and `OPTIONS /{proxy+}` serves CORS preflight. Both Lambda integrations use payload format `2.0` and a 30,000 ms timeout.
+
+![Screenshot 5.7.1: Health route integration details showing the dedicated Lambda function](/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
+
+![Screenshot 5.7.1: Proxy route integration details showing the Lambda function, payload format, and timeout](/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
 
 ## Expected result
 
-Routes point to the correct handlers and the invoke URL is recorded.
+The deployed `$default` stage routes health checks to `dms-dev-health` and document requests to `dms-dev-documents`; browser/API results are recorded in section 5.7.2 and 5.8.2.
 
 ## Troubleshooting
 

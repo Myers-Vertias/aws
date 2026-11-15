@@ -7,7 +7,7 @@ pre: " <b> 5.9.1 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,13 +21,13 @@ Kết nối Amplify tới repository chứa UniCloud DMS, không phải reposito
 3. Đặt thư mục artifact Vite là `dist` và cấu hình SPA rewrite cho route React Router.
 4. Xem lại build setting trước khi lưu.
 
-## Vị trí ảnh chụp màn hình
+## Minh chứng triển khai
 
-**[Vị trí ảnh 5.9.1 — Lựa chọn repository/branch Amplify và build setting frontend.]**
+Nhánh production `main` đã deploy trên Amplify; trạng thái nhánh và frontend được chụp ở mục 5.9.2. Không lưu màn hình chọn repository và build settings ban đầu.
 
 ## Kết quả mong đợi
 
-Amplify đã kết nối đúng mã nguồn ứng dụng và nhận diện đầu ra build.
+Nhánh ứng dụng `main` đã deploy và phục vụ frontend. Không chụp riêng chi tiết repository/build settings.
 
 ## Khắc phục sự cố
 

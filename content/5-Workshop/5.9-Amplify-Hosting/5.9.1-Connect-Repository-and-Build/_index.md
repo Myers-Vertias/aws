@@ -7,7 +7,7 @@ pre: " <b> 5.9.1 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
@@ -21,13 +21,13 @@ Connect Amplify to the repository containing UniCloud DMS, not the workshop docu
 3. Set the Vite artifact directory to `dist` and configure SPA rewrites for React Router routes.
 4. Review build settings before saving.
 
-## Screenshot placeholder
+## Deployment evidence
 
-**[Screenshot placeholder 5.9.1 — Amplify repository/branch selection and frontend build settings.]**
+The production `main` branch is deployed on Amplify; its branch status and deployed frontend are shown in section 5.9.2. The original repository-selection and build-settings screen was not retained.
 
 ## Expected result
 
-Amplify is connected to the correct application source and recognizes the build output.
+The `main` application branch is deployed and serving the frontend. Detailed repository/build settings were not separately captured.
 
 ## Troubleshooting
 

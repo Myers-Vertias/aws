@@ -7,7 +7,7 @@ pre: " <b> 5.6.3 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Mục này dùng lại minh chứng trình duyệt và API ở các mục 5.7.2, 5.8.2, 5.10.2 và 5.10.3 để tránh chụp lặp ảnh.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -22,9 +22,14 @@ Triển khai upload/download presigned, Favorites, Tags, Thùng rác và sharing
 4. Thùng rác là xóa mềm qua `deletedAt`; khôi phục xóa trường này. Xóa vĩnh viễn phải phối hợp xóa object S3 và metadata liên quan.
 5. Tạo share phải xác minh người nhận, chặn tự chia sẻ/trùng lặp. Revoke chặn truy cập metadata/URL mới. Presigned URL đã cấp trước đó còn hạn đến khi hết thời gian.
 
-## Vị trí ảnh chụp màn hình
+## Hành vi đã xác nhận và minh chứng
 
-**[Vị trí ảnh 5.6.3 — Kiểm thử phân quyền upload/download, Favorites, Thùng rác/khôi phục và share/revoke.]**
+- **Upload/download bằng presigned URL:** Kết quả upload S3 thành công, lưu metadata và luồng tải xuống được ghi nhận ở mục 5.8.2.
+- **Phân quyền tài nguyên:** Mục 5.7.2 ghi nhận request chưa xác thực nhận `401` và tài khoản thứ hai đã đăng nhập nhận `404` khi mở tài liệu riêng chưa chia sẻ của chủ sở hữu.
+- **Chia sẻ:** Mục 5.10.2 ghi nhận tài liệu xuất hiện trong Được chia sẻ với tôi và thao tác tải xuống; mục 5.8.2 cũng ghi nhận lượt tải trực tiếp của tài khoản nhận.
+- **Yêu thích, metadata và Thùng rác/khôi phục:** Kết quả được ghi nhận tại mục 5.8.2 và 5.10.3.
+
+Chưa xác minh thu hồi chia sẻ, chặn tự chia sẻ/trùng lặp, hoặc việc viewer bị từ chối khi sửa/xóa tài liệu được chia sẻ. Báo cáo không khẳng định các hành vi này.
 
 ## Kết quả mong đợi
 

@@ -11,8 +11,22 @@ pre: " <b> 5. </b> "
 Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite hiện có đến ứng dụng quản lý tài liệu được backend AWS hỗ trợ.
 
 {{% notice warning %}}
-**Trạng thái:** Đây là khung hướng dẫn chuẩn bị trước khi triển khai backend. Các vị trí ảnh là placeholder; chỉ thay bằng ảnh thật sau khi thực hiện và xác minh bước tương ứng. Không coi kết quả mong đợi là bằng chứng triển khai.
+**Trạng thái triển khai (15 tháng 11 năm 2026):** Ứng dụng `dms-dev` đã triển khai tại `ap-southeast-1`; frontend React đang được phục vụ qua Amplify. Đã quan sát đăng nhập Cognito thật, gọi API có xác thực, upload/download S3, lưu metadata, Favorites, Thùng rác/khôi phục và chia sẻ giữa hai tài khoản. Báo cáo phân biệt kết quả đã quan sát với nội dung còn chưa xác minh.
 {{% /notice %}}
+
+## Đã triển khai và xác minh
+
+- Tạo Cognito User Pool và public web app client; đăng ký và đăng nhập bằng tài khoản Cognito thật.
+- Triển khai HTTP API, Lambda, S3 riêng tư và ba bảng DynamoDB. Bảng cùng access index được ghi ở mục 5.4.1 và 5.4.2.
+- Xác minh request lấy danh sách tài liệu đã đăng nhập (`200`), request chưa xác thực (`401`) và tài khoản thứ hai đã đăng nhập gọi tài liệu chưa chia sẻ (`404`).
+- Xác minh upload, lưu metadata, download, Favorites, Thùng rác/khôi phục, chia sẻ, tài khoản nhận xem/tải tài liệu, lọc danh mục, tìm theo thẻ và giao diện tiếng Việt/Anh. Minh chứng nằm ở các mục 5.7.2, 5.8.2 và 5.10.
+- Cấu hình S3 riêng tư, mã hóa mặc định SSE-S3 và CORS cho origin local cùng Amplify.
+
+## Chưa xác minh hoặc chưa hoàn tất
+
+- Chưa kiểm thử từ chối file quá dung lượng/token hết hạn, xóa vĩnh viễn, S3 Lifecycle, thu hồi share, chặn tự chia sẻ/trùng lặp và từ chối viewer sửa/xóa tài liệu.
+- CloudWatch chưa có log ghép từng request với route/status. IAM user `dms-dev` bị từ chối `iam:GetRole`, nên chưa thể kiểm tra độc lập nội dung policy hiện hành của execution role.
+- Đã thêm sơ đồ kiến trúc của hệ thống đã deploy. Sơ đồ data model riêng do sinh viên tự vẽ và bước kiểm tra billing sau deploy còn thiếu. Bảng tổng kết minh chứng đã được ghi ở mục 5.12.1. Tài nguyên AWS của workshop chưa được cleanup.
 
 ## Nội dung Workshop
 

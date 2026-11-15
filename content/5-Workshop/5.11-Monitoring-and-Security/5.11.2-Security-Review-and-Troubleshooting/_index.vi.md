@@ -7,7 +7,7 @@ pre: " <b> 5.11.2 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Bằng chứng S3 Block Public Access và SSE-S3 được ghi ở mục 5.5.1. User `dms-dev` không thể xem Lambda execution role vì IAM từ chối `iam:GetRole`; chưa xác minh được policy có least-privilege hay không.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -23,7 +23,9 @@ Theo trình tự chẩn đoán nhất quán và xác minh lưu trữ riêng tư 
 
 ## Vị trí ảnh chụp màn hình
 
-**[Vị trí ảnh 5.11.2 — Rà soát bảo mật đã làm sạch và dấu vết từ request lỗi tới nguyên nhân.]**
+![Ảnh 5.11.2: IAM từ chối dms-dev quyền xem Lambda execution role](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.2-iam-role-review-access-denied.png)
+
+Không có quyền IAM nào bị thay đổi. Nội dung policy của role và phạm vi least-privilege chưa thể xác minh bằng phiên đăng nhập này.
 
 ## Kết quả mong đợi
 

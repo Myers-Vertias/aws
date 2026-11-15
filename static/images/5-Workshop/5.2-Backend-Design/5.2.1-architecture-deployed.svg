@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1040" viewBox="0 0 1600 1040" role="img" aria-labelledby="title desc">
+  <title id="title">UniCloud DMS deployed AWS architecture</title>
+  <desc id="desc">Users access the React frontend hosted by Amplify, authenticate with Cognito, and call a JWT protected API Gateway HTTP API. Lambda functions serve documents and health checks, use DynamoDB, issue S3 presigned URLs, and write runtime logs to CloudWatch. GitHub main deploys the frontend to Amplify.</desc>
+  <defs>
+    <marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#344256"/></marker>
+    <marker id="ab" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#2563eb"/></marker>
+    <marker id="ag" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#11805b"/></marker>
+    <marker id="as" markerWidth="10" markerHeight="10" refX="2" refY="5" orient="auto"><path d="M10 0L0 5L10 10Z" fill="#344256"/></marker>
+    <style>
+      text{font-family:Arial,Helvetica,sans-serif;fill:#172033}.title{font-size:29px;font-weight:700}.sub{font-size:16px;fill:#5c687b}.ct{font-size:18px;font-weight:700;fill:#174ea6}.nt{font-size:19px;font-weight:700}.ns{font-size:15px;fill:#4b5870}.sm{font-size:13px;fill:#354258}.edge{fill:none;stroke:#344256;stroke-width:2.5;marker-end:url(#a)}.blue{fill:none;stroke:#2563eb;stroke-width:2.7;marker-end:url(#ab)}.green{fill:none;stroke:#11805b;stroke-width:2.7;marker-end:url(#ag)}.dash{fill:none;stroke:#66758a;stroke-width:2;stroke-dasharray:8 7;marker-end:url(#a)}.both{fill:none;stroke:#344256;stroke-width:2.5;marker-start:url(#as);marker-end:url(#a)}.lb{fill:#fff;opacity:.96}
+    </style>
+  </defs>
+  <rect width="1600" height="1040" fill="#f7f9fc"/>
+  <text x="50" y="53" class="title">UniCloud DMS | Deployed AWS architecture</text>
+  <text x="50" y="81" class="sub">Region ap-southeast-1 · React/Vite · API Gateway HTTP API · private document storage</text>
+  <rect x="220" y="105" width="1350" height="675" rx="24" fill="#eef5ff" stroke="#7aa7e8" stroke-width="2.5"/>
+  <rect x="245" y="120" width="130" height="34" rx="17" fill="#d9e9ff"/><text x="264" y="143" class="ct">AWS Cloud</text>
+
+  <!-- User -->
+  <circle cx="100" cy="238" r="25" fill="#e8eef8" stroke="#526075" stroke-width="2"/><path d="M55 320Q57 278 100 275Q143 278 145 320Z" fill="#e8eef8" stroke="#526075" stroke-width="2"/>
+  <text x="75" y="348" class="nt">User</text><text x="60" y="370" class="ns">Browser</text>
+
+  <!-- AWS service cards -->
+  <g><rect x="270" y="190" width="230" height="115" rx="16" fill="#fff" stroke="#3468d4" stroke-width="3"/><path d="M286 190H484Q500 190 500 206V211H270V206Q270 190 286 190Z" fill="#3468d4"/><text x="292" y="248" class="nt">AWS Amplify</text><text x="292" y="274" class="ns">React/Vite frontend</text><text x="292" y="294" class="sm">Production branch: main</text></g>
+  <g><rect x="270" y="430" width="230" height="118" rx="16" fill="#fff" stroke="#d34555" stroke-width="3"/><path d="M286 430H484Q500 430 500 446V451H270V446Q270 430 286 430Z" fill="#d34555"/><text x="292" y="488" class="nt">Amazon Cognito</text><text x="292" y="515" class="ns">User Pool sign-up/sign-in</text><text x="292" y="537" class="sm">Issues JWT / ID token</text></g>
+  <g><rect x="600" y="190" width="270" height="150" rx="16" fill="#fff" stroke="#7544d6" stroke-width="3"/><path d="M616 190H854Q870 190 870 206V211H600V206Q600 190 616 190Z" fill="#7544d6"/><text x="622" y="244" class="nt">Amazon API Gateway</text><text x="622" y="271" class="ns">HTTP API · 6wcs1urcm2</text><text x="622" y="301" class="sm">JWT authorizer on document routes</text><text x="622" y="324" class="sm">OPTIONS /{proxy+}: CORS, no JWT</text></g>
+  <g><rect x="960" y="180" width="230" height="118" rx="16" fill="#fff" stroke="#e78a18" stroke-width="3"/><path d="M976 180H1174Q1190 180 1190 196V201H960V196Q960 180 976 180Z" fill="#e78a18"/><text x="982" y="238" class="nt">AWS Lambda</text><text x="982" y="265" class="ns">dms-dev-documents</text><text x="982" y="288" class="sm">Protected document handler</text></g>
+  <g><rect x="960" y="420" width="230" height="105" rx="16" fill="#fff" stroke="#e78a18" stroke-width="3"/><path d="M976 420H1174Q1190 420 1190 436V441H960V436Q960 420 976 420Z" fill="#e78a18"/><text x="982" y="478" class="nt">AWS Lambda</text><text x="982" y="507" class="ns">dms-dev-health</text></g>
+  <g><rect x="1280" y="180" width="250" height="220" rx="16" fill="#fff" stroke="#9d36ba" stroke-width="3"/><path d="M1296 180H1514Q1530 180 1530 196V201H1280V196Q1280 180 1296 180Z" fill="#9d36ba"/><text x="1302" y="240" class="nt">Amazon DynamoDB</text><text x="1302" y="276" class="sm">dms-dev-documents</text><text x="1302" y="304" class="sm">dms-dev-shares</text><text x="1302" y="332" class="sm">dms-dev-favorites</text><line x1="1302" y1="349" x2="1508" y2="349" stroke="#e5e9f0"/><text x="1302" y="375" class="sm">OwnerIndex · OwnerShareIndex</text><text x="1302" y="394" class="sm">DocumentFavoritesIndex</text></g>
+  <g><rect x="1280" y="470" width="250" height="145" rx="16" fill="#fff" stroke="#5e921c" stroke-width="3"/><path d="M1296 470H1514Q1530 470 1530 486V491H1280V486Q1280 470 1296 470Z" fill="#5e921c"/><text x="1302" y="529" class="nt">Amazon S3</text><text x="1302" y="557" class="ns">Private document bucket</text><text x="1302" y="584" class="sm">Private · SSE-S3</text><text x="1302" y="605" class="sm">Document file bytes</text></g>
+  <g><rect x="600" y="580" width="330" height="112" rx="16" fill="#fff" stroke="#d33182" stroke-width="3"/><path d="M616 580H914Q930 580 930 596V601H600V596Q600 580 616 580Z" fill="#d33182"/><text x="622" y="635" class="nt">Amazon CloudWatch Logs</text><text x="622" y="663" class="ns">Lambda START / END / REPORT</text><text x="622" y="684" class="sm">No route/status correlation verified</text></g>
+  <g><rect x="960" y="610" width="270" height="105" rx="16" fill="#fff" stroke="#64748b" stroke-width="2.5" stroke-dasharray="8 5"/><text x="982" y="649" class="nt">Lambda execution role</text><text x="982" y="677" class="sm">Shared by both functions</text><text x="982" y="700" class="sm">Logs · DynamoDB · S3 prefix</text></g>
+  <g><rect x="270" y="630" width="270" height="86" rx="14" fill="#fff7e6" stroke="#e5b856" stroke-width="2"/><text x="290" y="662" class="nt" font-size="16">Routes</text><text x="290" y="686" class="sm">GET /health is public</text><text x="290" y="706" class="sm">ANY /{proxy+} requires JWT</text></g>
+
+  <!-- Flows -->
+  <path d="M145 300H270" class="blue"/><rect x="156" y="268" width="104" height="23" rx="5" class="lb"/><text x="161" y="285" class="sm">HTTPS website</text>
+  <path d="M385 305V430" class="both"/><rect x="395" y="350" width="112" height="42" rx="5" class="lb"/><text x="400" y="368" class="sm">Sign-in / sign-up</text><text x="400" y="386" class="sm">JWT returned</text>
+  <path d="M500 235H600" class="blue"/><rect x="510" y="204" width="82" height="23" rx="5" class="lb"/><text x="515" y="221" class="sm">HTTPS + JWT</text>
+  <path d="M500 485H555V315H600" class="dash"/><rect x="510" y="451" width="92" height="23" rx="5" class="lb"/><text x="516" y="468" class="sm">JWT issuer/JWKS</text>
+  <path d="M870 240H960" class="edge"/><rect x="875" y="208" width="78" height="23" rx="5" class="lb"/><text x="880" y="225" class="sm">proxy route</text>
+  <path d="M735 340V385H940V472H960" class="edge"/><rect x="805" y="354" width="108" height="23" rx="5" class="lb"/><text x="810" y="371" class="sm">GET /health</text>
+  <path d="M1190 238H1280" class="both"/><rect x="1193" y="207" width="82" height="23" rx="5" class="lb"/><text x="1198" y="224" class="sm">metadata</text>
+  <path d="M1190 270H1240V520H1280" class="dash"/><rect x="1200" y="422" width="82" height="41" rx="5" class="lb"/><text x="1207" y="440" class="sm">Create</text><text x="1207" y="457" class="sm">presigned URL</text>
+  <path d="M500 280H565V735H1405V615" class="green"/><rect x="705" y="713" width="318" height="23" rx="5" class="lb"/><text x="711" y="730" class="sm">Browser sends file directly to S3 via signed URL</text>
+  <path d="M960 280H940V568H850V580" class="dash"/><path d="M960 472H945V565H885V580" class="dash"/>
+
+  <!-- Deployment path -->
+  <rect x="55" y="835" width="1490" height="160" rx="20" fill="#fff" stroke="#c9d3e2" stroke-width="2"/>
+  <text x="82" y="871" class="nt">Frontend deployment pipeline</text>
+  <rect x="180" y="900" width="260" height="70" rx="14" fill="#f4f6fa" stroke="#64748b" stroke-width="2"/><text x="205" y="930" class="nt">Developer</text><text x="205" y="954" class="sm">Pushes frontend changes</text>
+  <rect x="650" y="900" width="260" height="70" rx="14" fill="#f4f6fa" stroke="#24292f" stroke-width="2"/><text x="675" y="930" class="nt">GitHub repository</text><text x="675" y="954" class="sm">main branch</text>
+  <rect x="1120" y="900" width="300" height="70" rx="14" fill="#eef4ff" stroke="#3468d4" stroke-width="2"/><text x="1145" y="930" class="nt">AWS Amplify Hosting</text><text x="1145" y="954" class="sm">Build and auto-deploy</text>
+  <path d="M440 935H650" class="edge"/><text x="505" y="921" class="sm">git push</text><path d="M910 935H1120" class="blue"/><text x="971" y="921" class="sm">main auto-deploy</text>
+</svg>

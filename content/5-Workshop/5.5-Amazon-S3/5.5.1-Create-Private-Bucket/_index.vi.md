@@ -7,7 +7,7 @@ pre: " <b> 5.5.1 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,13 +21,17 @@ Tạo bucket file với public access bị chặn và mã hóa được bật.
 3. Không thêm public-read ACL hay bucket policy công khai. Giữ object tài liệu riêng tư.
 4. Chỉ bật versioning nếu ứng dụng và quy trình cleanup đã tính đến version cũ.
 
-## Vị trí ảnh chụp màn hình
+## Minh chứng triển khai
 
-**[Vị trí ảnh 5.5.1 — Thuộc tính bucket hiển thị Region, Block Public Access và mã hóa.]**
+![Ảnh 5.5.1: S3 bucket bật Block all public access](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-block-public-access.png)
+
+![Ảnh 5.5.1: Bật mã hóa phía máy chủ mặc định bằng khóa S3 quản lý](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-default-encryption.png)
+
+Bucket đang triển khai dùng mã hóa phía máy chủ bằng khóa Amazon S3 quản lý (SSE-S3). Ảnh xác nhận Region Singapore, Block Public Access và mã hóa mặc định. Upload/download bằng presigned URL được ghi ở mục 5.8.2.
 
 ## Kết quả mong đợi
 
-S3 bucket sẵn sàng và vẫn riêng tư.
+Documents bucket đã triển khai vẫn riêng tư, bật Block Public Access và SSE-S3.
 
 ## Khắc phục sự cố
 

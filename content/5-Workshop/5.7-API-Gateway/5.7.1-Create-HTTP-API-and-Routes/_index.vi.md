@@ -7,7 +7,7 @@ pre: " <b> 5.7.1 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,13 +21,19 @@ Kết nối API Gateway route với Lambda integration tương ứng.
 3. Đảm bảo API Gateway có quyền gọi Lambda function đã chọn.
 4. Giữ method, path parameter và response mong đợi khớp code frontend.
 
-## Vị trí ảnh chụp màn hình
+## Route và integration đang triển khai
 
-**[Vị trí ảnh 5.7.1 — Danh sách API route và ánh xạ Lambda integration.]**
+![Ảnh 5.7.1: Các route health, proxy và CORS preflight của API Gateway](/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
+
+API đã triển khai có `GET /health` gọi Lambda integration riêng `dms-dev-health`; các document route được dispatch qua `ANY /{proxy+}` đến `dms-dev-documents`, còn `OPTIONS /{proxy+}` xử lý CORS preflight. Cả hai Lambda integration dùng payload format `2.0` và timeout 30.000 ms.
+
+![Ảnh 5.7.1: Chi tiết integration của health route với Lambda function riêng](/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
+
+![Ảnh 5.7.1: Chi tiết proxy route integration gồm Lambda function, payload format và timeout](/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
 
 ## Kết quả mong đợi
 
-Route trỏ đúng handler và invoke URL được ghi nhận.
+Stage `$default` đang định tuyến health check tới `dms-dev-health`, document request tới `dms-dev-documents`; kết quả trình duyệt/API được ghi ở mục 5.7.2 và 5.8.2.
 
 ## Khắc phục sự cố
 

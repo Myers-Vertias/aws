@@ -1,5 +1,5 @@
 ---
-title: "Test Sharing and Authorization with Two Users"
+title: "Test Sharing and Download Visibility with Two Users"
 date: 2026-10-16
 weight: 2
 chapter: false
@@ -7,29 +7,30 @@ pre: " <b> 5.10.2 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This report records only steps performed and verified. Add evidence only after completing the corresponding step.
 {{% /notice %}}
 
 ## Objective
 
-Verify Owner/Viewer rules, separation of My Documents and Shared With Me, and share revocation.
+Verify that an owner can share a document with another account, and that the recipient can see the shared document and initiate its download.
 
-## Implementation steps
+## Steps performed
 
-1. User A uploads a sample document and shares it with User B.
-2. As User B, verify the document appears under Shared With Me, not My Documents; verify view/download works but edit/share/delete is denied.
-3. User A revokes access. Confirm User B cannot request new metadata or download URLs.
-4. Test no-token and third-user requests directly against the API. Record the actual responses.
+1. Sign in as the document owner and upload a document.
+2. Share the document with the recipient account's email address.
+3. Sign in as the recipient account.
+4. Open **Shared With Me**, confirm the document appears, and select Download.
 
-## Screenshot placeholder
+## Verified result
 
-**[Screenshot placeholder 5.10.2 — User B shared list and denied actions after share revocation.]**
+The recipient account displayed the document under **Shared With Me**. After Download was selected, the application displayed its simulated download confirmation, and the browser's download history listed `Konoka.png` with status **Done**. This verifies shared-document visibility and the browser download interaction. It does not independently verify that the file contents were retrieved directly from S3.
 
-## Expected result
+## Evidence
 
-Only owners and active viewers can access a document according to the rules.
+![Screenshot 5.10.2: Recipient sees shared documents on the production frontend](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
 
-## Troubleshooting
+![Screenshot 5.10.2: Recipient opened the shared document and browser download history shows the completed download in the local run](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
 
-- Previously issued presigned URLs work until expiry; use a short lifetime.
-- Ensure authorization is enforced by Lambda, not just by React.
+## Notes
+
+Other authorization cases, such as access by a user who was not granted sharing permission, share revocation, and direct API access checks, are not included in this verified result. Record them in their corresponding test section after performing them.

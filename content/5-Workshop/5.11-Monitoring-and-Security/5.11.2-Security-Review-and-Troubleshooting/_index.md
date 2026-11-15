@@ -7,7 +7,7 @@ pre: " <b> 5.11.2 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+S3 Block Public Access and SSE-S3 evidence is recorded in section 5.5.1. The `dms-dev` user cannot inspect the Lambda execution role because IAM denies `iam:GetRole`; least-privilege policy review remains unverified.
 {{% /notice %}}
 
 ## Objective
@@ -21,9 +21,11 @@ Follow a consistent diagnostic path and verify private storage and least-privile
 3. Review each Lambda role for unnecessary wildcard permissions and confirm owner/share authorization on all document routes.
 4. Review Billing/Cost Explorer and record any resource intentionally retained after the workshop.
 
-## Screenshot placeholder
+## Observed access-denied evidence
 
-**[Screenshot placeholder 5.11.2 — Sanitized security review and a short trace from a failed request to its cause.]**
+![Screenshot 5.11.2: IAM denied dms-dev permission to inspect the Lambda execution role](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.2-iam-role-review-access-denied.png)
+
+No IAM permissions were changed. The role policy contents and least-privilege scope could not be verified with this session.
 
 ## Expected result
 

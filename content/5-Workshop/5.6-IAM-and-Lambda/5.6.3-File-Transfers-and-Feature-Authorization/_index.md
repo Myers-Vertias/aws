@@ -7,7 +7,7 @@ pre: " <b> 5.6.3 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This section reuses existing browser and API evidence from sections 5.7.2, 5.8.2, 5.10.2, and 5.10.3 to avoid repeating screenshots.
 {{% /notice %}}
 
 ## Objective
@@ -22,9 +22,14 @@ Implement presigned upload/download, Favorites, Tags, Trash, and sharing with se
 4. Trash is soft delete through `deletedAt`; restore clears it. Permanent delete must coordinate S3 object and related metadata cleanup.
 5. Share creation must validate the recipient and reject self-sharing/duplicates. Revoke prevents new metadata/URL access. A previously issued presigned URL remains valid until expiry.
 
-## Screenshot placeholder
+## Verified behavior and evidence
 
-**[Screenshot placeholder 5.6.3 — Tests for upload/download authorization, Favorites, Trash/restore, and share/revoke.]**
+- **Presigned upload and download:** The successful S3 upload, saved document metadata, and download flow are recorded in section 5.8.2.
+- **Resource authorization:** Section 5.7.2 records the unauthenticated `401` and the signed-in second account receiving `404` for an owner's unshared document.
+- **Sharing:** The recipient's Shared With Me view and download interaction are recorded in section 5.10.2. A direct recipient download is also recorded in section 5.8.2.
+- **Favorites, metadata, and Trash/restore:** These results are recorded in sections 5.8.2 and 5.10.3.
+
+Share revocation, self-share/duplicate rejection, and attempts by a viewer to modify or delete a shared document were not verified. No behavior for those cases is claimed here.
 
 ## Expected result
 

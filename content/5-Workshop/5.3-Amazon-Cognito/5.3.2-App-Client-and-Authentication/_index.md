@@ -7,7 +7,7 @@ pre: " <b> 5.3.2 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
@@ -21,13 +21,13 @@ Configure a browser-safe app client and verify the sign-up/sign-in flow after in
 3. Integrate the selected supported Cognito/AWS Amplify JavaScript authentication APIs: sign-up, confirmation, sign-in, session retrieval, and sign-out.
 4. Test with dedicated accounts. Keep tokens out of browser logs, screenshots, and Git.
 
-## Screenshot placeholder
+## Deployed configuration and verification
 
-**[Screenshot placeholder 5.3.2 — App Client configuration and a real sign-in result with sensitive values hidden.]**
+The deployed public SPA client is `epodlpjbopbdc809elojsad3a`; the template sets `GenerateSecret: false`. The frontend uses Cognito User Pools API calls for registration, email confirmation, sign-in, session refresh, and sign-out. Real owner and recipient accounts were used in the document workflows. The signed-in dashboard and authenticated API result are recorded in section 5.8.2; a separate App Client settings screenshot was not retained.
 
 ## Expected result
 
-The frontend can authenticate test users with Cognito rather than mock auth.
+Real Cognito authentication is working in the frontend. The app client ID and pool ID are in section 5.9.2; no client secret is configured for the browser app.
 
 ## Troubleshooting
 

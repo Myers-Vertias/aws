@@ -7,7 +7,7 @@ pre: " <b> 5.11.1 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Log group của Lambda `dms-dev-documents` và `dms-dev-health` tồn tại ở `ap-southeast-1`. Retention hiện là **Never expire**. Chưa đối chiếu được một log event cụ thể với request.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -23,7 +23,13 @@ pre: " <b> 5.11.1 </b> "
 
 ## Vị trí ảnh chụp màn hình
 
-**[Vị trí ảnh 5.11.1 — CloudWatch event đã làm sạch, đối chiếu được với request thử nghiệm.]**
+![Ảnh 5.11.1: Log group CloudWatch của Lambda documents và health, có hiển thị retention](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
+
+Log stream mới nhất của function documents có các bản ghi runtime Lambda `START`, `END` và `REPORT`, kèm Lambda request ID cùng thời lượng. Các dòng này không có API route hoặc HTTP status nên chưa thể gắn chắc chắn với một browser request cụ thể.
+
+![Ảnh 5.11.1: Các bản ghi runtime Lambda START, END và REPORT trong log stream của function documents](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
+
+Handler hiện ghi log cho lỗi không dự kiến nhưng chưa ghi route/status của từng API request đã được xử lý; vì vậy request 404 trước đó chưa thể đối chiếu với application log theo route.
 
 ## Kết quả mong đợi
 

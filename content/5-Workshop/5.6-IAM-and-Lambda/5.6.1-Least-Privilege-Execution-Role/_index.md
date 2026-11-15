@@ -7,27 +7,29 @@ pre: " <b> 5.6.1 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
 
-Give each Lambda function only the logging, DynamoDB, and S3 permissions it needs.
+Create a dedicated Lambda execution role and grant permissions according to the function's actual needs.
 
 ## Implementation steps
 
-1. Create a role trusted by Lambda and attach the basic CloudWatch logging policy.
-2. Add a policy scoped to the exact table/index ARNs and bucket/prefix needed by each function.
-3. Separate roles where permission needs differ significantly. Review every action before attaching the policy.
-4. Test permissions through a real invocation; do not fix AccessDenied by granting wildcard access to all resources.
+1. In IAM, create `dms-lambda-execution` with Lambda as its trusted entity.
+2. Attach the AWS managed `AWSLambdaBasicExecutionRole` policy so functions can write to CloudWatch Logs.
+3. The role permissions page showed the inline policy `DmsDocumentRuntimeAccess`. The policy source in `backend/iam/lambda-runtime-policy.ap-southeast-1.json` scopes DynamoDB tables/indexes, the document object prefix in S3, and Cognito recipient lookup. The `dms-dev` user was later denied `iam:GetRole`, so the live policy contents could not be independently re-opened during this review.
+4. The deployment group's inline `DmsPassLambdaExecutionRole` policy allows passing only this role to Lambda; it does not grant `iam:PassRole` on every role.
 
-## Screenshot placeholder
+## Screenshots
 
-**[Screenshot placeholder 5.6.1 — Execution role with resource-scoped policy statements.]**
+![Screenshot 5.6.1: Lambda role with the basic logging policy](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-basic-execution-policy.png)
+
+![Screenshot 5.6.1: DmsDocumentRuntimeAccess attached to the Lambda role](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-runtime-policy-attached.png)
 
 ## Expected result
 
-The Lambda role grants only necessary permissions.
+The captured role permissions page shows `AWSLambdaBasicExecutionRole` and `DmsDocumentRuntimeAccess`. The local policy source is resource-scoped. Protected document operations were subsequently exercised; live policy contents remain unverified because IAM denied `iam:GetRole`.
 
 ## Troubleshooting
 

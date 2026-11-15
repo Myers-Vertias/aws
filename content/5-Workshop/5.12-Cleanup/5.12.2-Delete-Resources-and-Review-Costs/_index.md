@@ -7,12 +7,16 @@ pre: " <b> 5.12.2 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
 
 Safely remove resources created for this lab in dependency-aware order.
+
+## Current status
+
+Cleanup has **not** been performed. The Amplify app, API Gateway API, Lambda functions, CloudWatch log groups, S3 bucket, DynamoDB tables, Cognito development pool, and related roles are retained for the running project. A post-deployment Billing/Cost Explorer review has also not been recorded. The USD 10 budget is an alert, not a spending cap. No deletion is claimed in this report.
 
 ## Implementation steps
 
@@ -22,13 +26,13 @@ Safely remove resources created for this lab in dependency-aware order.
 4. Delete the workshop DynamoDB tables and Cognito development User Pool only after testing is finished. Remove workshop-only IAM roles after dependants are gone.
 5. Review Billing/Cost Explorer after cleanup; cost data may be delayed and some shared resources may be intentionally retained.
 
-## Screenshot placeholder
+## Evidence status
 
-**[Screenshot placeholder 5.12.2 — Final resource inventory and billing review, with unrelated account data hidden.]**
+No final resource-deletion or post-deployment billing screenshot was captured because cleanup and the billing review were not performed. Recheck the account and region before any future removal, and preserve project resources while the application is still in use.
 
 ## Expected result
 
-Unused lab resources are removed safely and any retained resources are documented.
+If cleanup is later approved and completed, record the deleted and retained resources and review delayed cost data. This is a future action, not a result of the current workshop run.
 
 ## Troubleshooting
 

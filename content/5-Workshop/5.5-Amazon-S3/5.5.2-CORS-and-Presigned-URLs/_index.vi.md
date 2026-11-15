@@ -7,7 +7,7 @@ pre: " <b> 5.5.2 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Cấu hình CORS của bucket đang triển khai được chụp bên dưới. Luồng upload/download bằng presigned URL từ frontend được ghi nhận ở mục 5.8.2.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,9 +21,11 @@ Chỉ cho phép frontend origin cần thiết upload/download trực tiếp từ
 3. Trình duyệt upload với content type đã ký; endpoint hoàn tất xác minh object trước khi chốt metadata.
 4. Khi download, Lambda kiểm tra quyền owner/share còn hiệu lực rồi cấp GET URL ngắn hạn. Không log hay công khai URL.
 
-## Vị trí ảnh chụp màn hình
+## Minh chứng
 
-**[Vị trí ảnh 5.5.2 — CORS đã lưu và kiểm thử upload/download thành công, đã che signed URL.]**
+Cấu hình CORS S3 cho phép `GET`, `HEAD`, `PUT` cùng các header authorization, content type và signing cần thiết. Parameter `AllowedFrontendOrigins` đang triển khai, gồm origin Amplify, được chụp ở mục 5.9.2. Kết quả upload/download được ghi nhận tại mục 5.8.2.
+
+![Ảnh 5.5.2: Cấu hình CORS S3 đã lưu](/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
 
 ## Kết quả mong đợi
 

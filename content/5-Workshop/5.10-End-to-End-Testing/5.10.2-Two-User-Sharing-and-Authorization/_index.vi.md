@@ -1,35 +1,26 @@
----
-title: "Kiểm thử Chia sẻ và Phân quyền với Hai Người dùng"
-date: 2026-10-16
-weight: 2
-chapter: false
-pre: " <b> 5.10.2 </b> "
----
-
-{{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
-{{% /notice %}}
+# 5.10.2 Kiểm thử chia sẻ tài liệu giữa hai người dùng
 
 ## Mục tiêu
 
-Xác minh quyền Owner/Viewer, tách Tài liệu của tôi khỏi Được chia sẻ với tôi và thu hồi share.
+Xác nhận người sở hữu có thể chia sẻ tài liệu với tài khoản khác và tài khoản nhận có thể xem, tải tài liệu được chia sẻ.
 
 ## Các bước thực hiện
 
-1. User A upload tài liệu mẫu và chia sẻ cho User B.
-2. Đăng nhập User B, xác nhận tài liệu nằm trong Được chia sẻ với tôi, không nằm trong Tài liệu của tôi; xem/tải được nhưng sửa/chia sẻ/xóa bị chặn.
-3. User A thu hồi quyền. Xác nhận User B không lấy được metadata hoặc download URL mới.
-4. Gọi API trực tiếp khi thiếu token và bằng người dùng thứ ba. Ghi response thực tế.
+1. Đăng nhập bằng tài khoản người sở hữu và tải một tài liệu lên hệ thống.
+2. Chia sẻ tài liệu với email của tài khoản người nhận.
+3. Đăng xuất, đăng nhập bằng tài khoản người nhận.
+4. Mở mục **Được chia sẻ với tôi**, xác nhận tài liệu xuất hiện, sau đó tải xuống.
 
-## Vị trí ảnh chụp màn hình
+## Kết quả đã xác minh
 
-**[Vị trí ảnh 5.10.2 — Danh sách được chia sẻ của User B và thao tác bị từ chối sau khi thu hồi share.]**
+Tài khoản người nhận nhìn thấy tài liệu trong mục **Được chia sẻ với tôi**. Sau khi chọn tải xuống, giao diện hiển thị thông báo tải xuống giả lập và lịch sử tải xuống của trình duyệt ghi nhận tệp Konoka.png với trạng thái **Done**. Minh chứng này xác nhận luồng hiển thị tài liệu chia sẻ và thao tác tải xuống từ trình duyệt; chưa xác nhận riêng nội dung tệp được tải trực tiếp từ S3.
 
-## Kết quả mong đợi
+## Minh chứng
 
-Chỉ owner và viewer còn quyền truy cập tài liệu theo đúng quy tắc.
+![Ảnh 5.10.2: Tài khoản nhận thấy các tài liệu được chia sẻ trên frontend production](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
 
-## Khắc phục sự cố
+![Ảnh 5.10.2: Tài khoản nhận mở tài liệu chia sẻ và lịch sử trình duyệt ghi nhận tải xuống hoàn tất ở phiên local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
 
-- Presigned URL đã cấp trước đó còn dùng được đến khi hết hạn; hãy đặt thời hạn ngắn.
-- Đảm bảo Lambda thực thi phân quyền, không chỉ React.
+## Ghi chú
+
+Các trường hợp kiểm thử quyền truy cập khác, như người không được chia sẻ thử mở tài liệu hoặc thu hồi quyền chia sẻ, sẽ được ghi nhận ở bước kiểm thử tương ứng sau khi thực hiện.

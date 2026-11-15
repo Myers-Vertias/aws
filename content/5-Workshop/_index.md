@@ -11,8 +11,22 @@ pre: " <b> 5. </b> "
 This workshop guides learners from the existing React/Vite frontend to an AWS-backed document-management application.
 
 {{% notice warning %}}
-**Status:** This is a guide framework prepared before backend implementation. Screenshot positions are placeholders; replace them with real images only after performing and verifying each step. Expected results are not deployment evidence.
+**Implementation status (15 November 2026):** The `dms-dev` application is deployed in `ap-southeast-1`, and the React frontend is available through Amplify. Real Cognito sign-in, authenticated API access, S3 upload/download, document metadata, Favorites, Trash/restore, and two-user sharing have been observed. This report distinguishes those observations from items that remain unverified.
 {{% /notice %}}
+
+## Completed and verified
+
+- Created the Cognito User Pool and public web app client; signed up and signed in with real Cognito accounts.
+- Deployed the HTTP API, Lambda functions, private S3 bucket, and three DynamoDB tables. The tables and their access indexes are recorded in sections 5.4.1 and 5.4.2.
+- Verified authenticated document-list requests (`200`), an unauthenticated request (`401`), and a logged-in second user requesting an unshared document (`404`).
+- Verified upload, metadata persistence, download, Favorites, Trash/restore, sharing, recipient visibility/download, category filtering, tag search, and Vietnamese/English interface selection. Evidence is distributed across sections 5.7.2, 5.8.2, and 5.10.
+- Configured the S3 bucket as private with default SSE-S3 encryption and added browser CORS rules for local and Amplify origins.
+
+## Not verified or not completed
+
+- Oversized-file and expired-token rejection, permanent deletion, S3 lifecycle purge, share revocation, duplicate/self-share rejection, and viewer edit/delete denial were not tested.
+- Per-request route/status correlation is not present in the current Lambda logs. The `dms-dev` IAM user was denied `iam:GetRole`, so the live execution-role policy contents could not be independently inspected.
+- The deployed architecture diagram has been added. A separate student-authored data-model diagram and the post-deployment billing review remain incomplete. The final verification matrix is recorded in section 5.12.1. AWS workshop resources have not been cleaned up.
 
 ## Workshop contents
 

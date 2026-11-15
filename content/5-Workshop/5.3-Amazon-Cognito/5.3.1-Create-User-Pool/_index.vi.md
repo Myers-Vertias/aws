@@ -7,7 +7,7 @@ pre: " <b> 5.3.1 </b> "
 ---
 
 {{% notice info %}}
-Đây là khung hướng dẫn. Chỉ thay placeholder bằng minh chứng sau khi đã thực hiện và xác minh bước tương ứng.
+Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,13 +21,13 @@ Tạo thư mục người dùng dùng để xác thực tài khoản UniCloud DM
 3. Đặt tên development rõ ràng như `unicloud-dms-dev-users`; xem lại lựa chọn trước khi tạo pool.
 4. Ghi Pool ID và Region vào ghi chú cục bộ. Không ghi mật khẩu hay token người dùng vào tài liệu.
 
-## Vị trí ảnh chụp màn hình
+## Cấu hình đã triển khai và xác minh
 
-**[Vị trí ảnh 5.3.1 — Cài đặt đăng nhập User Pool và thông tin pool đã tạo.]**
+Stack `dms-dev` tạo User Pool `ap-southeast-1_hWIAdC6Xu` tại `ap-southeast-1`. SAM template cấu hình email để đăng nhập/xác minh, khôi phục tài khoản qua email đã xác minh và mật khẩu tối thiểu 12 ký tự gồm chữ hoa, chữ thường, số và ký hiệu. Output của pool/client được chụp ở mục 5.9.2. Đã đăng ký, xác nhận và đăng nhập Cognito thật qua ứng dụng; không lưu ảnh riêng màn hình cài đặt pool.
 
 ## Kết quả mong đợi
 
-User Pool development tồn tại tại Region dự kiến.
+User Pool development đã triển khai tại Singapore và frontend đã dùng Cognito thật. Xem mục 5.3.2 và 5.8.2 về app client và kết quả đăng nhập.
 
 ## Khắc phục sự cố
 

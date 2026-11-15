@@ -7,7 +7,7 @@ pre: " <b> 5.5.2 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+The deployed bucket CORS configuration is captured below. The frontend's presigned upload and download flows are recorded in section 5.8.2.
 {{% /notice %}}
 
 ## Objective
@@ -21,9 +21,11 @@ Allow only the frontend origins needed for direct browser upload/download while 
 3. The browser uploads with the signed content type; a completion endpoint verifies the object before finalizing metadata.
 4. For download, Lambda checks owner/active-share access before issuing a short-lived GET URL. Never log or publish the URL.
 
-## Screenshot placeholder
+## Evidence
 
-**[Screenshot placeholder 5.5.2 — Saved CORS rules and successful test upload/download with signed URLs redacted.]**
+The S3 CORS configuration allows `GET`, `HEAD`, and `PUT`, with the required authorization, content-type, and signing headers. Its deployed `AllowedFrontendOrigins` parameter, including the Amplify origin, is shown in section 5.9.2. Upload and download results are documented in section 5.8.2.
+
+![Screenshot 5.5.2: Saved S3 CORS configuration](/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
 
 ## Expected result
 

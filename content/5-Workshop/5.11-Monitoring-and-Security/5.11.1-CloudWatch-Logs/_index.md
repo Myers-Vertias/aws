@@ -7,7 +7,7 @@ pre: " <b> 5.11.1 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+The `dms-dev-documents` and `dms-dev-health` Lambda log groups exist in `ap-southeast-1`. Their retention is set to **Never expire**. A per-request log event has not yet been correlated.
 {{% /notice %}}
 
 ## Objective
@@ -21,9 +21,15 @@ Correlate an API request with its Lambda execution without exposing secrets.
 3. Correlate the Lambda outcome with the API Gateway response. Use structured logs with request ID, route, status, and latency if enabled.
 4. Do not log authorization headers, full JWTs, presigned URLs, file contents, or sensitive personal data.
 
-## Screenshot placeholder
+## Observed log evidence and limitation
 
-**[Screenshot placeholder 5.11.1 — Sanitized CloudWatch event correlated to a known test request.]**
+![Screenshot 5.11.1: CloudWatch log groups for the dms-dev document and health Lambdas, with retention shown](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
+
+The newest document-function stream contains Lambda runtime `START`, `END`, and `REPORT` records with Lambda request IDs and duration. It does not show the API route or HTTP status, so these records cannot be reliably tied to a specific browser request.
+
+![Screenshot 5.11.1: Lambda runtime START, END, and REPORT records in the document function log stream](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
+
+The handler logs unexpected errors, but does not currently emit route/status details for each handled API request; the earlier 404 request therefore cannot be correlated to a route-level application log event.
 
 ## Expected result
 

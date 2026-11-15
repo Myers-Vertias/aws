@@ -7,27 +7,36 @@ pre: " <b> 5.12.1 </b> "
 ---
 
 {{% notice info %}}
-This is a prepared guide. Replace the placeholder with evidence only after the corresponding step has been performed and verified.
+This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
 {{% /notice %}}
 
 ## Objective
 
 Collect genuine screenshots and test records before deleting resources.
 
-## Implementation steps
+## Evidence collected
 
-1. Capture the deployed frontend, Cognito settings, DynamoDB keys/indexes, private S3 settings, API routes, Lambda test results, and Amplify status as applicable.
-2. Replace each screenshot placeholder only with an image from a completed and verified step.
-3. Redact credentials, account-sensitive details, full tokens, signed URLs, and private document content.
-4. Record actual Pass/Fail outcomes, dates, and troubleshooting notes. Leave unexecuted tests marked Pending.
+The report reuses screenshots captured during the work instead of repeating near-identical images. Configuration evidence is in sections 5.2–5.9; the production application and real-account workflows are in sections 5.8 and 5.10; CloudWatch observations are in section 5.11. Sensitive account identifiers, role ARNs, and document details are redacted in report copies where applicable.
 
-## Screenshot placeholder
+## Final verification matrix
 
-**[Screenshot placeholder 5.12.1 — Final app and completed test matrix, with all sensitive values redacted.]**
+| Area | Result | Evidence / limitation |
+|---|---|---|
+| SAM validation/build and deployed stack | Verified | Sections 5.1.1, 5.2.2, and 5.9.2 |
+| Cognito sign-up, confirmation, and sign-in | Verified | Sections 5.3.1, 5.3.2, and 5.8.2 |
+| API authorization | Verified | Authenticated list `200`, missing-token request `401`, and unshared cross-account detail `404`; section 5.7.2 |
+| Upload, download, metadata, sharing, Favorites, Trash/restore | Verified | Sections 5.8.2, 5.10.1–5.10.3 |
+| VI/EN selection, category filter, tag search | Verified | Section 5.10.3; UI checks were performed on the local frontend where stated |
+| CloudWatch runtime logs | Partially verified | Lambda `START`/`END`/`REPORT` events observed; no route/status correlation; section 5.11.1 |
+| Oversized upload, expired-token behavior, share revocation/duplicate/self-share, Viewer write denial | Not verified | No result is claimed; see section 5.6.3 and related test notes |
+| Permanent deletion and S3 lifecycle expiration | Not verified | Destructive/expiry behavior was not exercised; no result is claimed |
+| Post-deployment billing review and resource cleanup | Not done | Resources are retained; see section 5.12.2 |
+
+No single final screenshot or composite dashboard was captured. The linked evidence above is the final record for this run.
 
 ## Expected result
 
-The workshop report distinguishes verified results from work that remains untested.
+The workshop report distinguishes completed implementation, observed results, partial observations, and unverified work.
 
 ## Troubleshooting
 
