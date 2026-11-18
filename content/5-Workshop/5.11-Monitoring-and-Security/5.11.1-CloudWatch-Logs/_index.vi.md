@@ -1,5 +1,5 @@
 ---
-title: "Kiểm tra CloudWatch Logs"
+title: "CloudWatch Logs, Metrics và Alarms"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -16,10 +16,11 @@ Log group của Lambda `dms-dev-documents` và `dms-dev-health` tồn tại ở 
 
 ## Các bước thực hiện
 
-1. Mở CloudWatch Logs và tìm log group `/aws/lambda/...` của function đang kiểm thử.
-2. Gọi function bằng dữ liệu thử nghiệm tổng hợp rồi tìm log theo timestamp/request ID.
-3. Đối chiếu kết quả Lambda với response API Gateway. Nếu bật, dùng log có cấu trúc gồm request ID, route, status và latency.
-4. Không log authorization header, JWT đầy đủ, presigned URL, nội dung file hay dữ liệu cá nhân nhạy cảm.
+1. Trong AWS Console chọn `ap-southeast-1` → CloudWatch → Logs → Log groups; mở `/aws/lambda/<stack>-documents` hoặc `/aws/lambda/<stack>-health`.
+2. Chọn log stream gần thời điểm thao tác và đọc `START`, `END`, `REPORT`; dùng thời gian/function request ID để tìm lượt chạy. Không coi Lambda request ID là API Gateway request ID.
+3. Đặt retention phù hợp ở tab Retention để log không lưu vô thời hạn. Lambda tự xuất metrics `Invocations`, `Errors`, `Duration` trong CloudWatch → Metrics → AWS/Lambda ([tài liệu metrics Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
+4. Để có email khi Lambda lỗi, mở CloudWatch → Alarms → Create alarm → chọn `AWS/Lambda` / FunctionName / `Errors`; đặt thống kê Sum, period phù hợp, ngưỡng `>= 1`, rồi chọn hoặc tạo SNS email topic. Người nhận phải xác nhận subscription email trước khi nhận thông báo ([hướng dẫn SNS email alarm](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarm có thể phát sinh chi phí.
+5. Không log authorization header, JWT đầy đủ, presigned URL, nội dung file hay dữ liệu cá nhân nhạy cảm.
 
 ## Vị trí ảnh chụp màn hình
 
@@ -33,7 +34,7 @@ Handler hiện ghi log cho lỗi không dự kiến nhưng chưa ghi route/statu
 
 ## Kết quả mong đợi
 
-Người học truy vết được thao tác tới backend log tương ứng.
+Người học xem được Lambda logs/metrics và nhận cảnh báo khi metric vượt ngưỡng đã chọn. Môi trường đã ghi nhận hiện có Lambda runtime log và budget email alert; chưa ghi nhận CloudWatch metric alarm hoặc API Gateway access log.
 
 ## Khắc phục sự cố
 

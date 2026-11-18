@@ -12,15 +12,110 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Kiểm tra frontend hiện tại và ghi nhận trạng thái ban đầu trước khi kết nối AWS.
+Chuẩn bị máy phát triển, chạy thử frontend và xác nhận backend có thể khởi động cục bộ trước khi cấu hình tài nguyên AWS.
 
-## Các bước thực hiện
+## Công cụ cần cài
 
-1. Mở repository UniCloud DMS và xác nhận có package.json cùng package-lock.json. Đã xác nhận cả hai file đều có.
-2. Chạy `npm ci`, `npm run lint` và `npm run build` tại thư mục gốc; ghi lại warning/lỗi có sẵn.
-3. Chạy `npm run dev`, mở URL Vite in ra và xác nhận các trang frontend mock vẫn hoạt động trước khi thay service. Đã xác minh ngày 2026-11-10: đăng nhập demo tích hợp sẵn mở được Dashboard và hiển thị các tài liệu mẫu.
-4. Cài AWS CLI và AWS SAM CLI trên Windows. Xác nhận phiên AWS bằng `aws sts get-caller-identity --profile dms-dev` và xác nhận SAM bằng `sam --version`.
-5. Tạo Git branch hoặc commit sao lưu trước khi tích hợp backend. Không đưa credentials hay token vào source control.
+- [Git for Windows](https://git-scm.com/download/win) để lấy mã nguồn và quản lý thay đổi.
+- [Node.js 24 LTS](https://nodejs.org/en/download) cùng npm để cài dependency, chạy frontend React/Vite và khớp major version với Lambda runtime `nodejs24.x`.
+- [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) để xác thực và thao tác AWS ở các bước triển khai tiếp theo.
+- [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/install-sam-cli.html) để kiểm tra, build và chạy thử backend Lambda/API Gateway.
+- [Docker Desktop cho Windows](https://docs.docker.com/desktop/setup/install/windows-install/) đang chạy nếu muốn dùng `sam local start-api`.
+
+{{% notice info %}}
+Trang này chỉ chuẩn bị và chạy thử trên máy. Chưa cần tạo AWS credentials để mở giao diện frontend hoặc gọi health endpoint local. Không dùng root access key và không lưu access key, mật khẩu, JWT hay presigned URL trong source code.
+{{% /notice %}}
+
+## Hướng dẫn thực hiện
+
+### A. Lấy mã nguồn và chạy frontend
+
+1. Cài Git, Node.js/npm, AWS CLI v2, AWS SAM CLI và Docker Desktop. Docker Desktop cần chạy khi dùng SAM local.
+2. Chạy các lệnh sau để tải source và chuyển vào thư mục dự án:
+
+   ```powershell
+   git clone https://github.com/Myers-Vertias/serverless-document-management.git
+   Set-Location serverless-document-management
+   ```
+
+3. Xác nhận thư mục hiện tại có `package.json`, `package-lock.json` và `.env.example`; sau đó kiểm tra phiên bản công cụ:
+
+   ```powershell
+   node --version
+   npm --version
+   git --version
+   aws --version
+   sam --version
+   docker --version
+   ```
+
+4. Cài đúng các package đã khóa trong `package-lock.json`:
+
+   ```powershell
+   npm ci
+   ```
+
+5. Chạy kiểm tra lint và tạo production build:
+
+   ```powershell
+   npm run lint
+   npm run build
+   ```
+
+   Ghi nhận cảnh báo lint hiện có; không nhầm cảnh báo với lỗi build.
+
+6. Tạo file cấu hình local từ mẫu:
+
+   ```powershell
+   Copy-Item .env.example .env.local
+   ```
+
+   Giữ các giá trị `replace-with-...` cho tới khi đã tạo các dịch vụ AWS. Điền Region, Cognito User Pool ID, App Client ID, API URL và tên S3 bucket theo outputs ở các mục triển khai sau. Không commit `.env.local`.
+
+7. Khởi động Vite:
+
+   ```powershell
+   npm run dev
+   ```
+
+8. Mở địa chỉ local được Vite in ra, thường là `http://localhost:5173`. Xác nhận trang đăng nhập hiển thị. Đăng nhập Cognito chỉ hoạt động sau khi cập nhật các giá trị thật vào `.env.local`.
+
+### B. Kiểm tra backend local
+
+1. Mở terminal thứ hai, chuyển vào thư mục `backend` của repository:
+
+   ```powershell
+   Set-Location backend
+   ```
+
+2. Kiểm tra SAM template và build Lambda:
+
+   ```powershell
+   sam validate --lint
+   sam build
+   ```
+
+3. Nếu Docker Desktop đang chạy, khởi động API local:
+
+   ```powershell
+   sam local start-api --port 3000
+   ```
+
+4. Mở `http://127.0.0.1:3000/health`. Kết quả mong đợi:
+
+   ```json
+   {"status":"ok","service":"dms-api"}
+   ```
+
+5. Nhấn `Ctrl+C` để dừng các tiến trình local khi hoàn tất.
+
+Health endpoint trên chỉ xác nhận API local khởi động được. Nó không xác nhận Cognito, DynamoDB, S3 hoặc API đã deploy hoạt động; các phần đó được cấu hình riêng ở các mục tiếp theo.
+
+### C. Chuẩn bị cho các bước AWS
+
+1. Sang mục 5.1.2 để chọn AWS account/Region và cấu hình identity dành cho lab. Dùng tài khoản development có quyền phù hợp, không dùng root.
+2. Sau khi cấu hình profile riêng, xác nhận danh tính bằng `aws sts get-caller-identity --profile <lab-profile>`. Thay `<lab-profile>` bằng tên profile của người học; không dùng profile của người hướng dẫn.
+3. Tạo branch Git hoặc commit lưu trạng thái trước khi bắt đầu tích hợp backend.
 
 ## Baseline ghi nhận ngày 2026-11-10
 
@@ -28,7 +123,7 @@ Kiểm tra frontend hiện tại và ghi nhận trạng thái ban đầu trướ
 - `npm run lint`: hoàn tất, không có lỗi và có 10 warnings. Các warning có sẵn nằm ở `Profile.jsx`, `Dashboard.jsx`, `Trash.jsx`, `Shared.jsx`, `Documents.jsx`, `Favorites.jsx` và `DocumentDetail.jsx` (quy tắc React purity, state trong effect và dependency của hooks).
 - `npm run build`: hoàn tất thành công với Vite 8.3.3; đã tạo production assets trong `dist/`.
 - Kiểm tra nền trước khi tích hợp AWS: Vite phục vụ ứng dụng tại `http://127.0.0.1:5173/`; đăng nhập mock tích hợp sẵn mở được `/dashboard` và hiển thị ba tài liệu mẫu. Đây là ghi nhận luồng mock ban đầu. Các luồng dùng AWS backend được ghi ở mục 5.8–5.10.
-- Phiên bản môi trường ghi nhận: Node.js 25.9.0 và npm 11.14.1. Cần xác nhận lựa chọn phiên bản Node.js support/LTS trước khi chốt hướng dẫn có thể tái lập.
+- Phiên bản môi trường ở lần ghi nhận baseline: Node.js 25.9.0 và npm 11.14.1. Hướng dẫn hiện khuyến nghị Node.js 24 LTS để khớp runtime Lambda `nodejs24.x`; phiên bản baseline cũ được giữ như thông tin lịch sử của lần chạy.
 - AWS CLI đăng nhập qua IAM user `dms-dev`; `aws sts get-caller-identity --profile dms-dev` trả về ARN kết thúc bằng `user/dms-dev`.
 - AWS SAM CLI đã cài thành công, phiên bản 1.171.0.
 - Trong `backend/`, `sam validate --lint` xác nhận `template.yaml` là SAM template hợp lệ; chưa deploy tài nguyên AWS.

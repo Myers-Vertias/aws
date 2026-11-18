@@ -16,10 +16,10 @@ Allow only the frontend origins needed for direct browser upload/download while 
 
 ## Implementation steps
 
-1. Configure S3 CORS for the exact local Vite origin and deployed Amplify origin; allow only required methods and headers.
-2. Lambda validates user identity, file size, type, and metadata before returning a short-lived PUT URL with a server-generated key.
-3. The browser uploads with the signed content type; a completion endpoint verifies the object before finalizing metadata.
-4. For download, Lambda checks owner/active-share access before issuing a short-lived GET URL. Never log or publish the URL.
+1. Add exact origins to the SAM stack's `AllowedFrontendOrigins`: local Vite and `https://<amplify-domain>`. Update the stack after the Amplify domain exists; the template applies the list to the HTTP API and bucket CORS.
+2. In S3 Console → bucket → Permissions → CORS, compare GET/HEAD/PUT and the required signing/content-type headers. Do not use `*` for the production origin.
+3. Upload flow: the frontend sends file details to Lambda; Lambda verifies the Cognito caller, creates the key server-side, and returns a short-lived PUT presigned URL. The browser PUTs directly to S3 using the signed Content-Type, then calls the complete API; Lambda uses HeadObject before writing DynamoDB metadata.
+4. Download flow: the API verifies owner or active-share access, then returns a short-lived GET presigned URL. Never log or share the URL.
 
 ## Evidence
 

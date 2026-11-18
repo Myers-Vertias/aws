@@ -16,10 +16,10 @@ Deploy the frontend and verify its real authentication and API calls.
 
 ## Implementation steps
 
-1. Configure public Region, Cognito IDs, and API base URL. Never add secret access keys to frontend variables.
-2. Update Cognito callback/sign-out URLs and S3/API CORS with the exact Amplify domain where required.
-3. Run deployment and inspect the build log until status is successful.
-4. Open the generated HTTPS URL, test login and one protected document operation, then refresh a nested route.
+1. In Amplify Console, open the app → Hosting → Environment variables and set the five `VITE_*` values from CloudFormation Outputs; do not add secret access keys. Save to trigger a new deployment.
+2. Get the branch HTTPS domain. Update `AllowedFrontendOrigins` in the SAM stack to include this exact origin; the current frontend calls Cognito API directly, so it does not need managed-login callback URLs.
+3. In Amplify → branch, follow the build log to success; confirm artifact directory `dist`, build command `npm ci && npm run build`, and the SPA rewrite.
+4. Open the production domain in a browser. API and bucket CORS origins must match its scheme/host; API URL, Pool ID, Client ID, and bucket must come from the same stack.
 
 ## Deployment evidence and verification
 

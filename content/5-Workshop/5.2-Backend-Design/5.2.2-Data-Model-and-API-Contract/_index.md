@@ -7,7 +7,7 @@ pre: " <b> 5.2.2 </b> "
 ---
 
 {{% notice info %}}
-This section records the data model and API behavior observed in the deployed `dms-dev` stack. The example item and route catalog describe the implementation contract; test limitations are called out separately.
+This section records the data model and API behavior observed in the deployed `dms-dev` stack. The example item and route catalog describe the implementation contract.
 {{% /notice %}}
 
 ## Objective
@@ -110,7 +110,7 @@ The CloudFormation change set was reviewed before deployment and the stack was d
 
 ## Expected result and verification status
 
-The deployed table/index design and observed access behavior are recorded above. Authenticated listing returned HTTP `200`; an unshared cross-account detail request returned `404`. Additional outstanding tests are listed in section 5.10.
+The deployed table/index design and observed access behavior are recorded above. Authenticated listing returned HTTP `200`; an unshared cross-account detail request returned `404`.
 
 ## Implementation progress
 

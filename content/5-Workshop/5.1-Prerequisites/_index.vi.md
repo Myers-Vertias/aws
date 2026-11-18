@@ -18,7 +18,8 @@ Chuẩn bị ứng dụng React/Vite, công cụ phát triển, tài khoản AWS
 
 - [5.1.1 Chuẩn bị môi trường phát triển](5.1.1-Development-Environment/)
 - [5.1.2 Chuẩn bị tài khoản AWS và kiểm soát chi phí](5.1.2-AWS-Account-Region-and-Cost/)
+- [5.1.3 Quy trình triển khai Backend bằng AWS SAM](5.1.3-Backend-Deployment-Runbook/)
 
 ## Lưu ý
 
-Mỗi bài con có mục tiêu, các bước, vị trí ảnh chụp, kết quả mong đợi và cách xử lý lỗi. Hãy thực hiện theo thứ tự và giữ tên tài nguyên nhất quán.
+Các trang hướng dẫn trình bày quy trình bằng văn bản; ảnh hiện có dùng làm minh chứng cho những thao tác đã thực hiện. Hãy thực hiện theo thứ tự và dùng tên tài nguyên riêng cho môi trường của mình.

@@ -20,7 +20,7 @@ Documents are often scattered across personal computers, messaging apps, and ema
 Amazon Cognito authenticates users and issues JWT tokens. Every request from the web app hosted on AWS Amplify goes through Amazon API Gateway, which verifies the token with a Cognito authorizer before invoking AWS Lambda. Lambda validates the request, manages document metadata in Amazon DynamoDB, and generates short-lived pre-signed URLs so the browser can upload and download files directly to and from Amazon S3. This keeps large files out of API Gateway and Lambda payloads, which improves performance and lowers cost. Lambda runs with a least-privilege IAM role, Amazon CloudWatch collects logs, metrics, and alarms from API Gateway and Lambda, and the GitHub integration lets AWS Amplify deploy the frontend automatically on every push. Key features include secure sign-in, document upload and download, metadata management (owner, tags, file name, type, size, timestamps), and access control.
 
 ### Benefits and Return on Investment
-The solution gives users a single, secure place to manage documents, reduces the time spent searching for files, and provides a reusable serverless foundation for future extensions such as full-text search, document versioning, or AI-based document analysis. It also serves as a hands-on study resource for core AWS serverless services. Every service is pay-per-use and there is no hardware or licence to buy, so the estimated running cost is about $0.94 USD per month, or $11.28 USD for 12 months, based on the assumptions in Section 6, and much of it falls within the AWS Free Tier. With no upfront investment, the return comes from time saved, better document security, and automatic scaling if usage grows.
+The solution gives users a single, secure place to manage documents, reduces the time spent searching for files, and provides a reusable serverless foundation for future extensions such as full-text search, document versioning, or AI-based document analysis. It also serves as a hands-on study resource for core AWS serverless services. Every service is pay-per-use and there is no hardware or licence to buy. Under the assumptions in Section 6, the AWS Pricing Calculator estimates a pre-discount cost of about $1.19 USD per month, or $14.24 USD for 12 months if usage remains constant. This is a planning estimate, not a bill; applicable free-tier allowances, discounts, taxes, and actual traffic can change the amount charged. With no upfront investment, the return comes from time saved, better document security, and automatic scaling if usage grows.
 
 ### 3. Solution Architecture
 The platform follows a serverless AWS architecture. Users access a web app hosted on AWS Amplify and sign in through Amazon Cognito. Requests pass through Amazon API Gateway to AWS Lambda, which manages metadata in Amazon DynamoDB and issues pre-signed URLs for files stored in Amazon S3. Amazon CloudWatch monitors the system, and GitHub with AWS Amplify provides automated frontend deployment. The architecture is detailed below:
@@ -88,22 +88,28 @@ The project has four phases:
 - Weeks 11-12: Deploy, set up monitoring, finalize documentation, and present the final demo.
 
 ### 6. Budget Estimation
-
+The estimate was exported from the AWS Pricing Calculator on November 18, 2026 for the Asia Pacific (Singapore) Region. It is a monthly, before-discounts estimate and covers the services below. The annual figure is the monthly estimate multiplied by 12; it assumes the same usage every month.
 
 ### Infrastructure Costs
-- AWS Services:
-    - AWS Lambda: 
-    - Amazon API Gateway: 
-    - Amazon DynamoDB:
-    - Amazon S3 Standard: 
-    - Amazon Cognito:
-    - AWS Amplify Hosting:
-    - Amazon CloudWatch:
-    - Data Transfer: 
+| AWS service | Monthly estimate (USD) |
+| --- | ---: |
+| AWS Lambda | $0.0062 |
+| Amazon API Gateway (HTTP API) | $0.0125 |
+| Amazon DynamoDB (on-demand) | $0.0020 |
+| Amazon S3 Standard | $0.1257 |
+| Amazon Cognito (Essentials, 10 MAU) | $0.0550 |
+| AWS Amplify Hosting | $0.3500 |
+| Amazon CloudWatch | $0.0352 |
+| AWS data transfer | $0.6000 |
+| **Estimated total** | **$1.1866 (~$1.19)** |
 
-Total: 
+**Estimated annual total:** $14.24 USD (monthly estimate × 12).
 
-- Hardware: 
+**Hardware:** $0; the solution uses managed AWS services.
+
+**Monthly usage assumptions:** 10,000 API Gateway HTTP API requests; 10,000 Lambda requests and 250 Lambda GB-seconds; 4,000 DynamoDB eventually consistent read request units, 2,000 standard write request units, 1 KB average item size, and 0.1 GB table storage; 5 GB of S3 Standard storage, 100 write/list requests, and 500 read requests; 10 Cognito monthly active users; 20 Amplify build minutes, 1 GB served, and 0.002 GB stored; 0.05 GB of CloudWatch standard logs ingested with one month of log retention; and 5 GB of internet data transfer out. Other optional usage shown in the calculator was excluded. These are planning assumptions, not measured production usage.
+
+The estimate is before discounts and does not determine the final bill. Free-tier eligibility and allowances, account-specific discounts, taxes, and usage outside these assumptions may change actual charges. The estimate assumes one month of CloudWatch log retention; the deployed log groups should be configured to match this assumption if the estimated storage cost is to represent the live setup. Review usage and the AWS bill after deployment, and set AWS Budgets alerts before increasing traffic or stored data.
 
 ### 7. Risk Assessment
 #### Risk Matrix

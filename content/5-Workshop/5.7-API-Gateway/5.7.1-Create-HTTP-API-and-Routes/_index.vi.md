@@ -16,10 +16,10 @@ Kết nối API Gateway route với Lambda integration tương ứng.
 
 ## Các bước thực hiện
 
-1. Tạo HTTP API cùng Region với Lambda và Cognito.
-2. Thêm integration/route khớp mục 5.2.2 và service layer. Ghi API invoke URL cùng stage.
-3. Đảm bảo API Gateway có quyền gọi Lambda function đã chọn.
-4. Giữ method, path parameter và response mong đợi khớp code frontend.
+1. Deploy SAM stack tại mục 5.1.3; template tạo HTTP API, stage và Lambda integrations, không tạo API thủ công trùng.
+2. Trong CloudFormation → stack → Resources, mở `DocumentsApi` để vào API Gateway. Trong Routes, đối chiếu `GET /health`, `ANY /{proxy+}` và `OPTIONS /{proxy+}`; trong Integrations xác nhận health và document Lambda riêng.
+3. Mở Stages, xác nhận `$default`; lấy `ApiBaseUrl` từ Outputs. Template dùng payload format 2.0 và cấu hình timeout theo SAM.
+4. Nếu thay route hoặc handler, sửa `backend/template.yaml`, validate/build/deploy lại bằng SAM và xem change set. Giữ route khớp với `src/services`.
 
 ## Route và integration đang triển khai
 

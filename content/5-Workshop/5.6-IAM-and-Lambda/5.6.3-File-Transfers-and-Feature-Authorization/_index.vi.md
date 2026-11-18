@@ -16,11 +16,26 @@ Triển khai upload/download presigned, Favorites, Tags, Thùng rác và sharing
 
 ## Các bước thực hiện
 
-1. Chỉ tạo S3 key do server kiểm soát và PUT URL ngắn hạn sau khi xác minh danh tính, loại file và dung lượng. Xác minh object trước khi chốt metadata.
-2. Khi download, kiểm tra caller là owner hoặc viewer còn hiệu lực trước khi cấp GET URL ngắn hạn.
-3. Lưu Favorites theo user và document. Giữ mã category/status ổn định và chuẩn hóa tags nhất quán.
-4. Thùng rác là xóa mềm qua `deletedAt`; khôi phục xóa trường này. Xóa vĩnh viễn phải phối hợp xóa object S3 và metadata liên quan.
-5. Tạo share phải xác minh người nhận, chặn tự chia sẻ/trùng lặp. Revoke chặn truy cập metadata/URL mới. Presigned URL đã cấp trước đó còn hạn đến khi hết thời gian.
+1. Trong `backend/src/index.mjs`, tạo key S3 từ Cognito `sub` và ID do server sinh; xác minh file type/size trước khi trả PUT URL. Khi complete, dùng HeadObject rồi mới ghi metadata.
+2. Với download, share, favorites và trash, xác định caller từ claims rồi kiểm tra quyền trước khi cấp URL hoặc thay đổi record. Frontend gọi các route trong `src/services/documentService.js`.
+3. Favorites dùng quan hệ user/document; Trash là soft-delete bằng `deletedAt`, restore xóa thuộc tính này. Chỉ thêm hard-delete khi đồng bộ xóa object, metadata, share và favorites.
+4. Share resolve email sang Cognito `sub`, chỉ owner được cấp/revoke quyền. Viewer chỉ được xem/tải file đang chia sẻ; URL đã phát hành còn dùng được đến khi hết hạn.
+5. Sau khi cập nhật Lambda, build/deploy bằng SAM; frontend sử dụng API URL và Cognito IDs từ Outputs, không gọi DynamoDB/S3 bằng credentials ở trình duyệt.
+
+### Mẫu tạo key và URL upload
+
+Key được tạo từ user `sub` và document ID do server sinh, không nhận key từ trình duyệt:
+
+```javascript
+const documentId = randomUUID();
+const s3Key = `users/${caller.sub}/documents/${documentId}`;
+const uploadUrl = await getSignedUrl(s3, new PutObjectCommand({
+  Bucket: process.env.DOCUMENTS_BUCKET,
+  Key: s3Key,
+  ContentType: contentType,
+  Metadata: { "document-id": documentId },
+}), { expiresIn: 300 });
+```
 
 ## Hành vi đã xác nhận và minh chứng
 
@@ -29,7 +44,7 @@ Triển khai upload/download presigned, Favorites, Tags, Thùng rác và sharing
 - **Chia sẻ:** Mục 5.10.2 ghi nhận tài liệu xuất hiện trong Được chia sẻ với tôi và thao tác tải xuống; mục 5.8.2 cũng ghi nhận lượt tải trực tiếp của tài khoản nhận.
 - **Yêu thích, metadata và Thùng rác/khôi phục:** Kết quả được ghi nhận tại mục 5.8.2 và 5.10.3.
 
-Chưa xác minh thu hồi chia sẻ, chặn tự chia sẻ/trùng lặp, hoặc việc viewer bị từ chối khi sửa/xóa tài liệu được chia sẻ. Báo cáo không khẳng định các hành vi này.
+Form upload local đã từ chối file vượt giới hạn 20 MB; một request đã xác thực gửi riêng tới `POST /documents/upload-url` cũng xác minh API đang deploy trả HTTP `400` cho file 20 MiB + 1 byte trước khi cấp S3 upload URL. Xem mục 5.10.1.
 
 ## Kết quả mong đợi
 

@@ -16,10 +16,10 @@ Tạo thư mục người dùng dùng để xác thực tài khoản UniCloud DM
 
 ## Các bước thực hiện
 
-1. Mở Amazon Cognito console và tạo User Pool tại Region đã chọn.
-2. Chọn email làm định danh đăng nhập và cấu hình xác minh/khôi phục tài khoản cho lab.
-3. Đặt tên development rõ ràng như `unicloud-dms-dev-users`; xem lại lựa chọn trước khi tạo pool.
-4. Ghi Pool ID và Region vào ghi chú cục bộ. Không ghi mật khẩu hay token người dùng vào tài liệu.
+1. Deploy SAM template theo mục 5.1.3. Template tạo User Pool, vì vậy không tạo thêm pool thủ công.
+2. Trong AWS Console, chọn đúng Region → Amazon Cognito → User pools → mở pool thuộc CloudFormation stack của lab. Đối chiếu tên pool trong tab Resources/Outputs của stack.
+3. Mở cấu hình đăng nhập và xác nhận email là username attribute, email auto-verified và account recovery dùng email đã xác minh. Template đặt mật khẩu tối thiểu 12 ký tự, bắt buộc chữ hoa, chữ thường, số và ký hiệu.
+4. Ghi Pool ID và Region vào cấu hình local. Không ghi password, mã xác nhận hay token vào báo cáo.
 
 ## Cấu hình đã triển khai và xác minh
 

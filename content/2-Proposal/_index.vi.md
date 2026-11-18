@@ -20,7 +20,7 @@ Tài liệu thường nằm rải rác trên máy tính cá nhân, ứng dụng 
 Amazon Cognito xác thực người dùng và cấp JWT token. Mọi request từ web app được host trên AWS Amplify đều đi qua Amazon API Gateway, nơi token được kiểm tra bằng Cognito authorizer trước khi gọi AWS Lambda. Lambda kiểm tra request, quản lý metadata tài liệu trong Amazon DynamoDB và tạo pre-signed URL có thời hạn ngắn để trình duyệt tải file lên hoặc tải xuống trực tiếp từ Amazon S3. Cách này giúp các file lớn không phải đi qua giới hạn payload của API Gateway và Lambda, nhờ đó tăng hiệu năng và giảm chi phí. Lambda chạy với IAM role theo nguyên tắc đặc quyền tối thiểu (least privilege), Amazon CloudWatch thu thập log, metrics và alarms từ API Gateway và Lambda, còn tích hợp GitHub cho phép AWS Amplify tự động deploy frontend mỗi khi có push mới. Các tính năng chính gồm đăng nhập an toàn, tải lên và tải xuống tài liệu, quản lý metadata (chủ sở hữu, tag, tên file, loại file, dung lượng, thời gian tạo và cập nhật) và kiểm soát truy cập.
 
 ### Lợi ích và hiệu quả đầu tư
-Giải pháp mang lại cho người dùng một nơi tập trung và an toàn để quản lý tài liệu, giảm thời gian tìm kiếm file, đồng thời tạo nền tảng serverless có thể tái sử dụng để mở rộng sau này như tìm kiếm toàn văn (full-text search), quản lý phiên bản tài liệu hoặc phân tích tài liệu bằng AI. Dự án cũng là tài liệu học tập thực tế về các dịch vụ serverless cốt lõi của AWS. Vì mọi dịch vụ đều tính phí theo mức sử dụng và không phải mua phần cứng hay giấy phép, chi phí vận hành ước tính khoảng 0,94 USD mỗi tháng, tức 11,28 USD cho 12 tháng, dựa trên các giả định ở Mục 6, và phần lớn nằm trong hạn mức miễn phí (Free Tier) của AWS. Không cần đầu tư ban đầu, lợi ích đến từ việc tiết kiệm thời gian, tăng tính bảo mật cho tài liệu và khả năng tự động mở rộng khi nhu cầu sử dụng tăng.
+Giải pháp mang lại cho người dùng một nơi tập trung và an toàn để quản lý tài liệu, giảm thời gian tìm kiếm file, đồng thời tạo nền tảng serverless có thể tái sử dụng để mở rộng sau này như tìm kiếm toàn văn (full-text search), quản lý phiên bản tài liệu hoặc phân tích tài liệu bằng AI. Dự án cũng là tài liệu học tập thực tế về các dịch vụ serverless cốt lõi của AWS. Các dịch vụ tính phí theo mức sử dụng và không cần mua phần cứng hay giấy phép. Với các giả định ở Mục 6, AWS Pricing Calculator ước tính chi phí trước chiết khấu khoảng 1,19 USD mỗi tháng, tương đương 14,24 USD cho 12 tháng nếu mức sử dụng không đổi. Đây là con số phục vụ lập kế hoạch, không phải hóa đơn; hạn mức miễn phí áp dụng được, chiết khấu, thuế và lưu lượng thực tế có thể làm thay đổi số tiền bị tính. Không cần đầu tư ban đầu, lợi ích đến từ việc tiết kiệm thời gian, tăng tính bảo mật cho tài liệu và khả năng tự động mở rộng khi nhu cầu sử dụng tăng.
 
 ### 3. Kiến trúc giải pháp
 Nền tảng theo kiến trúc serverless trên AWS. Người dùng truy cập web app được host trên AWS Amplify và đăng nhập qua Amazon Cognito. Các request đi qua Amazon API Gateway đến AWS Lambda, nơi quản lý metadata trong Amazon DynamoDB và cấp pre-signed URL cho các file lưu trong Amazon S3. Amazon CloudWatch giám sát hệ thống, còn GitHub kết hợp AWS Amplify giúp deploy frontend tự động. Kiến trúc chi tiết như sau:
@@ -88,24 +88,28 @@ Dự án gồm bốn giai đoạn:
 - Tuần 11-12: Deploy, thiết lập giám sát, hoàn thiện tài liệu và trình bày demo cuối cùng.
 
 ### 6. Ước tính ngân sách
-Bạn có thể xem ước tính ngân sách trên [AWS Pricing Calculator](https://calculator.aws/) (chèn link bản ước tính đã lưu của bạn vào đây).
-
-**Giả định:** khoảng 10 người dùng, khoảng 5 GB tài liệu lưu trữ và khoảng 10.000 API request mỗi tháng.
+Ước tính được xuất từ AWS Pricing Calculator ngày 18/11/2026 cho Region Asia Pacific (Singapore). Đây là ước tính theo tháng, trước chiết khấu và bao gồm các dịch vụ dưới đây. Chi phí năm được tính bằng chi phí tháng nhân 12, với giả định mức sử dụng mỗi tháng không đổi.
 
 ### Chi phí hạ tầng
-- Dịch vụ AWS:
-    - AWS Lambda: 
-    - Amazon API Gateway: 
-    - Amazon DynamoDB:
-    - Amazon S3 Standard:
-    - Amazon Cognito: 
-    - AWS Amplify Hosting: 
-    - Amazon CloudWatch: 
-    - Chuyển dữ liệu (Data Transfer):
+| Dịch vụ AWS | Ước tính mỗi tháng (USD) |
+| --- | ---: |
+| AWS Lambda | $0.0062 |
+| Amazon API Gateway (HTTP API) | $0.0125 |
+| Amazon DynamoDB (on-demand) | $0.0020 |
+| Amazon S3 Standard | $0.1257 |
+| Amazon Cognito (Essentials, 10 MAU) | $0.0550 |
+| AWS Amplify Hosting | $0.3500 |
+| Amazon CloudWatch | $0.0352 |
+| Truyền dữ liệu AWS | $0.6000 |
+| **Tổng ước tính** | **$1.1866 (~$1.19)** |
 
-Tổng: 
+**Tổng ước tính mỗi năm:** $14.24 USD (chi phí tháng × 12).
 
-- Phần cứng: 
+**Phần cứng:** $0; giải pháp sử dụng các dịch vụ AWS được quản lý.
+
+**Giả định sử dụng mỗi tháng:** 10.000 request API Gateway HTTP API; 10.000 request Lambda và 250 Lambda GB-second; DynamoDB gồm 4.000 read request unit nhất quán cuối cùng, 2.000 write request unit tiêu chuẩn, kích thước trung bình mỗi item 1 KB và 0,1 GB dữ liệu bảng; S3 Standard lưu 5 GB, 100 request ghi/liệt kê và 500 request đọc; 10 người dùng hoạt động hằng tháng trên Cognito; Amplify có 20 phút build, phục vụ 1 GB và lưu 0,002 GB; CloudWatch ingest 0,05 GB standard logs và lưu log trong một tháng; truyền 5 GB dữ liệu ra Internet. Các loại sử dụng tùy chọn khác trong calculator được loại khỏi ước tính. Đây là giả định để lập kế hoạch, không phải số liệu đo từ môi trường production.
+
+Ước tính chưa trừ chiết khấu và không xác định hóa đơn thực tế. Hạn mức miễn phí đủ điều kiện, ưu đãi riêng của tài khoản, thuế và mức sử dụng ngoài giả định có thể làm thay đổi chi phí thực tế. Ước tính giả định log CloudWatch được lưu một tháng; cần cấu hình thời hạn lưu của các log group đã triển khai tương ứng nếu muốn chi phí lưu trữ phản ánh hệ thống đang chạy. Sau khi deploy, hãy theo dõi usage và hóa đơn AWS, đồng thời thiết lập cảnh báo AWS Budgets trước khi tăng lưu lượng hoặc dung lượng lưu trữ.
 
 ### 7. Đánh giá rủi ro
 #### Ma trận rủi ro

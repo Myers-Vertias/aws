@@ -7,7 +7,7 @@ pre: " <b> 5.10.1 </b> "
 ---
 
 {{% notice info %}}
-The images below record some observed results. Distinguish local frontend screenshots from production screenshots; do not infer untested cases from a build result or document list.
+The images below record observed results. Each caption identifies whether it came from the local frontend or production.
 {{% /notice %}}
 
 ## Objective
@@ -16,10 +16,10 @@ Record actual outcomes for the sign-in, metadata, upload, view, and download flo
 
 ## Implementation steps
 
-1. Create/verify a dedicated test user, then test sign-in and sign-out.
-2. Upload a harmless sample file and verify both the private S3 object and DynamoDB metadata.
-3. List the document, open its detail view, update allowed metadata, and download the file.
-4. Test invalid file type/size and missing/expired authentication. Record Pass/Fail only after the test was run.
+1. Open the frontend configured in section 5.8.1, sign in with the Cognito lab account, and open Documents.
+2. Select a supported sample under 20 MiB and upload it. Wait for `Active`; file bytes go directly to the private S3 bucket, while metadata is written to DynamoDB through the API.
+3. Open details, update an allowed category/description/tag, and save. Return to the list and reopen details to confirm the saved values; use Download to retrieve the file through a presigned URL.
+4. To observe upload limits, select an unsupported extension and a file over 20 MiB. The form rejects the file before upload completes; the API also rejects oversized metadata before issuing a presigned URL.
 
 ## Screenshots and remaining evidence
 
@@ -37,7 +37,13 @@ Selecting a `.md` file was rejected by the frontend, which displayed the support
 
 ![Screenshot 5.10.1: Unsupported Markdown file rejected by the upload form](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-invalid-file-extension-rejected.png)
 
-Oversized-file rejection and expired-token behavior were not tested in this workshop run.
+On November 18, 2026, the local upload form rejected the selected file for exceeding its displayed 20 MB limit.
+
+![Screenshot 5.10.1: Local upload form rejects a file over the displayed 20 MB limit](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-oversized-file-rejected-local.png)
+
+The UI check confirms client-side validation. A separate authenticated request to the deployed `POST /documents/upload-url` supplied a file size of 20 MiB + 1 byte and received HTTP `400` with `File size must be between 1 byte and 20 MiB`. The request contained metadata only; the API rejected it before generating an upload URL, and no file was sent to S3.
+
+![Screenshot 5.10.1: Deployed upload-url API rejects a 20 MiB + 1 byte request with HTTP 400](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-backend-oversized-file-rejected-400.png)
 
 ## Expected result
 

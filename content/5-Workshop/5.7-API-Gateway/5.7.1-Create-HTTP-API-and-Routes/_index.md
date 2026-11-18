@@ -16,10 +16,10 @@ Connect API Gateway routes to their intended Lambda integrations.
 
 ## Implementation steps
 
-1. Create an HTTP API in the same Region as Lambda and Cognito.
-2. Add integrations/routes matching section 5.2.2 and the service layer. Record the API invoke URL and stage.
-3. Ensure API Gateway has permission to invoke the selected Lambda functions.
-4. Keep route methods, path parameters, and response expectations consistent with frontend code.
+1. Deploy the SAM stack from section 5.1.3; the template creates the HTTP API, stage, and Lambda integrations. Do not create a duplicate API manually.
+2. In CloudFormation → stack → Resources, open `DocumentsApi` to reach API Gateway. In Routes, confirm `GET /health`, `ANY /{proxy+}`, and `OPTIONS /{proxy+}`; in Integrations, confirm separate health and document Lambdas.
+3. Open Stages, confirm `$default`, and get `ApiBaseUrl` from Outputs. The SAM template configures payload format 2.0 and the Lambda timeout.
+4. If routes or handlers change, update `backend/template.yaml`, validate/build/deploy with SAM, and review the change set. Keep routes aligned with `src/services`.
 
 ## Deployed routes and integrations
 

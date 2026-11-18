@@ -16,10 +16,10 @@ Supply public configuration and connect the frontend to real Cognito authenticat
 
 ## Implementation steps
 
-1. Create `.env.local` with Region `ap-southeast-1`, User Pool `ap-southeast-1_hWIAdC6Xu`, App Client `epodlpjbopbdc809elojsad3a`, and API `https://6wcs1urcm2.execute-api.ap-southeast-1.amazonaws.com`. Git ignores this file; `.env.example` contains placeholders only.
-2. The frontend calls the Cognito User Pools JSON API for sign-up, email confirmation, sign-in, session refresh, and sign-out. The User Pool password policy requires at least 12 characters.
-3. The API client obtains the Cognito ID token and adds it as `Authorization: Bearer` on API Gateway requests.
-4. Vite-exposed `VITE_*` values are public configuration and must not contain AWS secret keys. Restart Vite after changing the environment.
+1. From CloudFormation Outputs, get the Region, `UserPoolId`, `UserPoolClientId`, `ApiBaseUrl`, and `DocumentsBucketName`. At the repository root, copy `.env.example` to `.env.local` and set `VITE_AWS_REGION`, `VITE_COGNITO_USER_POOL_ID`, `VITE_COGNITO_USER_POOL_CLIENT_ID`, `VITE_API_BASE_URL`, and `VITE_S3_BUCKET_NAME` respectively.
+2. Run `npm ci`, then `npm run dev`; restart Vite after changing `.env.local`. Git ignores the local file, which must not be committed.
+3. The auth service calls Cognito User Pools API for sign-up, email confirmation, sign-in, session refresh, and sign-out. The API client gets the ID token and adds `Authorization: Bearer <token>` to requests.
+4. Keep only public IDs/URLs in `VITE_*`; never put AWS secret access keys, credentials, passwords, or tokens in the frontend bundle.
 
 ## Verification
 

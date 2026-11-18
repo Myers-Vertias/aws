@@ -16,10 +16,10 @@ Follow a consistent diagnostic path and verify private storage and least-privile
 
 ## Implementation steps
 
-1. Check the browser Network panel, then API Gateway route/authorizer, Lambda logs, DynamoDB keys/indexes, S3 CORS/signature, and Cognito issuer/audience.
-2. Review S3 Block Public Access and bucket policies; confirm no uploaded object is public.
-3. Review each Lambda role for unnecessary wildcard permissions and confirm owner/share authorization on all document routes.
-4. Review Billing/Cost Explorer and record any resource intentionally retained after the workshop.
+1. Start from the CloudFormation stack to identify resources and Region; compare API routes/authorizer, Lambda functions, DynamoDB tables/indexes, and Cognito Pool/Client with the template.
+2. In S3 → Permissions, review Block Public Access, bucket policy, and CORS; in Properties, review SSE-S3. The bucket stays private; CORS does not grant object access.
+3. In the IAM role, compare each Action/Resource with `backend/iam/lambda-runtime-policy.template.json`; review Lambda trust and scoped PassRole. If the lab identity lacks `iam:GetRole`, ask an administrator to review the policy instead of broadening the user's permissions to bypass the denial.
+4. Confirm the frontend contains only public `VITE_*` settings, API Gateway validates JWTs, Lambda reads caller `sub` from claims, and Billing/Budget shows active resources.
 
 ## Observed access-denied evidence
 

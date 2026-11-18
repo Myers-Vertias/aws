@@ -16,10 +16,10 @@ Lưu share và favorite dưới dạng quan hệ riêng từng người dùng, r
 
 ## Các bước thực hiện
 
-1. Kiểm tra bảng `dms-dev-shares` đang triển khai có partition key `recipientSub` và sort key `documentId`. Cấu trúc này cho phép ứng dụng truy vấn trực tiếp các tài liệu được chia sẻ với người nhận, không cần recipient GSI riêng.
-2. Tạo Favorites với partition key `userSub`, sort key `documentId`.
-3. Dùng bản ghi tổng hợp để kiểm tra người dùng chỉ query favorite/share của mình.
-4. Ghi tên bảng/index cuối vào ghi chú cấu hình API và Lambda. Chỉ tạo index phục vụ truy vấn thực tế.
+1. Deploy cùng SAM stack ở mục 5.1.3; template tạo hai bảng quan hệ riêng, không tạo thủ công bảng trùng.
+2. Mở CloudFormation → stack → Resources và chọn `SharesTable`, rồi đối chiếu bảng `<stack-name>-shares`: partition key `recipientSub`, sort key `documentId`, capacity On-demand. Trong Indexes xác nhận `OwnerShareIndex` dùng `ownerSub` và `documentIdRecipientSub`.
+3. Mở `FavoritesTable` và đối chiếu `<stack-name>-favorites`: partition `userSub`, sort `documentId`, capacity On-demand. Index `DocumentFavoritesIndex` dùng `documentId` và `documentIdUserSub` để truy vấn favorite theo tài liệu.
+4. Ghi tên bảng/index từ stack outputs/template vào cấu hình Lambda. Các khóa Cognito dùng `sub`, không dùng email làm khóa phân quyền.
 
 ## Vị trí ảnh chụp màn hình
 

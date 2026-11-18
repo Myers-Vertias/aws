@@ -16,11 +16,23 @@ Implement create/list/detail/update operations using the authenticated caller an
 
 ## Implementation steps
 
-1. Read the caller's Cognito `sub` from the API Gateway JWT authorizer claims; return HTTP `401` if it is missing. Ownership is derived from this claim, not a browser-supplied owner ID.
-2. List owned documents with `OwnerIndex` (`ownerSub`); fetch a document by `documentId`. A detail request is readable only by its owner or a recipient with a share record. An inaccessible document returns `404`.
-3. On upload completion, verify the S3 object with `HeadObject`, check its size and server-generated document ID metadata, then write the document metadata with `ownerSub`, file details, category, description, tags, and timestamps.
-4. Metadata updates accept `description`, `category`, and `tags`. The handler validates types and limits, normalizes/deduplicates tags, and conditions the update on the caller being the owner and the upload being active.
-5. Return document DTOs and JSON errors with HTTP statuses. The deployed document table key schema and owner index are recorded in section 5.4.1.
+1. Open `backend/src/index.mjs` and use the API Gateway dispatcher to route by method/path; read the caller `sub` from authorizer-verified JWT claims. Never accept an owner ID from the frontend body.
+2. Query the owner's list with `OwnerIndex` and fetch details by `documentId`; check ownership or an active share record before returning data.
+3. The upload-completion API verifies the S3 object with `HeadObject`, then writes its metadata item to the Documents table. Keep metadata and bytes separate: DynamoDB stores file details, while S3 stores file contents.
+4. PATCH metadata accepts only `description`, `category`, and `tags`; validate types/limits and allow only the owner to update an active file. Return consistent DTO/error JSON with HTTP status.
+5. After code changes, run `sam validate --lint` and `sam build` from `backend/`, then deploy using section 5.1.3 after reviewing the change set.
+
+### Example: read identity from JWT claims
+
+This excerpt is from `backend/src/index.mjs`; Lambda uses only the `sub` verified by the API Gateway JWT authorizer:
+
+```javascript
+const identity = (event) => {
+  const claims = event.requestContext?.authorizer?.jwt?.claims;
+  if (!claims?.sub) throw new HttpError(401, "Authentication is required");
+  return { sub: claims.sub, email: claims.email?.toLowerCase() ?? claims.username ?? claims.sub };
+};
+```
 
 ## Verification evidence
 

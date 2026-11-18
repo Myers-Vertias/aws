@@ -16,10 +16,10 @@ Theo trình tự chẩn đoán nhất quán và xác minh lưu trữ riêng tư 
 
 ## Các bước thực hiện
 
-1. Kiểm tra Network panel, rồi API Gateway route/authorizer, Lambda log, key/index DynamoDB, CORS/signature S3 và issuer/audience Cognito.
-2. Rà soát Block Public Access và bucket policy S3; xác nhận không object upload nào public.
-3. Rà soát mỗi Lambda role để loại quyền wildcard thừa và xác nhận mọi document route đều kiểm tra owner/share.
-4. Xem Billing/Cost Explorer và ghi lại resource được chủ động giữ sau workshop.
+1. Bắt đầu từ CloudFormation stack để xác định resource và Region; sau đó đối chiếu API route/authorizer, Lambda function, DynamoDB tables/indexes và Cognito Pool/Client với template.
+2. Trong S3 → Permissions, xem Block Public Access, bucket policy và CORS; trong Properties xem SSE-S3. Bucket vẫn private, CORS không cấp quyền đọc object.
+3. Trong IAM role, so từng Action/Resource với `backend/iam/lambda-runtime-policy.template.json`; kiểm tra role trust cho Lambda và PassRole được giới hạn. Nếu danh tính lab không có `iam:GetRole`, nhờ quản trị viên xem policy, không tăng quyền của chính user để vượt lỗi.
+4. Kiểm tra frontend chỉ chứa public `VITE_*`, API xác minh JWT, Lambda lấy caller `sub` từ claims; xem Billing/Budget để nhận biết resource còn hoạt động.
 
 ## Vị trí ảnh chụp màn hình
 

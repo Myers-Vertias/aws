@@ -16,10 +16,10 @@ Chỉ cho phép frontend origin cần thiết upload/download trực tiếp từ
 
 ## Các bước thực hiện
 
-1. Cấu hình S3 CORS cho đúng Vite origin cục bộ và Amplify origin triển khai; chỉ cho phép method/header cần thiết.
-2. Lambda xác minh danh tính, dung lượng, loại file và metadata trước khi trả PUT URL ngắn hạn với key do server tạo.
-3. Trình duyệt upload với content type đã ký; endpoint hoàn tất xác minh object trước khi chốt metadata.
-4. Khi download, Lambda kiểm tra quyền owner/share còn hiệu lực rồi cấp GET URL ngắn hạn. Không log hay công khai URL.
+1. Khai báo origin chính xác trong `AllowedFrontendOrigins` của SAM stack: Vite local và `https://<amplify-domain>`. Cập nhật stack sau khi có domain; template áp dụng danh sách này cho HTTP API và CORS của bucket.
+2. Trong S3 Console → bucket → Permissions → CORS, đối chiếu GET/HEAD/PUT và các header signing/content type cần thiết. Không dùng `*` cho origin production.
+3. Luồng upload: frontend gửi thông tin file tới Lambda; Lambda xác minh Cognito caller, tạo key server-side và trả PUT presigned URL ngắn hạn. Browser PUT thẳng lên S3 với Content-Type đã ký, rồi gọi API complete; Lambda dùng HeadObject xác minh trước khi ghi metadata DynamoDB.
+4. Luồng download: API xác minh owner hoặc share còn hiệu lực rồi trả GET presigned URL ngắn hạn. Không log hoặc chia sẻ URL.
 
 ## Minh chứng
 

@@ -16,10 +16,10 @@ Configure a browser-safe app client and verify the sign-up/sign-in flow after in
 
 ## Implementation steps
 
-1. Create an app client for a browser single-page application. Do not create a client secret for a public SPA.
-2. Record App Client ID and configure only the real local/deployed callback and sign-out URLs if managed login is used.
-3. Integrate the selected supported Cognito/AWS Amplify JavaScript authentication APIs: sign-up, confirmation, sign-in, session retrieval, and sign-out.
-4. Test with dedicated accounts. Keep tokens out of browser logs, screenshots, and Git.
+1. Open the stack-created User Pool → App integration → App clients, then select its web client. The template already creates a public SPA client with `GenerateSecret: false`; do not create a client secret.
+2. Read the Client ID from CloudFormation Outputs. If using managed login, set the exact callback/sign-out URLs; the current frontend calls Cognito User Pools API directly and does not use redirect callbacks.
+3. Put the Pool ID, Client ID, and Region in `.env.local` as described in section 5.8.1. The authentication service calls Cognito for sign-up, email confirmation, sign-in, session refresh, and sign-out.
+4. Keep access/ID tokens in the application session; never write full tokens to logs, screenshots, or Git.
 
 ## Deployed configuration and verification
 

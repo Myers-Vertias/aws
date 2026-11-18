@@ -16,10 +16,10 @@ Create the file bucket with public access blocked and encryption enabled.
 
 ## Implementation steps
 
-1. Create a globally unique bucket such as `unicloud-dms-dev-your-unique-suffix` in the selected Region.
-2. Keep all Block Public Access settings enabled and keep default encryption on.
-3. Do not add public-read ACLs or public bucket policies. Keep uploaded document objects private.
-4. Enable versioning only if the application and cleanup procedure are prepared to manage old versions.
+1. Deploy the SAM stack from section 5.1.3; the template creates the Documents bucket and generates its unique name. Do not create a duplicate bucket or use the example name.
+2. In CloudFormation → stack → Outputs, get `DocumentsBucketName`; use Resources to open `DocumentsBucket` in the S3 Console.
+3. In Permissions, confirm all four Block Public Access controls are enabled and there is no public bucket policy/ACL. In Properties, confirm default SSE-S3 (AES-256) encryption.
+4. Keep the bucket private. Enable versioning only if version lifecycle and deletion of all object versions/delete markers are also planned.
 
 ## Deployment evidence
 

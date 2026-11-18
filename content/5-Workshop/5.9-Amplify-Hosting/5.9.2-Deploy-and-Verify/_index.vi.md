@@ -16,10 +16,10 @@ Triển khai frontend và xác minh xác thực cùng API call thật.
 
 ## Các bước thực hiện
 
-1. Cấu hình Region công khai, Cognito ID và API base URL. Không thêm secret access key vào biến frontend.
-2. Cập nhật Cognito callback/sign-out URL và CORS S3/API với domain Amplify chính xác khi cần.
-3. Chạy deployment và xem build log đến khi trạng thái thành công.
-4. Mở URL HTTPS được cấp, kiểm thử đăng nhập và một thao tác tài liệu cần bảo vệ, sau đó refresh route lồng nhau.
+1. Trong Amplify Console, mở app → Hosting → Environment variables và đặt năm biến `VITE_*` theo CloudFormation Outputs; không thêm secret access key. Lưu cấu hình để tạo deployment mới.
+2. Lấy domain HTTPS của branch. Cập nhật `AllowedFrontendOrigins` trong SAM stack để bao gồm origin chính xác này; frontend hiện dùng Cognito API trực tiếp nên không cần managed-login callback URL.
+3. Trong Amplify → branch, theo dõi build log đến trạng thái thành công; kiểm tra artifact directory `dist`, build command `npm ci && npm run build` và SPA rewrite.
+4. Dùng domain production làm origin trong trình duyệt. CORS API và bucket phải trùng scheme/host của domain; URL API, Pool ID, Client ID và bucket phải lấy cùng một stack.
 
 ## Minh chứng triển khai và xác minh
 

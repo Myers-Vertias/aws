@@ -16,11 +16,23 @@ Triển khai thao tác tạo/liệt kê/chi tiết/cập nhật bằng người 
 
 ## Các bước thực hiện
 
-1. Đọc Cognito `sub` của người gọi từ JWT authorizer claims của API Gateway; trả HTTP `401` nếu thiếu. Owner được xác định từ claim này, không lấy owner ID do trình duyệt gửi.
-2. Liệt kê tài liệu sở hữu bằng `OwnerIndex` (`ownerSub`); lấy chi tiết theo `documentId`. Chỉ owner hoặc người nhận có bản ghi share mới được đọc. Tài liệu ngoài quyền truy cập trả `404`.
-3. Khi hoàn tất upload, kiểm tra object S3 bằng `HeadObject`, xác minh kích thước và metadata document ID do server tạo, rồi ghi metadata gồm `ownerSub`, thông tin file, danh mục, mô tả, thẻ và timestamp.
-4. Cập nhật metadata nhận các trường `description`, `category`, `tags`. Handler kiểm tra kiểu/giới hạn, chuẩn hóa và loại thẻ trùng, đồng thời chỉ cập nhật khi caller là owner và upload đang hoạt động.
-5. Trả document DTO và JSON error kèm HTTP status. Key schema và owner index của bảng documents đang triển khai được ghi ở mục 5.4.1.
+1. Mở `backend/src/index.mjs` và dùng dispatcher của API Gateway để tách method/path; lấy caller `sub` từ JWT claims mà authorizer đã xác minh. Không nhận owner ID từ body frontend.
+2. Dùng `OwnerIndex` để Query danh sách của owner và `documentId` để lấy chi tiết; trước khi trả dữ liệu, kiểm tra owner hoặc share record còn hiệu lực.
+3. API complete upload dùng `HeadObject` xác nhận object S3 rồi ghi item metadata vào Documents table. Giữ metadata và bytes tách nhau: DynamoDB lưu thông tin file, S3 giữ nội dung.
+4. PATCH metadata chỉ nhận `description`, `category`, `tags`; kiểm tra kiểu/giới hạn và chỉ cho owner cập nhật active file. Trả DTO/error JSON kèm HTTP status nhất quán.
+5. Sau thay đổi code, từ `backend/` chạy `sam validate --lint`, `sam build` và deploy stack theo mục 5.1.3 sau khi xem change set.
+
+### Mẫu lấy danh tính từ JWT claims
+
+Đoạn trích dưới đây nằm trong `backend/src/index.mjs`; Lambda chỉ dùng `sub` do API Gateway JWT authorizer đã xác minh:
+
+```javascript
+const identity = (event) => {
+  const claims = event.requestContext?.authorizer?.jwt?.claims;
+  if (!claims?.sub) throw new HttpError(401, "Authentication is required");
+  return { sub: claims.sub, email: claims.email?.toLowerCase() ?? claims.username ?? claims.sub };
+};
+```
 
 ## Minh chứng kiểm thử
 

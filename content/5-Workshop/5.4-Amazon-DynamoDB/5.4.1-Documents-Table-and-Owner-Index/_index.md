@@ -16,10 +16,10 @@ Create the main metadata table using the approved key design.
 
 ## Implementation steps
 
-1. Create `UniCloudDMS-Documents-dev` in the selected Region. Use String partition key `documentId`.
-2. Use on-demand capacity for the small variable lab unless the design specifies otherwise; keep encryption enabled.
-3. Add the `OwnerIndex` GSI with partition key `ownerSub` and sort key `createdAtDocumentId`, matching the deployed owner-list query.
-4. Wait for table and index status to become Active before testing. Avoid full table scans for per-user listing.
+1. Deploy the SAM template from section 5.1.3; do not manually create a duplicate table. The template names it `<stack-name>-documents`, uses `PAY_PER_REQUEST`, and creates `OwnerIndex`.
+2. Open CloudFormation → the lab stack → Resources and select `DocumentsTable` to open DynamoDB. Alternatively, open DynamoDB → Tables and find `<stack-name>-documents` in the same Region.
+3. In Table details, confirm String partition key `documentId`, no sort key, On-demand capacity, and Active status. Open Indexes and confirm `OwnerIndex` has String partition key `ownerSub` and String sort key `createdAtDocumentId`.
+4. Record the table and index names for Lambda. Owner listings use Query on the GSI, not a full table Scan.
 
 ## Screenshot and remaining evidence
 

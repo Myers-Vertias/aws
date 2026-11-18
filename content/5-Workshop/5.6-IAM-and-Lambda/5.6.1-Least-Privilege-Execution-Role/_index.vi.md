@@ -16,10 +16,10 @@ Tạo execution role riêng cho Lambda và cấp quyền theo nhu cầu thực t
 
 ## Các bước thực hiện
 
-1. Trong IAM, tạo role `dms-lambda-execution` với trusted entity là Lambda.
-2. Gắn policy AWS managed `AWSLambdaBasicExecutionRole` để function ghi log vào CloudWatch Logs.
-3. Ảnh trang quyền của role ghi nhận inline policy `DmsDocumentRuntimeAccess`. File policy trong `backend/iam/lambda-runtime-policy.ap-southeast-1.json` giới hạn DynamoDB tables/indexes, prefix object tài liệu trong S3 và thao tác tra cứu người nhận Cognito. Sau đó IAM user `dms-dev` bị từ chối `iam:GetRole`, nên chưa thể mở lại độc lập nội dung policy live trong lần rà soát này.
-4. Group triển khai có inline policy `DmsPassLambdaExecutionRole`, chỉ cho phép chuyển role này cho Lambda; không cấp quyền `iam:PassRole` trên mọi role.
+1. Tạo execution role theo mục 5.1.3 với trusted entity Lambda và policy `AWSLambdaBasicExecutionRole` để ghi CloudWatch Logs. Lấy ARN vì SAM yêu cầu parameter `LambdaExecutionRoleArn`.
+2. Deploy stack trước để sinh tên bảng, bucket và User Pool. Sau đó thay placeholder trong `backend/iam/lambda-runtime-policy.template.json` bằng đúng ARN/tên resource lấy từ Outputs và gắn policy runtime vào role.
+3. Mở IAM → Roles → role của Lambda → Permissions để xem policy. Giữ quyền ở đúng ba DynamoDB table/index, prefix tài liệu trong S3 và User Pool của project.
+4. Danh tính triển khai cần `iam:PassRole` giới hạn cho role này và Lambda. Không gắn quyền IAM rộng vào Lambda role.
 
 ## Vị trí ảnh chụp màn hình
 

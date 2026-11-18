@@ -16,10 +16,10 @@ Store shares and favorites as user-specific relationships and verify the query p
 
 ## Implementation steps
 
-1. In the deployed `dms-dev-shares` table, verify partition key `recipientSub` and sort key `documentId`. This lets the application query shares for a recipient directly; a separate recipient GSI is not needed.
-2. Create Favorites with partition key `userSub` and sort key `documentId`.
-3. Use synthetic records to check that a user queries only their own favorites and shares.
-4. Record the final table/index names in the API and Lambda configuration notes. Create only indexes required by actual query patterns.
+1. Deploy the same SAM stack from section 5.1.3; the template creates both relationship tables, so do not create duplicates manually.
+2. In CloudFormation → stack → Resources, select `SharesTable`. Confirm `<stack-name>-shares` has `recipientSub` partition key, `documentId` sort key, and On-demand capacity. In Indexes, confirm `OwnerShareIndex` uses `ownerSub` and `documentIdRecipientSub`.
+3. Open `FavoritesTable` and confirm `<stack-name>-favorites` has `userSub` partition key, `documentId` sort key, and On-demand capacity. `DocumentFavoritesIndex` uses `documentId` and `documentIdUserSub` to query favorites by document.
+4. Record table/index names from stack outputs/template for Lambda configuration. Cognito `sub` values are used as identity keys; email is not an authorization key.
 
 ## Screenshots and remaining evidence
 

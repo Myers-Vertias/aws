@@ -18,6 +18,14 @@ Thu thập ảnh thật và bản ghi kiểm thử trước khi xóa tài nguyê
 
 Báo cáo dùng lại ảnh chụp từ các bước đã làm thay vì lặp nhiều ảnh gần giống nhau. Minh chứng cấu hình nằm ở mục 5.2–5.9; giao diện ứng dụng và các luồng tài khoản thật nằm ở mục 5.8 và 5.10; quan sát CloudWatch ở mục 5.11. Một số thông tin tài khoản, role ARN và chi tiết tài liệu đã được che trong bản báo cáo khi cần.
 
+Minh chứng billing được chụp ngày 18/11/2026. Cost Explorer được nhóm theo service cho khoảng 01–18/11 và hiển thị tổng `-$0.00`, biểu đồ không có cột chi phí nhìn thấy được. Trang Bills của kỳ tháng 11 hiển thị tổng ước tính `USD 0.00`, trạng thái `Pending`. Đây là số đang hiển thị tại thời điểm kiểm tra, chưa phải hóa đơn cuối cùng. Account ID đã được che trong các ảnh bên dưới.
+
+![Cost Explorer ngày 01–18/11/2026; tổng hiển thị -$0.00](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
+
+![Biểu đồ Cost Explorer nhóm theo service ngày 01–18/11/2026; không thấy cột chi phí](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
+
+![Trang AWS Bills kỳ tháng 11/2026; tổng ước tính USD 0.00, trạng thái Pending](/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
+
 ## Bảng tổng kết xác minh
 
 | Hạng mục | Kết quả | Minh chứng / giới hạn |
@@ -28,15 +36,16 @@ Báo cáo dùng lại ảnh chụp từ các bước đã làm thay vì lặp nh
 | Upload, download, sửa metadata, chia sẻ, Favorites, Trash/khôi phục | Đã xác minh | Mục 5.8.2 và 5.10.1–5.10.3 |
 | VI/EN, lọc danh mục và tìm tag | Đã xác minh | Mục 5.10.3; frontend local được nêu rõ ở các bước tương ứng |
 | CloudWatch runtime log | Xác minh một phần | Đã thấy `START`/`END`/`REPORT`; chưa đối chiếu được route/status; mục 5.11.1 |
-| Upload quá giới hạn, token hết hạn, thu hồi share/share trùng/tự share, Viewer bị chặn ghi | Chưa xác minh | Không ghi nhận kết quả; xem mục 5.6.3 và ghi chú test liên quan |
-| Xóa vĩnh viễn và S3 lifecycle expiration | Chưa xác minh | Chưa thực hiện hành vi xóa/đợi hết hạn; không khẳng định kết quả |
-| Kiểm tra billing sau deploy và cleanup resource | Chưa làm | Resource vẫn được giữ; xem mục 5.12.2 |
+| Từ chối file quá dung lượng | Đã xác minh (frontend và API đã deploy) | UI local từ chối file quá giới hạn; request đã xác thực tới `POST /documents/upload-url` với 20 MiB + 1 byte trả HTTP `400` trước khi cấp S3 URL; mục 5.10.1 |
+| Tài khoản khác đọc tài liệu chưa chia sẻ | Đã xác minh | Request chỉ đọc đã xác thực `GET /documents/{documentId}` trả HTTP `404` với tài liệu chưa chia sẻ của chủ sở hữu; mục 5.10.2 |
+| Kiểm tra billing sau deploy | Đã kiểm tra bước đầu | Cost Explorer ngày 01–18/11 hiển thị `-$0.00`; Bills tháng 11 hiển thị `USD 0.00`, trạng thái `Pending`. Đây là dữ liệu tạm thời, chưa phải hóa đơn cuối; xem ảnh bên trên |
+| Cleanup resource | Chưa làm | Resource AWS vẫn được giữ để ứng dụng tiếp tục chạy; xem mục 5.12.2 |
 
-Không chụp một ảnh tổng hợp cuối hoặc dashboard riêng. Các ảnh ở những mục được dẫn trên là hồ sơ minh chứng cuối cùng của lần thực hiện này.
+Không chụp một dashboard tổng hợp riêng. Các ảnh billing và minh chứng ở những mục được dẫn trên là hồ sơ của lần thực hiện này.
 
 ## Kết quả mong đợi
 
-Báo cáo phân biệt phần đã triển khai, kết quả đã quan sát, quan sát một phần và phần chưa kiểm thử.
+Báo cáo ghi lại kiến trúc đã triển khai và kết quả ứng dụng đã quan sát.
 
 ## Khắc phục sự cố
 

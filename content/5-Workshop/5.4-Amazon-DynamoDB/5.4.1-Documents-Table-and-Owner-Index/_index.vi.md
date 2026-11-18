@@ -16,10 +16,10 @@ Tạo bảng metadata chính theo thiết kế khóa đã duyệt.
 
 ## Các bước thực hiện
 
-1. Tạo `UniCloudDMS-Documents-dev` tại Region đã chọn, dùng partition key String `documentId`.
-2. Dùng on-demand cho lab nhỏ có tải biến động nếu thiết kế không quy định khác; giữ bật mã hóa.
-3. Thêm GSI `OwnerIndex` với partition key `ownerSub`, sort key `createdAtDocumentId`, khớp truy vấn danh sách theo owner đang triển khai.
-4. Chờ bảng và index chuyển sang Active trước khi test. Tránh scan toàn bảng khi liệt kê theo người dùng.
+1. Deploy SAM template theo mục 5.1.3; không tạo bảng thủ công trùng với bảng trong stack. Template đặt tên theo `<stack-name>-documents`, bật `PAY_PER_REQUEST` và tạo `OwnerIndex`.
+2. Mở CloudFormation → stack của lab → Resources, chọn `DocumentsTable` để đi tới DynamoDB. Hoặc mở DynamoDB → Tables và tìm bảng `<stack-name>-documents` trong cùng Region.
+3. Trong Table details, đối chiếu partition key `documentId` kiểu String, không có sort key, capacity On-demand và trạng thái Active. Mở tab Indexes, xác nhận `OwnerIndex` có partition `ownerSub` và sort `createdAtDocumentId`, cả hai kiểu String.
+4. Ghi lại tên bảng và index cho Lambda. Truy vấn danh sách owner dùng Query trên GSI, không Scan toàn bảng.
 
 ## Vị trí ảnh chụp màn hình
 

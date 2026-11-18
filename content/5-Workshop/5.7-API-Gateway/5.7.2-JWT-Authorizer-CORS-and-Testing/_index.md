@@ -16,10 +16,10 @@ Require valid Cognito tokens and check CORS without confusing it with authorizat
 
 ## Implementation steps
 
-1. Configure a JWT authorizer with the Cognito issuer URL and app client ID as the audience.
-2. Attach the authorizer to every route that reads or changes user documents.
-3. Allow only the required local and deployed frontend origins, methods, and Authorization/Content-Type headers.
-4. Test requests without a token, with a valid token, and as a logged-in user who lacks access to a document. Record status codes and request IDs.
+1. Review `Auth` in `backend/template.yaml`: the JWT issuer is built from the Region/User Pool, and the audience is the Cognito web App Client ID. SAM applies the default authorizer to the proxy route.
+2. In API Gateway → API → Authorization/Routes, confirm the document proxy requires Cognito JWT. Only `GET /health` and `OPTIONS /{proxy+}` are unauthenticated by design.
+3. Keep `AllowedFrontendOrigins` limited to local Vite and the actual Amplify domain; the template allows Authorization/Content-Type and the methods used by the app.
+4. Change the template and redeploy with SAM; review routes/auth/CORS after the stack update. Do not enable CORS credentials when the frontend does not use cookies.
 
 ## Screenshot and remaining evidence
 

@@ -16,10 +16,10 @@ Yêu cầu token Cognito hợp lệ và kiểm tra CORS nhưng không nhầm COR
 
 ## Các bước thực hiện
 
-1. Cấu hình JWT authorizer bằng Cognito issuer URL và app client ID làm audience.
-2. Gắn authorizer cho mọi route đọc hoặc thay đổi tài liệu người dùng.
-3. Chỉ cho phép frontend origin local/deployed, method và header Authorization/Content-Type cần thiết.
-4. Kiểm thử request thiếu token, token hợp lệ và người đã đăng nhập nhưng không có quyền tài liệu. Ghi status code và request ID.
+1. Xem `Auth` trong `backend/template.yaml`: JWT issuer được tạo từ Region/User Pool, audience là Cognito web App Client ID. SAM áp dụng authorizer mặc định cho route proxy.
+2. Trong API Gateway → API → Authorization/Routes, xác nhận document proxy yêu cầu Cognito JWT. Chỉ `GET /health` và `OPTIONS /{proxy+}` được miễn auth theo thiết kế.
+3. Giữ `AllowedFrontendOrigins` giới hạn ở Vite local và domain Amplify thực tế; template cho phép header Authorization/Content-Type và các method ứng dụng dùng.
+4. Thay đổi cấu hình ở template rồi deploy bằng SAM; xem route/auth/CORS sau khi stack cập nhật. Không bật CORS credentials nếu frontend không dùng cookie.
 
 ## Vị trí ảnh chụp màn hình
 

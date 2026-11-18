@@ -16,10 +16,10 @@ Create the user directory used to authenticate UniCloud DMS accounts.
 
 ## Implementation steps
 
-1. Open the Amazon Cognito console and create a User Pool in the selected Region.
-2. Choose email as the sign-in identifier and configure account verification/recovery for the lab.
-3. Use a clear development name such as `unicloud-dms-dev-users`; review the choices before creating the pool.
-4. Record the Pool ID and Region in a local note. Do not include user passwords or tokens in documentation.
+1. Deploy the SAM template using section 5.1.3. The template creates the User Pool, so do not create a second pool manually.
+2. In the AWS Console, select the same Region → Amazon Cognito → User pools → open the pool owned by the lab's CloudFormation stack. Match its name in the stack's Resources/Outputs.
+3. Open the sign-in configuration and confirm email is the username attribute, email is auto-verified, and account recovery uses a verified email. The template requires a 12-character minimum password with uppercase, lowercase, number, and symbol.
+4. Record the Pool ID and Region in local configuration. Do not put passwords, verification codes, or tokens in the report.
 
 ## Deployed configuration and verification
 

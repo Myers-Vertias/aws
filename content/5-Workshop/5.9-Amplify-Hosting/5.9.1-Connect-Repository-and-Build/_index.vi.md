@@ -16,10 +16,10 @@ Kết nối Amplify tới repository chứa UniCloud DMS, không phải reposito
 
 ## Các bước thực hiện
 
-1. Kết nối Git provider và chọn repository frontend có package.json cùng branch cần triển khai.
-2. Cấu hình build dùng lockfile của repository; với npm thường là `npm ci` rồi `npm run build`.
-3. Đặt thư mục artifact Vite là `dist` và cấu hình SPA rewrite cho route React Router.
-4. Xem lại build setting trước khi lưu.
+1. Mở AWS Amplify → Create new app → Host web app, kết nối GitHub và cấp quyền chọn repository. Chọn repository ứng dụng `serverless-document-management`, không chọn repository tài liệu workshop.
+2. Chọn branch cần publish (project dùng `main`), xác nhận app root là thư mục có `package.json` và `package-lock.json`.
+3. Dùng build command `npm ci && npm run build`, artifact directory `dist`; thêm SPA rewrite để route React Router trả về `index.html` khi refresh.
+4. Lưu cấu hình và để Amplify tạo build đầu tiên. Khi cần environment variables, nhập các biến `VITE_*` trong Amplify trước khi redeploy theo mục 5.9.2.
 
 ## Minh chứng triển khai
 

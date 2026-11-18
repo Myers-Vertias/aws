@@ -16,10 +16,10 @@ Connect Amplify to the repository containing UniCloud DMS, not the workshop docu
 
 ## Implementation steps
 
-1. Connect the Git provider and select the frontend repository with its package.json and intended branch.
-2. Configure the build to use the repository's lockfile; for npm this is normally `npm ci` followed by `npm run build`.
-3. Set the Vite artifact directory to `dist` and configure SPA rewrites for React Router routes.
-4. Review build settings before saving.
+1. In AWS Amplify, choose Create new app → Host web app, connect GitHub, and authorize repository selection. Select the `serverless-document-management` application repository, not the workshop documentation repository.
+2. Select the branch to publish (the project uses `main`); confirm the app root contains `package.json` and `package-lock.json`.
+3. Set build command to `npm ci && npm run build`, artifact directory to `dist`, and add the SPA rewrite so React Router refreshes return `index.html`.
+4. Save settings and let Amplify run the initial build. Add `VITE_*` environment variables in Amplify before redeploying, as described in section 5.9.2.
 
 ## Deployment evidence
 

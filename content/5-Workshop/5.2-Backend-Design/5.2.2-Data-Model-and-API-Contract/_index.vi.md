@@ -110,7 +110,7 @@ CloudFormation change set đã được rà soát trước khi deploy và stack 
 
 ## Kết quả mong đợi
 
-Thiết kế bảng/index triển khai và quy tắc truy cập đã kiểm thử được ghi ở trên. Contract đã cập nhật khớp ứng dụng; các kiểm thử còn thiếu được nêu tại mục 5.10.
+Thiết kế bảng/index triển khai và quy tắc truy cập đã được ghi ở trên. Contract đã cập nhật khớp với ứng dụng và API hiện hành.
 
 ## Tiến độ hiện thực hóa
 

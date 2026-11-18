@@ -16,10 +16,10 @@ Tạo bucket file với public access bị chặn và mã hóa được bật.
 
 ## Các bước thực hiện
 
-1. Tạo bucket duy nhất toàn cầu như `unicloud-dms-dev-your-unique-suffix` tại Region đã chọn.
-2. Giữ bật toàn bộ Block Public Access và mã hóa mặc định.
-3. Không thêm public-read ACL hay bucket policy công khai. Giữ object tài liệu riêng tư.
-4. Chỉ bật versioning nếu ứng dụng và quy trình cleanup đã tính đến version cũ.
+1. Deploy SAM stack theo mục 5.1.3; template tạo Documents bucket và tự sinh tên duy nhất. Không tạo thêm bucket hoặc đổi sang tên trong ví dụ.
+2. Mở CloudFormation → stack → Outputs, lấy `DocumentsBucketName`; từ Resources mở `DocumentsBucket` trong S3 Console.
+3. Trong Permissions, xác nhận cả bốn Block Public Access controls đang bật và không có public bucket policy/ACL. Trong Properties, xác nhận default encryption SSE-S3 (AES-256).
+4. Giữ bucket private. Chỉ bật versioning khi đã thiết kế vòng đời version và cách dọn toàn bộ object version/delete marker.
 
 ## Minh chứng triển khai
 

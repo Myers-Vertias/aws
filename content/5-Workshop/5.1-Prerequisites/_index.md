@@ -18,7 +18,8 @@ Prepare the local React/Vite app, development tools, AWS account, Region, and co
 
 - [5.1.1 Prepare the Development Environment](5.1.1-Development-Environment/)
 - [5.1.2 Prepare the AWS Account and Cost Controls](5.1.2-AWS-Account-Region-and-Cost/)
+- [5.1.3 Deploy the Backend with AWS SAM](5.1.3-Backend-Deployment-Runbook/)
 
 ## Note
 
-Each child page contains an objective, steps, a screenshot position, an expected result, and troubleshooting guidance. Follow the sequence and keep resource names consistent.
+The guide pages describe the procedure in text; existing images serve as evidence for actions already performed. Follow the sequence and use resource names dedicated to your own environment.

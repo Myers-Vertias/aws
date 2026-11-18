@@ -16,10 +16,10 @@ Create a dedicated Lambda execution role and grant permissions according to the 
 
 ## Implementation steps
 
-1. In IAM, create `dms-lambda-execution` with Lambda as its trusted entity.
-2. Attach the AWS managed `AWSLambdaBasicExecutionRole` policy so functions can write to CloudWatch Logs.
-3. The role permissions page showed the inline policy `DmsDocumentRuntimeAccess`. The policy source in `backend/iam/lambda-runtime-policy.ap-southeast-1.json` scopes DynamoDB tables/indexes, the document object prefix in S3, and Cognito recipient lookup. The `dms-dev` user was later denied `iam:GetRole`, so the live policy contents could not be independently re-opened during this review.
-4. The deployment group's inline `DmsPassLambdaExecutionRole` policy allows passing only this role to Lambda; it does not grant `iam:PassRole` on every role.
+1. Create the execution role as described in section 5.1.3, with Lambda as the trusted entity and `AWSLambdaBasicExecutionRole` for CloudWatch Logs. Copy its ARN because SAM requires `LambdaExecutionRoleArn`.
+2. Deploy the stack to create the table, bucket, and User Pool names. Then replace the placeholders in `backend/iam/lambda-runtime-policy.template.json` with exact ARNs/names from Outputs and attach the runtime policy to the role.
+3. Open IAM → Roles → the Lambda role → Permissions to review the policy. Keep permissions scoped to the three DynamoDB tables/indexes, document prefix in S3, and this project's User Pool.
+4. The deployment identity needs `iam:PassRole` scoped to this role and Lambda. Do not attach broad IAM permissions to the Lambda role.
 
 ## Screenshots
 

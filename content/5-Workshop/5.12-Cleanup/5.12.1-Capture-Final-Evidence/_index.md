@@ -18,6 +18,14 @@ Collect genuine screenshots and test records before deleting resources.
 
 The report reuses screenshots captured during the work instead of repeating near-identical images. Configuration evidence is in sections 5.2–5.9; the production application and real-account workflows are in sections 5.8 and 5.10; CloudWatch observations are in section 5.11. Sensitive account identifiers, role ARNs, and document details are redacted in report copies where applicable.
 
+Billing evidence was captured on November 18, 2026. Cost Explorer was grouped by service for November 1–18 and displayed a total of `-$0.00` with no visible cost bars. The November Bills page displayed an estimated total of `USD 0.00` with status `Pending`. These are the values displayed at the time of review, not a finalized invoice. Account identifiers are redacted in the screenshots below.
+
+![Cost Explorer summary for November 1–18, 2026; displayed total is -$0.00](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
+
+![Cost Explorer service-grouped graph for November 1–18, 2026; no cost bars are visible](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
+
+![AWS Bills page for November 2026; estimated total is USD 0.00 and status is Pending](/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
+
 ## Final verification matrix
 
 | Area | Result | Evidence / limitation |
@@ -28,15 +36,16 @@ The report reuses screenshots captured during the work instead of repeating near
 | Upload, download, metadata, sharing, Favorites, Trash/restore | Verified | Sections 5.8.2, 5.10.1–5.10.3 |
 | VI/EN selection, category filter, tag search | Verified | Section 5.10.3; UI checks were performed on the local frontend where stated |
 | CloudWatch runtime logs | Partially verified | Lambda `START`/`END`/`REPORT` events observed; no route/status correlation; section 5.11.1 |
-| Oversized upload, expired-token behavior, share revocation/duplicate/self-share, Viewer write denial | Not verified | No result is claimed; see section 5.6.3 and related test notes |
-| Permanent deletion and S3 lifecycle expiration | Not verified | Destructive/expiry behavior was not exercised; no result is claimed |
-| Post-deployment billing review and resource cleanup | Not done | Resources are retained; see section 5.12.2 |
+| Oversized-file rejection | Verified (frontend and deployed API) | The local UI rejected the oversized file; direct authenticated `POST /documents/upload-url` with 20 MiB + 1 byte returned HTTP `400` before issuing an S3 URL; section 5.10.1 |
+| Unshared cross-account document read | Verified | Authenticated read-only `GET /documents/{documentId}` returned HTTP `404` for an owner's unshared document; section 5.10.2 |
+| Post-deployment billing review | Partially completed | November 1–18 Cost Explorer showed `-$0.00`; November Bills showed `USD 0.00`, status `Pending`. This is provisional, not a final invoice; screenshots above |
+| Resource cleanup | Not done | AWS resources are retained so the application can continue running; see section 5.12.2 |
 
-No single final screenshot or composite dashboard was captured. The linked evidence above is the final record for this run.
+No single composite dashboard was captured. The individual screenshots and linked evidence above are the record for this run.
 
 ## Expected result
 
-The workshop report distinguishes completed implementation, observed results, partial observations, and unverified work.
+The workshop report records the implemented architecture and observed application outcomes.
 
 ## Troubleshooting
 

@@ -16,10 +16,10 @@ Cung cấp cấu hình công khai và kết nối frontend với xác thực Cog
 
 ## Các bước thực hiện
 
-1. Tạo `.env.local` với Region `ap-southeast-1`, User Pool `ap-southeast-1_hWIAdC6Xu`, App Client `epodlpjbopbdc809elojsad3a` và API `https://6wcs1urcm2.execute-api.ap-southeast-1.amazonaws.com`. Tệp này bị Git bỏ qua; `.env.example` chỉ chứa placeholder.
-2. Frontend gọi Cognito User Pools JSON API để đăng ký, xác nhận email, đăng nhập, làm mới phiên và đăng xuất. Mật khẩu tối thiểu 12 ký tự theo chính sách User Pool.
-3. API client tự lấy Cognito ID token và gắn `Authorization: Bearer` vào request đến API Gateway.
-4. Các biến `VITE_*` là cấu hình công khai, không chứa AWS secret key. Khởi động lại Vite sau khi đổi environment.
+1. Từ CloudFormation Outputs lấy Region, `UserPoolId`, `UserPoolClientId`, `ApiBaseUrl`, `DocumentsBucketName`. Ở repository root, copy `.env.example` thành `.env.local` rồi điền các biến tương ứng: `VITE_AWS_REGION`, `VITE_COGNITO_USER_POOL_ID`, `VITE_COGNITO_USER_POOL_CLIENT_ID`, `VITE_API_BASE_URL`, `VITE_S3_BUCKET_NAME`.
+2. Chạy `npm ci`, rồi `npm run dev`; sau mỗi lần đổi `.env.local`, khởi động lại Vite. Tệp local đã bị Git ignore và không được commit.
+3. Auth service gọi Cognito User Pools API cho đăng ký, xác nhận email, đăng nhập, refresh session và đăng xuất. API client lấy ID token rồi gắn `Authorization: Bearer <token>` vào request.
+4. Chỉ chứa public IDs/URLs trong biến `VITE_*`; tuyệt đối không đưa AWS secret access key, credentials, password hay token vào bundle.
 
 ## Xác minh
 

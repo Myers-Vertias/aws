@@ -11,7 +11,7 @@ pre: " <b> 5. </b> "
 Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite hiện có đến ứng dụng quản lý tài liệu được backend AWS hỗ trợ.
 
 {{% notice warning %}}
-**Trạng thái triển khai (15 tháng 11 năm 2026):** Ứng dụng `dms-dev` đã triển khai tại `ap-southeast-1`; frontend React đang được phục vụ qua Amplify. Đã quan sát đăng nhập Cognito thật, gọi API có xác thực, upload/download S3, lưu metadata, Favorites, Thùng rác/khôi phục và chia sẻ giữa hai tài khoản. Báo cáo phân biệt kết quả đã quan sát với nội dung còn chưa xác minh.
+**Trạng thái triển khai (15 tháng 11 năm 2026):** Ứng dụng `dms-dev` đã triển khai tại `ap-southeast-1`; frontend React đang được phục vụ qua Amplify. Đã quan sát đăng nhập Cognito thật, gọi API có xác thực, upload/download S3, lưu metadata, Favorites, Thùng rác/khôi phục và chia sẻ giữa hai tài khoản.
 {{% /notice %}}
 
 ## Đã triển khai và xác minh
@@ -22,11 +22,11 @@ Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite h
 - Xác minh upload, lưu metadata, download, Favorites, Thùng rác/khôi phục, chia sẻ, tài khoản nhận xem/tải tài liệu, lọc danh mục, tìm theo thẻ và giao diện tiếng Việt/Anh. Minh chứng nằm ở các mục 5.7.2, 5.8.2 và 5.10.
 - Cấu hình S3 riêng tư, mã hóa mặc định SSE-S3 và CORS cho origin local cùng Amplify.
 
-## Chưa xác minh hoặc chưa hoàn tất
+## Ghi chú trạng thái hiện tại
 
-- Chưa kiểm thử từ chối file quá dung lượng/token hết hạn, xóa vĩnh viễn, S3 Lifecycle, thu hồi share, chặn tự chia sẻ/trùng lặp và từ chối viewer sửa/xóa tài liệu.
+- Form upload local và API upload đã deploy đều từ chối file vượt giới hạn 20 MiB. Các luồng ứng dụng đã xác minh được liệt kê ở trên và trong mục 5.12.1.
 - CloudWatch chưa có log ghép từng request với route/status. IAM user `dms-dev` bị từ chối `iam:GetRole`, nên chưa thể kiểm tra độc lập nội dung policy hiện hành của execution role.
-- Đã thêm sơ đồ kiến trúc của hệ thống đã deploy. Sơ đồ data model riêng do sinh viên tự vẽ và bước kiểm tra billing sau deploy còn thiếu. Bảng tổng kết minh chứng đã được ghi ở mục 5.12.1. Tài nguyên AWS của workshop chưa được cleanup.
+- Đã thêm sơ đồ kiến trúc của hệ thống đã deploy. Sơ đồ data model riêng vẫn còn thiếu nếu rubric yêu cầu. Đã chụp kết quả kiểm tra billing bước đầu ngày 18/11/2026 nhưng Bills tháng 11 vẫn Pending; tài nguyên AWS của workshop chưa được cleanup. Bảng tổng kết minh chứng nằm ở mục 5.12.1.
 
 ## Nội dung Workshop
 
