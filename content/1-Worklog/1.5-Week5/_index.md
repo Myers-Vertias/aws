@@ -1,57 +1,29 @@
 ---
 title: "Week 5 Worklog"
-date: 2024-01-01
+date: 2026-10-16
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
+
+### Week 5 Objectives
+
+* Study the remaining AWS services in the document management project's architecture.
+* Understand the roles of AWS Lambda, Amazon S3, Amazon DynamoDB, IAM, and Amazon CloudWatch.
+* Learn how these services can work together in a serverless application.
+
+### Tasks Completed This Week
+
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| Friday | **Study backend and storage services for the project**<br>• Learn about AWS Lambda and how functions run application tasks without managing servers. Review using Lambda to start and stop EC2 instances to optimize costs.<br>• Study Amazon S3, including buckets and objects, file storage, and access control.<br>• Learn about Amazon DynamoDB as the NoSQL database for document metadata.<br>• Study IAM roles and the permissions Lambda needs to access AWS services following the principle of least privilege.<br>• Learn how Amazon CloudWatch Logs, metrics, and alarms help monitor application activity and detect errors.<br>• Map the intended service flow: API Gateway invokes Lambda; Lambda works with DynamoDB and S3; CloudWatch receives logs and metrics. | 10/16/2026 | 10/16/2026 | [Serverless Journey](https://000078.awsfcaj.com/vi/); [Optimize EC2 Costs with Lambda](https://000022.awsfcaj.com/vi/); [CloudWatch Workshop](https://000008.awsfcaj.com/vi/); [Amazon S3](https://000057.awsfcaj.com/vi/) |
+
+### Week 5 Achievements
+
+* Understood AWS Lambda's role in running backend logic in a serverless architecture.
+* Learned that Amazon S3 stores files while Amazon DynamoDB stores metadata in the project architecture.
+* Understood how IAM roles give Lambda the permissions needed to access AWS resources.
+* Learned how Amazon CloudWatch supports log review, metrics monitoring, and alarms.
+* Mapped how these services can work with Cognito, Amplify, and API Gateway studied in Week 4 to form the overall architecture.
 
 
-### Week 5 Objectives:
-
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
-
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-
-
-### Week 5 Achievements:
-
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
