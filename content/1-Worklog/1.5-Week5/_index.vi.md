@@ -1,59 +1,29 @@
 ---
 title: "Worklog Tuần 5"
-date: 2024-01-01
+date: 2026-10-16
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
+### Mục tiêu tuần 5
 
-### Mục tiêu tuần 5:
+* Tìm hiểu các dịch vụ AWS còn lại trong kiến trúc dự án quản lý tài liệu.
+* Nắm được vai trò của AWS Lambda, Amazon S3, Amazon DynamoDB, IAM và Amazon CloudWatch.
+* Hiểu sơ bộ cách các dịch vụ này phối hợp trong một ứng dụng serverless.
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+### Các công việc đã thực hiện trong tuần
 
-### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| Thứ 6 | **Tìm hiểu các dịch vụ backend và lưu trữ cho project**<br>• Tìm hiểu AWS Lambda và cách function xử lý tác vụ mà không cần tự quản lý máy chủ. Tham khảo cách dùng Lambda để tự động bật/tắt EC2 nhằm tối ưu chi phí.<br>• Tìm hiểu Amazon S3, các khái niệm bucket và object, cách lưu trữ file và kiểm soát quyền truy cập.<br>• Tìm hiểu Amazon DynamoDB trong vai trò cơ sở dữ liệu NoSQL để lưu metadata của tài liệu.<br>• Tìm hiểu IAM role và quyền mà Lambda cần để truy cập các dịch vụ AWS theo nguyên tắc tối thiểu cần thiết.<br>• Tìm hiểu Amazon CloudWatch Logs, metrics và alarms để theo dõi hoạt động, phát hiện lỗi của ứng dụng.<br>• Tổng hợp luồng phối hợp dự kiến: API Gateway gọi Lambda; Lambda làm việc với DynamoDB và S3; CloudWatch tiếp nhận log và metrics. | 16/10/2026 | 16/10/2026 | [Serverless Journey](https://000078.awsfcaj.com/vi/); [Tối ưu chi phí EC2 với Lambda](https://000022.awsfcaj.com/vi/); [CloudWatch Workshop](https://000008.awsfcaj.com/vi/); [Amazon S3](https://000057.awsfcaj.com/vi/) |
 
+### Kết quả đạt được tuần 5
 
-### Kết quả đạt được tuần 5:
-
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
+* Hiểu vai trò của AWS Lambda trong việc chạy logic backend theo hướng serverless.
+* Nắm được Amazon S3 dùng để lưu trữ file và Amazon DynamoDB dùng để lưu metadata trong kiến trúc dự án.
+* Hiểu IAM role cấp quyền cho Lambda truy cập các tài nguyên AWS cần thiết.
+* Biết Amazon CloudWatch hỗ trợ xem log, theo dõi metrics và thiết lập cảnh báo.
+* Hình dung được cách các dịch vụ trên phối hợp với Cognito, Amplify và API Gateway đã tìm hiểu ở tuần 4 để tạo thành kiến trúc tổng thể.
 
 
