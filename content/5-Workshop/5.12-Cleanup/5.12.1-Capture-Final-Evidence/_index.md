@@ -35,11 +35,11 @@ Billing evidence was captured on November 18, 2026. Cost Explorer was grouped by
 | API authorization | Verified | Authenticated list `200`, missing-token request `401`, and unshared cross-account detail `404`; section 5.7.2 |
 | Upload, download, metadata, sharing, Favorites, Trash/restore | Verified | Sections 5.8.2, 5.10.1–5.10.3 |
 | VI/EN selection, category filter, tag search | Verified | Section 5.10.3; UI checks were performed on the local frontend where stated |
-| CloudWatch runtime logs | Partially verified | Lambda `START`/`END`/`REPORT` events observed; no route/status correlation; section 5.11.1 |
+| CloudWatch logs and Lambda alarm | Partially verified | Lambda `START`/`END`/`REPORT` events and an API Gateway `OPTIONS` access-log record with status `204` observed; `dms-dev-documents-errors` monitors `Errors >= 1` per 5 minutes, was OK when captured, and its SNS email subscription is confirmed. API Gateway request IDs are not directly correlated with Lambda runtime events; section 5.11.1 |
 | Oversized-file rejection | Verified (frontend and deployed API) | The local UI rejected the oversized file; direct authenticated `POST /documents/upload-url` with 20 MiB + 1 byte returned HTTP `400` before issuing an S3 URL; section 5.10.1 |
 | Unshared cross-account document read | Verified | Authenticated read-only `GET /documents/{documentId}` returned HTTP `404` for an owner's unshared document; section 5.10.2 |
 | Post-deployment billing review | Partially completed | November 1–18 Cost Explorer showed `-$0.00`; November Bills showed `USD 0.00`, status `Pending`. This is provisional, not a final invoice; screenshots above |
-| Resource cleanup | Not done | AWS resources are retained so the application can continue running; see section 5.12.2 |
+| AWS resource cleanup guide | Documented | See section 5.12.2 and follow it for the reader's account, Region, and resource inventory; the guide does not certify cleanup status in AWS |
 
 No single composite dashboard was captured. The individual screenshots and linked evidence above are the record for this run.
 

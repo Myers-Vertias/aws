@@ -1,125 +1,83 @@
 ---
-title: "Event 2"
-date: 2024-01-01
+title: "FCAJ Community Day"
+date: 2026-10-31
 weight: 1
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+# Báo cáo sự kiện: FCAJ Community Day
 
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+## Thông tin sự kiện
 
-### Mục Đích Của Sự Kiện
+- **Thời gian:** 09:00–12:00, Thứ Bảy, ngày 31/10/2026
+- **Địa điểm:** Bitexco Financial Tower, 2 đường Hải Triều, Thành phố Hồ Chí Minh
+- **Vai trò:** Người tham dự
+- **Chương trình:** [FCAJ Community Day trên Luma](https://luma.com/1izeyind)
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+## Các diễn giả
 
-### Danh Sách Diễn Giả
+Buổi chia sẻ có sự tham gia của các diễn giả đến từ doanh nghiệp và cộng đồng FCAJ:
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+- **Thinh Nguyen** – STYL Solutions
+- **Henry Duc Bui** – CloudThinker
+- **Hung Tran** – NAB
+- **Dao Luong** – FCAJ
+- **Khang Duong** – FCAJ
+- **Tuan Tran** – FCAJ
 
-### Nội Dung Nổi Bật
+## Nội dung em được nghe tại sự kiện
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+### Bài học khi xây dựng Software Factory
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Mở đầu chương trình là phần chia sẻ về những bài học thực tế khi xây dựng software factory ở quy mô lớn. Qua nội dung này, em nghe được rằng khi mở rộng quy trình phát triển phần mềm, đội ngũ cần chú ý đến những khó khăn thường gặp và tập trung vào những cách làm đã chứng minh được hiệu quả trong thực tế. Điều em ghi nhận là quy trình và công cụ cần hỗ trợ đội ngũ làm việc ổn định, thay vì chỉ bổ sung thêm nhiều bước hoặc công nghệ.
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+### Giáo dục và chuẩn bị nhân lực Cloud
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+Phiên Education mang đến góc nhìn của người làm giáo dục về việc chuẩn bị thế hệ nhân lực Cloud tiếp theo. Nội dung tập trung vào những điều sinh viên nên chuẩn bị trước khi bước vào môi trường doanh nghiệp và khoảng cách giữa kiến thức ở trường với nhu cầu thực tế. Em nhận ra rằng ngoài kiến thức nền tảng, sinh viên cần chủ động thực hành, làm dự án và rèn khả năng áp dụng kiến thức vào bài toán cụ thể.
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+### AWS Lambda Web Functions và kiến trúc Serverless
 
-#### Domain-Driven Design (DDD)
+Phiên AWS Lambda Web Functions giới thiệu cách tiếp cận mới để chạy ứng dụng web trên Lambda. Diễn giả trình bày native HTTP support và khả năng xử lý nhiều request đồng thời, được nêu trong chương trình là tối đa 128 request. Phần chia sẻ cũng đề cập đến việc giảm overhead từ adapter, Active CPU Billing và so sánh hiệu năng trực tiếp với cách triển khai Docker trên EC2/ECS.
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+Qua phiên này, em hiểu thêm rằng khi chọn kiến trúc serverless, cần xem xét cả cách ứng dụng nhận request, mức độ đồng thời, chi phí tính toán và hiệu năng thực tế. Việc có benchmark giúp nhóm phát triển đánh giá lựa chọn kiến trúc dựa trên workload, thay vì mặc định một mô hình luôn phù hợp cho mọi ứng dụng.
 
-#### Event-Driven Architecture
+### Amazon SQS và xử lý bất đồng bộ
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+Ở phiên Amazon SQS: Building Asynchronous Systems, em được nghe lý do các hệ thống hiện đại cần xử lý bất đồng bộ và cách hàng đợi giúp tách rời các thành phần. Khi request được đưa vào queue, bên tiếp nhận và bên xử lý có thể hoạt động độc lập hơn, nhờ đó hệ thống có thêm khả năng hấp thụ tải và mở rộng từng phần. Phiên này cũng giới thiệu các mẫu thiết kế cùng lưu ý thực tế khi triển khai SQS.
 
-#### Compute Evolution
+Điều em rút ra là xử lý bất đồng bộ phù hợp với những tác vụ không cần trả kết quả ngay cho người dùng. Tuy nhiên, khi áp dụng cần thiết kế cách xử lý lỗi, retry và theo dõi trạng thái message để quy trình đáng tin cậy.
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+### Hành trình thực tập AWS trong ba tháng
 
-#### Amazon Q Developer
+Phiên My 3-Month AWS Internship Journey chia sẻ trải nghiệm thực tập trong ba tháng, cách áp dụng dịch vụ AWS vào một dự án thực tế và những bài học dành cho người sắp bắt đầu kỳ thực tập. Qua câu chuyện này, em thấy việc học dịch vụ Cloud sẽ hiệu quả hơn khi gắn với một sản phẩm cụ thể: người học phải hiểu yêu cầu, chọn dịch vụ phù hợp và quan sát cách hệ thống vận hành.
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+### Bắt đầu và duy trì đóng góp mã nguồn mở
 
-### Những Gì Học Được
+Phiên cuối nói về cách thực hiện đóng góp mã nguồn mở đầu tiên, xây dựng thói quen đóng góp đều đặn và duy trì động lực. Em hiểu rằng người mới có thể bắt đầu từ những việc nhỏ, chẳng hạn đọc hướng dẫn, báo lỗi rõ ràng, cải thiện tài liệu hoặc xử lý một issue phù hợp. Việc tham gia lâu dài giúp rèn kỹ năng đọc code, cộng tác và giao tiếp trong môi trường phát triển phần mềm.
 
-#### Tư Duy Thiết Kế
+## Bài học em rút ra
 
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
+Các phiên chia sẻ giúp em kết nối kiến thức về Cloud với những tình huống phát triển phần mềm thực tế. Em ghi nhận ba điểm chính: lựa chọn kiến trúc cần dựa trên workload và số liệu; xử lý bất đồng bộ giúp các thành phần ít phụ thuộc nhau hơn nhưng cần có chiến lược xử lý lỗi; và kỹ năng nghề nghiệp được hình thành qua thực hành dự án, thực tập, cũng như đóng góp cho cộng đồng.
 
-#### Kiến Trúc Kỹ Thuật
+## Liên hệ với dự án
 
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
+Dự án quản lý tài liệu của em hiện nhận request qua API Gateway và xử lý bằng Lambda. Sau khi nghe phần trình bày về SQS, em thấy có thể nghiên cứu dùng queue cho các tác vụ nền nếu sau này dự án cần xử lý thông báo hoặc công việc xử lý tài liệu lâu hơn. Đây là ý tưởng có thể xem xét trong tương lai, chưa phải chức năng đã triển khai. Phần chia sẻ về Lambda Web Functions cũng giúp em có thêm một hướng kiến trúc để tìm hiểu, nhưng cần đánh giá khả năng tương thích và benchmark theo yêu cầu của ứng dụng trước khi lựa chọn.
 
-#### Chiến Lược Hiện Đại Hóa
+## Cảm nhận
 
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
+Em thấy FCAJ Community Day hữu ích vì chương trình kết hợp kinh nghiệm xây dựng phần mềm, kiến trúc Cloud, câu chuyện thực tập và hoạt động mã nguồn mở. Những nội dung được chia sẻ giúp em có thêm góc nhìn thực tế để tiếp tục học AWS và cân nhắc các hướng cải tiến cho dự án của mình.
 
-### Ứng Dụng Vào Công Việc
+## Hình ảnh sự kiện
 
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
+### Em tham dự buổi chia sẻ
 
-### Trải nghiệm trong event
+![Em chụp ảnh tại khán phòng FCAJ Community Day](/images/4-EventParticipated/event-2-1.png)
 
-Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
+### Diễn giả trình bày về phát triển phần mềm
 
-#### Học hỏi từ các diễn giả có chuyên môn cao
-- Các diễn giả đến từ AWS và các tổ chức công nghệ lớn đã chia sẻ **best practices** trong thiết kế ứng dụng hiện đại.
-- Qua các case study thực tế, tôi hiểu rõ hơn cách áp dụng **Domain-Driven Design (DDD)** và **Event-Driven Architecture** vào các project lớn.
+![Diễn giả chia sẻ nội dung Talk first, code last tại FCAJ Community Day](/images/4-EventParticipated/event-2-2.png)
 
-#### Trải nghiệm kỹ thuật thực tế
-- Tham gia các phiên trình bày về **event storming** giúp tôi hình dung cách **mô hình hóa quy trình kinh doanh** thành các domain events.
-- Học cách **phân tách microservices** và xác định **bounded contexts** để quản lý sự phức tạp của hệ thống lớn.
-- Hiểu rõ trade-offs giữa **synchronous và asynchronous communication** cũng như các pattern tích hợp như **pub/sub, point-to-point, streaming**.
+### Phiên AWS Skill Builder
 
-#### Ứng dụng công cụ hiện đại
-- Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
-- Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
-
-#### Bài học rút ra
-- Việc áp dụng DDD và event-driven patterns giúp giảm **coupling**, tăng **scalability** và **resilience** cho hệ thống.
-- Chiến lược hiện đại hóa cần **phased approach** và đo lường **ROI**, không nên vội vàng chuyển đổi toàn bộ hệ thống.
-- Các công cụ AI như Amazon Q Developer có thể **boost productivity** nếu được tích hợp vào workflow phát triển hiện tại.
-
-#### Một số hình ảnh khi tham gia sự kiện
-* Thêm các hình ảnh của các bạn tại đây
-> Tổng thể, sự kiện không chỉ cung cấp kiến thức kỹ thuật mà còn giúp tôi thay đổi cách tư duy về thiết kế ứng dụng, hiện đại hóa hệ thống và phối hợp hiệu quả hơn giữa các team.
+![Diễn giả trình bày phiên AWS Skill Builder trước người tham dự](/images/4-EventParticipated/event-2-3.png)

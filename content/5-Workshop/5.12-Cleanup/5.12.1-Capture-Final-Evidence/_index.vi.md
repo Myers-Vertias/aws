@@ -35,11 +35,11 @@ Minh chứng billing được chụp ngày 18/11/2026. Cost Explorer được nh
 | API authorization | Đã xác minh | List có đăng nhập `200`, thiếu token `401`, tài liệu của tài khoản khác chưa share trả `404`; mục 5.7.2 |
 | Upload, download, sửa metadata, chia sẻ, Favorites, Trash/khôi phục | Đã xác minh | Mục 5.8.2 và 5.10.1–5.10.3 |
 | VI/EN, lọc danh mục và tìm tag | Đã xác minh | Mục 5.10.3; frontend local được nêu rõ ở các bước tương ứng |
-| CloudWatch runtime log | Xác minh một phần | Đã thấy `START`/`END`/`REPORT`; chưa đối chiếu được route/status; mục 5.11.1 |
+| CloudWatch logs và alarm Lambda | Xác minh một phần | Đã thấy Lambda `START`/`END`/`REPORT` và API Gateway access log `OPTIONS` status `204`; alarm `dms-dev-documents-errors` theo dõi `Errors >= 1`/5 phút, trạng thái OK khi chụp và SNS email subscription đã xác nhận. Chưa liên kết trực tiếp API Gateway request ID với Lambda runtime log; mục 5.11.1 |
 | Từ chối file quá dung lượng | Đã xác minh (frontend và API đã deploy) | UI local từ chối file quá giới hạn; request đã xác thực tới `POST /documents/upload-url` với 20 MiB + 1 byte trả HTTP `400` trước khi cấp S3 URL; mục 5.10.1 |
 | Tài khoản khác đọc tài liệu chưa chia sẻ | Đã xác minh | Request chỉ đọc đã xác thực `GET /documents/{documentId}` trả HTTP `404` với tài liệu chưa chia sẻ của chủ sở hữu; mục 5.10.2 |
 | Kiểm tra billing sau deploy | Đã kiểm tra bước đầu | Cost Explorer ngày 01–18/11 hiển thị `-$0.00`; Bills tháng 11 hiển thị `USD 0.00`, trạng thái `Pending`. Đây là dữ liệu tạm thời, chưa phải hóa đơn cuối; xem ảnh bên trên |
-| Cleanup resource | Chưa làm | Resource AWS vẫn được giữ để ứng dụng tiếp tục chạy; xem mục 5.12.2 |
+| Hướng dẫn cleanup tài nguyên AWS | Đã soạn | Xem mục 5.12.2 để thực hiện theo account, Region và danh sách resource của người đọc; nội dung hướng dẫn không xác nhận trạng thái cleanup của AWS |
 
 Không chụp một dashboard tổng hợp riêng. Các ảnh billing và minh chứng ở những mục được dẫn trên là hồ sơ của lần thực hiện này.
 

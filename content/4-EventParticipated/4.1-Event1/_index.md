@@ -223,3 +223,18 @@ Lambda
 DynamoDB / S3
   ↓
 CloudWatch
+```
+
+## Event Photos
+
+### Attendees listening to a presentation
+
+![Attendees listening to a presentation at AWS Cloud and AI Day](/images/4-EventParticipated/event-1-1.png)
+
+### Participants following the event on screen
+
+![Audience watching the AWS Cloud and AI Day program](/images/4-EventParticipated/event-1-2.png)
+
+### Another view of the audience
+
+![Another view of the event audience](/images/4-EventParticipated/event-1-3.png)

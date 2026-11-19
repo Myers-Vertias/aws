@@ -7,12 +7,12 @@ pre: " <b> 5.11.1 </b> "
 ---
 
 {{% notice info %}}
-Log group của Lambda `dms-dev-documents` và `dms-dev-health` tồn tại ở `ap-southeast-1`. Retention hiện là **Never expire**. Chưa đối chiếu được một log event cụ thể với request.
+Log group Lambda `dms-dev-documents` và `dms-dev-health` tại `ap-southeast-1` hiện đặt retention **Never expire**. API Gateway HTTP API đã ghi access log vào log group riêng với retention 7 ngày. Chưa thiết lập liên kết trực tiếp giữa request ID của API Gateway và Lambda runtime log.
 {{% /notice %}}
 
 ## Mục tiêu
 
-Đối chiếu API request với lần chạy Lambda mà không làm lộ secret.
+Quan sát API access logs, Lambda runtime logs/metrics và cảnh báo lỗi mà không làm lộ secret.
 
 ## Các bước thực hiện
 
@@ -21,6 +21,7 @@ Log group của Lambda `dms-dev-documents` và `dms-dev-health` tồn tại ở 
 3. Đặt retention phù hợp ở tab Retention để log không lưu vô thời hạn. Lambda tự xuất metrics `Invocations`, `Errors`, `Duration` trong CloudWatch → Metrics → AWS/Lambda ([tài liệu metrics Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
 4. Để có email khi Lambda lỗi, mở CloudWatch → Alarms → Create alarm → chọn `AWS/Lambda` / FunctionName / `Errors`; đặt thống kê Sum, period phù hợp, ngưỡng `>= 1`, rồi chọn hoặc tạo SNS email topic. Người nhận phải xác nhận subscription email trước khi nhận thông báo ([hướng dẫn SNS email alarm](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarm có thể phát sinh chi phí.
 5. Không log authorization header, JWT đầy đủ, presigned URL, nội dung file hay dữ liệu cá nhân nhạy cảm.
+6. Với HTTP API, tạo CloudWatch log group riêng, ví dụ `/aws/apigateway/<stack>-access`, và đặt retention. Trong API Gateway mở API → Monitor → Logging, chọn stage `$default` → Select → Edit; bật Access logging, nhập ARN của log group và chọn định dạng JSON có `$context.requestId`, `$context.routeKey`, `$context.httpMethod` và `$context.status`. Lưu cấu hình. Sau khi API nhận request, mở log group để xem access log. HTTP API access log ID và Lambda runtime request ID là hai ID khác nhau, không thể coi là cùng một ID.
 
 ## Vị trí ảnh chụp màn hình
 
@@ -30,11 +31,19 @@ Log stream mới nhất của function documents có các bản ghi runtime Lamb
 
 ![Ảnh 5.11.1: Các bản ghi runtime Lambda START, END và REPORT trong log stream của function documents](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
 
-Handler hiện ghi log cho lỗi không dự kiến nhưng chưa ghi route/status của từng API request đã được xử lý; vì vậy request 404 trước đó chưa thể đối chiếu với application log theo route.
+API Gateway stage `$default` đã ghi access log dạng JSON vào `/aws/apigateway/dms-dev-access` với retention 7 ngày. Bản ghi CORS preflight `OPTIONS /{proxy+}` có status `204`, request ID và thời gian request; source IP đã được che trong ảnh. Đây là access log ở tầng API Gateway. Lambda runtime logs vẫn là luồng riêng và chưa có cơ chế liên kết trực tiếp hai request ID.
+
+![Ảnh 5.11.1: CloudWatch ghi access log JSON của API Gateway, gồm method OPTIONS, routeKey và status 204](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
+
+Alarm `dms-dev-documents-errors` theo dõi metric `AWS/Lambda Errors` của function `dms-dev-documents`, thống kê Sum trong mỗi 5 phút và chuyển sang ALARM khi có ít nhất một lỗi (`1 of 1 datapoint`). Trạng thái tại thời điểm chụp là **OK**; chưa có lỗi vượt ngưỡng trong datapoint đang hiển thị. Email nhận cảnh báo đã xác nhận đăng ký thành công với SNS topic `dms-dev-lambda-errors`.
+
+![Ảnh 5.11.1: CloudWatch alarm dms-dev-documents-errors đang ở trạng thái OK với ngưỡng Errors >= 1 trong 5 phút](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-errors-alarm-ok.png)
+
+![Ảnh 5.11.1: Xác nhận đăng ký email thành công với Amazon SNS topic dms-dev-lambda-errors](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-sns-subscription-confirmed.png)
 
 ## Kết quả mong đợi
 
-Người học xem được Lambda logs/metrics và nhận cảnh báo khi metric vượt ngưỡng đã chọn. Môi trường đã ghi nhận hiện có Lambda runtime log và budget email alert; chưa ghi nhận CloudWatch metric alarm hoặc API Gateway access log.
+Người học xem được Lambda runtime logs/metrics, API Gateway access logs và cấu hình email alarm cho metric lỗi. Môi trường hiện có API Gateway access log với một bản ghi `OPTIONS` status `204`, alarm `dms-dev-documents-errors` đang ở trạng thái OK, SNS email subscription đã xác nhận và AWS Budget email alert. Chưa thiết lập đối chiếu trực tiếp giữa API Gateway access log và Lambda runtime log.
 
 ## Khắc phục sự cố
 
