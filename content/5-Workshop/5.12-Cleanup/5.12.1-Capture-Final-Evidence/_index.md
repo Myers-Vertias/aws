@@ -20,11 +20,11 @@ The report reuses screenshots captured during the work instead of repeating near
 
 Billing evidence was captured on November 18, 2026. Cost Explorer was grouped by service for November 1–18 and displayed a total of `-$0.00` with no visible cost bars. The November Bills page displayed an estimated total of `USD 0.00` with status `Pending`. These are the values displayed at the time of review, not a finalized invoice. Account identifiers are redacted in the screenshots below.
 
-![Cost Explorer summary for November 1–18, 2026; displayed total is -$0.00](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
+![Cost Explorer summary for November 1–18, 2026; displayed total is -$0.00](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
 
-![Cost Explorer service-grouped graph for November 1–18, 2026; no cost bars are visible](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
+![Cost Explorer service-grouped graph for November 1–18, 2026; no cost bars are visible](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
 
-![AWS Bills page for November 2026; estimated total is USD 0.00 and status is Pending](/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
+![AWS Bills page for November 2026; estimated total is USD 0.00 and status is Pending](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
 
 Screenshots captured on November 19, 2026 in section 5.12.2 document the project's actual cleanup actions: deleting the application stack, SAM artifact bucket and stack, Amplify app, log groups, alarm, SNS topic, IAM role, and USD 10 workshop budget. Success notices and resulting console states provide evidence for the corresponding actions, and the same screenshots illustrate the procedure.
 

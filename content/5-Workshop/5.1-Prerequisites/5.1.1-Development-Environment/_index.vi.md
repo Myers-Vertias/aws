@@ -134,13 +134,13 @@ Health endpoint trên chỉ xác nhận API local khởi động được. Nó k
 
 Dashboard mock, transcript lint/build frontend và kết quả `sam --version` đã được ghi ở phần baseline; không lưu ảnh riêng cho các lệnh này. Kết quả SAM validate/build và health local có ảnh minh chứng bên dưới.
 
-![Ảnh 5.1.1: SAM template validation thành công](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-template-validation.png)
+![Ảnh 5.1.1: SAM template validation thành công](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-template-validation.png)
 
-![Ảnh 5.1.1: SAM build thành công cho HealthFunction](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-build-success.png)
+![Ảnh 5.1.1: SAM build thành công cho HealthFunction](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-build-success.png)
 
-![Ảnh 5.1.1: Health endpoint SAM cục bộ trả về status ok](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-local-health.png)
+![Ảnh 5.1.1: Health endpoint SAM cục bộ trả về status ok](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-local-health.png)
 
-![Ảnh 5.1.1: Kết quả SAM validate và SAM build trong cùng một phiên PowerShell](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-validation-and-build.png)
+![Ảnh 5.1.1: Kết quả SAM validate và SAM build trong cùng một phiên PowerShell](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-validation-and-build.png)
 
 ## Kết quả mong đợi
 

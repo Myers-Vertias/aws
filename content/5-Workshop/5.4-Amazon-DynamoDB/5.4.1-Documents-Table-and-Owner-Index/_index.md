@@ -23,15 +23,15 @@ Create the main metadata table using the approved key design.
 
 ## Screenshot and remaining evidence
 
-![Screenshot 5.4.1: Document records in the dms-dev-documents table](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-records.png)
+![Screenshot 5.4.1: Document records in the dms-dev-documents table](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-records.png)
 
 The deployed `dms-dev-documents` table uses partition key `documentId` (String), has no sort key, uses on-demand capacity, and is Active.
 
-![Screenshot 5.4.1: dms-dev-documents table key schema and active status](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-key-schema.png)
+![Screenshot 5.4.1: dms-dev-documents table key schema and active status](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-key-schema.png)
 
 The `OwnerIndex` GSI is **Active**, with `ownerSub` (String) as its partition key and `createdAtDocumentId` (String) as its sort key.
 
-![Screenshot 5.4.1: Active OwnerIndex with ownerSub and createdAtDocumentId keys](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-owner-index-active.png)
+![Screenshot 5.4.1: Active OwnerIndex with ownerSub and createdAtDocumentId keys](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-owner-index-active.png)
 
 ## Expected result
 

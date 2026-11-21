@@ -31,9 +31,9 @@ Trong lần triển khai được ghi nhận, group CLI là `dms-dev-cli`, gồm
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.1.2: Group IAM phát triển có quyền đăng nhập và triển khai workshop](/images/5-Workshop/5.1-Prerequisites/5.1.2-iam-dev-group-policy.png)
+![Ảnh 5.1.2: Group IAM phát triển có quyền đăng nhập và triển khai workshop](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.2-iam-dev-group-policy.png)
 
-![Ảnh 5.1.2: Cấu hình monthly budget alert](/images/5-Workshop/5.1-Prerequisites/5.1.2-aws-monthly-budget.png)
+![Ảnh 5.1.2: Cấu hình monthly budget alert](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.2-aws-monthly-budget.png)
 
 Ảnh AWS console trong báo cáo hiển thị Region Asia Pacific (Singapore), `ap-southeast-1`. Ảnh ngân sách phía trên ghi nhận cảnh báo 10 USD/tháng. Không chụp riêng một ảnh ghép Region và cấu hình ngân sách.
 

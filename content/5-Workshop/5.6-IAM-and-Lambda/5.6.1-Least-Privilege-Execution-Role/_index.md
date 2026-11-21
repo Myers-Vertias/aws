@@ -23,9 +23,9 @@ Create a dedicated Lambda execution role and grant permissions according to the 
 
 ## Screenshots
 
-![Screenshot 5.6.1: Lambda role with the basic logging policy](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-basic-execution-policy.png)
+![Screenshot 5.6.1: Lambda role with the basic logging policy](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-basic-execution-policy.png)
 
-![Screenshot 5.6.1: DmsDocumentRuntimeAccess attached to the Lambda role](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-runtime-policy-attached.png)
+![Screenshot 5.6.1: DmsDocumentRuntimeAccess attached to the Lambda role](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-runtime-policy-attached.png)
 
 ## Expected result
 

@@ -36,22 +36,22 @@ Record the end-to-end verification of favorites, document metadata, Trash and la
 
 ## Evidence
 
-![Screenshot 5.10.3-A: Saved metadata on the document details page in the local frontend run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
+![Screenshot 5.10.3-A: Saved metadata on the document details page in the local frontend run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
 
-![Screenshot 5.10.3-B: Konoka.png appears in Favorites in the local frontend run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
+![Screenshot 5.10.3-B: Konoka.png appears in Favorites in the local frontend run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
 
-![Screenshot 5.10.3-C: Successful restore and empty Trash on the production frontend](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-trash-restore-production.png)
+![Screenshot 5.10.3-C: Successful restore and empty Trash on the production frontend](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-trash-restore-production.png)
 
-![Screenshot 5.10.3-D: Favorite records in the deployed DynamoDB table](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
+![Screenshot 5.10.3-D: Favorite records in the deployed DynamoDB table](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
 
-![Screenshot 5.10.3-E: English interface on the local dashboard](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-english-dashboard-local.png)
+![Screenshot 5.10.3-E: English interface on the local dashboard](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-english-dashboard-local.png)
 
-![Screenshot 5.10.3-F: Vietnamese interface on the local document list](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-vietnamese-documents-local.png)
+![Screenshot 5.10.3-F: Vietnamese interface on the local document list](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-vietnamese-documents-local.png)
 
-![Screenshot 5.10.3-G: Vietnamese language selection remained after refreshing the local Documents page](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-after-refresh.png)
+![Screenshot 5.10.3-G: Vietnamese language selection remained after refreshing the local Documents page](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-after-refresh.png)
 
-![Screenshot 5.10.3-H: Work category filter returns Konoka.png in the local document list](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-category-filter-work-local.png)
+![Screenshot 5.10.3-H: Work category filter returns Konoka.png in the local document list](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-category-filter-work-local.png)
 
-![Screenshot 5.10.3-I: Searching for the saved tag ảnh returns Konoka.png](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-tag-search-anh-local.png)
+![Screenshot 5.10.3-I: Searching for the saved tag ảnh returns Konoka.png](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-tag-search-anh-local.png)
 
-![Screenshot 5.10.3-J: The Vietnamese dashboard remains selected after navigating from Documents](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-dashboard-local.png)
+![Screenshot 5.10.3-J: The Vietnamese dashboard remains selected after navigating from Documents](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-dashboard-local.png)

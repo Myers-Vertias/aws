@@ -19,8 +19,8 @@ Ngày 18/11/2026, khi đăng nhập bằng tài khoản khác, một request đ�
 
 ## Minh chứng
 
-![Ảnh 5.10.2: Tài khoản nhận thấy các tài liệu được chia sẻ trên frontend production](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
+![Ảnh 5.10.2: Tài khoản nhận thấy các tài liệu được chia sẻ trên frontend production](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
 
-![Ảnh 5.10.2: Tài khoản nhận mở tài liệu chia sẻ và lịch sử trình duyệt ghi nhận tải xuống hoàn tất ở phiên local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
+![Ảnh 5.10.2: Tài khoản nhận mở tài liệu chia sẻ và lịch sử trình duyệt ghi nhận tải xuống hoàn tất ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
 
-![Ảnh 5.10.2: Request chỉ đọc đã xác thực tới tài liệu chưa chia sẻ trả HTTP 404](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-unshared-document-access-denied-404.png)
+![Ảnh 5.10.2: Request chỉ đọc đã xác thực tới tài liệu chưa chia sẻ trả HTTP 404](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-unshared-document-access-denied-404.png)

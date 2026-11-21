@@ -31,9 +31,9 @@ The recorded deployment used a `dms-dev-cli` group with `SignInLocalDevelopmentA
 
 ## Screenshots and remaining evidence
 
-![Screenshot 5.1.2: IAM development group with workshop deployment permissions](/images/5-Workshop/5.1-Prerequisites/5.1.2-iam-dev-group-policy.png)
+![Screenshot 5.1.2: IAM development group with workshop deployment permissions](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.2-iam-dev-group-policy.png)
 
-![Screenshot 5.1.2: Monthly budget alert configuration](/images/5-Workshop/5.1-Prerequisites/5.1.2-aws-monthly-budget.png)
+![Screenshot 5.1.2: Monthly budget alert configuration](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.2-aws-monthly-budget.png)
 
 The AWS console evidence throughout this report shows the selected Region as Asia Pacific (Singapore), `ap-southeast-1`. The budget screenshot above records the USD 10 alert. A separate screenshot combining the Region and budget settings was not captured.
 

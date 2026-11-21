@@ -32,31 +32,31 @@ Chuyển đọc/ghi tài liệu sang backend và kiểm thử upload/download c�
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.8.2: Các request API danh sách tài liệu đã đăng nhập trả về HTTP 200 ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-documents-api-200.png)
+![Ảnh 5.8.2: Các request API danh sách tài liệu đã đăng nhập trả về HTTP 200 ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-documents-api-200.png)
 
-![Ảnh 5.8.2: Dashboard local đã đăng nhập, hiển thị một tài liệu đang hoạt động](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-local-dashboard.png)
+![Ảnh 5.8.2: Dashboard local đã đăng nhập, hiển thị một tài liệu đang hoạt động](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-local-dashboard.png)
 
-![Ảnh 5.8.2: Konoka.png trong danh sách tài liệu ở phiên chạy local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-list-local.png)
+![Ảnh 5.8.2: Konoka.png trong danh sách tài liệu ở phiên chạy local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-list-local.png)
 
-![Ảnh 5.8.2: Lịch sử trình duyệt ghi nhận Konoka.png đã tải xuống ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-download-history-local.png)
+![Ảnh 5.8.2: Lịch sử trình duyệt ghi nhận Konoka.png đã tải xuống ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-download-history-local.png)
 
-![Ảnh 5.8.2: Object tài liệu đã được lưu trong bucket S3 riêng tư](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
+![Ảnh 5.8.2: Object tài liệu đã được lưu trong bucket S3 riêng tư](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
 
-![Ảnh 5.8.2: Konoka.png hiển thị trong mục Yêu thích ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
+![Ảnh 5.8.2: Konoka.png hiển thị trong mục Yêu thích ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
 
-![Ảnh 5.8.2: Konoka.png trong Thùng rác ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-local.png)
+![Ảnh 5.8.2: Konoka.png trong Thùng rác ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-local.png)
 
-![Ảnh 5.8.2: Thông báo khôi phục thành công và Thùng rác trống ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-restore-success-local.png)
+![Ảnh 5.8.2: Thông báo khôi phục thành công và Thùng rác trống ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-restore-success-local.png)
 
-![Ảnh 5.8.2: Konoka.png trở lại danh sách tài liệu ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-restored-local.png)
+![Ảnh 5.8.2: Konoka.png trở lại danh sách tài liệu ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-restored-local.png)
 
-![Ảnh 5.8.2: Tài liệu chia sẻ xuất hiện trong mục Được chia sẻ với tôi ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-shared-with-me-local.png)
+![Ảnh 5.8.2: Tài liệu chia sẻ xuất hiện trong mục Được chia sẻ với tôi ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-shared-with-me-local.png)
 
-![Ảnh 5.8.2: Trang chi tiết tài liệu có lịch sử tải xuống ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-detail-download-local.png)
+![Ảnh 5.8.2: Trang chi tiết tài liệu có lịch sử tải xuống ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-detail-download-local.png)
 
-![Ảnh 5.8.2: Metadata đã lưu trên trang chi tiết tài liệu ở phiên local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
+![Ảnh 5.8.2: Metadata đã lưu trên trang chi tiết tài liệu ở phiên local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
 
-![Ảnh 5.8.2: Tài liệu hoạt động và lịch sử tải xuống trên frontend production](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
+![Ảnh 5.8.2: Tài liệu hoạt động và lịch sử tải xuống trên frontend production](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
 
 Không còn ảnh terminal SAM deploy. Outputs của stack đã triển khai nằm ở mục 5.9.2; kết quả API ở mức ứng dụng được ghi trong mục này và mục 5.10.
 

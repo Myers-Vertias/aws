@@ -23,13 +23,13 @@ Connect API Gateway routes to their intended Lambda integrations.
 
 ## Deployed routes and integrations
 
-![Screenshot 5.7.1: API Gateway health, proxy, and CORS preflight routes](/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
+![Screenshot 5.7.1: API Gateway health, proxy, and CORS preflight routes](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
 
 The deployed API exposes `GET /health` through its dedicated `dms-dev-health` Lambda integration; document routes are dispatched through `ANY /{proxy+}` to `dms-dev-documents`, and `OPTIONS /{proxy+}` serves CORS preflight. Both Lambda integrations use payload format `2.0` and a 30,000 ms timeout.
 
-![Screenshot 5.7.1: Health route integration details showing the dedicated Lambda function](/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
+![Screenshot 5.7.1: Health route integration details showing the dedicated Lambda function](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
 
-![Screenshot 5.7.1: Proxy route integration details showing the Lambda function, payload format, and timeout](/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
+![Screenshot 5.7.1: Proxy route integration details showing the Lambda function, payload format, and timeout](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
 
 ## Expected result
 

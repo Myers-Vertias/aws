@@ -23,13 +23,13 @@ Deploy the frontend and verify its real authentication and API calls.
 
 ## Deployment evidence and verification
 
-![Screenshot 5.9.2: Production main branch deployed on AWS Amplify](/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-amplify-production-branch.png)
+![Screenshot 5.9.2: Production main branch deployed on AWS Amplify](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-amplify-production-branch.png)
 
-![Screenshot 5.9.2: CloudFormation outputs for the deployed dms-dev stack](/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
+![Screenshot 5.9.2: CloudFormation outputs for the deployed dms-dev stack](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
 
 The deployed stack's `AllowedFrontendOrigins` parameter includes the production Amplify origin and the local Vite development origins. The Lambda execution role ARN is redacted in this report copy.
 
-![Screenshot 5.9.2: Deployed frontend origins configured on the dms-dev stack](/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-allowed-frontend-origins.png)
+![Screenshot 5.9.2: Deployed frontend origins configured on the dms-dev stack](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-allowed-frontend-origins.png)
 
 The API health check is recorded in section 5.7.2. Authenticated sign-in, document listing, upload/download, and document operations were exercised in the deployed application; see sections 5.8.2, 5.10.1, and 5.10.2. No separate composite screenshot was captured because the same workflows are already documented in those sections.
 

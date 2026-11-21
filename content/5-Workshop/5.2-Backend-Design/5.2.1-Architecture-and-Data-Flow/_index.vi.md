@@ -78,7 +78,7 @@ Lambda ghi application log có cấu trúc vào CloudWatch. Access log và metri
 
 ## Sơ đồ kiến trúc đã triển khai
 
-![Kiến trúc AWS đã triển khai cho UniCloud DMS](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.svg)
+![Kiến trúc AWS đã triển khai cho UniCloud DMS](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.svg)
 
 [Mở file draw.io để chỉnh sửa](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.drawio)
 

@@ -116,17 +116,17 @@ Thiết kế bảng/index triển khai và quy tắc truy cập đã được gh
 
 Template SAM định nghĩa ba bảng đang triển khai; Lambda source có route xác thực cho presigned S3 upload/download, kiểm tra Owner/Viewer, soft delete, sharing và Favorites. `sam validate --lint` và `sam build` thành công. CloudFormation change set đã được rà soát và stack triển khai tại `ap-southeast-1`. Outputs và minh chứng tài nguyên hiện hành được ghi ở mục 5.9.2. Public `/health` trả `{"status":"ok","service":"dms-api"}`. Các luồng tài liệu có xác thực đã được kiểm thử sau đó tại mục 5.7 đến 5.10.
 
-![Ảnh 5.2.2: SAM build thành công cho HealthFunction và DocumentsFunction](/images/5-Workshop/5.2-Backend-Design/5.2.2-sam-build-api-routes.png)
+![Ảnh 5.2.2: SAM build thành công cho HealthFunction và DocumentsFunction](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.2-sam-build-api-routes.png)
 
 Change set đã được rà soát trước khi deploy; không lưu ảnh riêng màn hình rà soát change set.
 
-![Ảnh 5.2.2: Outputs của CloudFormation stack dms-dev sau khi triển khai](/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
+![Ảnh 5.2.2: Outputs của CloudFormation stack dms-dev sau khi triển khai](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
 
 Danh sách tài nguyên CloudFormation hiện tại ghi nhận 13 tài nguyên trong stack `dms-dev`. Các mục đang thấy gồm Cognito user pool và client, API Gateway API và stage, cùng S3 documents bucket. Physical ID đã được che trong bản ảnh của báo cáo.
 
-![Ảnh 5.2.2: Danh sách tài nguyên CloudFormation của stack dms-dev](/images/5-Workshop/5.2-Backend-Design/5.2.2-cloudformation-resources.png)
+![Ảnh 5.2.2: Danh sách tài nguyên CloudFormation của stack dms-dev](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.2-cloudformation-resources.png)
 
-![Ảnh 5.2.2: API health endpoint đã triển khai trả về status ok](/images/5-Workshop/5.7-API-Gateway/5.7.2-api-health-check.png)
+![Ảnh 5.2.2: API health endpoint đã triển khai trả về status ok](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.2-api-health-check.png)
 
 ## Khắc phục sự cố
 

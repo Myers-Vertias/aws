@@ -72,12 +72,12 @@ Em thấy FCAJ Community Day hữu ích vì chương trình kết hợp kinh ngh
 
 ### Em tham dự buổi chia sẻ
 
-![Em chụp ảnh tại khán phòng FCAJ Community Day](/images/4-EventParticipated/event-2-1.png)
+![Em chụp ảnh tại khán phòng FCAJ Community Day](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-1.png)
 
 ### Diễn giả trình bày về phát triển phần mềm
 
-![Diễn giả chia sẻ nội dung Talk first, code last tại FCAJ Community Day](/images/4-EventParticipated/event-2-2.png)
+![Diễn giả chia sẻ nội dung Talk first, code last tại FCAJ Community Day](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-2.png)
 
 ### Phiên AWS Skill Builder
 
-![Diễn giả trình bày phiên AWS Skill Builder trước người tham dự](/images/4-EventParticipated/event-2-3.png)
+![Diễn giả trình bày phiên AWS Skill Builder trước người tham dự](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-3.png)

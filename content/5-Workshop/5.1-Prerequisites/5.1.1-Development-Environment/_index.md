@@ -134,13 +134,13 @@ This health endpoint confirms only that the local API starts. It does not verify
 
 The local mock dashboard, frontend lint/build transcript, and `sam --version` were recorded in the baseline above; separate screenshots for those commands were not retained. The SAM validation/build and local health results have the screenshots below.
 
-![Screenshot 5.1.1: Successful SAM template validation](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-template-validation.png)
+![Screenshot 5.1.1: Successful SAM template validation](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-template-validation.png)
 
-![Screenshot 5.1.1: Successful SAM build for HealthFunction](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-build-success.png)
+![Screenshot 5.1.1: Successful SAM build for HealthFunction](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-build-success.png)
 
-![Screenshot 5.1.1: Local SAM health endpoint returning status ok](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-local-health.png)
+![Screenshot 5.1.1: Local SAM health endpoint returning status ok](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-local-health.png)
 
-![Screenshot 5.1.1: SAM validate and SAM build results in one PowerShell session](/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-validation-and-build.png)
+![Screenshot 5.1.1: SAM validate and SAM build results in one PowerShell session](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.1-Prerequisites/5.1.1-sam-validation-and-build.png)
 
 ## Expected result
 

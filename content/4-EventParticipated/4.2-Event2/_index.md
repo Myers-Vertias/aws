@@ -72,12 +72,12 @@ I found FCAJ Community Day useful because it combined software engineering exper
 
 ### Attending the event
 
-![Attendee taking a photo in the FCAJ Community Day venue](/images/4-EventParticipated/event-2-1.png)
+![Attendee taking a photo in the FCAJ Community Day venue](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-1.png)
 
 ### Speaker presentation on software development
 
-![Speaker presenting the Talk first, code last workflow at FCAJ Community Day](/images/4-EventParticipated/event-2-2.png)
+![Speaker presenting the Talk first, code last workflow at FCAJ Community Day](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-2.png)
 
 ### AWS Skill Builder session
 
-![Speaker presenting an AWS Skill Builder session to attendees](/images/4-EventParticipated/event-2-3.png)
+![Speaker presenting an AWS Skill Builder session to attendees](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-2-3.png)

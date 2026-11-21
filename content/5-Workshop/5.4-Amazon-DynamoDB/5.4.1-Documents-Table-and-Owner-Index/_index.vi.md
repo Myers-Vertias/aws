@@ -23,15 +23,15 @@ Tạo bảng metadata chính theo thiết kế khóa đã duyệt.
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.4.1: Bản ghi tài liệu trong bảng dms-dev-documents](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-records.png)
+![Ảnh 5.4.1: Bản ghi tài liệu trong bảng dms-dev-documents](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-records.png)
 
 Bảng `dms-dev-documents` đang triển khai dùng partition key `documentId` kiểu String, không có sort key, dùng capacity on-demand và có trạng thái Active.
 
-![Ảnh 5.4.1: Key schema và trạng thái Active của bảng dms-dev-documents](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-key-schema.png)
+![Ảnh 5.4.1: Key schema và trạng thái Active của bảng dms-dev-documents](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-documents-table-key-schema.png)
 
 GSI `OwnerIndex` đang **Active**, có partition key `ownerSub` (String) và sort key `createdAtDocumentId` (String).
 
-![Ảnh 5.4.1: OwnerIndex Active với hai khóa ownerSub và createdAtDocumentId](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-owner-index-active.png)
+![Ảnh 5.4.1: OwnerIndex Active với hai khóa ownerSub và createdAtDocumentId](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.1-owner-index-active.png)
 
 ## Kết quả mong đợi
 

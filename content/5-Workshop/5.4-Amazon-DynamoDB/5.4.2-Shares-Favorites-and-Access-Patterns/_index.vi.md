@@ -23,15 +23,15 @@ Lưu share và favorite dưới dạng quan hệ riêng từng người dùng, r
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.4.2: Bản ghi yêu thích trong bảng dms-dev-favorites](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
+![Ảnh 5.4.2: Bản ghi yêu thích trong bảng dms-dev-favorites](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
 
-![Ảnh 5.4.2: Bản ghi chia sẻ trong bảng dms-dev-shares](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-records.png)
+![Ảnh 5.4.2: Bản ghi chia sẻ trong bảng dms-dev-shares](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-records.png)
 
-![Ảnh 5.4.2: Key schema và trạng thái Active của bảng dms-dev-shares](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-key-schema.png)
+![Ảnh 5.4.2: Key schema và trạng thái Active của bảng dms-dev-shares](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-key-schema.png)
 
-![Ảnh 5.4.2: OwnerShareIndex đang Active trong bảng dms-dev-shares](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-owner-index.png)
+![Ảnh 5.4.2: OwnerShareIndex đang Active trong bảng dms-dev-shares](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-owner-index.png)
 
-![Ảnh 5.4.2: Key schema và trạng thái Active của bảng dms-dev-favorites](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-key-schema.png)
+![Ảnh 5.4.2: Key schema và trạng thái Active của bảng dms-dev-favorites](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-key-schema.png)
 
 Bảng Shares đang triển khai có trạng thái Active và dùng capacity On-demand. Khóa chính gồm `recipientSub` (partition key) và `documentId` (sort key). `OwnerShareIndex` đang Active, dùng `ownerSub` làm partition key và `documentIdRecipientSub` làm sort key. Bảng Favorites cũng đang Active, dùng capacity On-demand, với `userSub` là partition key và `documentId` là sort key.
 

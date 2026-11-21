@@ -78,7 +78,7 @@ Lambda writes structured application logs to CloudWatch. API Gateway access logs
 
 ## Deployed architecture diagram
 
-![UniCloud DMS deployed AWS architecture](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.svg)
+![UniCloud DMS deployed AWS architecture](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.svg)
 
 [Open the editable draw.io source](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.drawio)
 

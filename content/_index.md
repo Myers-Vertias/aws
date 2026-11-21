@@ -29,7 +29,7 @@ This report documents my First Cloud AI Journey internship, the AWS services I s
 
 &emsp; **Internship Duration:** From 09/09/2026 to 11/11/2026
 
-![Your profile picture](../static/images/avatar.png)
+![Your profile picture](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/avatar.png)
 
 ### Report Content
 

@@ -23,13 +23,13 @@ Kết nối API Gateway route với Lambda integration tương ứng.
 
 ## Route và integration đang triển khai
 
-![Ảnh 5.7.1: Các route health, proxy và CORS preflight của API Gateway](/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
+![Ảnh 5.7.1: Các route health, proxy và CORS preflight của API Gateway](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-api-routes.png)
 
 API đã triển khai có `GET /health` gọi Lambda integration riêng `dms-dev-health`; các document route được dispatch qua `ANY /{proxy+}` đến `dms-dev-documents`, còn `OPTIONS /{proxy+}` xử lý CORS preflight. Cả hai Lambda integration dùng payload format `2.0` và timeout 30.000 ms.
 
-![Ảnh 5.7.1: Chi tiết integration của health route với Lambda function riêng](/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
+![Ảnh 5.7.1: Chi tiết integration của health route với Lambda function riêng](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-health-lambda-integration-details.png)
 
-![Ảnh 5.7.1: Chi tiết proxy route integration gồm Lambda function, payload format và timeout](/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
+![Ảnh 5.7.1: Chi tiết proxy route integration gồm Lambda function, payload format và timeout](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.1-lambda-integration-details.png)
 
 ## Kết quả mong đợi
 

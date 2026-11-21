@@ -25,7 +25,7 @@ Allow only the frontend origins needed for direct browser upload/download while 
 
 The S3 CORS configuration allows `GET`, `HEAD`, and `PUT`, with the required authorization, content-type, and signing headers. Its deployed `AllowedFrontendOrigins` parameter, including the Amplify origin, is shown in section 5.9.2. Upload and download results are documented in section 5.8.2.
 
-![Screenshot 5.5.2: Saved S3 CORS configuration](/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
+![Screenshot 5.5.2: Saved S3 CORS configuration](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
 
 ## Expected result
 

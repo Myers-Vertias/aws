@@ -23,15 +23,15 @@ Store shares and favorites as user-specific relationships and verify the query p
 
 ## Screenshots and remaining evidence
 
-![Screenshot 5.4.2: Favorite records in the dms-dev-favorites table](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
+![Screenshot 5.4.2: Favorite records in the dms-dev-favorites table](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
 
-![Screenshot 5.4.2: Share records in the dms-dev-shares table](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-records.png)
+![Screenshot 5.4.2: Share records in the dms-dev-shares table](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-records.png)
 
-![Screenshot 5.4.2: dms-dev-shares key schema and active table status](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-key-schema.png)
+![Screenshot 5.4.2: dms-dev-shares key schema and active table status](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-table-key-schema.png)
 
-![Screenshot 5.4.2: Active OwnerShareIndex on dms-dev-shares](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-owner-index.png)
+![Screenshot 5.4.2: Active OwnerShareIndex on dms-dev-shares](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-shares-owner-index.png)
 
-![Screenshot 5.4.2: dms-dev-favorites key schema and active table status](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-key-schema.png)
+![Screenshot 5.4.2: dms-dev-favorites key schema and active table status](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-key-schema.png)
 
 The deployed Shares table is Active and uses on-demand capacity. Its primary key is `recipientSub` (partition key) plus `documentId` (sort key). Its active `OwnerShareIndex` uses `ownerSub` as the partition key and `documentIdRecipientSub` as the sort key. The deployed Favorites table is also Active and uses on-demand capacity, with `userSub` as the partition key and `documentId` as the sort key.
 

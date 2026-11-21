@@ -32,31 +32,31 @@ Move document reads/writes to the backend and test upload/download and all exist
 
 ## Screenshots and remaining evidence
 
-![Screenshot 5.8.2: Authenticated document-list API requests returned HTTP 200 in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-documents-api-200.png)
+![Screenshot 5.8.2: Authenticated document-list API requests returned HTTP 200 in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-documents-api-200.png)
 
-![Screenshot 5.8.2: Authenticated local dashboard showing one active document](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-local-dashboard.png)
+![Screenshot 5.8.2: Authenticated local dashboard showing one active document](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-authenticated-local-dashboard.png)
 
-![Screenshot 5.8.2: Konoka.png in the document list in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-list-local.png)
+![Screenshot 5.8.2: Konoka.png in the document list in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-list-local.png)
 
-![Screenshot 5.8.2: Browser download history records Konoka.png in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-download-history-local.png)
+![Screenshot 5.8.2: Browser download history records Konoka.png in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-download-history-local.png)
 
-![Screenshot 5.8.2: Document object stored in the private S3 bucket](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
+![Screenshot 5.8.2: Document object stored in the private S3 bucket](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
 
-![Screenshot 5.8.2: Konoka.png appears in Favorites in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
+![Screenshot 5.8.2: Konoka.png appears in Favorites in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
 
-![Screenshot 5.8.2: Konoka.png in Trash in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-local.png)
+![Screenshot 5.8.2: Konoka.png in Trash in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-local.png)
 
-![Screenshot 5.8.2: Restore success message and empty Trash in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-restore-success-local.png)
+![Screenshot 5.8.2: Restore success message and empty Trash in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-trash-restore-success-local.png)
 
-![Screenshot 5.8.2: Konoka.png returned to the document list in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-restored-local.png)
+![Screenshot 5.8.2: Konoka.png returned to the document list in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-restored-local.png)
 
-![Screenshot 5.8.2: Shared document appears in Shared With Me in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-shared-with-me-local.png)
+![Screenshot 5.8.2: Shared document appears in Shared With Me in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-shared-with-me-local.png)
 
-![Screenshot 5.8.2: Document details page with browser download history in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-detail-download-local.png)
+![Screenshot 5.8.2: Document details page with browser download history in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-detail-download-local.png)
 
-![Screenshot 5.8.2: Saved metadata on the document details page in the local run](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
+![Screenshot 5.8.2: Saved metadata on the document details page in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
 
-![Screenshot 5.8.2: Active document and browser download history on the production frontend](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
+![Screenshot 5.8.2: Active document and browser download history on the production frontend](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
 
 The deployment terminal capture was not retained. The deployed stack outputs are recorded in section 5.9.2, and application-level API results are recorded below and in section 5.10.
 

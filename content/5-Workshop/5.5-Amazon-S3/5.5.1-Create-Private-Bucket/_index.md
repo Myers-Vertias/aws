@@ -23,9 +23,9 @@ Create the file bucket with public access blocked and encryption enabled.
 
 ## Deployment evidence
 
-![Screenshot 5.5.1: S3 bucket with Block all public access enabled](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-block-public-access.png)
+![Screenshot 5.5.1: S3 bucket with Block all public access enabled](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-block-public-access.png)
 
-![Screenshot 5.5.1: Default server-side encryption with S3-managed keys enabled](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-default-encryption.png)
+![Screenshot 5.5.1: Default server-side encryption with S3-managed keys enabled](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-default-encryption.png)
 
 The deployed bucket uses server-side encryption with Amazon S3 managed keys (SSE-S3). These screenshots confirm the Singapore Region, Block Public Access, and default encryption. Upload/download through presigned URLs is recorded in section 5.8.2.
 

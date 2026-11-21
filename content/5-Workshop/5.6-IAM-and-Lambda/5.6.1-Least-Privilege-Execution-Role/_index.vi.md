@@ -23,9 +23,9 @@ Tạo execution role riêng cho Lambda và cấp quyền theo nhu cầu thực t
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.6.1: Lambda role có policy ghi log cơ bản](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-basic-execution-policy.png)
+![Ảnh 5.6.1: Lambda role có policy ghi log cơ bản](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-basic-execution-policy.png)
 
-![Ảnh 5.6.1: DmsDocumentRuntimeAccess đã gắn vào Lambda role](/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-runtime-policy-attached.png)
+![Ảnh 5.6.1: DmsDocumentRuntimeAccess đã gắn vào Lambda role](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.6-IAM-and-Lambda/5.6.1-lambda-runtime-policy-attached.png)
 
 ## Kết quả mong đợi
 

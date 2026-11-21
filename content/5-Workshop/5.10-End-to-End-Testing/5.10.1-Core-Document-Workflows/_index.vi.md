@@ -23,27 +23,27 @@ Ghi nhận kết quả thực tế cho luồng đăng nhập, metadata, upload, 
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.10.1: Tài liệu hoạt động và lịch sử tải xuống trên frontend production](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
+![Ảnh 5.10.1: Tài liệu hoạt động và lịch sử tải xuống trên frontend production](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-document-download-production.png)
 
-![Ảnh 5.10.1: Object đã upload trong bucket S3 riêng tư](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
+![Ảnh 5.10.1: Object đã upload trong bucket S3 riêng tư](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-s3-object-upload.png)
 
-![Ảnh 5.10.1: Metadata đã lưu trên trang chi tiết trong phiên frontend local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
+![Ảnh 5.10.1: Metadata đã lưu trên trang chi tiết trong phiên frontend local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
 
 Trường hợp thiếu token được dẫn chứng bằng HTTP `401` ở mục 5.7.2.
 
-![Ảnh 5.10.1: Network panel hiển thị HTTP 401 cho request chưa xác thực](/images/5-Workshop/5.7-API-Gateway/5.7.2-unauthenticated-request-401.png)
+![Ảnh 5.10.1: Network panel hiển thị HTTP 401 cho request chưa xác thực](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.2-unauthenticated-request-401.png)
 
 Khi chọn file `.md`, frontend từ chối và hiển thị danh sách định dạng được hỗ trợ trước khi tải lên.
 
-![Ảnh 5.10.1: Form upload từ chối file Markdown không được hỗ trợ](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-invalid-file-extension-rejected.png)
+![Ảnh 5.10.1: Form upload từ chối file Markdown không được hỗ trợ](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-invalid-file-extension-rejected.png)
 
 Ngày 18/11/2026, form upload local đã từ chối file được chọn vì vượt giới hạn 20 MB hiển thị trên giao diện.
 
-![Ảnh 5.10.1: Form upload local từ chối file vượt giới hạn 20 MB hiển thị](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-oversized-file-rejected-local.png)
+![Ảnh 5.10.1: Form upload local từ chối file vượt giới hạn 20 MB hiển thị](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-oversized-file-rejected-local.png)
 
 Kiểm tra trên UI xác nhận client-side validation. Ở lần kiểm tra riêng, request đã xác thực gửi trực tiếp tới `POST /documents/upload-url` với dung lượng 20 MiB + 1 byte nhận HTTP `400` và thông báo `File size must be between 1 byte and 20 MiB`. Request chỉ chứa metadata; API từ chối trước khi tạo upload URL và không gửi file lên S3.
 
-![Ảnh 5.10.1: API upload-url đã deploy từ chối request 20 MiB + 1 byte với HTTP 400](/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-backend-oversized-file-rejected-400.png)
+![Ảnh 5.10.1: API upload-url đã deploy từ chối request 20 MiB + 1 byte với HTTP 400](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.1-backend-oversized-file-rejected-400.png)
 
 ## Kết quả mong đợi
 

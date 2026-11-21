@@ -229,12 +229,12 @@ CloudWatch
 
 ### Attendees listening to a presentation
 
-![Attendees listening to a presentation at AWS Cloud and AI Day](/images/4-EventParticipated/event-1-1.png)
+![Attendees listening to a presentation at AWS Cloud and AI Day](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-1-1.png)
 
 ### Participants following the event on screen
 
-![Audience watching the AWS Cloud and AI Day program](/images/4-EventParticipated/event-1-2.png)
+![Audience watching the AWS Cloud and AI Day program](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-1-2.png)
 
 ### Another view of the audience
 
-![Another view of the event audience](/images/4-EventParticipated/event-1-3.png)
+![Another view of the event audience](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/4-EventParticipated/event-1-3.png)

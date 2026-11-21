@@ -25,7 +25,7 @@ Chỉ cho phép frontend origin cần thiết upload/download trực tiếp từ
 
 Cấu hình CORS S3 cho phép `GET`, `HEAD`, `PUT` cùng các header authorization, content type và signing cần thiết. Parameter `AllowedFrontendOrigins` đang triển khai, gồm origin Amplify, được chụp ở mục 5.9.2. Kết quả upload/download được ghi nhận tại mục 5.8.2.
 
-![Ảnh 5.5.2: Cấu hình CORS S3 đã lưu](/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
+![Ảnh 5.5.2: Cấu hình CORS S3 đã lưu](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.2-s3-cors-config.png)
 
 ## Kết quả mong đợi
 

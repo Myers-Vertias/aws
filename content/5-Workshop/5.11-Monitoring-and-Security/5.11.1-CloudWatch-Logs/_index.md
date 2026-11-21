@@ -25,21 +25,21 @@ Inspect API access logs, Lambda runtime logs/metrics, and error alarms without e
 
 ## Observed log evidence
 
-![Screenshot 5.11.1: CloudWatch log groups for the dms-dev document and health Lambdas, with retention shown](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
+![Screenshot 5.11.1: CloudWatch log groups for the dms-dev document and health Lambdas, with retention shown](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
 
 The document-function stream contains Lambda runtime `START`, `END`, and `REPORT` records with Lambda request IDs and duration.
 
-![Screenshot 5.11.1: Lambda runtime START, END, and REPORT records in the document function log stream](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
+![Screenshot 5.11.1: Lambda runtime START, END, and REPORT records in the document function log stream](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
 
 The `$default` HTTP API stage writes JSON access logs to `/aws/apigateway/dms-dev-access` with 7-day retention. A browser CORS preflight record for `OPTIONS /{proxy+}` has status `204` and includes a request ID and request time; the source IP is redacted in the screenshot. Lambda runtime logs and API Gateway access logs are recorded in separate log groups.
 
-![Screenshot 5.11.1: CloudWatch JSON access log from API Gateway showing OPTIONS method, routeKey, and status 204](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
+![Screenshot 5.11.1: CloudWatch JSON access log from API Gateway showing OPTIONS method, routeKey, and status 204](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
 
 The `dms-dev-documents-errors` alarm monitors the `AWS/Lambda Errors` metric for `dms-dev-documents`, using Sum over each 5-minute period and triggering at one or more errors (`1 of 1 datapoint`). Its state was **OK** when captured; no threshold breach appears in the displayed datapoint. The alert email successfully confirmed its subscription to the `dms-dev-lambda-errors` SNS topic.
 
-![Screenshot 5.11.1: CloudWatch alarm dms-dev-documents-errors in OK state with an Errors >= 1 in 5 minutes threshold](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-errors-alarm-ok.png)
+![Screenshot 5.11.1: CloudWatch alarm dms-dev-documents-errors in OK state with an Errors >= 1 in 5 minutes threshold](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-errors-alarm-ok.png)
 
-![Screenshot 5.11.1: Email subscription successfully confirmed for the Amazon SNS topic dms-dev-lambda-errors](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-sns-subscription-confirmed.png)
+![Screenshot 5.11.1: Email subscription successfully confirmed for the Amazon SNS topic dms-dev-lambda-errors](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-sns-subscription-confirmed.png)
 
 ## Expected result
 

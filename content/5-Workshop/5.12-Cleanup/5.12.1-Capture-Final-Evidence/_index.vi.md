@@ -20,11 +20,11 @@ Báo cáo dùng lại ảnh chụp từ các bước đã làm thay vì lặp nh
 
 Minh chứng billing được chụp ngày 18/11/2026. Cost Explorer được nhóm theo service cho khoảng 01–18/11 và hiển thị tổng `-$0.00`, biểu đồ không có cột chi phí nhìn thấy được. Trang Bills của kỳ tháng 11 hiển thị tổng ước tính `USD 0.00`, trạng thái `Pending`. Đây là số đang hiển thị tại thời điểm kiểm tra, chưa phải hóa đơn cuối cùng. Account ID đã được che trong các ảnh bên dưới.
 
-![Cost Explorer ngày 01–18/11/2026; tổng hiển thị -$0.00](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
+![Cost Explorer ngày 01–18/11/2026; tổng hiển thị -$0.00](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-summary-nov-2026.png)
 
-![Biểu đồ Cost Explorer nhóm theo service ngày 01–18/11/2026; không thấy cột chi phí](/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
+![Biểu đồ Cost Explorer nhóm theo service ngày 01–18/11/2026; không thấy cột chi phí](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-cost-explorer-graph-nov-2026.png)
 
-![Trang AWS Bills kỳ tháng 11/2026; tổng ước tính USD 0.00, trạng thái Pending](/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
+![Trang AWS Bills kỳ tháng 11/2026; tổng ước tính USD 0.00, trạng thái Pending](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
 
 Ảnh chụp ngày 19/11/2026 trong mục 5.12.2 ghi lại các thao tác cleanup thực tế của dự án, gồm xóa stack ứng dụng, bucket artifact SAM, stack SAM, Amplify app, log group, alarm, SNS topic, IAM role và budget 10 USD. Các ảnh có thông báo thành công hoặc trạng thái sau thao tác là minh chứng cho kết quả tương ứng; chúng đồng thời minh họa các bước để người đọc làm theo.
 

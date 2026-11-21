@@ -25,21 +25,21 @@ Quan sát API access logs, Lambda runtime logs/metrics và cảnh báo lỗi mà
 
 ## Vị trí ảnh chụp màn hình
 
-![Ảnh 5.11.1: Log group CloudWatch của Lambda documents và health, có hiển thị retention](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
+![Ảnh 5.11.1: Log group CloudWatch của Lambda documents và health, có hiển thị retention](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
 
 Log stream của function documents ghi nhận các bản ghi runtime Lambda `START`, `END` và `REPORT`, kèm Lambda request ID cùng thời lượng.
 
-![Ảnh 5.11.1: Các bản ghi runtime Lambda START, END và REPORT trong log stream của function documents](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
+![Ảnh 5.11.1: Các bản ghi runtime Lambda START, END và REPORT trong log stream của function documents](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
 
 API Gateway stage `$default` đã ghi access log dạng JSON vào `/aws/apigateway/dms-dev-access` với retention 7 ngày. Bản ghi CORS preflight `OPTIONS /{proxy+}` có status `204`, request ID và thời gian request; source IP đã được che trong ảnh. Lambda runtime logs và API Gateway access logs được ghi ở các log group riêng.
 
-![Ảnh 5.11.1: CloudWatch ghi access log JSON của API Gateway, gồm method OPTIONS, routeKey và status 204](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
+![Ảnh 5.11.1: CloudWatch ghi access log JSON của API Gateway, gồm method OPTIONS, routeKey và status 204](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
 
 Alarm `dms-dev-documents-errors` theo dõi metric `AWS/Lambda Errors` của function `dms-dev-documents`, thống kê Sum trong mỗi 5 phút và chuyển sang ALARM khi có ít nhất một lỗi (`1 of 1 datapoint`). Trạng thái tại thời điểm chụp là **OK**; chưa có lỗi vượt ngưỡng trong datapoint đang hiển thị. Email nhận cảnh báo đã xác nhận đăng ký thành công với SNS topic `dms-dev-lambda-errors`.
 
-![Ảnh 5.11.1: CloudWatch alarm dms-dev-documents-errors đang ở trạng thái OK với ngưỡng Errors >= 1 trong 5 phút](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-errors-alarm-ok.png)
+![Ảnh 5.11.1: CloudWatch alarm dms-dev-documents-errors đang ở trạng thái OK với ngưỡng Errors >= 1 trong 5 phút](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-errors-alarm-ok.png)
 
-![Ảnh 5.11.1: Xác nhận đăng ký email thành công với Amazon SNS topic dms-dev-lambda-errors](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-sns-subscription-confirmed.png)
+![Ảnh 5.11.1: Xác nhận đăng ký email thành công với Amazon SNS topic dms-dev-lambda-errors](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-sns-subscription-confirmed.png)
 
 ## Kết quả mong đợi
 

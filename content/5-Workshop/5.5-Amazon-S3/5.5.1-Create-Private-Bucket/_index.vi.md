@@ -23,9 +23,9 @@ Tạo bucket file với public access bị chặn và mã hóa được bật.
 
 ## Minh chứng triển khai
 
-![Ảnh 5.5.1: S3 bucket bật Block all public access](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-block-public-access.png)
+![Ảnh 5.5.1: S3 bucket bật Block all public access](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-block-public-access.png)
 
-![Ảnh 5.5.1: Bật mã hóa phía máy chủ mặc định bằng khóa S3 quản lý](/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-default-encryption.png)
+![Ảnh 5.5.1: Bật mã hóa phía máy chủ mặc định bằng khóa S3 quản lý](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.5-Amazon-S3/5.5.1-s3-default-encryption.png)
 
 Bucket đang triển khai dùng mã hóa phía máy chủ bằng khóa Amazon S3 quản lý (SSE-S3). Ảnh xác nhận Region Singapore, Block Public Access và mã hóa mặc định. Upload/download bằng presigned URL được ghi ở mục 5.8.2.
 

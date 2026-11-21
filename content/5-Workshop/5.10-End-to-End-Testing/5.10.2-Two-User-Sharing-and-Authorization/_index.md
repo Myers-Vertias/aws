@@ -29,8 +29,8 @@ On November 18, 2026, while signed in as a different account, a read-only authen
 
 ## Evidence
 
-![Screenshot 5.10.2: Recipient sees shared documents on the production frontend](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
+![Screenshot 5.10.2: Recipient sees shared documents on the production frontend](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-shared-with-me-production.png)
 
-![Screenshot 5.10.2: Recipient opened the shared document and browser download history shows the completed download in the local run](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
+![Screenshot 5.10.2: Recipient opened the shared document and browser download history shows the completed download in the local run](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-recipient-document-download-local.png)
 
-![Screenshot 5.10.2: Authenticated read-only request for an unshared document returns HTTP 404](/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-unshared-document-access-denied-404.png)
+![Screenshot 5.10.2: Authenticated read-only request for an unshared document returns HTTP 404](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.2-unshared-document-access-denied-404.png)

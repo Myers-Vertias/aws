@@ -116,17 +116,17 @@ The deployed table/index design and observed access behavior are recorded above.
 
 The SAM template defines the three deployed tables, and Lambda implements authenticated presigned S3 upload/download, owner/Viewer checks, soft delete, sharing, and Favorites. `sam validate --lint` and `sam build` succeeded. The reviewed CloudFormation change set completed successfully; the stack was deployed in `ap-southeast-1`. Deployed outputs and current resource evidence are recorded in section 5.9.2. The public `/health` endpoint returned `{"status":"ok","service":"dms-api"}`. Authenticated document workflows were subsequently verified in sections 5.7 through 5.10.
 
-![Screenshot 5.2.2: SAM build succeeded for HealthFunction and DocumentsFunction](/images/5-Workshop/5.2-Backend-Design/5.2.2-sam-build-api-routes.png)
+![Screenshot 5.2.2: SAM build succeeded for HealthFunction and DocumentsFunction](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.2-sam-build-api-routes.png)
 
 The change set was reviewed before deployment; a separate screenshot of the change-set review screen was not retained.
 
-![Screenshot 5.2.2: CloudFormation outputs for the deployed dms-dev stack](/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
+![Screenshot 5.2.2: CloudFormation outputs for the deployed dms-dev stack](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.9-Amplify-Hosting/5.9.2-cloudformation-stack-outputs.png)
 
 The current CloudFormation resource view lists 13 resources in the `dms-dev` stack. The visible entries include the Cognito user pool and client, API Gateway API and stage, and the S3 documents bucket. Physical resource IDs are redacted in the report copy.
 
-![Screenshot 5.2.2: CloudFormation resource inventory for the dms-dev stack](/images/5-Workshop/5.2-Backend-Design/5.2.2-cloudformation-resources.png)
+![Screenshot 5.2.2: CloudFormation resource inventory for the dms-dev stack](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.2-cloudformation-resources.png)
 
-![Screenshot 5.2.2: Deployed API health endpoint returned status ok](/images/5-Workshop/5.7-API-Gateway/5.7.2-api-health-check.png)
+![Screenshot 5.2.2: Deployed API health endpoint returned status ok](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.7-API-Gateway/5.7.2-api-health-check.png)
 
 ## Troubleshooting
 

@@ -36,22 +36,22 @@ Ghi nhận kết quả kiểm thử đầu cuối các chức năng yêu thích,
 
 ## Minh chứng
 
-![Ảnh 5.10.3-A: Metadata đã lưu trên trang chi tiết trong phiên frontend local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
+![Ảnh 5.10.3-A: Metadata đã lưu trên trang chi tiết trong phiên frontend local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-metadata-update-local.png)
 
-![Ảnh 5.10.3-B: Konoka.png xuất hiện trong mục Yêu thích ở phiên frontend local](/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
+![Ảnh 5.10.3-B: Konoka.png xuất hiện trong mục Yêu thích ở phiên frontend local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.8-Frontend-Integration/5.8.2-favorite-local.png)
 
-![Ảnh 5.10.3-C: Khôi phục thành công và Thùng rác trống trên frontend production](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-trash-restore-production.png)
+![Ảnh 5.10.3-C: Khôi phục thành công và Thùng rác trống trên frontend production](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-trash-restore-production.png)
 
-![Ảnh 5.10.3-D: Bản ghi yêu thích trong bảng DynamoDB đã triển khai](/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
+![Ảnh 5.10.3-D: Bản ghi yêu thích trong bảng DynamoDB đã triển khai](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.4-Amazon-DynamoDB/5.4.2-favorites-table-records.png)
 
-![Ảnh 5.10.3-E: Giao diện tiếng Anh trên Dashboard local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-english-dashboard-local.png)
+![Ảnh 5.10.3-E: Giao diện tiếng Anh trên Dashboard local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-english-dashboard-local.png)
 
-![Ảnh 5.10.3-F: Giao diện tiếng Việt trên danh sách tài liệu local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-vietnamese-documents-local.png)
+![Ảnh 5.10.3-F: Giao diện tiếng Việt trên danh sách tài liệu local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-language-vietnamese-documents-local.png)
 
-![Ảnh 5.10.3-G: Lựa chọn tiếng Việt vẫn được giữ sau khi tải lại trang Kho tài liệu local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-after-refresh.png)
+![Ảnh 5.10.3-G: Lựa chọn tiếng Việt vẫn được giữ sau khi tải lại trang Kho tài liệu local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-after-refresh.png)
 
-![Ảnh 5.10.3-H: Bộ lọc danh mục Công việc trả về Konoka.png trong danh sách tài liệu local](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-category-filter-work-local.png)
+![Ảnh 5.10.3-H: Bộ lọc danh mục Công việc trả về Konoka.png trong danh sách tài liệu local](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-category-filter-work-local.png)
 
-![Ảnh 5.10.3-I: Tìm theo thẻ ảnh trả về Konoka.png](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-tag-search-anh-local.png)
+![Ảnh 5.10.3-I: Tìm theo thẻ ảnh trả về Konoka.png](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-tag-search-anh-local.png)
 
-![Ảnh 5.10.3-J: Dashboard vẫn giữ lựa chọn tiếng Việt sau khi chuyển từ Kho tài liệu](/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-dashboard-local.png)
+![Ảnh 5.10.3-J: Dashboard vẫn giữ lựa chọn tiếng Việt sau khi chuyển từ Kho tài liệu](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.10-End-to-End-Testing/5.10.3-vietnamese-language-persists-dashboard-local.png)

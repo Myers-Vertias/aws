@@ -27,7 +27,7 @@ Báo cáo này ghi lại quá trình em tham gia First Cloud AI Journey, các d�
 
 &emsp; **Thời gian thực tập:** Từ ngày 09/09/2026 đến ngày 11/11/2026
 
-![Ảnh đại diện của bạn](../static/images/avatar.png)
+![Ảnh đại diện của bạn](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/avatar.png)
 
 
 
