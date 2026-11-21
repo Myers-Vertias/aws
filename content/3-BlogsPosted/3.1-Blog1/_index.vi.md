@@ -1,109 +1,101 @@
 ---
-title: "Amazon Bedrock Guardrails: AI có thể bị đánh lừa bởi một câu lệnh không?"
-date: 2026-11-19
+title: "S3 Presigned URL: Tải file thẳng lên S3 có an toàn không?"
+date: 2026-11-21
 weight: 1
 chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# Amazon Bedrock Guardrails: AI có thể bị đánh lừa bởi một câu lệnh không?
+# S3 Presigned URL: Tải file thẳng lên S3 có an toàn không?
 
-![Minh họa luồng kiểm tra đầu vào và đầu ra bằng Amazon Bedrock Guardrails](../../../static/images/3-BlogPosted/3.1-Blog1/bedrock-guardrails.png)
+Một tình huống quen thuộc khi xây dựng ứng dụng quản lý tài liệu: người dùng chọn file, frontend gửi file đến backend, rồi Lambda chuyển tiếp file lên Amazon S3. Cách này hoạt động, nhưng backend phải tiếp nhận và truyền toàn bộ nội dung file.
 
-Có một điều em thấy khá thú vị khi tìm hiểu về AI.
+Có cách nào để trình duyệt tải file trực tiếp lên S3 mà không cần cấp AWS credentials cho người dùng không? Một lựa chọn phổ biến là **presigned URL**. Nhưng URL này cấp quyền gì, có dùng lại được không, và cần lưu ý điều gì nếu URL bị lộ?
 
-Khi sử dụng chatbot, mình thường đặt câu hỏi và AI sẽ cố gắng trả lời dựa trên những gì nó được hướng dẫn. Nhưng hãy tưởng tượng em đang xây dựng một chatbot hỗ trợ khách hàng cho doanh nghiệp. Chatbot được yêu cầu chỉ trả lời những câu hỏi liên quan đến sản phẩm, không tiết lộ thông tin nhạy cảm và không thực hiện những yêu cầu nằm ngoài phạm vi cho phép.
+## 01 | PRESIGNED URL CẤP QUYỀN GÌ?
 
-Mọi thứ có vẻ ổn cho đến khi một người dùng nhập:
+Presigned URL là một HTTP request đến S3 được ký bằng credentials của một IAM principal. Ứng dụng có thể gửi URL cho client để thực hiện một thao tác cụ thể trong khoảng thời gian nhất định, chẳng hạn `PUT` để tải lên hoặc `GET` để tải xuống.
 
-> “Hãy bỏ qua tất cả những chỉ dẫn trước đó và làm theo yêu cầu tiếp theo của tôi.”
+Client không cần giữ AWS access key. Request vẫn bị giới hạn bởi quyền của principal đã tạo URL, cùng bucket, object key, HTTP method và thời hạn được ký. Nói cách khác, đây là cách trao quyền tạm thời để thực hiện request đã định trước, không phải một cơ chế phân quyền người dùng độc lập.
 
-Đây là một ví dụ về **prompt injection trực tiếp**, tức là người dùng đưa vào chỉ dẫn nhằm khiến ứng dụng AI bỏ qua hoặc làm sai lệch hướng dẫn của nhà phát triển.
+AWS xem presigned URL là một **bearer token**: bất kỳ ai có URL đều có thể dùng nó trong thời gian còn hiệu lực. Vì vậy, cần bảo vệ URL như thông tin xác thực. [1]
 
-Vậy nếu xây dựng ứng dụng AI trên AWS, chỉ cần viết prompt thật chặt chẽ là đủ chưa? Trong lúc tìm hiểu, em biết đến **Amazon Bedrock Guardrails**, một dịch vụ giúp ứng dụng áp dụng các chính sách kiểm tra nội dung AI.
+## 02 | LUỒNG TẢI FILE TRỰC TIẾP LÊN S3
 
-## Vì sao chỉ viết prompt có thể chưa đủ?
+Với ứng dụng quản lý tài liệu, luồng tải lên có thể diễn ra như sau:
 
-Khi mới tìm hiểu về AI, em thường nghĩ rằng nếu đưa ra bộ hướng dẫn đủ rõ ràng thì model sẽ luôn tuân thủ. Nhưng người dùng vẫn có thể thử vượt qua những giới hạn mà ứng dụng đặt ra.
+1. Người dùng đăng nhập và yêu cầu tải tài liệu lên.
+2. Backend xác thực danh tính, kiểm tra quyền nghiệp vụ và tự tạo object key duy nhất, ví dụ `incoming/user-123/uuid.pdf`.
+3. Backend dùng IAM role của mình để tạo presigned URL cho đúng bucket, object key, phương thức HTTP và thời hạn.
+4. Backend trả URL cho trình duyệt.
+5. Trình duyệt dùng request `PUT` gửi file trực tiếp đến S3.
+6. Sau khi S3 nhận object, hệ thống có thể kích hoạt bước kiểm tra file và cập nhật trạng thái tài liệu.
 
-Hai khái niệm thường được nhắc đến là **jailbreak** và **prompt injection**. Jailbreak là nỗ lực vượt qua các giới hạn an toàn vốn có của model để tạo ra nội dung mà model được thiết kế để tránh tạo ra. Prompt injection là việc đưa vào những chỉ dẫn nhằm ghi đè hoặc thay đổi hướng dẫn ban đầu của ứng dụng.
+Trong luồng này, Lambda xác thực và cấp quyền tạm thời, còn nội dung file đi từ trình duyệt thẳng đến S3. Bucket vẫn có thể ở chế độ private; presigned URL chỉ cho phép request được ký truy cập object đã chỉ định trong thời hạn cho phép. [1][2]
 
-Chẳng hạn, một chatbot nội bộ chỉ được thiết kế để trả lời về quy trình công ty, nhưng người dùng lại yêu cầu chatbot bỏ qua hướng dẫn và tiết lộ thông tin cần được giữ bí mật. Không phải cứ nhập câu lệnh như vậy là AI chắc chắn làm theo. Tuy nhiên, đây là một tình huống mà nhà phát triển cần tính đến khi thiết kế ứng dụng.
+## 03 | URL KHÔNG TỰ ĐỘNG CHỈ DÙNG ĐƯỢC MỘT LẦN
 
-Ngoài những câu lệnh do người dùng nhập trực tiếp, ứng dụng cũng có thể lấy nội dung từ tài liệu hoặc nguồn bên ngoài rồi đưa vào ngữ cảnh của model. Nếu nội dung đó chứa chỉ dẫn độc hại, ứng dụng cần cân nhắc cách nhận diện và xử lý nguồn nội dung này. Đây là tình huống có liên quan đến prompt injection nhưng khác với ví dụ người dùng trực tiếp yêu cầu model bỏ qua chỉ dẫn.
+Một điểm dễ bỏ sót: presigned URL có thể được sử dụng nhiều lần cho đến khi hết hạn. Nếu object cùng key đã tồn tại, một lần `PUT` khác có thể thay thế object đó. [1][2]
 
-Vì vậy, vấn đề không chỉ nằm ở việc model thông minh đến đâu, mà còn ở cách ứng dụng kiểm soát đầu vào, đầu ra và quyền mà AI được phép sử dụng. AWS mô tả các dạng prompt attack được hỗ trợ trong tài liệu [Detect prompt attacks with Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-prompt-attack.html).
+Vì vậy, không nên để client tùy chọn một key dùng chung như `uploads/report.pdf`. Backend nên tạo key khó đoán và duy nhất cho mỗi lần tải lên, gắn key với người dùng hoặc bản ghi nghiệp vụ, đồng thời chỉ ký đúng thao tác cần thiết.
 
-## Amazon Bedrock Guardrails là gì?
+Nếu cần giới hạn dung lượng trong một khoảng cụ thể, hãy cân nhắc **presigned POST** với policy có điều kiện `content-length-range`. Không nên mặc định rằng presigned `PUT` tự đáp ứng được mọi yêu cầu giới hạn kích thước của ứng dụng. [3]
 
-Amazon Bedrock Guardrails cung cấp các chính sách bảo vệ có thể áp dụng cho ứng dụng sử dụng AI tạo sinh. Có thể hình dung Guardrails như một lớp kiểm tra bổ sung, giúp đánh giá nội dung theo những chính sách mà nhà phát triển đã cấu hình.
+## 04 | THỜI HẠN URL CÒN PHỤ THUỘC CREDENTIALS KÝ
 
-Tùy theo nhu cầu, nhà phát triển có thể cấu hình bộ lọc nội dung có hại, hạn chế các chủ đề không được phép hoặc phát hiện thông tin nhạy cảm để che hay chặn. Guardrails cũng hỗ trợ bộ lọc từ và cụm từ được cấu hình, bộ lọc prompt attack để phát hiện một số dạng jailbreak và prompt injection, cùng contextual grounding checks để đánh giá câu trả lời dựa trên nguồn tham chiếu và câu hỏi.
+Presigned URL có thời hạn do ứng dụng cấu hình, nhưng không thể sống lâu hơn credentials dùng để ký. Nếu URL được ký bằng credentials tạm thời từ IAM role, URL có thể mất hiệu lực khi phiên credentials kết thúc, dù thời hạn khai báo dài hơn.
 
-Mỗi loại chính sách giải quyết một dạng rủi ro khác nhau. Vì vậy, nhà phát triển cần chọn và cấu hình các chính sách phù hợp với ứng dụng, thay vì nghĩ rằng một bộ lọc có thể xử lý mọi vấn đề. Có thể xem cách hoạt động và các loại chính sách trong tài liệu [How Amazon Bedrock Guardrails works](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-how.html).
+AWS CLI và SDK cho phép đặt thời hạn tối đa đến 7 ngày trong các điều kiện tương ứng. Đây là mức tối đa, không phải cấu hình mặc định phù hợp cho mọi trường hợp. Hãy chọn thời gian vừa đủ cho thao tác và cân nhắc khả năng người dùng cần thử lại. URL sống càng lâu thì cửa sổ sử dụng nếu bị lộ càng dài. [1]
 
-## Guardrails được áp dụng vào ứng dụng như thế nào?
+## 05 | CORS GIÚP TRÌNH DUYỆT GỌI S3, KHÔNG XÁC THỰC NGƯỜI DÙNG
 
-Hãy lấy ví dụ về một chatbot chăm sóc khách hàng. Người dùng hỏi về thời hạn bảo hành của một sản phẩm. Ứng dụng gửi yêu cầu đến Amazon Bedrock bằng API suy luận có áp dụng Guardrails. Các chính sách đã cấu hình có thể đánh giá nội dung đầu vào và câu trả lời do model tạo ra. Nếu phát hiện nội dung vi phạm chính sách, ứng dụng sẽ xử lý kết quả theo cấu hình, chẳng hạn chặn nội dung hoặc trả về thông báo phù hợp.
+Khi frontend và bucket thuộc các origin khác nhau, trình duyệt có thể gửi preflight request. Cấu hình CORS của bucket cần cho phép đúng origin, method như `PUT` và các request header mà ứng dụng thực sự gửi.
 
-Guardrails có thể được áp dụng khi gọi các API suy luận như `InvokeModel` hoặc `Converse`. Với một số cách tích hợp, nhà phát triển cần đánh dấu phần nội dung do người dùng gửi để bộ lọc prompt attack biết phần nào cần đánh giá. Vì vậy, luồng thực tế phụ thuộc vào API và cách ứng dụng tích hợp, không nhất thiết phải có một dịch vụ Guardrails đứng riêng giữa người dùng và model. Thông tin về các cách áp dụng Guardrails có trong tài liệu [Use cases for Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-use.html).
+Nhưng CORS chỉ quy định cách trình duyệt cho phép JavaScript gọi tài nguyên khác origin. Nó không xác thực người dùng, không thay thế IAM hoặc bucket policy, và không ngăn một HTTP client khác sử dụng URL đã bị lộ. Các quyền và chính sách S3 vẫn tiếp tục được áp dụng. [4]
 
-## Guardrails có thể hỗ trợ xử lý thông tin nhạy cảm
+Một lỗi thường gặp là `SignatureDoesNotMatch`. Request tải lên phải khớp với những gì đã được ký, gồm HTTP method và các header liên quan. Ví dụ, nếu `Content-Type` được đưa vào lúc tạo URL, client cần gửi đúng giá trị đó khi tải file lên. Khi gặp lỗi, hãy kiểm tra URL có bị thay đổi không, đã hết hạn chưa, đúng region chưa và các header có khớp không. [2]
 
-Một ứng dụng AI có thể nhận được yêu cầu hoặc tạo ra câu trả lời chứa thông tin nhận dạng cá nhân, chẳng hạn email hay số điện thoại. Guardrails hỗ trợ phát hiện một số loại thông tin nhạy cảm đã được cấu hình. Tùy chính sách, ứng dụng có thể chặn nội dung hoặc che thông tin trước khi sử dụng kết quả.
+## 06 | TẢI LÊN THÀNH CÔNG CHƯA CÓ NGHĨA FILE ĐÃ AN TOÀN
 
-Ví dụ, một câu trả lời có thông tin liên hệ của khách hàng có thể được xử lý để email và số điện thoại hiển thị dưới dạng `{EMAIL}` và `{PHONE}`. Đây là ví dụ minh họa; kết quả thực tế phụ thuộc vào loại thông tin, ngữ cảnh và cấu hình bộ lọc.
+Presigned URL giúp chuyển file đến S3, nhưng không tự xác nhận file có đúng định dạng nghiệp vụ, có an toàn hay người dùng có quyền xem file sau đó hay không.
 
-Em thấy khả năng này hữu ích trong những ứng dụng có xử lý dữ liệu doanh nghiệp. Tuy nhiên, bộ lọc thông tin nhạy cảm đánh giá nội dung văn bản và không bao phủ mọi vị trí trong mọi luồng xử lý. Chẳng hạn, AWS lưu ý một số nội dung trong luồng gọi công cụ không được bộ lọc này đánh giá. Vì vậy, ứng dụng vẫn cần tự kiểm soát dữ liệu ở các thành phần khác. Chi tiết về chế độ che và chặn có trong tài liệu [Sensitive information filters](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html).
+Một thiết kế có thể tải file vào prefix như `incoming/`, sau đó chuyển qua bước kiểm tra và cập nhật trạng thái thành `PENDING`, `READY` hoặc `REJECTED`. Khi tải xuống, backend vẫn cần xác thực lại quyền người dùng và trạng thái tài liệu trước khi cấp URL phù hợp.
 
-## Contextual grounding checks giúp kiểm tra điều gì?
+Nếu dùng S3 Event Notifications để bắt đầu xử lý sau upload, cần tính đến việc sự kiện được phân phối theo mô hình **at-least-once**, có thể đến trễ, bị gửi trùng và không được bảo đảm theo đúng thứ tự phát sinh. Consumer nên chịu được retry và xử lý lặp an toàn, chẳng hạn dựa trên object key kết hợp version hoặc một định danh xử lý đã lưu. Đồng thời, tránh để Lambda ghi object vào chính prefix đang kích hoạt nó nếu chưa có cơ chế ngăn vòng lặp. [5]
 
-Contextual grounding checks có thể đánh giá câu trả lời của model dựa trên nguồn tham chiếu và câu hỏi của người dùng. Cơ chế này xem xét câu trả lời có được hỗ trợ bởi nguồn hay không, đồng thời có liên quan đến câu hỏi hay không.
+Với dữ liệu cần kiểm tra tính toàn vẹn khi truyền, SigV4 presigned upload hỗ trợ checksum header để S3 so sánh checksum với nội dung nhận được. Checksum giúp phát hiện dữ liệu không khớp, nhưng không thay thế bước kiểm tra nội dung hay quét mã độc. [1][6]
 
-Ví dụ, nguồn tham chiếu ghi rằng Tokyo là thủ đô của Nhật Bản và người dùng hỏi thủ đô Nhật Bản là gì. Câu trả lời “Tokyo” vừa liên quan đến câu hỏi vừa được nguồn hỗ trợ. Nếu model trả lời “London”, câu trả lời không khớp với nguồn tham chiếu.
+## 07 | CHECKLIST TRƯỚC KHI ĐƯA VÀO PRODUCTION
 
-Theo em, cần hiểu đây là cách kiểm tra câu trả lời trong những luồng có nguồn tham chiếu, chứ không phải cơ chế xác minh đúng sai tổng quát cho mọi câu trả lời của AI. AWS giải thích thêm về cơ chế này trong tài liệu [Contextual grounding checks](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html).
+① Backend đã xác thực danh tính và quyền trước khi cấp URL chưa?
 
-## Có Guardrails rồi thì AI đã an toàn tuyệt đối chưa?
+② Object key do backend tạo, không dùng chung và nằm trong vùng lưu trữ dự kiến chưa?
 
-Theo em, đây là điểm quan trọng nhất cần nhớ: Guardrails là một lớp bảo vệ bổ sung, không phải lời bảo đảm rằng mọi cuộc tấn công đều sẽ bị ngăn chặn.
+③ Bucket vẫn private, IAM role chỉ có quyền cần thiết và URL có thời hạn phù hợp chưa?
 
-Một ứng dụng AI vẫn cần kiểm soát quyền truy cập. Nếu người dùng không có quyền xem tài liệu của người khác, backend phải ngăn họ truy cập ngay từ đầu. Không nên để model tự quyết định người dùng nào được xem tài liệu nào.
+④ Đã tính đến URL bị lộ, tải lại cùng key, CORS, header được ký và checksum chưa?
 
-Ứng dụng cũng cần bảo vệ dữ liệu bằng cách chỉ đưa những thông tin cần thiết vào ngữ cảnh của model. Việc lọc đầu vào hoặc đầu ra không thay thế cho thiết kế quyền truy cập và quy trình xử lý dữ liệu phù hợp.
+⑤ File có được kiểm tra sau upload, và worker có xử lý an toàn khi nhận sự kiện trùng hoặc đến sai thứ tự không?
 
-Nếu AI được kết nối với API, cơ sở dữ liệu hoặc công cụ bên ngoài, ứng dụng cần kiểm tra quyền của từng hành động. Không nên cho model toàn quyền thực hiện thao tác chỉ dựa trên câu trả lời mà nó tạo ra.
+## KẾT LUẬN
 
-Cuối cùng, các chính sách cần được kiểm thử thường xuyên với những tình huống thực tế. Cấu hình quá chặt có thể chặn nhầm yêu cầu hợp lệ, trong khi cấu hình chưa phù hợp có thể bỏ sót một số nội dung không mong muốn.
+Presigned URL giúp trình duyệt tải file trực tiếp lên S3 mà không cần giữ AWS credentials và không phải chuyển toàn bộ nội dung file qua Lambda. Đổi lại, URL cần được xem như một quyền truy cập tạm thời: người sở hữu nó có thể thực hiện request đã ký cho đến khi URL hoặc credentials liên quan hết hiệu lực.
 
-## Liên hệ với project Serverless Document Management System
+Một luồng an toàn vì thế không dừng ở bước “tạo URL”. Backend phải quyết định ai được tải lên, object key nào được phép dùng và URL sống trong bao lâu. Hệ thống cũng cần kiểm tra file sau khi nhận và xử lý sự kiện theo cách chịu được retry.
 
-Trong project quản lý tài liệu trên AWS, người dùng có thể đăng nhập, tải file lên, quản lý metadata và tải tài liệu xuống. Phiên bản hiện tại sử dụng Amazon Cognito, API Gateway, Lambda, DynamoDB và S3.
+**Presigned URL giúp trao một request có giới hạn. Quyền nghiệp vụ vẫn phải được kiểm soát ở ứng dụng.**
 
-Nếu sau này bổ sung chatbot để tìm kiếm hoặc tóm tắt tài liệu, người dùng có thể gửi câu hỏi qua giao diện. Yêu cầu được chuyển đến API Gateway, sau đó đến Lambda để xác thực danh tính và kiểm tra quyền truy cập. Lambda chỉ lấy những tài liệu mà người dùng được phép xem rồi gửi câu hỏi cùng phần nội dung phù hợp đến Amazon Bedrock, đồng thời áp dụng Guardrails đã cấu hình.
+#AWS #AmazonWebServices #CloudComputing #CloudArchitecture #AmazonS3 #AWSLambda #Serverless #CloudSecurity #PresignedURL #AWSSecurity #AWSStudyGroupVN
 
-Khi nhận kết quả từ Bedrock, Lambda có thể xử lý câu trả lời trước khi gửi lại cho người dùng. Trong luồng này, backend vẫn chịu trách nhiệm kiểm tra quyền trên từng tài liệu. Guardrails hỗ trợ đánh giá nội dung theo các chính sách đã thiết lập, chứ không thay thế bước phân quyền của hệ thống.
+### Nguồn tham khảo
 
-Đây là một kiến trúc có thể cân nhắc nếu project được mở rộng thêm tính năng AI. Cách triển khai thực tế sẽ phụ thuộc vào API và thiết kế của ứng dụng.
-
-## Điều em rút ra sau khi tìm hiểu
-
-Trước đây, khi nghĩ đến chatbot, em thường quan tâm model nào thông minh, trả lời tốt và dễ tích hợp. Khi tìm hiểu về Guardrails, em nhận ra rằng để đưa AI vào một ứng dụng thực tế, mình còn cần nghĩ đến cách xử lý những yêu cầu cố gắng vượt qua hướng dẫn, cách bảo vệ thông tin nhạy cảm và giới hạn những hành động mà AI được phép thực hiện.
-
-Amazon Bedrock Guardrails giúp em hình dung thêm một lớp kiểm soát có thể áp dụng cho ứng dụng AI. Nhưng để bảo vệ ứng dụng, nhà phát triển vẫn cần kết hợp nhiều biện pháp như kiểm soát quyền truy cập, bảo vệ dữ liệu, giới hạn hành động và kiểm thử thường xuyên.
-
-Điều em thấy đáng nhớ nhất là: **một ứng dụng AI tốt không chỉ cần biết cách trả lời. Nó còn cần biết yêu cầu nào nên được xử lý, thông tin nào cần được bảo vệ và giới hạn nào không được vượt qua.**
-
-#AWS #AmazonBedrock #BedrockGuardrails #PromptInjection #AISecurity #GenerativeAI #CloudComputing #LearningAWS #FCAJ
-
-### Tài liệu tham khảo
-
-1. AWS Documentation, [How Amazon Bedrock Guardrails works](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-how.html)
-2. AWS Documentation, [Detect prompt attacks with Amazon Bedrock Guardrails](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-prompt-attack.html)
-3. AWS Documentation, [Content filters](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-content-filters-overview.html)
-4. AWS Documentation, [Sensitive information filters](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-sensitive-filters.html)
-5. AWS Documentation, [Contextual grounding checks](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-contextual-grounding-check.html)
+1. [Download and upload objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-presigned-url.html)
+2. [Uploading objects with presigned URLs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/PresignedUrlUploadObject.html)
+3. [POST Policy](https://docs.aws.amazon.com/AmazonS3/latest/developerguide/sigv4-HTTPPOSTConstructPolicy.html)
+4. [Configuring cross-origin resource sharing (CORS)](https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html)
+5. [Amazon S3 Event Notifications](https://docs.aws.amazon.com/AmazonS3/latest/userguide/EventNotifications.html)
+6. [Checking object integrity in Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity-upload.html)
 
 ### Thông tin bài đăng
 
-**Link bài blog:** Anh bổ sung sau khi đăng.
+https://www.facebook.com/groups/awsstudygroupfcj/permalink/2345064529591839/?rdid=KmHzDedRJD6NcuJ7#
