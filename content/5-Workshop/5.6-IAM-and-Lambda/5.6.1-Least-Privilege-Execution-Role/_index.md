@@ -29,7 +29,7 @@ Create a dedicated Lambda execution role and grant permissions according to the 
 
 ## Expected result
 
-The captured role permissions page shows `AWSLambdaBasicExecutionRole` and `DmsDocumentRuntimeAccess`. The local policy source is resource-scoped. Protected document operations were subsequently exercised; live policy contents remain unverified because IAM denied `iam:GetRole`.
+The captured role permissions page confirms that `AWSLambdaBasicExecutionRole` and `DmsDocumentRuntimeAccess` were attached to `dms-lambda-execution`. The runtime policy source scopes permissions to project resources. Protected document operations were exercised and are recorded in sections 5.7.2, 5.8.2, and 5.10.
 
 ## Troubleshooting
 

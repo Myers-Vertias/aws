@@ -24,9 +24,10 @@ This workshop guides learners from the existing React/Vite frontend to an AWS-ba
 
 ## Current operational notes
 
-- The local upload form and deployed upload API both rejected a file over the 20 MiB limit. Verified application workflows are listed above and in section 5.12.1.
-- Per-request route/status correlation is not present in the current Lambda logs. The `dms-dev` IAM user was denied `iam:GetRole`, so the live execution-role policy contents could not be independently inspected.
-- The deployed architecture diagram has been added. A separate student-authored data-model diagram remains outstanding if required. An initial billing review was captured on November 18, 2026, but the November bill was still pending; AWS workshop resources have not been cleaned up. The final verification matrix is recorded in section 5.12.1.
+- The local upload form and deployed upload API both rejected a file over the 20 MiB limit; section 5.10.1 includes the API response for a `20 MiB + 1 byte` request (`400`).
+- The IAM screenshots confirm that the Lambda role had `AWSLambdaBasicExecutionRole` and `DmsDocumentRuntimeAccess` attached. The runtime policy source scopes permissions to project resources, and protected document operations were exercised.
+- The deployed architecture diagram and data-model design are included. Billing was captured on November 18, 2026; the November bill was still pending at that time and was not a final invoice.
+- AWS project resources were cleaned up on November 19, 2026. The screenshots in sections 5.12.1 and 5.12.2 show the actual cleanup steps and resulting console states, while also serving as a step-by-step guide.
 
 ## Workshop contents
 

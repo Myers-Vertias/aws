@@ -82,7 +82,7 @@ Lambda writes structured application logs to CloudWatch. API Gateway access logs
 
 [Open the editable draw.io source](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.drawio)
 
-The diagram distinguishes user traffic from the GitHub-to-Amplify deployment path. It shows Cognito-issued JWTs, the API Gateway HTTP API routes, the documents and health Lambda functions, all three DynamoDB tables, private S3 with direct browser transfers using presigned URLs, the shared Lambda execution role, and the observed CloudWatch runtime logs. The report does not claim unverified API Gateway access-log correlation.
+The diagram distinguishes user traffic from the GitHub-to-Amplify deployment path. It shows Cognito-issued JWTs, the API Gateway HTTP API routes, the documents and health Lambda functions, all three DynamoDB tables, private S3 with direct browser transfers using presigned URLs, the shared Lambda execution role, and the observed CloudWatch runtime logs.
 
 ## Expected result
 

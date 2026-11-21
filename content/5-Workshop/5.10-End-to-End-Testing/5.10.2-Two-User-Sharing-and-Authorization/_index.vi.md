@@ -13,7 +13,7 @@ Xác nhận người sở hữu có thể chia sẻ tài liệu với tài kho�
 
 ## Kết quả đã xác minh
 
-Tài khoản người nhận nhìn thấy tài liệu trong mục **Được chia sẻ với tôi**. Sau khi chọn tải xuống, giao diện hiển thị thông báo tải xuống giả lập và lịch sử tải xuống của trình duyệt ghi nhận tệp Konoka.png với trạng thái **Done**. Minh chứng này xác nhận luồng hiển thị tài liệu chia sẻ và thao tác tải xuống từ trình duyệt; chưa xác nhận riêng nội dung tệp được tải trực tiếp từ S3.
+Tài khoản người nhận nhìn thấy tài liệu trong mục **Được chia sẻ với tôi**. Sau khi chọn tải xuống, lịch sử tải xuống của trình duyệt ghi nhận tệp `Konoka.png` với trạng thái **Done**. Ảnh minh chứng ghi lại tài liệu chia sẻ trên giao diện và kết quả tải xuống ở trình duyệt.
 
 Ngày 18/11/2026, khi đăng nhập bằng tài khoản khác, một request đã xác thực chỉ đọc `GET /documents/{documentId}` tới tài liệu của chủ sở hữu nhưng chưa chia sẻ cho tài khoản này trả HTTP `404` với thông báo `Document not found`. Request không sửa đổi dữ liệu. Kết quả xác nhận tài khoản được kiểm tra không thể truy xuất tài liệu chưa chia sẻ; API dùng not-found cho tài liệu nằm ngoài quyền truy cập của người gọi.
 

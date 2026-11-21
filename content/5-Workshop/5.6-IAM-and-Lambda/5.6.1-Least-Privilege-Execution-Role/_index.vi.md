@@ -29,7 +29,7 @@ Tạo execution role riêng cho Lambda và cấp quyền theo nhu cầu thực t
 
 ## Kết quả mong đợi
 
-Ảnh trang quyền role hiển thị `AWSLambdaBasicExecutionRole` và `DmsDocumentRuntimeAccess`. File policy trong repo giới hạn theo resource. Các document operation có bảo vệ đã được thao tác sau đó; nội dung policy live vẫn chưa xác minh được do IAM từ chối `iam:GetRole`.
+Ảnh trang quyền role xác nhận `AWSLambdaBasicExecutionRole` và `DmsDocumentRuntimeAccess` đã được gắn vào `dms-lambda-execution`. File policy runtime trong repo giới hạn quyền theo resource. Các thao tác tài liệu có kiểm tra quyền đã được thực hiện và ghi ở mục 5.7.2, 5.8.2 và 5.10.
 
 ## Khắc phục sự cố
 

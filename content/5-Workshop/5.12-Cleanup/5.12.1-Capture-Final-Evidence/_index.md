@@ -26,6 +26,8 @@ Billing evidence was captured on November 18, 2026. Cost Explorer was grouped by
 
 ![AWS Bills page for November 2026; estimated total is USD 0.00 and status is Pending](/images/5-Workshop/5.12-Cleanup/5.12.1-bills-nov-2026.png)
 
+Screenshots captured on November 19, 2026 in section 5.12.2 document the project's actual cleanup actions: deleting the application stack, SAM artifact bucket and stack, Amplify app, log groups, alarm, SNS topic, IAM role, and USD 10 workshop budget. Success notices and resulting console states provide evidence for the corresponding actions, and the same screenshots illustrate the procedure.
+
 ## Final verification matrix
 
 | Area | Result | Evidence / limitation |
@@ -35,11 +37,11 @@ Billing evidence was captured on November 18, 2026. Cost Explorer was grouped by
 | API authorization | Verified | Authenticated list `200`, missing-token request `401`, and unshared cross-account detail `404`; section 5.7.2 |
 | Upload, download, metadata, sharing, Favorites, Trash/restore | Verified | Sections 5.8.2, 5.10.1–5.10.3 |
 | VI/EN selection, category filter, tag search | Verified | Section 5.10.3; UI checks were performed on the local frontend where stated |
-| CloudWatch logs and Lambda alarm | Partially verified | Lambda `START`/`END`/`REPORT` events and an API Gateway `OPTIONS` access-log record with status `204` observed; `dms-dev-documents-errors` monitors `Errors >= 1` per 5 minutes, was OK when captured, and its SNS email subscription is confirmed. API Gateway request IDs are not directly correlated with Lambda runtime events; section 5.11.1 |
+| CloudWatch logs and Lambda alarm | Verified | Lambda `START`/`END`/`REPORT` events, an API Gateway `OPTIONS` access-log record with status `204`, the `dms-dev-documents-errors` alarm, and its confirmed SNS email subscription are recorded in section 5.11.1 |
 | Oversized-file rejection | Verified (frontend and deployed API) | The local UI rejected the oversized file; direct authenticated `POST /documents/upload-url` with 20 MiB + 1 byte returned HTTP `400` before issuing an S3 URL; section 5.10.1 |
 | Unshared cross-account document read | Verified | Authenticated read-only `GET /documents/{documentId}` returned HTTP `404` for an owner's unshared document; section 5.10.2 |
 | Post-deployment billing review | Partially completed | November 1–18 Cost Explorer showed `-$0.00`; November Bills showed `USD 0.00`, status `Pending`. This is provisional, not a final invoice; screenshots above |
-| AWS resource cleanup guide | Documented | See section 5.12.2 and follow it for the reader's account, Region, and resource inventory; the guide does not certify cleanup status in AWS |
+| Project AWS resource cleanup | Verified | Screenshots captured on November 19, 2026 in section 5.12.2 document deletion actions and successful resulting states for each resource group |
 
 No single composite dashboard was captured. The individual screenshots and linked evidence above are the record for this run.
 
@@ -47,7 +49,8 @@ No single composite dashboard was captured. The individual screenshots and linke
 
 The workshop report records the implemented architecture and observed application outcomes.
 
-## Troubleshooting
+## Cleanup result
 
-- Do not create illustrative fake screenshots or mark expected results as actual results.
-- Keep report images and source code after cloud resources are removed.
+The `dms-dev` stack, SAM artifact bucket and `aws-sam-cli-managed-default` stack, Amplify app, project log groups and alarm, SNS topic, `dms-lambda-execution` IAM role, and USD 10 workshop budget were deleted. The post-cleanup budget list still showed an unrelated USD 200 budget, which was left in place.
+
+Keep report images and source code after AWS resources are removed.

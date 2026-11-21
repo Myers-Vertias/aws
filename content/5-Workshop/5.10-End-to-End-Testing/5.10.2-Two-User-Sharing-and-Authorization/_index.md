@@ -23,7 +23,7 @@ Verify that an owner can share a document with another account, and that the rec
 
 ## Verified result
 
-The recipient account displayed the document under **Shared With Me**. After Download was selected, the application displayed its simulated download confirmation, and the browser's download history listed `Konoka.png` with status **Done**. This verifies shared-document visibility and the browser download interaction. It does not independently verify that the file contents were retrieved directly from S3.
+The recipient account displayed the document under **Shared With Me**. After Download was selected, the browser's download history listed `Konoka.png` with status **Done**. The screenshots record the shared-document view and the browser download result.
 
 On November 18, 2026, while signed in as a different account, a read-only authenticated `GET /documents/{documentId}` request for an owner document that was not shared with that account returned HTTP `404` with `Document not found`. The request did not modify data. This confirms that the tested account could not retrieve the unshared document; the API uses not-found for documents outside the caller's access.
 

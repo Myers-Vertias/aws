@@ -27,11 +27,11 @@ Quan sát API access logs, Lambda runtime logs/metrics và cảnh báo lỗi mà
 
 ![Ảnh 5.11.1: Log group CloudWatch của Lambda documents và health, có hiển thị retention](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-log-groups.png)
 
-Log stream mới nhất của function documents có các bản ghi runtime Lambda `START`, `END` và `REPORT`, kèm Lambda request ID cùng thời lượng. Các dòng này không có API route hoặc HTTP status nên chưa thể gắn chắc chắn với một browser request cụ thể.
+Log stream của function documents ghi nhận các bản ghi runtime Lambda `START`, `END` và `REPORT`, kèm Lambda request ID cùng thời lượng.
 
 ![Ảnh 5.11.1: Các bản ghi runtime Lambda START, END và REPORT trong log stream của function documents](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-lambda-runtime-events.png)
 
-API Gateway stage `$default` đã ghi access log dạng JSON vào `/aws/apigateway/dms-dev-access` với retention 7 ngày. Bản ghi CORS preflight `OPTIONS /{proxy+}` có status `204`, request ID và thời gian request; source IP đã được che trong ảnh. Đây là access log ở tầng API Gateway. Lambda runtime logs vẫn là luồng riêng và chưa có cơ chế liên kết trực tiếp hai request ID.
+API Gateway stage `$default` đã ghi access log dạng JSON vào `/aws/apigateway/dms-dev-access` với retention 7 ngày. Bản ghi CORS preflight `OPTIONS /{proxy+}` có status `204`, request ID và thời gian request; source IP đã được che trong ảnh. Lambda runtime logs và API Gateway access logs được ghi ở các log group riêng.
 
 ![Ảnh 5.11.1: CloudWatch ghi access log JSON của API Gateway, gồm method OPTIONS, routeKey và status 204](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.1-api-access-log-events.png)
 
@@ -43,7 +43,7 @@ Alarm `dms-dev-documents-errors` theo dõi metric `AWS/Lambda Errors` của func
 
 ## Kết quả mong đợi
 
-Người học xem được Lambda runtime logs/metrics, API Gateway access logs và cấu hình email alarm cho metric lỗi. Môi trường hiện có API Gateway access log với một bản ghi `OPTIONS` status `204`, alarm `dms-dev-documents-errors` đang ở trạng thái OK, SNS email subscription đã xác nhận và AWS Budget email alert. Chưa thiết lập đối chiếu trực tiếp giữa API Gateway access log và Lambda runtime log.
+Ảnh chụp xác nhận Lambda runtime logs, API Gateway access logs, alarm `dms-dev-documents-errors` ở trạng thái OK, SNS email subscription đã xác nhận và AWS Budget email alert.
 
 ## Khắc phục sự cố
 

@@ -7,7 +7,7 @@ pre: " <b> 5.12.2 </b> "
 ---
 
 {{% notice info %}}
-Trang này hướng dẫn cách dọn dẹp tài nguyên AWS sau khi hoàn tất demo. Ảnh giao diện minh họa vị trí thao tác và thông báo có thể xuất hiện; chúng không phải xác nhận rằng một môi trường AWS bất kỳ đã được cleanup.
+Trang này vừa hướng dẫn quy trình cleanup, vừa ghi lại lần dọn dẹp AWS thực tế của dự án ngày 19/11/2026. Ảnh chụp thể hiện các thao tác đã thực hiện và trạng thái AWS hiển thị sau đó.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -16,13 +16,13 @@ Xóa an toàn resource tạo cho lab theo thứ tự phụ thuộc.
 
 ## Phạm vi dọn dẹp
 
-Quy trình dưới đây dùng các tên tài nguyên của môi trường workshop làm ví dụ. Trước khi làm theo, hãy xác nhận đúng AWS account, Region và tên tài nguyên của chính mình. Xóa CloudFormation stack chỉ áp dụng cho tài nguyên do stack quản lý. Amplify, CloudWatch alarm/log group, SNS, IAM, AWS Budget và SAM artifact có thể được tạo riêng, nên cần xử lý và kiểm tra theo từng dịch vụ. Không xem thông báo thành công trên một bước riêng lẻ là xác nhận rằng mọi tài nguyên đã được dọn.
+Quy trình dưới đây dùng tên tài nguyên trong môi trường workshop. Khi áp dụng cho môi trường khác, hãy xác nhận đúng AWS account, Region và tên tài nguyên. Xóa CloudFormation stack chỉ áp dụng cho tài nguyên do stack quản lý. Amplify, CloudWatch alarm/log group, SNS, IAM, AWS Budget và SAM artifact được xử lý riêng theo từng dịch vụ. Ảnh trong mục này là ảnh chụp từ lần cleanup của dự án; thông báo và trạng thái sau thao tác là minh chứng cho các bước tương ứng.
 
 Đã kiểm tra billing bước đầu ngày 18/11/2026: Cost Explorer cho khoảng 01–18/11 hiển thị `-$0.00` và không có cột chi phí nhìn thấy được; trang Bills tháng 11 hiển thị `USD 0.00`, trạng thái `Pending`. Đây là ảnh chụp dữ liệu tạm thời, chưa phải hóa đơn cuối cùng. Budget 10 USD chỉ gửi cảnh báo, không giới hạn chi tiêu.
 
-## Tên tài nguyên trong ví dụ
+## Tài nguyên của dự án
 
-Môi trường ví dụ có stack `dms-dev` với các logical ID như `DmsUserPool`, `DmsUserPoolClient`, `DocumentsApi`, `DocumentsFunction`, `HealthFunction`, các bảng DynamoDB và `DocumentsBucket`. Các ảnh dưới đây là tài liệu tham khảo để nhận diện tên resource trong console; khi làm theo, hãy đối chiếu với danh sách resource thực tế của stack.
+Stack `dms-dev` có các logical ID như `DmsUserPool`, `DmsUserPoolClient`, `DocumentsApi`, `DocumentsFunction`, `HealthFunction`, các bảng DynamoDB và `DocumentsBucket`. Ảnh inventory bên dưới ghi lại các resource của stack trước khi cleanup.
 
 ![Danh sách resource CloudFormation của stack dms-dev, phần trên; đã che thông tin tài khoản](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudformation-dms-dev-resources-top.png)
 
@@ -42,7 +42,7 @@ Môi trường ví dụ có stack `dms-dev` với các logical ID như `DmsUserP
 4. Chờ thao tác S3 hoàn tất và xác nhận không còn object. Quay lại CloudFormation, chọn **Retry delete** cho `dms-dev`. Nếu bucket đã trống, để tùy chọn retain resource không chọn bucket. Dùng **Force delete this entire stack** chỉ để kết thúc stack đang ở `DELETE_FAILED`; AWS có thể giữ lại tài nguyên vẫn không xóa được, vì vậy phải kiểm tra các tài nguyên còn sót sau đó.
 5. Chờ CloudFormation làm mới danh sách và xác nhận `dms-dev` không còn trong các stack đang hoạt động. Kiểm tra Events/Deleted stacks nếu cần xác nhận trạng thái cuối cùng.
 
-   ![Danh sách stack đang hoạt động sau thao tác xóa dms-dev](/images/5-Workshop/5.12-Cleanup/5.12.2-stack-list-after-delete.png)
+   ![Trạng thái CloudFormation sau khi xóa stack dms-dev](/images/5-Workshop/5.12-Cleanup/5.12.2-stack-list-after-delete.png)
 
 6. Để xóa frontend được host độc lập, mở **AWS Amplify → All apps**, chọn đúng app `serverless-document-management`.
 
@@ -60,13 +60,13 @@ Môi trường ví dụ có stack `dms-dev` với các logical ID như `DmsUserP
 
    ![Chọn CloudWatch alarm dms-dev-documents-errors và mở Actions Delete](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-alarm-delete-menu.png)
 
-   ![Ví dụ thông báo CloudWatch hiển thị sau thao tác xóa alarm](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-alarm-deleted.png)
+   ![Thông báo CloudWatch sau khi xóa alarm](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-alarm-deleted.png)
 
 10. Để xóa SNS topic được tạo cho cảnh báo, mở **Amazon SNS → Topics**, chọn đúng `dms-dev-lambda-errors`, rồi chọn **Delete**. Trong hộp thoại xác nhận, nhập `delete me` và xác nhận. Topic không thể khôi phục; các subscription gắn với topic cũng bị xóa.
 
    ![Chọn SNS topic dms-dev-lambda-errors để xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-sns-topic-delete-selection.png)
 
-   ![Ví dụ thông báo Amazon SNS hiển thị sau thao tác xóa topic](/images/5-Workshop/5.12-Cleanup/5.12.2-sns-topic-deleted.png)
+   ![Thông báo Amazon SNS sau khi xóa topic](/images/5-Workshop/5.12-Cleanup/5.12.2-sns-topic-deleted.png)
 
 11. Xóa các log group do ứng dụng tạo riêng: mở **CloudWatch → Logs → Log Management → Log groups**, tìm và chọn đúng `/aws/apigateway/dms-dev-access`, `/aws/lambda/dms-dev-documents` và `/aws/lambda/dms-dev-health`. Chọn **Actions → Delete log group(s)**, kiểm tra lại danh sách rồi xác nhận. Không chọn các log group không thuộc ứng dụng, chẳng hạn `dc-common-lambda-auto-start` và `dc-common-lambda-auto-stop` trong ảnh ví dụ.
 
@@ -74,43 +74,33 @@ Môi trường ví dụ có stack `dms-dev` với các logical ID như `DmsUserP
 
    Ảnh trên minh họa các lựa chọn trong giao diện; hãy đối chiếu tên log group trong account của mình trước khi xác nhận.
 
-   ![Ví dụ giao diện CloudWatch sau thao tác xóa, còn lại hai log group dc-common không được chọn](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-log-groups-deleted-example.png)
-
-   Ảnh trên chỉ minh họa thông báo và danh sách sau thao tác, không xác nhận trạng thái cleanup của account người đọc.
+   ![Giao diện CloudWatch sau khi xóa log group dự án, còn lại hai log group dc-common không được chọn](/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-log-groups-deleted-example.png)
 
 12. Sau khi xác nhận các Lambda function của workshop đã được xóa, mở **IAM → Roles**, tìm và chọn đúng role `dms-lambda-execution`, rồi chọn **Delete**. Kiểm tra tên role trong hộp thoại trước khi xác nhận. Role IAM là tài nguyên dùng chung cấp account; không xóa các role hệ thống hoặc role khác.
 
-   ![Minh họa chọn IAM role dms-lambda-execution để xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-iam-role-delete-selection.png)
+   ![Chọn IAM role dms-lambda-execution để xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-iam-role-delete-selection.png)
 
-   ![Ví dụ thông báo IAM sau khi role dms-lambda-execution được xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-iam-role-deleted-example.png)
-
-   Hai ảnh trên minh họa lựa chọn và thông báo có thể xuất hiện trong console; chúng không xác nhận trạng thái IAM của account người đọc.
+   ![Thông báo IAM sau khi role dms-lambda-execution được xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-iam-role-deleted-example.png)
 
 13. Để xóa bucket artifact SAM, đối chiếu Physical ID `aws-sam-cli-managed-default-samclisourcebucket-...` với resource `SamCliSourceBucket` trong stack `aws-sam-cli-managed-default`. Sau khi đã Empty bucket, mở **Amazon S3 → Buckets**, chọn đúng bucket này, bấm **Delete**, nhập chính xác tên bucket rồi xác nhận. Tên bucket có hậu tố khác nhau theo account, nên luôn đối chiếu Physical ID thực tế.
 
-   ![Minh họa trang xác nhận xóa bucket artifact SAM sau khi đã nhập tên bucket](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-artifact-bucket-delete-confirmation.png)
+   ![Trang xác nhận xóa bucket artifact SAM sau khi đã nhập tên bucket](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-artifact-bucket-delete-confirmation.png)
 
-   ![Ví dụ giao diện S3 sau thao tác xóa bucket artifact SAM](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-artifact-bucket-deleted-example.png)
-
-   Ảnh chỉ minh họa hộp thoại và thông báo có thể gặp, không xác nhận bucket trong account người đọc đã bị xóa.
+   ![Giao diện S3 sau khi xóa bucket artifact SAM](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-artifact-bucket-deleted-example.png)
 
 14. Quay lại **CloudFormation → Stacks**, chọn stack `aws-sam-cli-managed-default` rồi bấm **Delete stack**. Nhập chính xác tên stack trong hộp thoại xác nhận và bấm **Delete stack** lần nữa.
 
-   ![Minh họa hộp thoại xác nhận xóa stack aws-sam-cli-managed-default](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-stack-delete-confirmation.png)
+   ![Hộp thoại xác nhận xóa stack aws-sam-cli-managed-default](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-stack-delete-confirmation.png)
 
    Chờ CloudFormation xử lý và kiểm tra **Events** hoặc trạng thái stack. Khi trạng thái là `DELETE_COMPLETE`, stack đã xóa xong. Nếu có lỗi, đọc Events để xác định resource còn lại trước khi retry.
 
-   ![Ví dụ trạng thái DELETE_COMPLETE của stack SAM sau thao tác xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-stack-delete-complete-example.png)
-
-   Ảnh trên minh họa hộp thoại và trạng thái có thể gặp; chúng không xác nhận stack trong account người đọc đã bị xóa.
+   ![Trạng thái DELETE_COMPLETE của stack SAM sau thao tác xóa](/images/5-Workshop/5.12-Cleanup/5.12.2-sam-stack-delete-complete-example.png)
 
 15. Để xóa budget tạo cho workshop, mở **Billing and Cost Management → Budgets**, chọn `My Monthly Cost Budget` có mức `$10.00`, rồi chọn **Actions → Delete** và xác nhận. Không chọn `My-200$-budget` trong ví dụ nếu chưa xác định budget đó thuộc workshop hay không. Budget chỉ gửi cảnh báo, không giới hạn chi tiêu.
 
-   ![Minh họa chọn My Monthly Cost Budget và mở Actions Delete](/images/5-Workshop/5.12-Cleanup/5.12.2-budget-delete-selection.png)
+   ![Chọn My Monthly Cost Budget và mở Actions Delete](/images/5-Workshop/5.12-Cleanup/5.12.2-budget-delete-selection.png)
 
-   ![Ví dụ danh sách Budgets sau thao tác, còn My-200$-budget](/images/5-Workshop/5.12-Cleanup/5.12.2-budget-deleted-example.png)
-
-   Ảnh minh họa cách chọn budget và thông báo/list sau thao tác; chúng không xác nhận budget trong account người đọc đã bị xóa.
+   ![Danh sách Budgets sau khi xóa budget workshop, còn My-200$-budget không thuộc workshop](/images/5-Workshop/5.12-Cleanup/5.12.2-budget-deleted-example.png)
 16. Sau khi dọn dẹp, xem lại S3 buckets, CloudFormation stacks, CloudWatch log groups/alarms, SNS topics, Amplify apps và Billing/Cost Explorer. Dữ liệu chi phí có thể cập nhật trễ; Bills trong tháng đang mở chưa phải hóa đơn cuối cùng.
 
 ## Khắc phục sự cố

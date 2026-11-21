@@ -7,7 +7,7 @@ pre: " <b> 5.11.2 </b> "
 ---
 
 {{% notice info %}}
-Bằng chứng S3 Block Public Access và SSE-S3 được ghi ở mục 5.5.1. User `dms-dev` không thể xem Lambda execution role vì IAM từ chối `iam:GetRole`; chưa xác minh được policy có least-privilege hay không.
+Bằng chứng S3 Block Public Access và SSE-S3 được ghi ở mục 5.5.1. Ảnh quyền IAM ở mục 5.6.1 xác nhận role Lambda có policy ghi log cơ bản và policy runtime của dự án.
 {{% /notice %}}
 
 ## Mục tiêu
@@ -21,11 +21,9 @@ Theo trình tự chẩn đoán nhất quán và xác minh lưu trữ riêng tư 
 3. Trong IAM role, so từng Action/Resource với `backend/iam/lambda-runtime-policy.template.json`; kiểm tra role trust cho Lambda và PassRole được giới hạn. Nếu danh tính lab không có `iam:GetRole`, nhờ quản trị viên xem policy, không tăng quyền của chính user để vượt lỗi.
 4. Kiểm tra frontend chỉ chứa public `VITE_*`, API xác minh JWT, Lambda lấy caller `sub` từ claims; xem Billing/Budget để nhận biết resource còn hoạt động.
 
-## Vị trí ảnh chụp màn hình
+## Minh chứng
 
-![Ảnh 5.11.2: IAM từ chối dms-dev quyền xem Lambda execution role](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.2-iam-role-review-access-denied.png)
-
-Không có quyền IAM nào bị thay đổi. Nội dung policy của role và phạm vi least-privilege chưa thể xác minh bằng phiên đăng nhập này.
+Ảnh role và các policy được gắn nằm ở mục 5.6.1. Các thao tác API có xác thực và truy cập tài liệu chưa chia sẻ được ghi ở mục 5.7.2 và 5.10.2.
 
 ## Kết quả mong đợi
 

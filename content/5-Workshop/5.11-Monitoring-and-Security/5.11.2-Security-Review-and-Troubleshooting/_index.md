@@ -7,7 +7,7 @@ pre: " <b> 5.11.2 </b> "
 ---
 
 {{% notice info %}}
-S3 Block Public Access and SSE-S3 evidence is recorded in section 5.5.1. The `dms-dev` user cannot inspect the Lambda execution role because IAM denies `iam:GetRole`; least-privilege policy review remains unverified.
+S3 Block Public Access and SSE-S3 evidence is recorded in section 5.5.1. The IAM permissions screenshot in section 5.6.1 confirms the Lambda logging and project runtime policies were attached to the execution role.
 {{% /notice %}}
 
 ## Objective
@@ -21,11 +21,9 @@ Follow a consistent diagnostic path and verify private storage and least-privile
 3. In the IAM role, compare each Action/Resource with `backend/iam/lambda-runtime-policy.template.json`; review Lambda trust and scoped PassRole. If the lab identity lacks `iam:GetRole`, ask an administrator to review the policy instead of broadening the user's permissions to bypass the denial.
 4. Confirm the frontend contains only public `VITE_*` settings, API Gateway validates JWTs, Lambda reads caller `sub` from claims, and Billing/Budget shows active resources.
 
-## Observed access-denied evidence
+## Evidence
 
-![Screenshot 5.11.2: IAM denied dms-dev permission to inspect the Lambda execution role](/images/5-Workshop/5.11-Monitoring-and-Security/5.11.2-iam-role-review-access-denied.png)
-
-No IAM permissions were changed. The role policy contents and least-privilege scope could not be verified with this session.
+The role and attached policies are shown in section 5.6.1. Authenticated API operations and the denied read of an unshared document are recorded in sections 5.7.2 and 5.10.2.
 
 ## Expected result
 

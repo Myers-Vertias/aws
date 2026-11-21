@@ -24,9 +24,10 @@ Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite h
 
 ## Ghi chú trạng thái hiện tại
 
-- Form upload local và API upload đã deploy đều từ chối file vượt giới hạn 20 MiB. Các luồng ứng dụng đã xác minh được liệt kê ở trên và trong mục 5.12.1.
-- CloudWatch chưa có log ghép từng request với route/status. IAM user `dms-dev` bị từ chối `iam:GetRole`, nên chưa thể kiểm tra độc lập nội dung policy hiện hành của execution role.
-- Đã thêm sơ đồ kiến trúc của hệ thống đã deploy. Sơ đồ data model riêng vẫn còn thiếu nếu rubric yêu cầu. Đã chụp kết quả kiểm tra billing bước đầu ngày 18/11/2026 nhưng Bills tháng 11 vẫn Pending; tài nguyên AWS của workshop chưa được cleanup. Bảng tổng kết minh chứng nằm ở mục 5.12.1.
+- Form upload local và API upload đã deploy đều từ chối file vượt giới hạn 20 MiB; ảnh request API `20 MiB + 1 byte` trả HTTP `400` nằm ở mục 5.10.1.
+- Ảnh quyền IAM xác nhận role Lambda có `AWSLambdaBasicExecutionRole` và `DmsDocumentRuntimeAccess`. Policy runtime trong source giới hạn theo resource; các thao tác tài liệu có kiểm tra quyền đã được thực hiện.
+- Đã thêm sơ đồ kiến trúc của hệ thống đã deploy và phần thiết kế data model. Billing được chụp ngày 18/11/2026; Bills tháng 11 khi đó vẫn Pending nên chưa phải hóa đơn cuối cùng.
+- Tài nguyên AWS của dự án đã được cleanup ngày 19/11/2026. Ảnh thao tác và trạng thái sau khi xóa vừa hướng dẫn từng bước, vừa là minh chứng cho lần cleanup này; xem mục 5.12.1 và 5.12.2.
 
 ## Nội dung Workshop
 
