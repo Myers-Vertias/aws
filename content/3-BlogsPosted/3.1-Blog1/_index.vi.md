@@ -8,7 +8,7 @@ pre: " <b> 3.1. </b> "
 
 # Amazon Bedrock Guardrails: AI có thể bị đánh lừa bởi một câu lệnh không?
 
-![Minh họa luồng kiểm tra đầu vào và đầu ra bằng Amazon Bedrock Guardrails](/images/3-BlogPosted/3.1-Blog1/bedrock-guardrails.png)
+![Minh họa luồng kiểm tra đầu vào và đầu ra bằng Amazon Bedrock Guardrails](../../../static/images/3-BlogPosted/3.1-Blog1/bedrock-guardrails.png)
 
 Có một điều em thấy khá thú vị khi tìm hiểu về AI.
 

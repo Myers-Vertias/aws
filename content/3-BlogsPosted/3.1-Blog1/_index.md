@@ -8,7 +8,7 @@ pre: " <b> 3.1. </b> "
 
 # Amazon Bedrock Guardrails: Can AI Be Tricked by a Prompt?
 
-![An illustration of Amazon Bedrock Guardrails checking input and output](/images/3-BlogPosted/3.1-Blog1/bedrock-guardrails.png)
+![An illustration of Amazon Bedrock Guardrails checking input and output](../../../static/images/3-BlogPosted/3.1-Blog1/bedrock-guardrails.png)
 
 There is something I find particularly interesting as I learn more about AI.
 
