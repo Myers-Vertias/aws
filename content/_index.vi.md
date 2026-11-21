@@ -6,6 +6,8 @@ chapter: false
 ---
 
 # Báo cáo thực tập
+
+Báo cáo này ghi lại quá trình em tham gia First Cloud AI Journey, các dịch vụ AWS đã học, kiến trúc và quá trình thực hiện project, cùng những nội dung nhìn lại sau kỳ thực tập.
 ### Thông tin sinh viên:
 &emsp; **Họ và tên:** Nìm Văn Hạo
 
@@ -23,7 +25,7 @@ chapter: false
 
 &emsp; **Vị trí thực tập:** Workforce Bootcamp - First Cloud AI Journey
 
-&emsp; **Thời gian thực tập:** Từ ngày 09/09/2026 đến ngày 11/11/2025
+&emsp; **Thời gian thực tập:** Từ ngày 09/09/2026 đến ngày 11/11/2026
 
 ![Ảnh đại diện của bạn](../static/images/avatar.png)
 

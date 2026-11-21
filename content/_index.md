@@ -8,9 +8,7 @@ chapter: false
     
 # Internship Report
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+This report documents my First Cloud AI Journey internship, the AWS services I studied, my project architecture and implementation, and my reflections on the experience.
 
 ### Student Information:
 &emsp; **Full Name:** Nim Van Hao
