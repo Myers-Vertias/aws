@@ -1,12 +1,12 @@
 ---
-title: "AWS Cloud and AI Day Hanoi 2026"
+title: "AWS Cloud & AI Day Vietnam 2026 - Watch Party"
 date: 2026-09-29
 weight: 1
 chapter: false
 pre: "<b> 4.1. </b>"
 ---
 
-# Báo cáo sự kiện: “AWS Cloud and AI Day Hanoi 2026”
+# Báo cáo sự kiện: “AWS Cloud & AI Day Vietnam 2026 - Watch Party”
 
 ## Mục tiêu của sự kiện
 
@@ -16,17 +16,19 @@ pre: "<b> 4.1. </b>"
 - Tạo cơ hội để developer, sinh viên, chuyên gia công nghệ và các nhà lãnh đạo doanh nghiệp trực tiếp học hỏi từ các chuyên gia và đối tác của AWS.
 - Kết nối người tham dự với cộng đồng AWS thông qua các phiên kỹ thuật, workshop, hoạt động trình diễn và networking.
 
-AWS Cloud and AI Day Hanoi là sự kiện trực tiếp diễn ra trong một ngày tại **JW Marriott Hotel Hanoi vào ngày 29/09/2026**. Sự kiện tập trung vào các nhu cầu về Cloud và AI, kết hợp giữa các bài keynote, các phiên kỹ thuật, hoạt động thực hành, chia sẻ từ doanh nghiệp và hoạt động kết nối cộng đồng. :chatgpt-content-reference{index="1"}
+Chương trình chính **AWS Cloud & AI Day Vietnam 2026** được tổ chức tại Hà Nội ngày **29/09/2026**, với các phiên keynote, kỹ thuật, thực hành và chia sẻ từ doanh nghiệp. Em tham dự watch party tại văn phòng công ty ở tầng 26, tòa nhà Bitexco, TP. Hồ Chí Minh và theo dõi livestream các diễn giả đang trình bày tại Hà Nội.
 
 ## Thông tin sự kiện
 
-- **Tên sự kiện:** AWS Cloud and AI Day Hanoi 2026
+- **Tên chương trình chính:** AWS Cloud & AI Day Vietnam 2026
 - **Thời gian:** 29/09/2026
-- **Địa điểm:** JW Marriott Hotel Hanoi
-- **Hình thức:** Sự kiện trực tiếp trong một ngày
+- **Địa điểm chương trình chính:** JW Marriott Hotel Hanoi
+- **Địa điểm em tham dự:** Watch party tại văn phòng công ty, tầng 26, tòa nhà Bitexco, TP. Hồ Chí Minh
+- **Hình thức tham dự:** Theo dõi trực tiếp qua livestream từ watch party
+- **Hình thức chương trình tại Hà Nội:** Sự kiện trực tiếp trong một ngày
 - **Chủ đề chính:** Agentic AI, Data & Analytics, Cloud Migration, Modern Applications
 - **Số lượng session:** Hơn 30 session
-- **Hoạt động nổi bật:** Expo, Startup Zone, Developer Community Zone, Workshop và 8-Bit Agents Activation :chatgpt-content-reference{index="2"}
+- **Hoạt động nổi bật:** Expo, Startup Zone, Developer Community Zone, Workshop và 8-Bit Agents Activation
 
 ## Các diễn giả chính
 
@@ -37,7 +39,7 @@ Theo thông tin được công bố trong sự kiện, các diễn giả chính 
 - **Dr. Werner Vogels** – CTO, Amazon.com
 - **Eric Yeo** – Country General Manager Malaysia, Vietnam, Indochina, AWS
 - **Mai Le** – Director of Product Management, Katalon
-- **Dr. Jens Lottner** – Chief Executive Officer, Techcombank :chatgpt-content-reference{index="3"}
+- **Dr. Jens Lottner** – Chief Executive Officer, Techcombank
 
 # Nội dung nổi bật
 
@@ -45,7 +47,7 @@ Theo thông tin được công bố trong sự kiện, các diễn giả chính 
 
 Một trong những chủ đề nổi bật nhất của sự kiện là **Agentic AI**.
 
-Thay vì chỉ tập trung vào các chatbot AI truyền thống, nội dung của sự kiện hướng đến khái niệm các hệ thống AI có thể thực hiện hành động, tương tác với các công cụ, hỗ trợ quy trình làm việc và giải quyết những nhiệm vụ phức tạp hơn. :chatgpt-content-reference{index="4"}
+Thay vì chỉ tập trung vào các chatbot AI truyền thống, nội dung của sự kiện hướng đến khái niệm các hệ thống AI có thể thực hiện hành động, tương tác với các công cụ, hỗ trợ quy trình làm việc và giải quyết những nhiệm vụ phức tạp hơn.
 
 Một số session liên quan đến chủ đề này gồm:
 
@@ -54,11 +56,11 @@ Một số session liên quan đến chủ đề này gồm:
 - **Migration at Scale with Agentic AI: AWS Transform and Beyond**
 - **Amazon Quick Play & Build: Create Your AI Assistant, Compete, Win**
 
-Điều em thấy đặc biệt thú vị là cách nhìn về AI đang dần thay đổi: không chỉ đơn thuần là đặt câu hỏi và nhận câu trả lời, mà AI có thể tham gia trực tiếp vào một quy trình làm việc cụ thể. :chatgpt-content-reference{index="5"}
+Điều em thấy đặc biệt thú vị là cách nhìn về AI đang dần thay đổi: không chỉ đơn thuần là đặt câu hỏi và nhận câu trả lời, mà AI có thể tham gia trực tiếp vào một quy trình làm việc cụ thể.
 
 ## Phát triển phần mềm với Agentic AI
 
-Session **"Building software like never before with agentic AI"** cho thấy AI đang ngày càng được đưa vào quá trình phát triển phần mềm. :chatgpt-content-reference{index="6"}
+Session **"Building software like never before with agentic AI"** cho thấy AI đang ngày càng được đưa vào quá trình phát triển phần mềm.
 
 Thay vì chỉ sử dụng AI để gợi ý hoặc hoàn thành code, AI có thể hỗ trợ nhiều giai đoạn khác nhau trong vòng đời phát triển phần mềm, chẳng hạn như:
 
@@ -83,13 +85,13 @@ Dữ liệu cần:
 - Đảm bảo chất lượng
 - Phù hợp với nhu cầu phân tích và AI
 
-Qua nội dung này, em nhận ra rằng khi xây dựng một hệ thống AI, phần data architecture cũng quan trọng không kém việc lựa chọn model. :chatgpt-content-reference{index="7"}
+Qua nội dung này, em nhận ra rằng khi xây dựng một hệ thống AI, phần data architecture cũng quan trọng không kém việc lựa chọn model.
 
 ## Cloud Migration và Modernization
 
 Sự kiện cũng tập trung vào chủ đề **Migration và Modernization** thông qua session:
 
-**"Migration at Scale with Agentic AI: AWS Transform and Beyond."** :chatgpt-content-reference{index="8"}
+**"Migration at Scale with Agentic AI: AWS Transform and Beyond."**
 
 Nội dung cho thấy AI có thể trở thành một phần trong quá trình hiện đại hóa các hệ thống hiện có.
 
@@ -107,7 +109,7 @@ Cloud Migration không chỉ đơn giản là chuyển một ứng dụng từ m
 
 Agenda của sự kiện cũng có session:
 
-**"Platform Engineering at Scale: Internal Developer Platform on EKS"**, được trình bày cùng VPBank. :chatgpt-content-reference{index="9"}
+**"Platform Engineering at Scale: Internal Developer Platform on EKS"**, được trình bày cùng VPBank.
 
 Nội dung này cho thấy thay vì yêu cầu từng developer tự quản lý toàn bộ infrastructure, doanh nghiệp có thể xây dựng một **Internal Developer Platform** để đơn giản hóa quá trình phát triển và triển khai ứng dụng.
 
@@ -117,7 +119,7 @@ Qua đó, em hiểu thêm về cách **container, Kubernetes và platform engine
 
 Một session khác là:
 
-**"Beyond IAM Roles: Engineering Workload Identity on AWS"**, được trình bày cùng Vingroup. :chatgpt-content-reference{index="10"}
+**"Beyond IAM Roles: Engineering Workload Identity on AWS"**, được trình bày cùng Vingroup.
 
 Chủ đề này giúp em hiểu rõ hơn vai trò của Identity trong Cloud Security.
 
@@ -137,7 +139,7 @@ Một trong những hoạt động đáng chú ý là:
 
 **"Amazon Quick Play & Build: Create Your AI Assistant, Compete, Win."**
 
-Người tham dự có cơ hội trực tiếp xây dựng AI Assistant và trải nghiệm công nghệ thay vì chỉ nghe lý thuyết. :chatgpt-content-reference{index="11"}
+Người tham dự có cơ hội trực tiếp xây dựng AI Assistant và trải nghiệm công nghệ thay vì chỉ nghe lý thuyết.
 
 Sự kiện cũng có hoạt động **8-Bit Agents Activation**, giúp người tham dự khám phá cách xây dựng và triển khai AI Agent theo hình thức tương tác.
 
@@ -157,7 +159,7 @@ AI đang dần được tích hợp trực tiếp vào các ứng dụng và wor
 - Data
 - Workflow
 - Security
-- Human oversight :chatgpt-content-reference{index="12"}
+- Human oversight
 
 ## 2. Data Infrastructure rất quan trọng
 
@@ -169,7 +171,7 @@ Một hệ thống AI tốt cần có dữ liệu:
 - Đáng tin cậy
 - Được tổ chức hợp lý
 - An toàn
-- Phù hợp với workload AI :chatgpt-content-reference{index="13"}
+- Phù hợp với workload AI
 
 Điều này cho thấy việc học database, storage, analytics và data pipeline vẫn rất quan trọng ngay cả khi AI ngày càng phát triển.
 
@@ -188,13 +190,13 @@ Tùy từng bài toán, hệ thống có thể kết hợp:
 - Monitoring
 - DevOps Tools
 
-Điều này khá gần với kiến thức mà em đang học về **Serverless Architecture**. :chatgpt-content-reference{index="14"}
+Điều này khá gần với kiến thức mà em đang học về **Serverless Architecture**.
 
 ## 4. Security cần được thiết kế ngay từ đầu
 
 Các nội dung về Workload Identity giúp em hiểu rõ hơn tầm quan trọng của **Authorization và Access Control**.
 
-Thay vì chỉ nghĩ đến security sau khi ứng dụng được xây dựng xong, developer nên tính đến identity và permission ngay từ giai đoạn thiết kế hệ thống. :chatgpt-content-reference{index="15"}
+Thay vì chỉ nghĩ đến security sau khi ứng dụng được xây dựng xong, developer nên tính đến identity và permission ngay từ giai đoạn thiết kế hệ thống.
 
 ## 5. Cloud không chỉ đơn giản là “đưa ứng dụng lên Cloud”
 
@@ -206,11 +208,11 @@ Tuy nhiên, qua sự kiện, em nhận ra Cloud Migration còn có thể là cơ
 - Cải thiện khả năng mở rộng
 - Tự động hóa vận hành
 - Đưa AI vào hệ thống
-- Cải thiện năng suất phát triển phần mềm :chatgpt-content-reference{index="16"}
+- Cải thiện năng suất phát triển phần mềm
 
 # Áp dụng vào project của em
 
-Những kiến thức từ sự kiện có thể áp dụng trực tiếp vào project **Serverless Document Management System** mà em đang thực hiện. :chatgpt-content-reference{index="17"}
+Những kiến thức từ sự kiện có thể áp dụng trực tiếp vào project **Serverless Document Management System** mà em đang thực hiện.
 
 Kiến trúc hiện tại của project sử dụng:
 

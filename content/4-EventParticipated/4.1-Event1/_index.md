@@ -1,12 +1,12 @@
 ---
-title: "AWS Cloud and AI Day Hanoi 2026"
+title: "AWS Cloud & AI Day Vietnam 2026 - Watch Party"
 date: 2026-09-29
 weight: 1
 chapter: false
 pre: "<b> 4.1. </b>"
 ---
 
-# Summary Report: “AWS Cloud and AI Day Hanoi 2026”
+# Summary Report: “AWS Cloud & AI Day Vietnam 2026 - Watch Party”
 
 ## Event Objectives
 
@@ -16,17 +16,19 @@ pre: "<b> 4.1. </b>"
 - Provide opportunities for developers, students, technology professionals, and business leaders to learn directly from AWS experts and partners.
 - Connect attendees with the local AWS community through technical sessions, workshops, demonstrations, and networking activities.
 
-AWS Cloud and AI Day Hanoi was a one-day in-person event organized at **JW Marriott Hotel Hanoi on September 29, 2026**. The event was designed around regional cloud and AI needs and combined keynote presentations, technical sessions, hands-on activities, customer stories, and community networking. :chatgpt-content-reference{index="1"}
+The main **AWS Cloud & AI Day Vietnam 2026** program took place in Hanoi on **September 29, 2026**, with keynote presentations, technical sessions, hands-on activities, customer stories, and community networking. I attended a watch party at my company office on the 26th floor of Bitexco Tower in Ho Chi Minh City and followed the Hanoi presentations via livestream.
 
 ## Event Information
 
-- **Event:** AWS Cloud and AI Day Hanoi 2026
+- **Main event:** AWS Cloud & AI Day Vietnam 2026
 - **Date:** September 29, 2026
-- **Location:** JW Marriott Hotel Hanoi
-- **Format:** One-day, in-person event
+- **Main event venue:** JW Marriott Hotel Hanoi
+- **My attendance location:** Company watch party, 26th floor, Bitexco Tower, Ho Chi Minh City
+- **Format:** Followed the Hanoi presentations via livestream at the watch party
+- **Hanoi program format:** One-day, in-person event
 - **Main Areas:** Agentic AI, Data & Analytics, Cloud Migration, Modern Applications
 - **Sessions:** 30+ sessions
-- **Special Activities:** Expo, Startup Zone, Developer Community Zone, Workshops, and 8-Bit Agents Activation :chatgpt-content-reference{index="2"}
+- **Special Activities:** Expo, Startup Zone, Developer Community Zone, Workshops, and 8-Bit Agents Activation
 
 ## Keynote Speakers
 
@@ -37,7 +39,7 @@ The official AWS event page listed the following keynote speakers:
 - **Dr. Werner Vogels** – CTO, Amazon.com
 - **Eric Yeo** – Country General Manager Malaysia, Vietnam, Indochina, AWS
 - **Mai Le** – Director of Product Management, Katalon
-- **Dr. Jens Lottner** – Chief Executive Officer, Techcombank :chatgpt-content-reference{index="3"}
+- **Dr. Jens Lottner** – Chief Executive Officer, Techcombank
 
 ## Key Highlights
 
@@ -52,7 +54,7 @@ This theme appeared across several sessions, including:
 - **From Demo to Deployment: Solving Agentic AI's Toughest Challenges**
 - **Building software like never before with agentic AI**
 - **Migration at Scale with Agentic AI: AWS Transform and Beyond**
-- **Amazon Quick Play & Build: Create Your AI Assistant, Compete, Win** :chatgpt-content-reference{index="4"}
+- **Amazon Quick Play & Build: Create Your AI Assistant, Compete, Win**
 
 What I found particularly interesting was the shift in perspective from simply asking AI questions toward building systems in which AI can participate as part of an actual workflow.
 
@@ -70,7 +72,7 @@ From a student perspective, this made me think about how AI tools could assist w
 - Debugging
 - Improving development productivity
 
-The event therefore connected AI with practical software engineering rather than treating AI as an isolated technology. :chatgpt-content-reference{index="5"}
+The event therefore connected AI with practical software engineering rather than treating AI as an isolated technology.
 
 ### Data as the Foundation for AI
 
@@ -80,7 +82,7 @@ This highlighted an important idea: AI applications are only as useful as the da
 
 For organizations, preparing data for AI involves more than simply collecting a large amount of information. Data needs to be accessible, well-managed, and suitable for analytics and AI workloads.
 
-This topic helped me understand that building an AI system is not only about choosing a powerful model. The underlying data architecture is equally important. :chatgpt-content-reference{index="6"}
+This topic helped me understand that building an AI system is not only about choosing a powerful model. The underlying data architecture is equally important.
 
 ### Cloud Migration and Modernization
 
@@ -96,7 +98,7 @@ Instead of viewing migration as simply moving applications from one environment 
 - Security
 - Long-term maintainability
 
-This was especially relevant to me because it connected cloud technology with real business and engineering problems rather than focusing only on infrastructure. :chatgpt-content-reference{index="7"}
+This was especially relevant to me because it connected cloud technology with real business and engineering problems rather than focusing only on infrastructure.
 
 ### Internal Developer Platforms and Cloud-Native Development
 
@@ -104,7 +106,7 @@ The agenda also included **"Platform Engineering at Scale: Internal Developer Pl
 
 This session demonstrated another direction of modern cloud development: instead of asking every developer to manage infrastructure independently, organizations can create internal platforms that simplify development and deployment.
 
-This helped me see how technologies such as containers, Kubernetes, and platform engineering can be combined to improve developer productivity in larger organizations. :chatgpt-content-reference{index="8"}
+This helped me see how technologies such as containers, Kubernetes, and platform engineering can be combined to improve developer productivity in larger organizations.
 
 ### Security and Workload Identity
 
@@ -112,7 +114,7 @@ One of the advanced sessions was **"Beyond IAM Roles: Engineering Workload Ident
 
 This topic was especially interesting from a cloud-security perspective because identity is a fundamental part of protecting cloud workloads.
 
-It reinforced the idea that cloud security is not only about protecting networks and data, but also about carefully controlling which workloads, applications, and services are allowed to access resources. :chatgpt-content-reference{index="9"}
+It reinforced the idea that cloud security is not only about protecting networks and data, but also about carefully controlling which workloads, applications, and services are allowed to access resources.
 
 ### Amazon Quick and Hands-on AI
 
@@ -122,7 +124,7 @@ The event also provided practical activities around **Amazon Quick**, including:
 
 AWS described this as a hands-on activity where participants could build their own AI assistant and interact with the technology directly.
 
-The event also featured the **8-Bit Agents Activation**, which was designed to let participants build and deploy AI agents through an interactive experience. :chatgpt-content-reference{index="10"}
+The event also featured the **8-Bit Agents Activation**, which was designed to let participants build and deploy AI agents through an interactive experience.
 
 These activities were useful because they demonstrated how AI concepts can move from theory into something that users can actually build and experiment with.
 

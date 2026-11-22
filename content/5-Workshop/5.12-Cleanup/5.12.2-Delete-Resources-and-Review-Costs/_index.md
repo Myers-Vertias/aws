@@ -33,57 +33,57 @@ The `dms-dev` stack uses logical IDs such as `DmsUserPool`, `DmsUserPoolClient`,
 Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
 
 
-### Step 1: Start cleanup after saving the demo evidence
+### Step 1: Begin cleanup only after saving the demo
 
 Perform cleanup only after recording the demo and when the application no longer needs to run. Save source code, reports, and any required data locally. Deleting the stack stops the backend and may permanently remove application data.
 
-### Step 2: Select the correct account and stack in CloudFormation
+### Step 2: Select the correct stack in CloudFormation
 
 Open **CloudFormation → Stacks**, confirm the AWS account and `ap-southeast-1` Region, select `dms-dev`, and choose **Delete**. Check the stack name and deletion impact in the confirmation dialog before proceeding.
 
 ![CloudFormation confirmation dialog for deleting dms-dev](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-delete-stack-confirmation.png)
 
 
-### Step 3: Resolve any DELETE_FAILED resources before retrying
+### Step 3: Empty the document bucket if deletion fails
 
 If Events reports `DELETE_FAILED` because of `DocumentsBucket`, open the bucket listed in the stack's **Resources** tab. From the bucket page, choose **Empty** to remove all contents. For a versioned bucket, remove all object versions and delete markers too. Do not confuse the document bucket with the SAM artifact bucket.
 
 ![Permanent object deletion confirmation for the users prefix in the document bucket](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-empty-s3-confirmation.png)
 
 
-### Step 4: Wait for S3 to finish and verify no objects remain
+### Step 4: Retry deletion and check for retained resources
 
 Wait for S3 to finish and verify no objects remain. Return to CloudFormation and choose **Retry delete** for `dms-dev`. If the bucket is empty, do not select it for retention. Use **Force delete this entire stack** only to finish a stack in `DELETE_FAILED`; AWS may retain resources that still cannot be deleted, so inspect for leftovers afterwards.
 
-### Step 5: Wait for CloudFormation to refresh and confirm dms-dev no
+### Step 5: Confirm the application stack was deleted
 
 Wait for CloudFormation to refresh and confirm `dms-dev` no longer appears among active stacks. Check Events or deleted stacks if the final state needs confirmation.
 
 ![CloudFormation state after deleting the dms-dev stack](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-stack-list-after-delete.png)
 
 
-### Step 6: Open the AWS Amplify app to remove frontend hosting
+### Step 6: Open the Amplify app
 
 To remove the separately hosted frontend, open **AWS Amplify → All apps** and select the `serverless-document-management` app.
 
 ![AWS Amplify app list showing serverless-document-management](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-amplify-all-apps.png)
 
 
-### Step 7: Open App settings → General settings, verify the app
+### Step 7: Delete the Amplify app
 
 Open **App settings → General settings**, verify the app name, and choose **Delete app**. In the confirmation dialog, enter `delete` and confirm. This action cannot be undone.
 
 ![Amplify app General settings page with the Delete app control](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-amplify-general-settings.png)
 
 
-### Step 8: Wait for the success notice
+### Step 8: Confirm Amplify deletion completed
 
 Wait for the success notice. AWS may report that backend resources associated with branches have been queued for deletion; verify that the app no longer appears in the Amplify app list.
 
 ![Amplify success notice confirming app deletion and branch backend cleanup queued](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-amplify-deleted.png)
 
 
-### Step 9: Delete the workshop alarm in CloudWatch
+### Step 9: Delete the workshop CloudWatch alarm
 
 To delete the separately created alarm, open **CloudWatch → Alarms**, select `dms-dev-documents-errors`, then choose **Actions → Delete** and confirm.
 
@@ -92,7 +92,7 @@ To delete the separately created alarm, open **CloudWatch → Alarms**, select `
 ![CloudWatch notice after deleting the alarm](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-alarm-deleted.png)
 
 
-### Step 10: To delete the SNS topic created for alarm notifications
+### Step 10: Delete the workshop SNS topic
 
 To delete the SNS topic created for alarm notifications, open **Amazon SNS → Topics**, select `dms-dev-lambda-errors`, and choose **Delete**. In the confirmation dialog, enter `delete me` and confirm. The topic cannot be recovered, and its subscriptions are deleted with it.
 
@@ -101,7 +101,7 @@ To delete the SNS topic created for alarm notifications, open **Amazon SNS → T
 ![Amazon SNS notice after deleting the topic](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-sns-topic-deleted.png)
 
 
-### Step 11: Remove the application log groups created for this workshop
+### Step 11: Delete the application log groups
 
 Remove the application log groups created separately from the stack: open **CloudWatch → Logs → Log Management → Log groups**, find and select `/aws/apigateway/dms-dev-access`, `/aws/lambda/dms-dev-documents`, and `/aws/lambda/dms-dev-health`. Choose **Actions → Delete log group(s)**, review the selected names, and confirm. Do not select log groups unrelated to the application, such as `dc-common-lambda-auto-start` and `dc-common-lambda-auto-stop` in the example screenshots.
 
@@ -112,7 +112,7 @@ The screenshot illustrates the console selections; compare the log group names i
 ![CloudWatch after deleting the project log groups, with the two unselected dc-common log groups remaining](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-cloudwatch-log-groups-deleted-example.png)
 
 
-### Step 12: After confirming that the workshop's Lambda functions
+### Step 12: Delete the workshop IAM role
 
 After confirming that the workshop's Lambda functions have been deleted, open **IAM → Roles**, find and select the `dms-lambda-execution` role, then choose **Delete**. Verify the role name in the confirmation dialog before proceeding. IAM roles are account-level resources; do not delete service roles or other roles.
 
@@ -121,7 +121,7 @@ After confirming that the workshop's Lambda functions have been deleted, open **
 ![IAM notice after deleting the dms-lambda-execution role](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-iam-role-deleted-example.png)
 
 
-### Step 13: To remove the SAM artifact bucket, match the Physical ID
+### Step 13: Identify and delete the SAM artifact bucket
 
 To remove the SAM artifact bucket, match the Physical ID `aws-sam-cli-managed-default-samclisourcebucket-...` to the `SamCliSourceBucket` resource in the `aws-sam-cli-managed-default` stack. After emptying the bucket, open **Amazon S3 → Buckets**, select this exact bucket, choose **Delete**, enter its exact name, and confirm. The suffix varies by account, so always match the actual Physical ID.
 
@@ -130,7 +130,7 @@ To remove the SAM artifact bucket, match the Physical ID `aws-sam-cli-managed-de
 ![S3 console after deleting the SAM artifact bucket](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-sam-artifact-bucket-deleted-example.png)
 
 
-### Step 14: Select the stack in CloudFormation and delete it
+### Step 14: Delete the SAM artifact stack
 
 Return to **CloudFormation → Stacks**, select `aws-sam-cli-managed-default`, and choose **Delete stack**. Enter the exact stack name in the confirmation dialog and choose **Delete stack** again.
 
@@ -141,7 +141,7 @@ Wait for CloudFormation to finish and check **Events** or the stack status. When
 ![DELETE_COMPLETE status for the SAM stack after deletion](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-sam-stack-delete-complete-example.png)
 
 
-### Step 15: Delete the workshop budget in Billing and Cost Management
+### Step 15: Delete the workshop budget
 
 To delete the budget created for the workshop, open **Billing and Cost Management → Budgets**, select `My Monthly Cost Budget` with an amount of `$10.00`, then choose **Actions → Delete** and confirm. Do not select `My-200$-budget` in the example unless you have verified that it belongs to this workshop. A budget sends alerts; it does not cap spending.
 
@@ -149,7 +149,7 @@ To delete the budget created for the workshop, open **Billing and Cost Managemen
 
 ![Budgets list after deleting the workshop budget, with the unrelated My-200$-budget remaining](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.12-Cleanup/5.12.2-budget-deleted-example.png)
 
-### Step 16: Review S3 buckets, CloudFormation stacks, CloudWatch log
+### Step 16: Review AWS for remaining resources
 
 Review S3 buckets, CloudFormation stacks, CloudWatch log groups/alarms, SNS topics, Amplify apps, and Billing/Cost Explorer after cleanup. Cost data can be delayed; a Bills page for an open month is not a final invoice.
 

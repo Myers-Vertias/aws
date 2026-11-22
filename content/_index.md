@@ -13,9 +13,9 @@ This report documents my First Cloud AI Journey internship, the AWS services I s
 ### Student Information:
 &emsp; **Full Name:** Nim Van Hao
 
-&emsp; **Phone Number:** 0337828950 
+&emsp; **Contact Details:** Provided separately with the official submission.
 
-&emsp; **Email:** nimvanhao.myers@gmail.com
+
 
 &emsp; **University:** Ho Chi Minh City University of Industry and Trade
 

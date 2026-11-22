@@ -11,9 +11,9 @@ Báo cáo này ghi lại quá trình em tham gia First Cloud AI Journey, các d�
 ### Thông tin sinh viên:
 &emsp; **Họ và tên:** Nìm Văn Hạo
 
-&emsp; **Số điện thoại:** 0337828950
+&emsp; **Thông tin liên hệ:** Được cung cấp riêng trong hồ sơ nộp chính thức.
 
-&emsp; **Email:** nimvanhao.myers@gmail.com
+
 
 &emsp; **Trường:** Trường Đại học Công Thương TP. Hồ Chí Minh
 

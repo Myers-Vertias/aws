@@ -1,6 +1,6 @@
 ---
 title: "Các events đã tham gia"
-date: 2024-01-01
+date: 2026-11-22
 weight: 4
 chapter: false
 pre: " <b> 4. </b> "
@@ -8,10 +8,10 @@ pre: " <b> 4. </b> "
 
 
 
-Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là nhứng món quà và những khoảnh khắc rất tuyệt vời.
+Trong quá trình thực tập, em đã tham gia 2 events, với mỗi event là một trải nghiệm đáng nhớ với những kiến thức mới, hay và bổ ích, cùng với đó là những món quà và những khoảnh khắc rất tuyệt vời.
 
 ### [Event 1](4.1-Event1/)
-&emsp;**Tên sự kiện:** AWS Cloud & AI Day VietNam 2026 - Watch party
+&emsp;**Tên sự kiện:** AWS Cloud & AI Day Vietnam 2026 - Watch Party
 
 &emsp;**Thời gian:** 09:00 ngày 29/09/2026
 
