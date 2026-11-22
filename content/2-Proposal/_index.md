@@ -10,52 +10,55 @@ pre: " <b> 2. </b> "
 ## A Unified AWS Serverless Solution for Secure Document Storage and Management
 
 ### 1. Executive Summary
-The Serverless Document Management System (DMS) is a web platform that allows employees and members of an organization to upload, store, find, and download documents (PDF, DOCX, images, etc.) securely from anywhere. The whole system is built on AWS serverless services: AWS Amplify hosts the React/Next.js frontend, Amazon Cognito handles authentication, Amazon API Gateway and AWS Lambda implement the business logic, Amazon S3 stores the document files, and Amazon DynamoDB stores document metadata. Amazon CloudWatch provides monitoring and logging. The platform requires no servers to manage and is designed to run at a very low monthly cost.
+The Serverless Document Management System (DMS) is a web application for storing, finding, and managing documents. Its frontend is built with React/Vite, while AWS managed and serverless services provide authentication, APIs, business logic, metadata storage, and file storage. Implemented features include sign-in, uploads and downloads, document metadata updates, favorites, trash/restore, and document sharing. The architecture and test results in this report describe the previously verified deployment. The project's AWS resources were cleaned up on November 19, 2026, so there is no active production environment now.
 
 ### 2. Problem Statement
 ### What's the Problem?
 Documents are often scattered across personal computers, messaging apps, and email, which makes them hard to find and easy to lose. There is no single place to store them, no consistent control over who can view or change a file, and no clear record of who owns which document. Traditional solutions require running and maintaining a dedicated server, while commercial document platforms are costly and more complex than a small team needs.
 
 ### The Solution
-Amazon Cognito authenticates users and issues JWT tokens. Every request from the web app hosted on AWS Amplify goes through Amazon API Gateway, which verifies the token with a Cognito authorizer before invoking AWS Lambda. Lambda validates the request, manages document metadata in Amazon DynamoDB, and generates short-lived pre-signed URLs so the browser can upload and download files directly to and from Amazon S3. This keeps large files out of API Gateway and Lambda payloads, which improves performance and lowers cost. Lambda runs with a least-privilege IAM role, Amazon CloudWatch collects logs, metrics, and alarms from API Gateway and Lambda, and the GitHub integration lets AWS Amplify deploy the frontend automatically on every push. Key features include secure sign-in, document upload and download, metadata management (owner, tags, file name, type, size, timestamps), and access control.
+Amazon Cognito authenticates users and issues JWTs. The React/Vite frontend calls business APIs through an Amazon API Gateway HTTP API. A JWT authorizer validates tokens before API Gateway forwards document routes to Lambda. Lambda reads the authenticated Cognito `sub` claim and checks ownership or sharing permissions before processing each document. Metadata is stored in three separate DynamoDB tables for documents, shares, and favorites. For file operations, Lambda creates presigned URLs that expire after five minutes; the browser transfers file bytes directly to private S3 instead of sending them through API Gateway or Lambda. `GET /health` is a public health-check route, and `OPTIONS /{proxy+}` handles CORS preflight without JWT authorization. Both Lambda functions share an IAM execution role scoped to the runtime access required for logs, DynamoDB, and S3. CloudWatch collects Lambda logs. In the previous deployment, GitHub main was connected to Amplify for frontend build and hosting.
 
 ### Benefits and Return on Investment
 The solution gives users a single, secure place to manage documents, reduces the time spent searching for files, and provides a reusable serverless foundation for future extensions such as full-text search, document versioning, or AI-based document analysis. It also serves as a hands-on study resource for core AWS serverless services. Every service is pay-per-use and there is no hardware or licence to buy. Under the assumptions in Section 6, the AWS Pricing Calculator estimates a pre-discount cost of about $1.19 USD per month, or $14.24 USD for 12 months if usage remains constant. This is a planning estimate, not a bill; applicable free-tier allowances, discounts, taxes, and actual traffic can change the amount charged. With no upfront investment, the return comes from time saved, better document security, and automatic scaling if usage grows.
 
 ### 3. Solution Architecture
-The platform follows a serverless AWS architecture. Users access a web app hosted on AWS Amplify and sign in through Amazon Cognito. Requests pass through Amazon API Gateway to AWS Lambda, which manages metadata in Amazon DynamoDB and issues pre-signed URLs for files stored in Amazon S3. Amazon CloudWatch monitors the system, and GitHub with AWS Amplify provides automated frontend deployment. The architecture is detailed below:
+The diagram below describes the UniCloud DMS architecture that was verified during its deployment in the `ap-southeast-1` Region. AWS Amplify hosted the React/Vite frontend. Amazon Cognito handled sign-up/sign-in and issued JWTs; API Gateway HTTP API authenticated document routes and invoked Lambda. Lambda checked access, operated on three DynamoDB tables, and generated presigned URLs. The browser transferred file bytes directly to a private S3 bucket. Both Lambda functions shared an execution role, and CloudWatch received Lambda runtime logs.
 
 ![Serverless Document Management System Architecture](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/2-Proposal/platform_architecture.jpg)
 
-**Request Flow**
-1. The user opens the web app hosted on AWS Amplify over HTTPS.
-2. The user signs in or registers through Amazon Cognito and receives a JWT token.
-3. The web app sends REST API requests with the JWT to Amazon API Gateway.
-4. API Gateway verifies the token with the Cognito authorizer and invokes AWS Lambda.
-5. Lambda validates the request and creates, reads, updates, or deletes metadata in Amazon DynamoDB.
-6. For uploads and downloads, Lambda generates a pre-signed URL using its IAM role and returns it through API Gateway.
-7. The browser uploads or downloads the file directly to or from Amazon S3 using the pre-signed URL.
-8. API Gateway and Lambda send logs and metrics to Amazon CloudWatch.
+> **Status:** This diagram represents the previous deployment. The project's AWS resources were cleaned up on November 19, 2026; the old API endpoint and frontend hosting are no longer active.
+
+**Request flow**
+1. The user accesses the AWS Amplify frontend over HTTPS.
+2. The frontend sends the user to Cognito for sign-up or sign-in; Cognito returns tokens to the frontend.
+3. The frontend calls the API Gateway HTTP API with a JWT. The JWT authorizer validates tokens for document routes.
+4. `ANY /{proxy+}` sends authenticated business routes to the `dms-dev-documents` Lambda. Public `GET /health` invokes `dms-dev-health`; `OPTIONS /{proxy+}` handles unauthenticated CORS preflight.
+5. Lambda reads the authenticated Cognito `sub`, checks access, and reads/writes metadata in the `documents`, `shares`, and `favorites` DynamoDB tables.
+6. For uploads and downloads, Lambda creates a presigned PUT/GET URL with a five-minute expiry and returns it to the frontend.
+7. The browser uses that URL to transfer file bytes directly to or from the private S3 bucket. The bucket blocks public access and uses SSE-S3 encryption.
+8. Lambda sends runtime logs to Amazon CloudWatch. The previous frontend deployment path was Developer → GitHub main → AWS Amplify Hosting.
 
 ### AWS Services Used
-- **AWS Amplify**: Hosts the React/Next.js web frontend and deploys it automatically from GitHub.
-- **Amazon Cognito**: Handles user registration, sign-in, and JWT-based authentication.
-- **Amazon API Gateway**: Exposes the REST API and authorizes requests with a Cognito authorizer.
-- **AWS Lambda**: Runs the business logic: request validation, metadata management, and pre-signed URL generation.
-- **Amazon S3**: Stores document files (PDF, DOCX, images, etc.) in a private bucket.
-- **Amazon DynamoDB**: Stores document metadata such as owner, tags, file name, type, size, timestamps, and access control information.
-- **Amazon CloudWatch**: Collects logs, metrics, and alarms from API Gateway and Lambda.
-- **AWS IAM**: Provides least-privilege roles and policies for Lambda and other resources.
+- **AWS Amplify Hosting**: Hosted the React/Vite SPA and automatically built/deployed from GitHub main during the previous deployment.
+- **Amazon Cognito User Pool**: Managed user sign-up/sign-in and issued tokens to the frontend.
+- **Amazon API Gateway HTTP API**: Received API requests and used a JWT authorizer to protect document routes. `GET /health` and CORS preflight are unauthenticated exceptions.
+- **AWS Lambda**: `dms-dev-documents` handled document APIs, authorization, metadata, and presigned URLs; `dms-dev-health` handled health checks. Both functions shared a Lambda execution role.
+- **Amazon DynamoDB**: Three on-demand tables, `dms-dev-documents`, `dms-dev-shares`, and `dms-dev-favorites`, stored document metadata and sharing/favorite relationships.
+- **Amazon S3**: Stored document bytes in a private bucket with Block Public Access and SSE-S3 encryption. The browser transferred files directly with presigned URLs.
+- **Amazon CloudWatch Logs**: Collected Lambda runtime logs.
+- **AWS IAM**: Provided the shared execution role for both Lambda functions with runtime permissions scoped to the project.
+- **AWS SAM/CloudFormation**: Described and deployed the backend during the previous deployment.
 
 ### Component Design
-- **Web Frontend**: A React/Next.js app on AWS Amplify where users sign in, upload, browse, search, and download documents.
-- **Authentication**: Amazon Cognito user pool manages users and issues JWT tokens; user groups can be used for role-based access.
-- **API Layer**: Amazon API Gateway receives requests from the frontend and rejects any request without a valid token.
-- **Business Logic**: AWS Lambda functions handle document operations and generate pre-signed URLs.
-- **File Storage**: Amazon S3 stores document files; the browser transfers files directly using pre-signed URLs.
-- **Metadata Storage**: Amazon DynamoDB stores one item per document for fast lookup by owner, name, or tag.
-- **Monitoring**: Amazon CloudWatch provides centralized logs, metrics, and alarms.
-- **CI/CD**: A push to GitHub triggers AWS Amplify to build and deploy the frontend.
+- **Frontend**: React/Vite app that uses Cognito for authentication and API Gateway for document operations.
+- **Authentication and authorization**: API Gateway validates JWTs. Lambda uses the Cognito `sub` claim to identify the owner and checks recipient sharing rights in the backend. Document access does not rely on Cognito User Groups.
+- **API layer**: HTTP API uses `ANY /{proxy+}` for the documents Lambda, public `GET /health` for the health Lambda, and unauthenticated `OPTIONS` for CORS.
+- **Business logic**: Lambda handles upload/completion, lists/details, metadata updates, download URLs, favorites, trash/restore, sharing/revocation, and permanent deletion.
+- **Metadata**: Three separate on-demand DynamoDB tables hold documents, shares, and favorites.
+- **Files**: A private S3 bucket stores file contents. Five-minute presigned URLs let the browser transfer files without routing bytes through Lambda.
+- **Monitoring**: CloudWatch Logs receives Lambda runtime logs. The diagram does not claim API Gateway access logging or alarms.
+- **Frontend CI/CD**: GitHub main previously triggered Amplify build/deploy. This describes the cleaned-up environment's former workflow, not currently active hosting.
 
 ### 4. Technical Implementation
 **Implementation Phases**
@@ -65,19 +68,15 @@ The project has four phases:
 - Refine Architecture: Adjust the design for security, cost, and usability, for example the DynamoDB data model and IAM policies (Weeks 4-5).
 - Develop, Test, and Deploy: Build the backend and frontend, test all document operations, and deploy to production (Weeks 6-12).
 
-**Technical Requirements**
-- **Frontend**: React/Next.js app hosted on AWS Amplify, connected to a GitHub repository for automatic build and deploy.
-- **Authentication**: Cognito user pool with sign-up, sign-in, and a Cognito authorizer on API Gateway.
-- **API**: REST endpoints served by API Gateway and Lambda, for example:
-    - `POST /documents`: create metadata and return an upload URL.
-    - `GET /documents`: list or search the user's documents.
-    - `GET /documents/{id}`: get metadata and a download URL.
-    - `PUT /documents/{id}`: update metadata.
-    - `DELETE /documents/{id}`: delete the document and its metadata.
-- **Metadata Model**: A DynamoDB table with one item per document (document ID, owner, tags, file name, type, size, S3 key, created and updated timestamps, access control attributes).
-- **Storage**: A private S3 bucket with Block Public Access enabled, server-side encryption, and a CORS rule that allows the web app to use pre-signed URLs, with short URL expiry (for example 5-15 minutes).
-- **Security**: A least-privilege IAM role for Lambda limited to the required S3 and DynamoDB actions.
-- **Monitoring**: CloudWatch log groups for API Gateway and Lambda, plus alarms for errors and unusual usage.
+**Technical Requirements and Implemented Configuration**
+- **Frontend**: React/Vite SPA; AWS Amplify Hosting was used during the previous deployment and connected to GitHub main.
+- **Authentication**: Cognito User Pool issues JWTs; API Gateway HTTP API uses a JWT authorizer for document routes.
+- **API routing**: API Gateway configures `ANY /{proxy+}` for the documents Lambda, public `GET /health` for the health Lambda, and unauthenticated `OPTIONS /{proxy+}` for CORS. Document operations include `POST /documents/upload-url`, `POST /documents/{id}/complete`, `GET /documents`, `GET /documents/shared`, `GET /documents/{id}`, `PATCH /documents/{id}`, `GET /documents/{id}/download-url`, favorite/trash/restore/shares routes, and `DELETE /documents/{id}`.
+- **Authorization**: Lambda reads the authenticated user's Cognito `sub` claim and checks owner or recipient-sharing permissions. Ownership is not accepted from the request body.
+- **Data**: Three on-demand DynamoDB tables, `documents`, `shares`, and `favorites`; the project does not store all data in a single table.
+- **Storage**: Private S3 bucket with Block Public Access and SSE-S3 encryption; uploads are limited to 20 MiB and presigned URLs expire after five minutes.
+- **IAM**: Both Lambda functions use a shared execution role with permissions scoped to backend runtime needs.
+- **Monitoring**: Lambda runtime logs are sent to CloudWatch Logs. Describe API Gateway access logs or alarms only when backed by corresponding configuration and evidence.
 
 ### 5. Timeline & Milestones
 **Project Timeline**
@@ -121,7 +120,7 @@ The estimate is before discounts and does not determine the final bill. Free-tie
 
 #### Mitigation Strategies
 - Access: Cognito authentication, Cognito authorizer, private S3 bucket, least-privilege IAM, and short-lived pre-signed URLs.
-- Data Loss: Enable S3 versioning and restrict delete permissions.
+- Data loss: If object recovery is required, enable and test S3 Versioning before operation; the current template does not configure Versioning. Restrict delete permissions to reduce accidental deletion.
 - Cost: AWS Budgets alerts and CloudWatch alarms; keep resources on pay-per-use.
 - Misconfiguration: Test each integration step by step and review IAM and CORS settings before release.
 - Performance: Use pre-signed URLs to keep large files out of API Gateway and Lambda payload limits, and keep functions small.

@@ -10,52 +10,55 @@ pre: " <b> 2. </b> "
 ## Giải pháp AWS Serverless thống nhất để lưu trữ và quản lý tài liệu an toàn
 
 ### 1. Tóm tắt điều hành
-Hệ thống quản lý tài liệu Serverless (Serverless Document Management System - DMS) là một nền tảng web cho phép nhân viên và thành viên của tổ chức tải lên, lưu trữ, tìm kiếm và tải xuống tài liệu (PDF, DOCX, hình ảnh, v.v.) một cách an toàn từ bất kỳ đâu. Toàn bộ hệ thống được xây dựng trên các dịch vụ serverless của AWS: AWS Amplify host giao diện React/Next.js, Amazon Cognito xử lý xác thực, Amazon API Gateway và AWS Lambda thực hiện logic nghiệp vụ, Amazon S3 lưu file tài liệu, Amazon DynamoDB lưu metadata của tài liệu. Amazon CloudWatch đảm nhiệm giám sát và ghi log. Nền tảng không cần quản lý máy chủ và được thiết kế để vận hành với chi phí hằng tháng rất thấp.
+Hệ thống quản lý tài liệu Serverless (Serverless Document Management System - DMS) là ứng dụng web giúp người dùng lưu trữ, tìm kiếm và quản lý tài liệu. Frontend được xây dựng bằng React/Vite; các dịch vụ AWS đảm nhiệm xác thực, API, xử lý nghiệp vụ, lưu metadata và lưu nội dung tệp. Các chức năng đã triển khai gồm đăng nhập, tải lên/tải xuống, cập nhật thông tin tài liệu, yêu thích, thùng rác/khôi phục và chia sẻ tài liệu. Sơ đồ kiến trúc và các kết quả kiểm thử trong báo cáo mô tả lần triển khai trước; tài nguyên AWS đã được dọn dẹp ngày 19/11/2026 nên hệ thống hiện không có môi trường production đang hoạt động.
 
 ### 2. Vấn đề cần giải quyết
 ### Vấn đề là gì?
 Tài liệu thường nằm rải rác trên máy tính cá nhân, ứng dụng nhắn tin và email, khiến việc tìm kiếm khó khăn và dễ bị thất lạc. Không có một nơi lưu trữ tập trung, không có cơ chế kiểm soát nhất quán ai được xem hoặc chỉnh sửa tệp, và cũng không có bản ghi rõ ràng về chủ sở hữu của từng tài liệu. Các giải pháp truyền thống đòi hỏi phải vận hành và bảo trì một máy chủ riêng, trong khi các nền tảng quản lý tài liệu thương mại thì tốn kém và phức tạp hơn mức một nhóm nhỏ cần.
 
 ### Giải pháp
-Amazon Cognito xác thực người dùng và cấp JWT token. Mọi request từ web app được host trên AWS Amplify đều đi qua Amazon API Gateway, nơi token được kiểm tra bằng Cognito authorizer trước khi gọi AWS Lambda. Lambda kiểm tra request, quản lý metadata tài liệu trong Amazon DynamoDB và tạo pre-signed URL có thời hạn ngắn để trình duyệt tải file lên hoặc tải xuống trực tiếp từ Amazon S3. Cách này giúp các file lớn không phải đi qua giới hạn payload của API Gateway và Lambda, nhờ đó tăng hiệu năng và giảm chi phí. Lambda chạy với IAM role theo nguyên tắc đặc quyền tối thiểu (least privilege), Amazon CloudWatch thu thập log, metrics và alarms từ API Gateway và Lambda, còn tích hợp GitHub cho phép AWS Amplify tự động deploy frontend mỗi khi có push mới. Các tính năng chính gồm đăng nhập an toàn, tải lên và tải xuống tài liệu, quản lý metadata (chủ sở hữu, tag, tên file, loại file, dung lượng, thời gian tạo và cập nhật) và kiểm soát truy cập.
+Amazon Cognito xác thực người dùng và cấp JWT. Frontend React/Vite gọi các API nghiệp vụ qua Amazon API Gateway HTTP API; JWT authorizer xác thực token trước khi API Gateway chuyển route tài liệu đến Lambda. Lambda lấy `sub` từ claims đã xác thực và kiểm tra quyền sở hữu hoặc quyền chia sẻ trước khi xử lý từng tài liệu. Metadata được lưu trong ba bảng DynamoDB riêng cho documents, shares và favorites. Với thao tác tệp, Lambda tạo presigned URL có thời hạn 5 phút; trình duyệt truyền nội dung trực tiếp với S3 private, không chuyển bytes tệp qua API Gateway hoặc Lambda. Route `GET /health` được công khai để kiểm tra tình trạng dịch vụ, còn `OPTIONS /{proxy+}` không yêu cầu JWT để xử lý CORS preflight. Lambda dùng IAM execution role dùng chung, giới hạn theo quyền cần cho log, DynamoDB và S3. CloudWatch thu thập Lambda logs. Trong lần triển khai trước, GitHub main được kết nối với Amplify để tự động build và host frontend.
 
 ### Lợi ích và hiệu quả đầu tư
 Giải pháp mang lại cho người dùng một nơi tập trung và an toàn để quản lý tài liệu, giảm thời gian tìm kiếm file, đồng thời tạo nền tảng serverless có thể tái sử dụng để mở rộng sau này như tìm kiếm toàn văn (full-text search), quản lý phiên bản tài liệu hoặc phân tích tài liệu bằng AI. Dự án cũng là tài liệu học tập thực tế về các dịch vụ serverless cốt lõi của AWS. Các dịch vụ tính phí theo mức sử dụng và không cần mua phần cứng hay giấy phép. Với các giả định ở Mục 6, AWS Pricing Calculator ước tính chi phí trước chiết khấu khoảng 1,19 USD mỗi tháng, tương đương 14,24 USD cho 12 tháng nếu mức sử dụng không đổi. Đây là con số phục vụ lập kế hoạch, không phải hóa đơn; hạn mức miễn phí áp dụng được, chiết khấu, thuế và lưu lượng thực tế có thể làm thay đổi số tiền bị tính. Không cần đầu tư ban đầu, lợi ích đến từ việc tiết kiệm thời gian, tăng tính bảo mật cho tài liệu và khả năng tự động mở rộng khi nhu cầu sử dụng tăng.
 
 ### 3. Kiến trúc giải pháp
-Nền tảng theo kiến trúc serverless trên AWS. Người dùng truy cập web app được host trên AWS Amplify và đăng nhập qua Amazon Cognito. Các request đi qua Amazon API Gateway đến AWS Lambda, nơi quản lý metadata trong Amazon DynamoDB và cấp pre-signed URL cho các file lưu trong Amazon S3. Amazon CloudWatch giám sát hệ thống, còn GitHub kết hợp AWS Amplify giúp deploy frontend tự động. Kiến trúc chi tiết như sau:
+Sơ đồ dưới đây mô tả kiến trúc UniCloud DMS trong lần triển khai đã kiểm chứng tại region `ap-southeast-1`. Frontend React/Vite được host trên AWS Amplify. Amazon Cognito xử lý đăng ký/đăng nhập và cấp JWT; API Gateway HTTP API xác thực JWT cho route tài liệu rồi gọi Lambda. Lambda kiểm tra quyền, thao tác metadata trên ba bảng DynamoDB và tạo presigned URL. Trình duyệt truyền bytes tệp trực tiếp tới bucket S3 riêng tư. Lambda execution role được dùng chung bởi hai hàm Lambda; CloudWatch nhận log thực thi Lambda.
 
 ![Kiến trúc hệ thống quản lý tài liệu Serverless](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/2-Proposal/platform_architecture.jpg)
 
-**Luồng xử lý request**
-1. Người dùng mở web app được host trên AWS Amplify qua HTTPS.
-2. Người dùng đăng nhập hoặc đăng ký qua Amazon Cognito và nhận JWT token.
-3. Web app gửi REST API request kèm JWT đến Amazon API Gateway.
-4. API Gateway kiểm tra token bằng Cognito authorizer rồi gọi AWS Lambda.
-5. Lambda kiểm tra request và tạo, đọc, cập nhật hoặc xóa metadata trong Amazon DynamoDB.
-6. Với thao tác tải lên và tải xuống, Lambda tạo pre-signed URL bằng IAM role của nó và trả về qua API Gateway.
-7. Trình duyệt tải file lên hoặc tải xuống trực tiếp với Amazon S3 bằng pre-signed URL đó.
-8. API Gateway và Lambda gửi log và metrics về Amazon CloudWatch.
+> **Trạng thái:** Sơ đồ thể hiện kiến trúc của lần triển khai trước. Các tài nguyên AWS của dự án đã được cleanup ngày 19/11/2026; endpoint API và frontend hosting cũ hiện không hoạt động.
+
+**Luồng xử lý**
+1. Người dùng truy cập frontend trên AWS Amplify qua HTTPS.
+2. Frontend gửi người dùng đến Cognito để đăng ký hoặc đăng nhập; Cognito trả token cho frontend.
+3. Frontend gọi API Gateway HTTP API kèm JWT. JWT authorizer xác thực token cho route tài liệu.
+4. `ANY /{proxy+}` chuyển các route nghiệp vụ đã xác thực đến Lambda `dms-dev-documents`. `GET /health` là route công khai đến Lambda `dms-dev-health`; `OPTIONS /{proxy+}` phục vụ CORS preflight không cần xác thực.
+5. Lambda lấy Cognito `sub` đã xác thực, kiểm tra quyền truy cập và đọc/ghi metadata trong các bảng DynamoDB `documents`, `shares` và `favorites`.
+6. Với upload/download, Lambda tạo presigned PUT/GET URL có thời hạn 5 phút và trả URL về frontend.
+7. Trình duyệt dùng URL đó để truyền bytes trực tiếp với S3 bucket private; bucket bật Block Public Access và mã hóa SSE-S3.
+8. Lambda gửi runtime logs đến Amazon CloudWatch. Luồng deploy frontend trong lần triển khai trước là Developer → GitHub main → AWS Amplify Hosting.
 
 ### Các dịch vụ AWS sử dụng
-- **AWS Amplify**: Host giao diện web React/Next.js và tự động deploy từ GitHub.
-- **Amazon Cognito**: Xử lý đăng ký, đăng nhập và xác thực dựa trên JWT.
-- **Amazon API Gateway**: Cung cấp REST API và phân quyền request bằng Cognito authorizer.
-- **AWS Lambda**: Chạy logic nghiệp vụ gồm kiểm tra request, quản lý metadata và tạo pre-signed URL.
-- **Amazon S3**: Lưu các file tài liệu (PDF, DOCX, hình ảnh, v.v.) trong một bucket riêng tư.
-- **Amazon DynamoDB**: Lưu metadata tài liệu như chủ sở hữu, tag, tên file, loại file, dung lượng, thời gian và thông tin kiểm soát truy cập.
-- **Amazon CloudWatch**: Thu thập log, metrics và alarms từ API Gateway và Lambda.
-- **AWS IAM**: Cung cấp role và policy theo nguyên tắc đặc quyền tối thiểu cho Lambda và các tài nguyên khác.
+- **AWS Amplify Hosting**: Host frontend React/Vite dạng SPA và từng tự động build/deploy từ nhánh GitHub main trong lần triển khai trước.
+- **Amazon Cognito User Pool**: Đăng ký, đăng nhập và cấp token cho frontend.
+- **Amazon API Gateway HTTP API**: Nhận API request; JWT authorizer bảo vệ route tài liệu. `GET /health` và CORS preflight là các ngoại lệ không cần JWT.
+- **AWS Lambda**: `dms-dev-documents` xử lý API tài liệu, phân quyền, metadata và presigned URL; `dms-dev-health` phục vụ health check. Hai hàm dùng chung Lambda execution role.
+- **Amazon DynamoDB**: Ba bảng on-demand `dms-dev-documents`, `dms-dev-shares` và `dms-dev-favorites` lưu metadata và quan hệ chia sẻ/yêu thích.
+- **Amazon S3**: Lưu bytes của tài liệu trong bucket private, bật Block Public Access và mã hóa SSE-S3. Trình duyệt truyền file trực tiếp bằng presigned URL.
+- **Amazon CloudWatch Logs**: Thu thập log thực thi từ Lambda.
+- **AWS IAM**: Cấp execution role dùng chung cho hai Lambda với quyền runtime cần thiết theo phạm vi dự án.
+- **AWS SAM/CloudFormation**: Mô tả và triển khai backend trong lần triển khai trước.
 
 ### Thiết kế thành phần
-- **Web Frontend**: Ứng dụng React/Next.js trên AWS Amplify, nơi người dùng đăng nhập, tải lên, duyệt, tìm kiếm và tải xuống tài liệu.
-- **Xác thực**: Cognito user pool quản lý người dùng và cấp JWT token; có thể dùng user group để phân quyền theo vai trò.
-- **Lớp API**: Amazon API Gateway nhận request từ frontend và từ chối mọi request không có token hợp lệ.
-- **Logic nghiệp vụ**: Các hàm AWS Lambda xử lý thao tác với tài liệu và tạo pre-signed URL.
-- **Lưu trữ file**: Amazon S3 lưu các file tài liệu; trình duyệt truyền file trực tiếp bằng pre-signed URL.
-- **Lưu trữ metadata**: Amazon DynamoDB lưu mỗi tài liệu thành một item để tra cứu nhanh theo chủ sở hữu, tên hoặc tag.
-- **Giám sát**: Amazon CloudWatch cung cấp log, metrics và alarms tập trung.
-- **CI/CD**: Mỗi lần push lên GitHub sẽ kích hoạt AWS Amplify build và deploy frontend.
+- **Frontend**: Ứng dụng React/Vite; gọi Cognito để xác thực và gọi API Gateway cho nghiệp vụ tài liệu.
+- **Xác thực và phân quyền**: API Gateway xác thực JWT. Lambda dùng Cognito `sub` để xác định chủ sở hữu; quyền chia sẻ được kiểm tra ở backend. Dự án không dựa vào Cognito User Groups để phân quyền tài liệu.
+- **Lớp API**: HTTP API dùng route proxy `ANY /{proxy+}` cho Lambda documents, route công khai `GET /health` cho Lambda health và route `OPTIONS` cho CORS.
+- **Nghiệp vụ**: Lambda xử lý upload/complete, danh sách/chi tiết, cập nhật metadata, download URL, favorite, trash/restore, chia sẻ/thu hồi và xóa vĩnh viễn.
+- **Metadata**: Ba bảng DynamoDB tách riêng documents, shares và favorites; cấu hình billing on-demand.
+- **Tệp**: S3 bucket riêng tư lưu nội dung; presigned URL 5 phút giúp trình duyệt truyền file mà không đi qua Lambda.
+- **Giám sát**: CloudWatch Logs nhận runtime logs của Lambda. Sơ đồ không khẳng định API Gateway access logs hoặc alarm.
+- **CI/CD frontend**: GitHub main từng kích hoạt Amplify build/deploy; đây là luồng của môi trường đã cleanup, không phải hosting hiện đang hoạt động.
 
 ### 4. Triển khai kỹ thuật
 **Các giai đoạn triển khai**
@@ -65,19 +68,15 @@ Dự án gồm bốn giai đoạn:
 - Tinh chỉnh kiến trúc: Điều chỉnh thiết kế về bảo mật, chi phí và tính tiện dụng, ví dụ mô hình dữ liệu DynamoDB và IAM policy (Tuần 4-5).
 - Phát triển, kiểm thử và triển khai: Xây dựng backend và frontend, kiểm thử tất cả thao tác với tài liệu và deploy lên môi trường production (Tuần 6-12).
 
-**Yêu cầu kỹ thuật**
-- **Frontend**: Ứng dụng React/Next.js host trên AWS Amplify, kết nối với repository GitHub để tự động build và deploy.
-- **Xác thực**: Cognito user pool có đăng ký, đăng nhập và Cognito authorizer trên API Gateway.
-- **API**: Các REST endpoint do API Gateway và Lambda phục vụ, ví dụ:
-    - `POST /documents`: tạo metadata và trả về URL để upload.
-    - `GET /documents`: liệt kê hoặc tìm kiếm tài liệu của người dùng.
-    - `GET /documents/{id}`: lấy metadata và URL để download.
-    - `PUT /documents/{id}`: cập nhật metadata.
-    - `DELETE /documents/{id}`: xóa tài liệu và metadata của nó.
-- **Mô hình metadata**: Một bảng DynamoDB với mỗi tài liệu là một item (document ID, chủ sở hữu, tag, tên file, loại file, dung lượng, S3 key, thời gian tạo và cập nhật, thuộc tính kiểm soát truy cập).
-- **Lưu trữ**: S3 bucket riêng tư bật Block Public Access, mã hóa phía máy chủ và có CORS rule cho phép web app dùng pre-signed URL, với thời hạn URL ngắn (ví dụ 5-15 phút).
-- **Bảo mật**: IAM role cho Lambda theo nguyên tắc đặc quyền tối thiểu, chỉ giới hạn các hành động S3 và DynamoDB cần thiết.
-- **Giám sát**: CloudWatch log group cho API Gateway và Lambda, cùng các alarm cho lỗi và mức sử dụng bất thường.
+**Yêu cầu kỹ thuật và cấu hình đã hiện thực hóa**
+- **Frontend**: React/Vite SPA; AWS Amplify Hosting được dùng trong lần triển khai trước và kết nối GitHub main.
+- **Xác thực**: Cognito User Pool cấp JWT; API Gateway HTTP API dùng JWT authorizer cho route tài liệu.
+- **API routing**: API Gateway cấu hình `ANY /{proxy+}` cho Lambda documents, `GET /health` công khai cho Lambda health và `OPTIONS /{proxy+}` không xác thực cho CORS. Các thao tác tài liệu gồm `POST /documents/upload-url`, `POST /documents/{id}/complete`, `GET /documents`, `GET /documents/shared`, `GET /documents/{id}`, `PATCH /documents/{id}`, `GET /documents/{id}/download-url`, các route favorite/trash/restore/shares và `DELETE /documents/{id}`.
+- **Phân quyền**: Lambda lấy người dùng từ Cognito `sub` trong claims đã xác thực; backend kiểm tra quyền owner hoặc người nhận chia sẻ. Không nhận quyền sở hữu từ request body.
+- **Dữ liệu**: Ba bảng DynamoDB on-demand `documents`, `shares` và `favorites`; không gộp toàn bộ dữ liệu vào một bảng.
+- **Lưu trữ**: S3 private, Block Public Access, mã hóa SSE-S3; upload giới hạn tối đa 20 MiB và dùng presigned URL thời hạn 5 phút.
+- **IAM**: Execution role dùng chung cho hai Lambda, giới hạn quyền theo chức năng backend.
+- **Giám sát**: Lambda runtime logs được gửi tới CloudWatch Logs. Chỉ mô tả API Gateway access logging hoặc alarms khi có cấu hình và minh chứng tương ứng.
 
 ### 5. Lộ trình và các mốc quan trọng
 **Lộ trình dự án**
@@ -121,7 +120,7 @@ Dự án gồm bốn giai đoạn:
 
 #### Chiến lược giảm thiểu
 - Truy cập: Xác thực bằng Cognito, Cognito authorizer, S3 bucket riêng tư, IAM đặc quyền tối thiểu và pre-signed URL có thời hạn ngắn.
-- Mất dữ liệu: Bật S3 versioning và hạn chế quyền xóa.
+- Mất dữ liệu: Nếu cần khôi phục object, hãy bật và kiểm thử S3 Versioning trước khi vận hành; template hiện tại chưa cấu hình Versioning. Hạn chế quyền xóa để giảm thao tác nhầm.
 - Chi phí: Cảnh báo AWS Budgets và alarm CloudWatch; giữ tài nguyên ở mô hình tính phí theo mức sử dụng.
 - Cấu hình sai: Kiểm thử từng bước tích hợp và rà soát lại cài đặt IAM và CORS trước khi phát hành.
 - Hiệu năng: Dùng pre-signed URL để file lớn không đi qua giới hạn payload của API Gateway và Lambda, đồng thời giữ các hàm nhỏ gọn.
