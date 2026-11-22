@@ -16,10 +16,24 @@ Ghi nhận kết quả thực tế cho luồng đăng nhập, metadata, upload, 
 
 ## Các bước thực hiện
 
-1. Mở frontend đã cấu hình từ mục 5.8.1, đăng nhập bằng tài khoản Cognito lab và vào Kho tài liệu.
-2. Chọn file mẫu được hỗ trợ, dưới 20 MiB, rồi upload. Chờ trạng thái `Active`; file bytes được gửi thẳng lên bucket S3 private, metadata được ghi qua API vào DynamoDB.
-3. Mở trang chi tiết, cập nhật danh mục/mô tả/thẻ hợp lệ rồi lưu. Trở lại danh sách và mở lại chi tiết để xác nhận dữ liệu đã lưu; dùng Download để lấy file qua presigned URL.
-4. Để xem giới hạn upload, chọn đuôi file không hỗ trợ và file vượt 20 MiB. Giao diện từ chối file trước khi hoàn tất upload; API cũng từ chối metadata request vượt giới hạn trước khi cấp presigned URL.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Đăng nhập frontend bằng tài khoản thử nghiệm
+
+Mở frontend đã cấu hình từ mục 5.8.1, đăng nhập bằng tài khoản Cognito lab và vào Kho tài liệu.
+
+### Bước 2: Chọn file mẫu được hỗ trợ, dưới 20 MiB, rồi upload
+
+Chọn file mẫu được hỗ trợ, dưới 20 MiB, rồi upload. Chờ trạng thái `Active`; file bytes được gửi thẳng lên bucket S3 private, metadata được ghi qua API vào DynamoDB.
+
+### Bước 3: Mở trang chi tiết, cập nhật danh mục/mô tả/thẻ hợp lệ rồi
+
+Mở trang chi tiết, cập nhật danh mục/mô tả/thẻ hợp lệ rồi lưu. Trở lại danh sách và mở lại chi tiết để xác nhận dữ liệu đã lưu; dùng Download để lấy file qua presigned URL.
+
+### Bước 4: Kiểm tra ứng dụng từ chối định dạng file không hỗ trợ
+
+Để xem giới hạn upload, chọn đuôi file không hỗ trợ và file vượt 20 MiB. Giao diện từ chối file trước khi hoàn tất upload; API cũng từ chối metadata request vượt giới hạn trước khi cấp presigned URL.
 
 ## Vị trí ảnh chụp màn hình
 

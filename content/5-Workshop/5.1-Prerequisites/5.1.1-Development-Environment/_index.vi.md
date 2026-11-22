@@ -28,94 +28,144 @@ Trang này chỉ chuẩn bị và chạy thử trên máy. Chưa cần tạo AWS
 
 ## Hướng dẫn thực hiện
 
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
 ### A. Lấy mã nguồn và chạy frontend
 
-1. Cài Git, Node.js/npm, AWS CLI v2, AWS SAM CLI và Docker Desktop. Docker Desktop cần chạy khi dùng SAM local.
-2. Chạy các lệnh sau để tải source và chuyển vào thư mục dự án:
 
-   ```powershell
-   git clone https://github.com/Myers-Vertias/serverless-document-management.git
-   Set-Location serverless-document-management
-   ```
+#### Bước 1: Cài Git, Node.js/npm, AWS CLI v2, AWS SAM CLI và Docker
 
-3. Xác nhận thư mục hiện tại có `package.json`, `package-lock.json` và `.env.example`; sau đó kiểm tra phiên bản công cụ:
+Cài Git, Node.js/npm, AWS CLI v2, AWS SAM CLI và Docker Desktop. Docker Desktop cần chạy khi dùng SAM local.
 
-   ```powershell
-   node --version
-   npm --version
-   git --version
-   aws --version
-   sam --version
-   docker --version
-   ```
+#### Bước 2: Tải mã nguồn và mở thư mục dự án
 
-4. Cài đúng các package đã khóa trong `package-lock.json`:
+Chạy các lệnh sau để tải source và chuyển vào thư mục dự án:
 
-   ```powershell
-   npm ci
-   ```
+```powershell
+git clone https://github.com/Myers-Vertias/serverless-document-management.git
+Set-Location serverless-document-management
+```
 
-5. Chạy kiểm tra lint và tạo production build:
 
-   ```powershell
-   npm run lint
-   npm run build
-   ```
+#### Bước 3: Xác nhận thư mục hiện tại có package.json
 
-   Ghi nhận cảnh báo lint hiện có; không nhầm cảnh báo với lỗi build.
+Xác nhận thư mục hiện tại có `package.json`, `package-lock.json` và `.env.example`; sau đó kiểm tra phiên bản công cụ:
 
-6. Tạo file cấu hình local từ mẫu:
+```powershell
+node --version
+npm --version
+git --version
+aws --version
+sam --version
+docker --version
+```
 
-   ```powershell
-   Copy-Item .env.example .env.local
-   ```
 
-   Giữ các giá trị `replace-with-...` cho tới khi đã tạo các dịch vụ AWS. Điền Region, Cognito User Pool ID, App Client ID, API URL và tên S3 bucket theo outputs ở các mục triển khai sau. Không commit `.env.local`.
+#### Bước 4: Cài đúng các package đã khóa trong package-lock.json
 
-7. Khởi động Vite:
+Cài đúng các package đã khóa trong `package-lock.json`:
 
-   ```powershell
-   npm run dev
-   ```
+```powershell
+npm ci
+```
 
-8. Mở địa chỉ local được Vite in ra, thường là `http://localhost:5173`. Xác nhận trang đăng nhập hiển thị. Đăng nhập Cognito chỉ hoạt động sau khi cập nhật các giá trị thật vào `.env.local`.
+
+#### Bước 5: Chạy kiểm tra lint và tạo production build
+
+Chạy kiểm tra lint và tạo production build:
+
+```powershell
+npm run lint
+npm run build
+```
+
+Ghi nhận cảnh báo lint hiện có; không nhầm cảnh báo với lỗi build.
+
+
+#### Bước 6: Tạo file cấu hình local từ mẫu
+
+Tạo file cấu hình local từ mẫu:
+
+```powershell
+Copy-Item .env.example .env.local
+```
+
+Giữ các giá trị `replace-with-...` cho tới khi đã tạo các dịch vụ AWS. Điền Region, Cognito User Pool ID, App Client ID, API URL và tên S3 bucket theo outputs ở các mục triển khai sau. Không commit `.env.local`.
+
+
+#### Bước 7: Khởi động Vite
+
+Khởi động Vite:
+
+```powershell
+npm run dev
+```
+
+
+#### Bước 8: Mở ứng dụng trên địa chỉ local của Vite
+
+Mở địa chỉ local được Vite in ra, thường là `http://localhost:5173`. Xác nhận trang đăng nhập hiển thị. Đăng nhập Cognito chỉ hoạt động sau khi cập nhật các giá trị thật vào `.env.local`.
 
 ### B. Kiểm tra backend local
 
-1. Mở terminal thứ hai, chuyển vào thư mục `backend` của repository:
 
-   ```powershell
-   Set-Location backend
-   ```
+#### Bước 1: Mở terminal thứ hai tại thư mục backend
 
-2. Kiểm tra SAM template và build Lambda:
+Mở terminal thứ hai, chuyển vào thư mục `backend` của repository:
 
-   ```powershell
-   sam validate --lint
-   sam build
-   ```
+```powershell
+Set-Location backend
+```
 
-3. Nếu Docker Desktop đang chạy, khởi động API local:
 
-   ```powershell
-   sam local start-api --port 3000
-   ```
+#### Bước 2: Kiểm tra SAM template và build Lambda
 
-4. Mở `http://127.0.0.1:3000/health`. Kết quả mong đợi:
+Kiểm tra SAM template và build Lambda:
 
-   ```json
-   {"status":"ok","service":"dms-api"}
-   ```
+```powershell
+sam validate --lint
+sam build
+```
 
-5. Nhấn `Ctrl+C` để dừng các tiến trình local khi hoàn tất.
+
+#### Bước 3: Nếu Docker Desktop đang chạy, khởi động API local
+
+Nếu Docker Desktop đang chạy, khởi động API local:
+
+```powershell
+sam local start-api --port 3000
+```
+
+
+#### Bước 4: Mở http://127.0.0.1:3000/health
+
+Mở `http://127.0.0.1:3000/health`. Kết quả mong đợi:
+
+```json
+{"status":"ok","service":"dms-api"}
+```
+
+
+#### Bước 5: Nhấn Ctrl+C để dừng các tiến trình local khi hoàn tất
+
+Nhấn `Ctrl+C` để dừng các tiến trình local khi hoàn tất.
 
 Health endpoint trên chỉ xác nhận API local khởi động được. Nó không xác nhận Cognito, DynamoDB, S3 hoặc API đã deploy hoạt động; các phần đó được cấu hình riêng ở các mục tiếp theo.
 
 ### C. Chuẩn bị cho các bước AWS
 
-1. Sang mục 5.1.2 để chọn AWS account/Region và cấu hình identity dành cho lab. Dùng tài khoản development có quyền phù hợp, không dùng root.
-2. Sau khi cấu hình profile riêng, xác nhận danh tính bằng `aws sts get-caller-identity --profile <lab-profile>`. Thay `<lab-profile>` bằng tên profile của người học; không dùng profile của người hướng dẫn.
-3. Tạo branch Git hoặc commit lưu trạng thái trước khi bắt đầu tích hợp backend.
+
+#### Bước 1: Chọn AWS account và Region, rồi cấu hình CLI profile
+
+Sang mục 5.1.2 để chọn AWS account/Region và cấu hình identity dành cho lab. Dùng tài khoản development có quyền phù hợp, không dùng root.
+
+#### Bước 2: Xác nhận danh tính của CLI profile
+
+Sau khi cấu hình profile riêng, xác nhận danh tính bằng `aws sts get-caller-identity --profile <lab-profile>`. Thay `<lab-profile>` bằng tên profile của người học; không dùng profile của người hướng dẫn.
+
+#### Bước 3: Lưu trạng thái mã nguồn trước khi bắt đầu
+
+Tạo branch Git hoặc commit lưu trạng thái trước khi bắt đầu tích hợp backend.
 
 ## Baseline ghi nhận ngày 2026-11-10
 

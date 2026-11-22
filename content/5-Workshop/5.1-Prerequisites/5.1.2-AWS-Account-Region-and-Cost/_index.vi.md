@@ -16,14 +16,40 @@ Chọn tài khoản development và thống nhất Region cùng quy ước đặ
 
 ## Các bước thực hiện
 
-1. Đăng nhập đúng tài khoản AWS. Không dùng root access key cho phát triển hằng ngày.
-2. Chọn một Region cho Cognito, DynamoDB, Lambda, API Gateway và S3 rồi ghi vào ghi chú lab.
-3. Kiểm tra giá và billing AWS hiện tại. Cân nhắc tạo cảnh báo ngân sách trước khi tạo resource; cảnh báo không tự động dừng chi tiêu.
-4. Dùng tiền tố development như `unicloud-dms-dev`. Thêm hậu tố duy nhất cho tên toàn cầu như S3 bucket.
-5. Dùng IAM identity theo đặc quyền tối thiểu. Không sửa AccessDenied bằng cách gắn quyền quản trị quá rộng.
-6. Ưu tiên dùng IAM Identity Center và profile AWS CLI riêng cho lab. Cấp quyền theo yêu cầu triển khai, trong đó quyền `iam:PassRole` chỉ áp dụng cho Lambda execution role của project. Nếu lớp học cấp sẵn IAM user, chỉ dùng danh tính đó trong phạm vi được cho phép; không tạo access key dài hạn tùy tiện.
-7. Trước khi triển khai, xác nhận profile và tài khoản đích bằng `aws sts get-caller-identity --profile <lab-profile>`. Dùng cùng Region, chẳng hạn `ap-southeast-1`, cho Cognito, API Gateway, Lambda, DynamoDB và S3.
-8. Tạo AWS Budget theo giới hạn phù hợp với lab, thêm cảnh báo actual/forecast và kiểm tra người nhận email. Cảnh báo không giới hạn chi tiêu; xem lại Billing định kỳ.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Đăng nhập đúng tài khoản AWS
+
+Đăng nhập đúng tài khoản AWS. Không dùng root access key cho phát triển hằng ngày.
+
+### Bước 2: Chọn một Region cho Cognito, DynamoDB, Lambda, API
+
+Chọn một Region cho Cognito, DynamoDB, Lambda, API Gateway và S3 rồi ghi vào ghi chú lab.
+
+### Bước 3: Kiểm tra giá và billing AWS hiện tại
+
+Kiểm tra giá và billing AWS hiện tại. Cân nhắc tạo cảnh báo ngân sách trước khi tạo resource; cảnh báo không tự động dừng chi tiêu.
+
+### Bước 4: Dùng tiền tố development như unicloud-dms-dev
+
+Dùng tiền tố development như `unicloud-dms-dev`. Thêm hậu tố duy nhất cho tên toàn cầu như S3 bucket.
+
+### Bước 5: Dùng IAM identity theo đặc quyền tối thiểu
+
+Dùng IAM identity theo đặc quyền tối thiểu. Không sửa AccessDenied bằng cách gắn quyền quản trị quá rộng.
+
+### Bước 6: Ưu tiên dùng IAM Identity Center và profile AWS CLI riêng
+
+Ưu tiên dùng IAM Identity Center và profile AWS CLI riêng cho lab. Cấp quyền theo yêu cầu triển khai, trong đó quyền `iam:PassRole` chỉ áp dụng cho Lambda execution role của project. Nếu lớp học cấp sẵn IAM user, chỉ dùng danh tính đó trong phạm vi được cho phép; không tạo access key dài hạn tùy tiện.
+
+### Bước 7: Trước khi triển khai, xác nhận profile và tài khoản đích
+
+Trước khi triển khai, xác nhận profile và tài khoản đích bằng `aws sts get-caller-identity --profile <lab-profile>`. Dùng cùng Region, chẳng hạn `ap-southeast-1`, cho Cognito, API Gateway, Lambda, DynamoDB và S3.
+
+### Bước 8: Tạo AWS Budget theo giới hạn phù hợp với lab, thêm cảnh
+
+Tạo AWS Budget theo giới hạn phù hợp với lab, thêm cảnh báo actual/forecast và kiểm tra người nhận email. Cảnh báo không giới hạn chi tiêu; xem lại Billing định kỳ.
 
 ## Cấu hình môi trường project đã triển khai
 

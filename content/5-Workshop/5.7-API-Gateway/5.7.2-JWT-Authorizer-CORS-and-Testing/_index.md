@@ -16,10 +16,24 @@ Require valid Cognito tokens and check CORS without confusing it with authorizat
 
 ## Implementation steps
 
-1. Review `Auth` in `backend/template.yaml`: the JWT issuer is built from the Region/User Pool, and the audience is the Cognito web App Client ID. SAM applies the default authorizer to the proxy route.
-2. In API Gateway → API → Authorization/Routes, confirm the document proxy requires Cognito JWT. Only `GET /health` and `OPTIONS /{proxy+}` are unauthenticated by design.
-3. Keep `AllowedFrontendOrigins` limited to local Vite and the actual Amplify domain; the template allows Authorization/Content-Type and the methods used by the app.
-4. Change the template and redeploy with SAM; review routes/auth/CORS after the stack update. Do not enable CORS credentials when the frontend does not use cookies.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Review Auth in backend/template.yaml: the JWT issuer is
+
+Review `Auth` in `backend/template.yaml`: the JWT issuer is built from the Region/User Pool, and the audience is the Cognito web App Client ID. SAM applies the default authorizer to the proxy route.
+
+### Step 2: In API Gateway → API → Authorization/Routes, confirm the
+
+In API Gateway → API → Authorization/Routes, confirm the document proxy requires Cognito JWT. Only `GET /health` and `OPTIONS /{proxy+}` are unauthenticated by design.
+
+### Step 3: Keep AllowedFrontendOrigins limited to local Vite and the
+
+Keep `AllowedFrontendOrigins` limited to local Vite and the actual Amplify domain; the template allows Authorization/Content-Type and the methods used by the app.
+
+### Step 4: Change the template and redeploy with SAM
+
+Change the template and redeploy with SAM; review routes/auth/CORS after the stack update. Do not enable CORS credentials when the frontend does not use cookies.
 
 ## Screenshot and remaining evidence
 

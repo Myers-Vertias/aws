@@ -16,11 +16,28 @@ Triển khai upload/download presigned, Favorites, Tags, Thùng rác và sharing
 
 ## Các bước thực hiện
 
-1. Trong `backend/src/index.mjs`, tạo key S3 từ Cognito `sub` và ID do server sinh; xác minh file type/size trước khi trả PUT URL. Khi complete, dùng HeadObject rồi mới ghi metadata.
-2. Với download, share, favorites và trash, xác định caller từ claims rồi kiểm tra quyền trước khi cấp URL hoặc thay đổi record. Frontend gọi các route trong `src/services/documentService.js`.
-3. Favorites dùng quan hệ user/document; Trash là soft-delete bằng `deletedAt`, restore xóa thuộc tính này. Chỉ thêm hard-delete khi đồng bộ xóa object, metadata, share và favorites.
-4. Share resolve email sang Cognito `sub`, chỉ owner được cấp/revoke quyền. Viewer chỉ được xem/tải file đang chia sẻ; URL đã phát hành còn dùng được đến khi hết hạn.
-5. Sau khi cập nhật Lambda, build/deploy bằng SAM; frontend sử dụng API URL và Cognito IDs từ Outputs, không gọi DynamoDB/S3 bằng credentials ở trình duyệt.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Tạo S3 key dựa trên Cognito sub của người dùng
+
+Trong `backend/src/index.mjs`, tạo key S3 từ Cognito `sub` và ID do server sinh; xác minh file type/size trước khi trả PUT URL. Khi complete, dùng HeadObject rồi mới ghi metadata.
+
+### Bước 2: Với download, share, favorites và trash, xác định caller
+
+Với download, share, favorites và trash, xác định caller từ claims rồi kiểm tra quyền trước khi cấp URL hoặc thay đổi record. Frontend gọi các route trong `src/services/documentService.js`.
+
+### Bước 3: Favorites dùng quan hệ user/document
+
+Favorites dùng quan hệ user/document; Trash là soft-delete bằng `deletedAt`, restore xóa thuộc tính này. Chỉ thêm hard-delete khi đồng bộ xóa object, metadata, share và favorites.
+
+### Bước 4: Share resolve email sang Cognito sub, chỉ owner được
+
+Share resolve email sang Cognito `sub`, chỉ owner được cấp/revoke quyền. Viewer chỉ được xem/tải file đang chia sẻ; URL đã phát hành còn dùng được đến khi hết hạn.
+
+### Bước 5: Sau khi cập nhật Lambda, build/deploy bằng SAM
+
+Sau khi cập nhật Lambda, build/deploy bằng SAM; frontend sử dụng API URL và Cognito IDs từ Outputs, không gọi DynamoDB/S3 bằng credentials ở trình duyệt.
 
 ### Mẫu tạo key và URL upload
 

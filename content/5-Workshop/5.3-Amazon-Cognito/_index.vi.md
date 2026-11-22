@@ -12,12 +12,12 @@ Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và 
 
 ## Mục tiêu
 
-Tạo User Pool development và app client SPA công khai, sau đó tích hợp và kiểm thử xác thực thật.
+Kiểm tra User Pool và app client SPA do SAM tạo, sau đó kiểm thử xác thực thật.
 
 ## Các bài thực hành
 
-- [5.3.1 Tạo Cognito User Pool](5.3.1-Create-User-Pool/)
-- [5.3.2 Cấu hình App Client và kiểm thử xác thực](5.3.2-App-Client-and-Authentication/)
+- [5.3.1 Xác minh Cognito User Pool](5.3.1-Create-User-Pool/)
+- [5.3.2 Kiểm tra App Client và xác thực](5.3.2-App-Client-and-Authentication/)
 
 ## Lưu ý
 

@@ -16,10 +16,26 @@ Cung cấp cấu hình công khai và kết nối frontend với xác thực Cog
 
 ## Các bước thực hiện
 
-1. Từ CloudFormation Outputs lấy Region, `UserPoolId`, `UserPoolClientId`, `ApiBaseUrl`, `DocumentsBucketName`. Ở repository root, copy `.env.example` thành `.env.local` rồi điền các biến tương ứng: `VITE_AWS_REGION`, `VITE_COGNITO_USER_POOL_ID`, `VITE_COGNITO_USER_POOL_CLIENT_ID`, `VITE_API_BASE_URL`, `VITE_S3_BUCKET_NAME`.
-2. Chạy `npm ci`, rồi `npm run dev`; sau mỗi lần đổi `.env.local`, khởi động lại Vite. Tệp local đã bị Git ignore và không được commit.
-3. Auth service gọi Cognito User Pools API cho đăng ký, xác nhận email, đăng nhập, refresh session và đăng xuất. API client lấy ID token rồi gắn `Authorization: Bearer <token>` vào request.
-4. Chỉ chứa public IDs/URLs trong biến `VITE_*`; tuyệt đối không đưa AWS secret access key, credentials, password hay token vào bundle.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Điền cấu hình từ CloudFormation Outputs
+
+Mở **CloudFormation → Stacks → stack workshop → Outputs** và giữ trang này để tra giá trị. Ở thư mục gốc repo ứng dụng, sao chép `.env.example` thành `.env.local`. Điền lần lượt `VITE_AWS_REGION` từ Region của stack, `VITE_COGNITO_USER_POOL_ID` từ `UserPoolId`, `VITE_COGNITO_USER_POOL_CLIENT_ID` từ `UserPoolClientId`, `VITE_API_BASE_URL` từ `ApiBaseUrl` và `VITE_S3_BUCKET_NAME` từ `DocumentsBucketName`. Không chép giá trị từ ảnh cũ vì mỗi stack có ID riêng.
+
+### Bước 2: Cài package và khởi động frontend
+
+Mở terminal tại thư mục gốc repo ứng dụng, chạy `npm ci` rồi `npm run dev`. Mở địa chỉ local mà Vite in ra. Sau mỗi lần sửa `.env.local`, dừng Vite bằng `Ctrl+C` rồi chạy `npm run dev` lại. Không commit file `.env.local`.
+
+### Bước 3: Tạo tài khoản thử nghiệm và đăng nhập Cognito
+
+Trên trang đăng nhập của ứng dụng, chọn đăng ký tài khoản bằng email mà anh/chị có thể mở. Dùng mật khẩu đáp ứng chính sách ở mục 5.3.1. Mở email, lấy mã xác nhận và nhập vào ứng dụng. Sau khi hiện thông báo xác nhận thành công, đăng nhập bằng email và mật khẩu đó. Kết quả cần thấy là dashboard đã đăng nhập; không đưa mã xác nhận hoặc token vào ảnh/báo cáo.
+
+### Bước 4: Xác nhận request API có token
+
+Mở **Developer Tools → Network**, tải lại trang Kho tài liệu rồi chọn request `GET /documents`. Request phải trả `200` và hiển thị danh sách của tài khoản. Nếu trả `401`, đăng xuất rồi đăng nhập lại; nếu API không kết nối được, kiểm tra `VITE_API_BASE_URL` và CORS ở mục 5.7.2.
+
+Biến `VITE_*` được đưa vào frontend khi build nên chỉ chứa ID/URL công khai. Tuyệt đối không đưa AWS secret access key, credentials, password hay token vào các biến này.
 
 ## Xác minh
 

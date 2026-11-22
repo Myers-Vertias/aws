@@ -16,10 +16,24 @@ Yêu cầu token Cognito hợp lệ và kiểm tra CORS nhưng không nhầm COR
 
 ## Các bước thực hiện
 
-1. Xem `Auth` trong `backend/template.yaml`: JWT issuer được tạo từ Region/User Pool, audience là Cognito web App Client ID. SAM áp dụng authorizer mặc định cho route proxy.
-2. Trong API Gateway → API → Authorization/Routes, xác nhận document proxy yêu cầu Cognito JWT. Chỉ `GET /health` và `OPTIONS /{proxy+}` được miễn auth theo thiết kế.
-3. Giữ `AllowedFrontendOrigins` giới hạn ở Vite local và domain Amplify thực tế; template cho phép header Authorization/Content-Type và các method ứng dụng dùng.
-4. Thay đổi cấu hình ở template rồi deploy bằng SAM; xem route/auth/CORS sau khi stack cập nhật. Không bật CORS credentials nếu frontend không dùng cookie.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Xem Auth trong backend/template.yaml: JWT issuer được tạo
+
+Xem `Auth` trong `backend/template.yaml`: JWT issuer được tạo từ Region/User Pool, audience là Cognito web App Client ID. SAM áp dụng authorizer mặc định cho route proxy.
+
+### Bước 2: Trong API Gateway → API → Authorization/Routes, xác nhận
+
+Trong API Gateway → API → Authorization/Routes, xác nhận document proxy yêu cầu Cognito JWT. Chỉ `GET /health` và `OPTIONS /{proxy+}` được miễn auth theo thiết kế.
+
+### Bước 3: Giữ AllowedFrontendOrigins giới hạn ở Vite local và
+
+Giữ `AllowedFrontendOrigins` giới hạn ở Vite local và domain Amplify thực tế; template cho phép header Authorization/Content-Type và các method ứng dụng dùng.
+
+### Bước 4: Thay đổi cấu hình ở template rồi deploy bằng SAM
+
+Thay đổi cấu hình ở template rồi deploy bằng SAM; xem route/auth/CORS sau khi stack cập nhật. Không bật CORS credentials nếu frontend không dùng cookie.
 
 ## Vị trí ảnh chụp màn hình
 

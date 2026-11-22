@@ -19,11 +19,28 @@ Record the end-to-end verification of favorites, document metadata, Trash and la
 
 ## User procedure
 
-1. Sign in as the owner, open Documents, and use a document's star control to add it to Favorites; open Favorites to view the list.
-2. Open document details, choose Edit metadata, update category, tags, or description, and save. Return to details to see the saved values.
-3. From Documents, move the file to Trash; open Trash and choose Restore to return it to the active list.
-4. Use the language selector in the top bar to switch between Vietnamese and English. Navigate between Documents and Dashboard, then refresh to confirm the selection persists.
-5. Use the category filter and tag search in Documents to narrow the list by metadata.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Sign in as the owner, open Documents, and use a
+
+Sign in as the owner, open Documents, and use a document's star control to add it to Favorites; open Favorites to view the list.
+
+### Step 2: Open document details, choose Edit metadata, update
+
+Open document details, choose Edit metadata, update category, tags, or description, and save. Return to details to see the saved values.
+
+### Step 3: From Documents, move the file to Trash
+
+From Documents, move the file to Trash; open Trash and choose Restore to return it to the active list.
+
+### Step 4: Use the language selector in the top bar to switch
+
+Use the language selector in the top bar to switch between Vietnamese and English. Navigate between Documents and Dashboard, then refresh to confirm the selection persists.
+
+### Step 5: Use the category filter and tag search in Documents to
+
+Use the category filter and tag search in Documents to narrow the list by metadata.
 
 ## Verified results
 

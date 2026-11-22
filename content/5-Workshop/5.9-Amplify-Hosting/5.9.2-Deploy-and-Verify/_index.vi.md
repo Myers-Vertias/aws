@@ -16,10 +16,24 @@ Triển khai frontend và xác minh xác thực cùng API call thật.
 
 ## Các bước thực hiện
 
-1. Trong Amplify Console, mở app → Hosting → Environment variables và đặt năm biến `VITE_*` theo CloudFormation Outputs; không thêm secret access key. Lưu cấu hình để tạo deployment mới.
-2. Lấy domain HTTPS của branch. Cập nhật `AllowedFrontendOrigins` trong SAM stack để bao gồm origin chính xác này; frontend hiện dùng Cognito API trực tiếp nên không cần managed-login callback URL.
-3. Trong Amplify → branch, theo dõi build log đến trạng thái thành công; kiểm tra artifact directory `dist`, build command `npm ci && npm run build` và SPA rewrite.
-4. Dùng domain production làm origin trong trình duyệt. CORS API và bucket phải trùng scheme/host của domain; URL API, Pool ID, Client ID và bucket phải lấy cùng một stack.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Điền biến môi trường cho branch Amplify
+
+Trong Amplify Console, mở app → **Hosting → Environment variables**. Thêm năm biến `VITE_*` theo bảng ở mục 5.1.3 hoặc 5.8.1, dùng Outputs của đúng stack. Không thêm secret access key. Lưu cấu hình để Amplify chạy deployment mới.
+
+### Bước 2: Cập nhật CORS với domain mới
+
+Sau khi branch build xong, mở URL HTTPS của branch và sao chép origin, ví dụ `https://main.xxxxx.amplifyapp.com` (không có dấu `/` cuối). Từ PowerShell ở thư mục `backend`, chạy lại lệnh `sam deploy` ở mục 5.1.3 với cùng stack name, Region, profile và role. Trong `AllowedFrontendOrigins`, giữ các origin local còn dùng và thêm origin Amplify mới. Xem change set, xác nhận đúng stack rồi chờ `UPDATE_COMPLETE`. Frontend dùng Cognito User Pools API trực tiếp nên không cần managed-login callback URL.
+
+### Bước 3: Chờ build frontend hoàn tất
+
+Trong Amplify → branch, mở build mới nhất và chờ trạng thái thành công. Nếu build lỗi, kiểm tra build command `npm ci && npm run build`, artifact directory `dist` và các biến `VITE_*`. Xác nhận đã cấu hình SPA rewrite ở mục 5.9.1 để refresh route không trả 404.
+
+### Bước 4: Kiểm tra ứng dụng đã deploy
+
+Mở domain HTTPS production, đăng ký hoặc đăng nhập Cognito, rồi tải Kho tài liệu. Mở Developer Tools → **Network** và xác nhận request API đã đăng nhập trả `200`. Thử upload/download file nhỏ hơn 20 MiB. API URL, Pool ID, Client ID và bucket phải cùng lấy từ một stack; CORS API và S3 phải khớp chính xác origin Amplify.
 
 ## Minh chứng triển khai và xác minh
 

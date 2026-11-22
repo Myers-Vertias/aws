@@ -1,5 +1,5 @@
 ---
-title: "Tạo bảng Documents và owner index"
+title: "Xác minh bảng Documents và OwnerIndex"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Tạo bảng metadata chính theo thiết kế khóa đã duyệt.
+Kiểm tra bảng metadata chính và owner index do SAM tạo theo thiết kế đã duyệt.
 
 ## Các bước thực hiện
 
-1. Deploy SAM template theo mục 5.1.3; không tạo bảng thủ công trùng với bảng trong stack. Template đặt tên theo `<stack-name>-documents`, bật `PAY_PER_REQUEST` và tạo `OwnerIndex`.
-2. Mở CloudFormation → stack của lab → Resources, chọn `DocumentsTable` để đi tới DynamoDB. Hoặc mở DynamoDB → Tables và tìm bảng `<stack-name>-documents` trong cùng Region.
-3. Trong Table details, đối chiếu partition key `documentId` kiểu String, không có sort key, capacity On-demand và trạng thái Active. Mở tab Indexes, xác nhận `OwnerIndex` có partition `ownerSub` và sort `createdAtDocumentId`, cả hai kiểu String.
-4. Ghi lại tên bảng và index cho Lambda. Truy vấn danh sách owner dùng Query trên GSI, không Scan toàn bảng.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Deploy SAM template theo mục 5.1.3
+
+Deploy SAM template theo mục 5.1.3; không tạo bảng thủ công trùng với bảng trong stack. Template đặt tên theo `<stack-name>-documents`, bật `PAY_PER_REQUEST` và tạo `OwnerIndex`.
+
+### Bước 2: Mở CloudFormation → stack của lab → Resources, chọn
+
+Mở CloudFormation → stack của lab → Resources, chọn `DocumentsTable` để đi tới DynamoDB. Hoặc mở DynamoDB → Tables và tìm bảng `<stack-name>-documents` trong cùng Region.
+
+### Bước 3: Trong Table details, đối chiếu partition key documentId
+
+Trong Table details, đối chiếu partition key `documentId` kiểu String, không có sort key, capacity On-demand và trạng thái Active. Mở tab Indexes, xác nhận `OwnerIndex` có partition `ownerSub` và sort `createdAtDocumentId`, cả hai kiểu String.
+
+### Bước 4: Ghi lại tên bảng và index cho Lambda
+
+Ghi lại tên bảng và index cho Lambda. Truy vấn danh sách owner dùng Query trên GSI, không Scan toàn bảng.
 
 ## Vị trí ảnh chụp màn hình
 

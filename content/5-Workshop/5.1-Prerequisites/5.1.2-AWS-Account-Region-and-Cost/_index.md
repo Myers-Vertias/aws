@@ -16,14 +16,40 @@ Choose a development account and define a consistent Region and resource naming 
 
 ## Implementation steps
 
-1. Sign in to the intended AWS account. Do not use root access keys for daily development.
-2. Choose one Region for Cognito, DynamoDB, Lambda, API Gateway, and S3, then record it in lab notes.
-3. Review current AWS pricing and billing. Consider a budget alert before creating resources; an alert does not automatically stop spending.
-4. Use a development prefix such as `unicloud-dms-dev`. Add a unique suffix to globally unique names such as S3 buckets.
-5. Use least-privilege IAM identities. Do not solve AccessDenied errors by attaching broad administrator permissions.
-6. Prefer IAM Identity Center and a dedicated AWS CLI profile for the lab. Grant the permissions required to deploy, with `iam:PassRole` restricted to the project's Lambda execution role. If the class provides an IAM user, use that identity only within its approved scope; do not create long-lived access keys without authorization.
-7. Before deployment, verify the target profile and account with `aws sts get-caller-identity --profile <lab-profile>`. Use one Region, such as `ap-southeast-1`, for Cognito, API Gateway, Lambda, DynamoDB, and S3.
-8. Create an AWS Budget suitable for the lab, add actual/forecast alerts, and verify the notification recipient. Alerts do not cap spending; review Billing regularly.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Sign in to the intended AWS account
+
+Sign in to the intended AWS account. Do not use root access keys for daily development.
+
+### Step 2: Choose one Region for Cognito, DynamoDB, Lambda, API
+
+Choose one Region for Cognito, DynamoDB, Lambda, API Gateway, and S3, then record it in lab notes.
+
+### Step 3: Review current AWS pricing and billing
+
+Review current AWS pricing and billing. Consider a budget alert before creating resources; an alert does not automatically stop spending.
+
+### Step 4: Use a development prefix such as unicloud-dms-dev
+
+Use a development prefix such as `unicloud-dms-dev`. Add a unique suffix to globally unique names such as S3 buckets.
+
+### Step 5: Use least-privilege IAM identities
+
+Use least-privilege IAM identities. Do not solve AccessDenied errors by attaching broad administrator permissions.
+
+### Step 6: Prefer IAM Identity Center and a dedicated AWS CLI
+
+Prefer IAM Identity Center and a dedicated AWS CLI profile for the lab. Grant the permissions required to deploy, with `iam:PassRole` restricted to the project's Lambda execution role. If the class provides an IAM user, use that identity only within its approved scope; do not create long-lived access keys without authorization.
+
+### Step 7: Before deployment, verify the target profile and account
+
+Before deployment, verify the target profile and account with `aws sts get-caller-identity --profile <lab-profile>`. Use one Region, such as `ap-southeast-1`, for Cognito, API Gateway, Lambda, DynamoDB, and S3.
+
+### Step 8: Create an AWS Budget suitable for the lab, add
+
+Create an AWS Budget suitable for the lab, add actual/forecast alerts, and verify the notification recipient. Alerts do not cap spending; review Billing regularly.
 
 ## Configuration of the deployed project environment
 

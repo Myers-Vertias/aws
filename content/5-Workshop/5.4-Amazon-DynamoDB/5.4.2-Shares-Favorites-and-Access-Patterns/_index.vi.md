@@ -1,5 +1,5 @@
 ---
-title: "Tạo bảng Shares và Favorites"
+title: "Xác minh bảng Shares và Favorites"
 date: 2026-10-16
 weight: 2
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Lưu share và favorite dưới dạng quan hệ riêng từng người dùng, rồi xác minh đường truy vấn.
+Kiểm tra các bảng quan hệ Shares và Favorites do SAM tạo, rồi xác minh access pattern.
 
 ## Các bước thực hiện
 
-1. Deploy cùng SAM stack ở mục 5.1.3; template tạo hai bảng quan hệ riêng, không tạo thủ công bảng trùng.
-2. Mở CloudFormation → stack → Resources và chọn `SharesTable`, rồi đối chiếu bảng `<stack-name>-shares`: partition key `recipientSub`, sort key `documentId`, capacity On-demand. Trong Indexes xác nhận `OwnerShareIndex` dùng `ownerSub` và `documentIdRecipientSub`.
-3. Mở `FavoritesTable` và đối chiếu `<stack-name>-favorites`: partition `userSub`, sort `documentId`, capacity On-demand. Index `DocumentFavoritesIndex` dùng `documentId` và `documentIdUserSub` để truy vấn favorite theo tài liệu.
-4. Ghi tên bảng/index từ stack outputs/template vào cấu hình Lambda. Các khóa Cognito dùng `sub`, không dùng email làm khóa phân quyền.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Deploy cùng SAM stack ở mục 5.1.3
+
+Deploy cùng SAM stack ở mục 5.1.3; template tạo hai bảng quan hệ riêng, không tạo thủ công bảng trùng.
+
+### Bước 2: Mở CloudFormation → stack → Resources và chọn
+
+Mở CloudFormation → stack → Resources và chọn `SharesTable`, rồi đối chiếu bảng `<stack-name>-shares`: partition key `recipientSub`, sort key `documentId`, capacity On-demand. Trong Indexes xác nhận `OwnerShareIndex` dùng `ownerSub` và `documentIdRecipientSub`.
+
+### Bước 3: Mở FavoritesTable và đối chiếu <stack-name>-favorites
+
+Mở `FavoritesTable` và đối chiếu `<stack-name>-favorites`: partition `userSub`, sort `documentId`, capacity On-demand. Index `DocumentFavoritesIndex` dùng `documentId` và `documentIdUserSub` để truy vấn favorite theo tài liệu.
+
+### Bước 4: Ghi tên bảng/index từ stack outputs/template vào cấu hình
+
+Ghi tên bảng/index từ stack outputs/template vào cấu hình Lambda. Các khóa Cognito dùng `sub`, không dùng email làm khóa phân quyền.
 
 ## Vị trí ảnh chụp màn hình
 

@@ -16,11 +16,28 @@ Triển khai thao tác tạo/liệt kê/chi tiết/cập nhật bằng người 
 
 ## Các bước thực hiện
 
-1. Mở `backend/src/index.mjs` và dùng dispatcher của API Gateway để tách method/path; lấy caller `sub` từ JWT claims mà authorizer đã xác minh. Không nhận owner ID từ body frontend.
-2. Dùng `OwnerIndex` để Query danh sách của owner và `documentId` để lấy chi tiết; trước khi trả dữ liệu, kiểm tra owner hoặc share record còn hiệu lực.
-3. API complete upload dùng `HeadObject` xác nhận object S3 rồi ghi item metadata vào Documents table. Giữ metadata và bytes tách nhau: DynamoDB lưu thông tin file, S3 giữ nội dung.
-4. PATCH metadata chỉ nhận `description`, `category`, `tags`; kiểm tra kiểu/giới hạn và chỉ cho owner cập nhật active file. Trả DTO/error JSON kèm HTTP status nhất quán.
-5. Sau thay đổi code, từ `backend/` chạy `sam validate --lint`, `sam build` và deploy stack theo mục 5.1.3 sau khi xem change set.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Mở backend/src/index.mjs và dùng dispatcher của API
+
+Mở `backend/src/index.mjs` và dùng dispatcher của API Gateway để tách method/path; lấy caller `sub` từ JWT claims mà authorizer đã xác minh. Không nhận owner ID từ body frontend.
+
+### Bước 2: Dùng OwnerIndex để truy vấn danh sách tài liệu của chủ sở hữu
+
+Dùng `OwnerIndex` để Query danh sách của owner và `documentId` để lấy chi tiết; trước khi trả dữ liệu, kiểm tra owner hoặc share record còn hiệu lực.
+
+### Bước 3: API complete upload dùng HeadObject xác nhận object S3
+
+API complete upload dùng `HeadObject` xác nhận object S3 rồi ghi item metadata vào Documents table. Giữ metadata và bytes tách nhau: DynamoDB lưu thông tin file, S3 giữ nội dung.
+
+### Bước 4: PATCH metadata chỉ nhận description, category, tags
+
+PATCH metadata chỉ nhận `description`, `category`, `tags`; kiểm tra kiểu/giới hạn và chỉ cho owner cập nhật active file. Trả DTO/error JSON kèm HTTP status nhất quán.
+
+### Bước 5: Sau thay đổi code, từ backend/ chạy sam validate --lint
+
+Sau thay đổi code, từ `backend/` chạy `sam validate --lint`, `sam build` và deploy stack theo mục 5.1.3 sau khi xem change set.
 
 ### Mẫu lấy danh tính từ JWT claims
 

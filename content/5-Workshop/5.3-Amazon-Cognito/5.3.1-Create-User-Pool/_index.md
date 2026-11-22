@@ -1,5 +1,5 @@
 ---
-title: "Create a Cognito User Pool"
+title: "Verify the Cognito User Pool"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ This page records the deployed implementation and observed results. Any unverifi
 
 ## Objective
 
-Create the user directory used to authenticate UniCloud DMS accounts.
+Verify the User Pool created by SAM for UniCloud DMS account authentication.
 
 ## Implementation steps
 
-1. Deploy the SAM template using section 5.1.3. The template creates the User Pool, so do not create a second pool manually.
-2. In the AWS Console, select the same Region → Amazon Cognito → User pools → open the pool owned by the lab's CloudFormation stack. Match its name in the stack's Resources/Outputs.
-3. Open the sign-in configuration and confirm email is the username attribute, email is auto-verified, and account recovery uses a verified email. The template requires a 12-character minimum password with uppercase, lowercase, number, and symbol.
-4. Record the Pool ID and Region in local configuration. Do not put passwords, verification codes, or tokens in the report.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Deploy the SAM template using section 5.1.3
+
+Deploy the SAM template using section 5.1.3. The template creates the User Pool, so do not create a second pool manually.
+
+### Step 2: In the AWS Console, select the same Region → Amazon
+
+In the AWS Console, select the same Region → Amazon Cognito → User pools → open the pool owned by the lab's CloudFormation stack. Match its name in the stack's Resources/Outputs.
+
+### Step 3: Open the sign-in configuration and confirm email is the
+
+Open the sign-in configuration and confirm email is the username attribute, email is auto-verified, and account recovery uses a verified email. The template requires a 12-character minimum password with uppercase, lowercase, number, and symbol.
+
+### Step 4: Record the Pool ID and Region in local configuration
+
+Record the Pool ID and Region in local configuration. Do not put passwords, verification codes, or tokens in the report.
 
 ## Deployed configuration and verification
 

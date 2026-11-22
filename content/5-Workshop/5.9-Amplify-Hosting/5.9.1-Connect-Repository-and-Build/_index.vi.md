@@ -16,10 +16,39 @@ Kết nối Amplify tới repository chứa UniCloud DMS, không phải reposito
 
 ## Các bước thực hiện
 
-1. Mở AWS Amplify → Create new app → Host web app, kết nối GitHub và cấp quyền chọn repository. Chọn repository ứng dụng `serverless-document-management`, không chọn repository tài liệu workshop.
-2. Chọn branch cần publish (project dùng `main`), xác nhận app root là thư mục có `package.json` và `package-lock.json`.
-3. Dùng build command `npm ci && npm run build`, artifact directory `dist`; thêm SPA rewrite để route React Router trả về `index.html` khi refresh.
-4. Lưu cấu hình và để Amplify tạo build đầu tiên. Khi cần environment variables, nhập các biến `VITE_*` trong Amplify trước khi redeploy theo mục 5.9.2.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Kết nối đúng repository trong Amplify
+
+Trong AWS Console, mở **AWS Amplify → Create new app → Host web app**. Chọn GitHub và cấp quyền truy cập repository nếu AWS hỏi. Tìm repository ứng dụng `serverless-document-management` rồi chọn nó. Repository `aws` chứa báo cáo, không phải mã frontend cần deploy.
+
+### Bước 2: Chọn branch main và thư mục ứng dụng
+
+Chọn branch `main`. Ở bước thiết lập build, để app root tại thư mục gốc repository vì `package.json` và `package-lock.json` nằm ở đó. Nếu Amplify hỏi monorepo, không khai báo thư mục con.
+
+### Bước 3: Nhập lệnh build và thư mục kết quả
+
+Đặt build command là `npm ci && npm run build` và artifact/output directory là `dist`. Đây là thư mục Vite tạo sau khi build.
+
+Để refresh trực tiếp một route React Router không trả về 404, mở **Hosting → Rewrites and redirects → Manage redirects**. Thêm quy tắc rewrite 200 tới `/index.html`. Có thể dùng JSON SPA rule trong [tài liệu AWS Amplify](https://docs.aws.amazon.com/amplify/latest/userguide/redirect-rewrite-examples.html):
+
+```json
+[
+  {
+    "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|js|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>",
+    "status": "200",
+    "target": "/index.html",
+    "condition": null
+  }
+]
+```
+
+Quy tắc này chuyển các đường dẫn của ứng dụng về `index.html` để React Router xử lý; các file tĩnh có phần mở rộng trong biểu thức được giữ nguyên.
+
+### Bước 4: Lưu cấu hình và theo dõi build đầu tiên
+
+Lưu cấu hình để Amplify bắt đầu build branch `main`. Mở build log và chờ trạng thái thành công. Nếu build lỗi, kiểm tra lệnh build, app root và `dist`. Thêm biến `VITE_*` trong Amplify trước lần redeploy theo mục 5.9.2.
 
 ## Minh chứng triển khai
 

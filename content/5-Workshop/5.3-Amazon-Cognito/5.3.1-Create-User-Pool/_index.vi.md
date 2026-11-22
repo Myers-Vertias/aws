@@ -1,5 +1,5 @@
 ---
-title: "Tạo Cognito User Pool"
+title: "Xác minh Cognito User Pool"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Tạo thư mục người dùng dùng để xác thực tài khoản UniCloud DMS.
+Kiểm tra User Pool do SAM tạo để xác thực tài khoản UniCloud DMS.
 
 ## Các bước thực hiện
 
-1. Deploy SAM template theo mục 5.1.3. Template tạo User Pool, vì vậy không tạo thêm pool thủ công.
-2. Trong AWS Console, chọn đúng Region → Amazon Cognito → User pools → mở pool thuộc CloudFormation stack của lab. Đối chiếu tên pool trong tab Resources/Outputs của stack.
-3. Mở cấu hình đăng nhập và xác nhận email là username attribute, email auto-verified và account recovery dùng email đã xác minh. Template đặt mật khẩu tối thiểu 12 ký tự, bắt buộc chữ hoa, chữ thường, số và ký hiệu.
-4. Ghi Pool ID và Region vào cấu hình local. Không ghi password, mã xác nhận hay token vào báo cáo.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Deploy SAM template theo mục 5.1.3
+
+Deploy SAM template theo mục 5.1.3. Template tạo User Pool, vì vậy không tạo thêm pool thủ công.
+
+### Bước 2: Mở Cognito trong đúng Region và chọn User pool
+
+Trong AWS Console, chọn đúng Region → Amazon Cognito → User pools → mở pool thuộc CloudFormation stack của lab. Đối chiếu tên pool trong tab Resources/Outputs của stack.
+
+### Bước 3: Mở cấu hình đăng nhập và xác nhận email là username
+
+Mở cấu hình đăng nhập và xác nhận email là username attribute, email auto-verified và account recovery dùng email đã xác minh. Template đặt mật khẩu tối thiểu 12 ký tự, bắt buộc chữ hoa, chữ thường, số và ký hiệu.
+
+### Bước 4: Ghi Pool ID và Region vào cấu hình local
+
+Ghi Pool ID và Region vào cấu hình local. Không ghi password, mã xác nhận hay token vào báo cáo.
 
 ## Cấu hình đã triển khai và xác minh
 

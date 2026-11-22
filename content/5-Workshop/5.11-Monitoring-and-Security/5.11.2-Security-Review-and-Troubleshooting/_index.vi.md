@@ -16,10 +16,24 @@ Theo trình tự chẩn đoán nhất quán và xác minh lưu trữ riêng tư 
 
 ## Các bước thực hiện
 
-1. Bắt đầu từ CloudFormation stack để xác định resource và Region; sau đó đối chiếu API route/authorizer, Lambda function, DynamoDB tables/indexes và Cognito Pool/Client với template.
-2. Trong S3 → Permissions, xem Block Public Access, bucket policy và CORS; trong Properties xem SSE-S3. Bucket vẫn private, CORS không cấp quyền đọc object.
-3. Trong IAM role, so từng Action/Resource với `backend/iam/lambda-runtime-policy.template.json`; kiểm tra role trust cho Lambda và PassRole được giới hạn. Nếu danh tính lab không có `iam:GetRole`, nhờ quản trị viên xem policy, không tăng quyền của chính user để vượt lỗi.
-4. Kiểm tra frontend chỉ chứa public `VITE_*`, API xác minh JWT, Lambda lấy caller `sub` từ claims; xem Billing/Budget để nhận biết resource còn hoạt động.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Bắt đầu từ CloudFormation stack để xác định resource và
+
+Bắt đầu từ CloudFormation stack để xác định resource và Region; sau đó đối chiếu API route/authorizer, Lambda function, DynamoDB tables/indexes và Cognito Pool/Client với template.
+
+### Bước 2: Trong S3 → Permissions, xem Block Public Access, bucket
+
+Trong S3 → Permissions, xem Block Public Access, bucket policy và CORS; trong Properties xem SSE-S3. Bucket vẫn private, CORS không cấp quyền đọc object.
+
+### Bước 3: Trong IAM role, so từng Action/Resource với
+
+Trong IAM role, so từng Action/Resource với `backend/iam/lambda-runtime-policy.template.json`; kiểm tra role trust cho Lambda và PassRole được giới hạn. Nếu danh tính lab không có `iam:GetRole`, nhờ quản trị viên xem policy, không tăng quyền của chính user để vượt lỗi.
+
+### Bước 4: Kiểm tra frontend chỉ chứa public VITE_*, API xác minh
+
+Kiểm tra frontend chỉ chứa public `VITE_*`, API xác minh JWT, Lambda lấy caller `sub` từ claims; xem Billing/Budget để nhận biết resource còn hoạt động.
 
 ## Minh chứng
 

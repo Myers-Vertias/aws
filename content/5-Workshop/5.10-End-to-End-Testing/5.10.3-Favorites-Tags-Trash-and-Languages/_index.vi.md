@@ -19,11 +19,28 @@ Ghi nhận kết quả kiểm thử đầu cuối các chức năng yêu thích,
 
 ## Các bước thao tác
 
-1. Đăng nhập bằng chủ sở hữu, mở Kho tài liệu và dùng biểu tượng sao trên một tài liệu để thêm vào Yêu thích; vào trang Yêu thích để xem danh sách.
-2. Mở chi tiết tài liệu, chọn sửa metadata, cập nhật danh mục, thẻ hoặc mô tả rồi lưu. Trở lại chi tiết để xem giá trị đã lưu.
-3. Từ Kho tài liệu, chuyển tài liệu vào Thùng rác; mở Thùng rác và chọn khôi phục để đưa tài liệu về danh sách đang hoạt động.
-4. Dùng bộ chọn ngôn ngữ ở thanh trên để chuyển Việt/Anh. Điều hướng giữa Kho tài liệu và Dashboard, tải lại trang để xem lựa chọn ngôn ngữ được duy trì.
-5. Dùng bộ lọc danh mục và ô tìm kiếm thẻ trong Kho tài liệu để thu hẹp danh sách theo metadata.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Đăng nhập bằng chủ sở hữu, mở Kho tài liệu và dùng biểu
+
+Đăng nhập bằng chủ sở hữu, mở Kho tài liệu và dùng biểu tượng sao trên một tài liệu để thêm vào Yêu thích; vào trang Yêu thích để xem danh sách.
+
+### Bước 2: Mở chi tiết tài liệu, chọn sửa metadata, cập nhật danh
+
+Mở chi tiết tài liệu, chọn sửa metadata, cập nhật danh mục, thẻ hoặc mô tả rồi lưu. Trở lại chi tiết để xem giá trị đã lưu.
+
+### Bước 3: Từ Kho tài liệu, chuyển tài liệu vào Thùng rác
+
+Từ Kho tài liệu, chuyển tài liệu vào Thùng rác; mở Thùng rác và chọn khôi phục để đưa tài liệu về danh sách đang hoạt động.
+
+### Bước 4: Dùng bộ chọn ngôn ngữ ở thanh trên để chuyển Việt/Anh
+
+Dùng bộ chọn ngôn ngữ ở thanh trên để chuyển Việt/Anh. Điều hướng giữa Kho tài liệu và Dashboard, tải lại trang để xem lựa chọn ngôn ngữ được duy trì.
+
+### Bước 5: Dùng bộ lọc danh mục và ô tìm kiếm thẻ trong Kho tài liệu
+
+Dùng bộ lọc danh mục và ô tìm kiếm thẻ trong Kho tài liệu để thu hẹp danh sách theo metadata.
 
 ## Kết quả đã xác nhận
 

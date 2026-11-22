@@ -1,5 +1,5 @@
 ---
-title: "Create Shares and Favorites Tables"
+title: "Verify the Shares and Favorites Tables"
 date: 2026-10-16
 weight: 2
 chapter: false
@@ -12,14 +12,28 @@ This page records the deployed implementation and observed results. Any unverifi
 
 ## Objective
 
-Store shares and favorites as user-specific relationships and verify the query paths.
+Verify the Shares and Favorites tables created by SAM as user-specific relationships and review their query paths.
 
 ## Implementation steps
 
-1. Deploy the same SAM stack from section 5.1.3; the template creates both relationship tables, so do not create duplicates manually.
-2. In CloudFormation → stack → Resources, select `SharesTable`. Confirm `<stack-name>-shares` has `recipientSub` partition key, `documentId` sort key, and On-demand capacity. In Indexes, confirm `OwnerShareIndex` uses `ownerSub` and `documentIdRecipientSub`.
-3. Open `FavoritesTable` and confirm `<stack-name>-favorites` has `userSub` partition key, `documentId` sort key, and On-demand capacity. `DocumentFavoritesIndex` uses `documentId` and `documentIdUserSub` to query favorites by document.
-4. Record table/index names from stack outputs/template for Lambda configuration. Cognito `sub` values are used as identity keys; email is not an authorization key.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Deploy the same SAM stack from section 5.1.3
+
+Deploy the same SAM stack from section 5.1.3; the template creates both relationship tables, so do not create duplicates manually.
+
+### Step 2: In CloudFormation → stack → Resources, select SharesTable
+
+In CloudFormation → stack → Resources, select `SharesTable`. Confirm `<stack-name>-shares` has `recipientSub` partition key, `documentId` sort key, and On-demand capacity. In Indexes, confirm `OwnerShareIndex` uses `ownerSub` and `documentIdRecipientSub`.
+
+### Step 3: Open FavoritesTable and confirm <stack-name>-favorites
+
+Open `FavoritesTable` and confirm `<stack-name>-favorites` has `userSub` partition key, `documentId` sort key, and On-demand capacity. `DocumentFavoritesIndex` uses `documentId` and `documentIdUserSub` to query favorites by document.
+
+### Step 4: Record table/index names from stack outputs/template for
+
+Record table/index names from stack outputs/template for Lambda configuration. Cognito `sub` values are used as identity keys; email is not an authorization key.
 
 ## Screenshots and remaining evidence
 

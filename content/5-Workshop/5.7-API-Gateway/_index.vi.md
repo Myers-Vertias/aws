@@ -16,8 +16,8 @@ Cung cấp Lambda handler qua HTTP route được bảo vệ và xác minh reque
 
 ## Các bài thực hành
 
-- [5.7.1 Tạo HTTP API và Route](5.7.1-Create-HTTP-API-and-Routes/)
-- [5.7.2 Cấu hình JWT Authorizer, CORS và Kiểm thử](5.7.2-JWT-Authorizer-CORS-and-Testing/)
+- [5.7.1 Xác minh HTTP API và Route](5.7.1-Create-HTTP-API-and-Routes/)
+- [5.7.2 Xác minh JWT Authorizer, CORS và kiểm thử](5.7.2-JWT-Authorizer-CORS-and-Testing/)
 
 ## Lưu ý
 

@@ -1,5 +1,5 @@
 ---
-title: "Create the HTTP API and Routes"
+title: "Verify the HTTP API and Routes"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ This page records the deployed implementation and observed results. Any unverifi
 
 ## Objective
 
-Connect API Gateway routes to their intended Lambda integrations.
+Verify the API Gateway routes and Lambda integrations created by SAM.
 
 ## Implementation steps
 
-1. Deploy the SAM stack from section 5.1.3; the template creates the HTTP API, stage, and Lambda integrations. Do not create a duplicate API manually.
-2. In CloudFormation → stack → Resources, open `DocumentsApi` to reach API Gateway. In Routes, confirm `GET /health`, `ANY /{proxy+}`, and `OPTIONS /{proxy+}`; in Integrations, confirm separate health and document Lambdas.
-3. Open Stages, confirm `$default`, and get `ApiBaseUrl` from Outputs. The SAM template configures payload format 2.0 and the Lambda timeout.
-4. If routes or handlers change, update `backend/template.yaml`, validate/build/deploy with SAM, and review the change set. Keep routes aligned with `src/services`.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Deploy the SAM stack from section 5.1.3
+
+Deploy the SAM stack from section 5.1.3; the template creates the HTTP API, stage, and Lambda integrations. Do not create a duplicate API manually.
+
+### Step 2: In CloudFormation → stack → Resources, open DocumentsApi
+
+In CloudFormation → stack → Resources, open `DocumentsApi` to reach API Gateway. In Routes, confirm `GET /health`, `ANY /{proxy+}`, and `OPTIONS /{proxy+}`; in Integrations, confirm separate health and document Lambdas.
+
+### Step 3: Open Stages, confirm $default, and get ApiBaseUrl from
+
+Open Stages, confirm `$default`, and get `ApiBaseUrl` from Outputs. The SAM template configures payload format 2.0 and the Lambda timeout.
+
+### Step 4: If routes or handlers change, update
+
+If routes or handlers change, update `backend/template.yaml`, validate/build/deploy with SAM, and review the change set. Keep routes aligned with `src/services`.
 
 ## Deployed routes and integrations
 

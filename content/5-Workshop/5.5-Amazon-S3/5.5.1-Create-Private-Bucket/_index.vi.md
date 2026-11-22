@@ -1,5 +1,5 @@
 ---
-title: "Tạo S3 bucket riêng tư"
+title: "Xác minh S3 bucket riêng tư"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Tạo bucket file với public access bị chặn và mã hóa được bật.
+Kiểm tra bucket tài liệu do SAM tạo, bảo đảm public access bị chặn và mã hóa được bật.
 
 ## Các bước thực hiện
 
-1. Deploy SAM stack theo mục 5.1.3; template tạo Documents bucket và tự sinh tên duy nhất. Không tạo thêm bucket hoặc đổi sang tên trong ví dụ.
-2. Mở CloudFormation → stack → Outputs, lấy `DocumentsBucketName`; từ Resources mở `DocumentsBucket` trong S3 Console.
-3. Trong Permissions, xác nhận cả bốn Block Public Access controls đang bật và không có public bucket policy/ACL. Trong Properties, xác nhận default encryption SSE-S3 (AES-256).
-4. Giữ bucket private. Chỉ bật versioning khi đã thiết kế vòng đời version và cách dọn toàn bộ object version/delete marker.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Deploy SAM stack theo mục 5.1.3
+
+Deploy SAM stack theo mục 5.1.3; template tạo Documents bucket và tự sinh tên duy nhất. Không tạo thêm bucket hoặc đổi sang tên trong ví dụ.
+
+### Bước 2: Mở CloudFormation → stack → Outputs, lấy
+
+Mở CloudFormation → stack → Outputs, lấy `DocumentsBucketName`; từ Resources mở `DocumentsBucket` trong S3 Console.
+
+### Bước 3: Trong Permissions, xác nhận cả bốn Block Public Access
+
+Trong Permissions, xác nhận cả bốn Block Public Access controls đang bật và không có public bucket policy/ACL. Trong Properties, xác nhận default encryption SSE-S3 (AES-256).
+
+### Bước 4: Giữ bucket private
+
+Giữ bucket private. Chỉ bật versioning khi đã thiết kế vòng đời version và cách dọn toàn bộ object version/delete marker.
 
 ## Minh chứng triển khai
 

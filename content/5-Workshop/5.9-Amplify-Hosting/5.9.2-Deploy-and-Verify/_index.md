@@ -16,10 +16,24 @@ Deploy the frontend and verify its real authentication and API calls.
 
 ## Implementation steps
 
-1. In Amplify Console, open the app → Hosting → Environment variables and set the five `VITE_*` values from CloudFormation Outputs; do not add secret access keys. Save to trigger a new deployment.
-2. Get the branch HTTPS domain. Update `AllowedFrontendOrigins` in the SAM stack to include this exact origin; the current frontend calls Cognito API directly, so it does not need managed-login callback URLs.
-3. In Amplify → branch, follow the build log to success; confirm artifact directory `dist`, build command `npm ci && npm run build`, and the SPA rewrite.
-4. Open the production domain in a browser. API and bucket CORS origins must match its scheme/host; API URL, Pool ID, Client ID, and bucket must come from the same stack.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Set the environment variables for the Amplify branch
+
+In Amplify Console, open the app → **Hosting → Environment variables**. Add the five `VITE_*` variables from the table in section 5.1.3 or 5.8.1, using Outputs from the same stack. Do not add secret access keys. Save the changes to trigger a new deployment.
+
+### Step 2: Update CORS for the new domain
+
+After the branch build succeeds, open its HTTPS URL and copy the origin, for example `https://main.xxxxx.amplifyapp.com` (without a trailing slash). In PowerShell, from the `backend` directory, rerun the `sam deploy` command in section 5.1.3 with the same stack name, Region, profile, and role. Keep any local origins still needed and add the Amplify origin to `AllowedFrontendOrigins`. Review the change set, confirm the correct stack, and wait for `UPDATE_COMPLETE`. The frontend calls Cognito User Pools API directly, so it does not need a managed-login callback URL.
+
+### Step 3: Wait for the frontend build to finish
+
+In Amplify → branch, open the latest build and wait for success. If it fails, check the `npm ci && npm run build` command, `dist` artifact directory, and `VITE_*` variables. Confirm the SPA rewrite from section 5.9.1 is configured so route refreshes do not return 404.
+
+### Step 4: Verify the deployed application
+
+Open the production HTTPS domain, sign up or sign in with Cognito, and load Documents. Open Developer Tools → **Network** and confirm an authenticated API request returns `200`. Try uploading/downloading a file smaller than 20 MiB. The API URL, Pool ID, Client ID, and bucket must come from the same stack; API and S3 CORS must exactly match the Amplify origin.
 
 ## Deployment evidence and verification
 

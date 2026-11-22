@@ -16,11 +16,28 @@ Implement presigned upload/download, Favorites, Tags, Trash, and sharing with se
 
 ## Implementation steps
 
-1. In `backend/src/index.mjs`, build the S3 key from Cognito `sub` and a server-generated ID; validate file type/size before returning a PUT URL. On completion, use HeadObject before writing metadata.
-2. For download, sharing, favorites, and Trash, identify the caller from claims and check permissions before issuing URLs or changing records. The frontend calls routes through `src/services/documentService.js`.
-3. Favorites are a user/document relation; Trash is a soft delete using `deletedAt`, and restore removes that attribute. Hard delete must coordinate the S3 object, metadata, shares, and favorites.
-4. Share creation resolves email to Cognito `sub`; only the owner can grant/revoke access. A Viewer can read/download an active shared file; an issued URL remains usable until it expires.
-5. After Lambda changes, build/deploy with SAM. The frontend uses API URL and Cognito IDs from Outputs; it never accesses DynamoDB/S3 with browser credentials.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: In backend/src/index.mjs, build the S3 key from Cognito
+
+In `backend/src/index.mjs`, build the S3 key from Cognito `sub` and a server-generated ID; validate file type/size before returning a PUT URL. On completion, use HeadObject before writing metadata.
+
+### Step 2: For download, sharing, favorites, and Trash, identify the
+
+For download, sharing, favorites, and Trash, identify the caller from claims and check permissions before issuing URLs or changing records. The frontend calls routes through `src/services/documentService.js`.
+
+### Step 3: Favorites are a user/document relation
+
+Favorites are a user/document relation; Trash is a soft delete using `deletedAt`, and restore removes that attribute. Hard delete must coordinate the S3 object, metadata, shares, and favorites.
+
+### Step 4: Share creation resolves email to Cognito sub
+
+Share creation resolves email to Cognito `sub`; only the owner can grant/revoke access. A Viewer can read/download an active shared file; an issued URL remains usable until it expires.
+
+### Step 5: After Lambda changes, build/deploy with SAM
+
+After Lambda changes, build/deploy with SAM. The frontend uses API URL and Cognito IDs from Outputs; it never accesses DynamoDB/S3 with browser credentials.
 
 ### Example: create the key and upload URL
 

@@ -16,10 +16,24 @@ Allow only the frontend origins needed for direct browser upload/download while 
 
 ## Implementation steps
 
-1. Add exact origins to the SAM stack's `AllowedFrontendOrigins`: local Vite and `https://<amplify-domain>`. Update the stack after the Amplify domain exists; the template applies the list to the HTTP API and bucket CORS.
-2. In S3 Console → bucket → Permissions → CORS, compare GET/HEAD/PUT and the required signing/content-type headers. Do not use `*` for the production origin.
-3. Upload flow: the frontend sends file details to Lambda; Lambda verifies the Cognito caller, creates the key server-side, and returns a short-lived PUT presigned URL. The browser PUTs directly to S3 using the signed Content-Type, then calls the complete API; Lambda uses HeadObject before writing DynamoDB metadata.
-4. Download flow: the API verifies owner or active-share access, then returns a short-lived GET presigned URL. Never log or share the URL.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Add exact origins to the SAM stack's
+
+Add exact origins to the SAM stack's `AllowedFrontendOrigins`: local Vite and `https://<amplify-domain>`. Update the stack after the Amplify domain exists; the template applies the list to the HTTP API and bucket CORS.
+
+### Step 2: In S3 Console → bucket → Permissions → CORS, compare
+
+In S3 Console → bucket → Permissions → CORS, compare GET/HEAD/PUT and the required signing/content-type headers. Do not use `*` for the production origin.
+
+### Step 3: Upload flow: the frontend sends file details to Lambda
+
+Upload flow: the frontend sends file details to Lambda; Lambda verifies the Cognito caller, creates the key server-side, and returns a short-lived PUT presigned URL. The browser PUTs directly to S3 using the signed Content-Type, then calls the complete API; Lambda uses HeadObject before writing DynamoDB metadata.
+
+### Step 4: Download flow: the API verifies owner or active-share
+
+Download flow: the API verifies owner or active-share access, then returns a short-lived GET presigned URL. Never log or share the URL.
 
 ## Evidence
 

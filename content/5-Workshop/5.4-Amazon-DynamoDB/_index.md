@@ -12,12 +12,12 @@ This section describes the lab procedure. Confirm AWS resources and results only
 
 ## Objective
 
-Create tables and indexes to support owner document lists, sharing, and per-user favorites.
+Verify the tables and indexes created by SAM for owner document lists, sharing, and per-user favorites.
 
 ## Practical modules
 
-- [5.4.1 Create the Documents Table and Owner Index](5.4.1-Documents-Table-and-Owner-Index/)
-- [5.4.2 Create Shares and Favorites Tables](5.4.2-Shares-Favorites-and-Access-Patterns/)
+- [5.4.1 Verify the Documents Table and Owner Index](5.4.1-Documents-Table-and-Owner-Index/)
+- [5.4.2 Verify Shares and Favorites Tables](5.4.2-Shares-Favorites-and-Access-Patterns/)
 
 ## Note
 

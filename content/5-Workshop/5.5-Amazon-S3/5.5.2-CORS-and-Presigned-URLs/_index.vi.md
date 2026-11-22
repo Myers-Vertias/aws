@@ -16,10 +16,24 @@ Chỉ cho phép frontend origin cần thiết upload/download trực tiếp từ
 
 ## Các bước thực hiện
 
-1. Khai báo origin chính xác trong `AllowedFrontendOrigins` của SAM stack: Vite local và `https://<amplify-domain>`. Cập nhật stack sau khi có domain; template áp dụng danh sách này cho HTTP API và CORS của bucket.
-2. Trong S3 Console → bucket → Permissions → CORS, đối chiếu GET/HEAD/PUT và các header signing/content type cần thiết. Không dùng `*` cho origin production.
-3. Luồng upload: frontend gửi thông tin file tới Lambda; Lambda xác minh Cognito caller, tạo key server-side và trả PUT presigned URL ngắn hạn. Browser PUT thẳng lên S3 với Content-Type đã ký, rồi gọi API complete; Lambda dùng HeadObject xác minh trước khi ghi metadata DynamoDB.
-4. Luồng download: API xác minh owner hoặc share còn hiệu lực rồi trả GET presigned URL ngắn hạn. Không log hoặc chia sẻ URL.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Khai báo origin chính xác trong AllowedFrontendOrigins
+
+Khai báo origin chính xác trong `AllowedFrontendOrigins` của SAM stack: Vite local và `https://<amplify-domain>`. Cập nhật stack sau khi có domain; template áp dụng danh sách này cho HTTP API và CORS của bucket.
+
+### Bước 2: Trong S3 Console → bucket → Permissions → CORS, đối chiếu
+
+Trong S3 Console → bucket → Permissions → CORS, đối chiếu GET/HEAD/PUT và các header signing/content type cần thiết. Không dùng `*` cho origin production.
+
+### Bước 3: Luồng upload: frontend gửi thông tin file tới Lambda
+
+Luồng upload: frontend gửi thông tin file tới Lambda; Lambda xác minh Cognito caller, tạo key server-side và trả PUT presigned URL ngắn hạn. Browser PUT thẳng lên S3 với Content-Type đã ký, rồi gọi API complete; Lambda dùng HeadObject xác minh trước khi ghi metadata DynamoDB.
+
+### Bước 4: Luồng download: API xác minh owner hoặc share còn hiệu
+
+Luồng download: API xác minh owner hoặc share còn hiệu lực rồi trả GET presigned URL ngắn hạn. Không log hoặc chia sẻ URL.
 
 ## Minh chứng
 

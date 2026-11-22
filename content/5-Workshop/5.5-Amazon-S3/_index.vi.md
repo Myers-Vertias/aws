@@ -12,11 +12,11 @@ Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và 
 
 ## Mục tiêu
 
-Tạo kho file riêng tư và cấu hình CORS cho trình duyệt truyền file bằng presigned URL ngắn hạn.
+Kiểm tra bucket file riêng tư do SAM tạo và cấu hình CORS để trình duyệt truyền file bằng presigned URL ngắn hạn.
 
 ## Các bài thực hành
 
-- [5.5.1 Tạo S3 bucket riêng tư](5.5.1-Create-Private-Bucket/)
+- [5.5.1 Xác minh S3 bucket riêng tư](5.5.1-Create-Private-Bucket/)
 - [5.5.2 Cấu hình CORS và truyền file bằng Presigned URL](5.5.2-CORS-and-Presigned-URLs/)
 
 ## Lưu ý

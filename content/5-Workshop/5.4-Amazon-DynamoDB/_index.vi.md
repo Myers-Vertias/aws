@@ -12,12 +12,12 @@ Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và 
 
 ## Mục tiêu
 
-Tạo bảng và index hỗ trợ danh sách tài liệu theo owner, chia sẻ và yêu thích theo người dùng.
+Kiểm tra các bảng và index do SAM tạo để hỗ trợ danh sách tài liệu theo owner, chia sẻ và yêu thích theo người dùng.
 
 ## Các bài thực hành
 
-- [5.4.1 Tạo bảng Documents và owner index](5.4.1-Documents-Table-and-Owner-Index/)
-- [5.4.2 Tạo bảng Shares và Favorites](5.4.2-Shares-Favorites-and-Access-Patterns/)
+- [5.4.1 Xác minh bảng Documents và OwnerIndex](5.4.1-Documents-Table-and-Owner-Index/)
+- [5.4.2 Xác minh bảng Shares và Favorites](5.4.2-Shares-Favorites-and-Access-Patterns/)
 
 ## Lưu ý
 

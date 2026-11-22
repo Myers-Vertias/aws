@@ -30,15 +30,22 @@ This page prepares and runs the application locally. AWS credentials are not nee
 
 ### A. Get the source and run the frontend
 
-1. Install Git, Node.js/npm, AWS CLI v2, AWS SAM CLI, and Docker Desktop. Docker Desktop must be running when using SAM local.
-2. Run the following commands to obtain the source and enter the project directory:
+#### Step 1: Install the required tools
+
+Install Git, Node.js/npm, AWS CLI v2, AWS SAM CLI, and Docker Desktop. Docker Desktop must be running when using SAM local.
+
+#### Step 2: Clone the application repository
+
+Run the following commands to obtain the source and enter the project directory:
 
    ```powershell
    git clone https://github.com/Myers-Vertias/serverless-document-management.git
    Set-Location serverless-document-management
    ```
 
-3. Confirm that the current directory contains `package.json`, `package-lock.json`, and `.env.example`, then check tool versions:
+#### Step 3: Confirm the folder and tool versions
+
+Confirm that the current directory contains `package.json`, `package-lock.json`, and `.env.example`, then check tool versions:
 
    ```powershell
    node --version
@@ -49,13 +56,17 @@ This page prepares and runs the application locally. AWS credentials are not nee
    docker --version
    ```
 
-4. Install the exact dependencies recorded in `package-lock.json`:
+#### Step 4: Install the project dependencies
+
+Install the exact dependencies recorded in `package-lock.json`:
 
    ```powershell
    npm ci
    ```
 
-5. Run lint and create a production build:
+#### Step 5: Check the source and create a build
+
+Run lint and create a production build:
 
    ```powershell
    npm run lint
@@ -64,7 +75,9 @@ This page prepares and runs the application locally. AWS credentials are not nee
 
    Record existing lint warnings; do not confuse warnings with build failures.
 
-6. Create the local configuration file from the template:
+#### Step 6: Create the local environment file
+
+Create the local configuration file from the template:
 
    ```powershell
    Copy-Item .env.example .env.local
@@ -72,50 +85,72 @@ This page prepares and runs the application locally. AWS credentials are not nee
 
    Keep the `replace-with-...` values until the AWS services have been created. Then fill in the Region, Cognito User Pool ID, App Client ID, API URL, and S3 bucket name from the outputs in later deployment sections. Do not commit `.env.local`.
 
-7. Start Vite:
+#### Step 7: Start the local frontend
+
+Start Vite:
 
    ```powershell
    npm run dev
    ```
 
-8. Open the local address printed by Vite, usually `http://localhost:5173`. Confirm that the sign-in page appears. Cognito sign-in works only after the real values have been added to `.env.local`.
+#### Step 8: Open the frontend in a browser
+
+Open the local address printed by Vite, usually `http://localhost:5173`. Confirm that the sign-in page appears. Cognito sign-in works only after the real values have been added to `.env.local`.
 
 ### B. Check the backend locally
 
-1. Open a second terminal and change to the repository's `backend` directory:
+#### Step 1: Open the backend in a second terminal
+
+Open a second terminal and change to the repository's `backend` directory:
 
    ```powershell
    Set-Location backend
    ```
 
-2. Validate the SAM template and build the Lambda functions:
+#### Step 2: Validate and build the SAM project
+
+Validate the SAM template and build the Lambda functions:
 
    ```powershell
    sam validate --lint
    sam build
    ```
 
-3. If Docker Desktop is running, start the local API:
+#### Step 3: Start the local API with Docker
+
+If Docker Desktop is running, start the local API:
 
    ```powershell
    sam local start-api --port 3000
    ```
 
-4. Open `http://127.0.0.1:3000/health`. The expected response is:
+#### Step 4: Check the local health endpoint
+
+Open `http://127.0.0.1:3000/health`. The expected response is:
 
    ```json
    {"status":"ok","service":"dms-api"}
    ```
 
-5. Press `Ctrl+C` to stop the local processes when finished.
+#### Step 5: Stop the local processes
+
+Press `Ctrl+C` to stop the local processes when finished.
 
 This health endpoint confirms only that the local API starts. It does not verify Cognito, DynamoDB, S3, or the deployed API; those are configured separately in later sections.
 
 ### C. Prepare for AWS steps
 
-1. Continue to section 5.1.2 to select the AWS account/Region and configure a lab identity. Use an appropriately permissioned development identity, not root.
-2. After configuring a personal profile, verify the identity with `aws sts get-caller-identity --profile <lab-profile>`. Replace `<lab-profile>` with the learner's profile name; do not use the instructor's profile.
-3. Create a Git branch or commit to preserve the current state before backend integration.
+#### Step 1: Prepare the AWS account and identity
+
+Continue to section 5.1.2 to select the AWS account/Region and configure a lab identity. Use an appropriately permissioned development identity, not root.
+
+#### Step 2: Verify the AWS CLI profile
+
+After configuring a personal profile, verify the identity with `aws sts get-caller-identity --profile <lab-profile>`. Replace `<lab-profile>` with the learner's profile name; do not use the instructor's profile.
+
+#### Step 3: Save a clean source checkpoint
+
+Create a Git branch or commit to preserve the current state before backend integration.
 
 ## Baseline recorded on 2026-11-10
 

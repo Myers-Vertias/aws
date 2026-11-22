@@ -10,6 +10,19 @@ pre: " <b> 5. </b> "
 
 This workshop guides learners from the existing React/Vite frontend to an AWS-backed document-management application.
 
+## How to follow the workshop
+
+For a first-time setup, follow the sequence below. Sections 5.3–5.7 explain and verify each service; **you do not need to create these resources one by one in the Console**, because SAM provisions the resources described in section 5.1.3.
+
+1. Complete [5.1 Prerequisites](5.1-Prerequisites/) to install the tools and prepare an AWS account.
+2. Read [5.2 Backend Design](5.2-Backend-Design/) to understand the data flow and model before deployment.
+3. Follow [5.1.3 AWS SAM Backend Deployment Runbook](5.1-Prerequisites/5.1.3-Backend-Deployment-Runbook/) to create the backend and record its Outputs.
+4. Use sections 5.3–5.7 to compare Cognito, DynamoDB, S3, Lambda, and API Gateway with the deployed stack.
+5. Follow [5.8 Frontend Integration](5.8-Frontend-Integration/) and [5.9 AWS Amplify Hosting](5.9-Amplify-Hosting/), then run the checks in section 5.10.
+6. Follow [5.12 Cleanup](5.12-Cleanup/) only after saving evidence and when the application is no longer needed.
+
+The screenshots in section 5 record a previous completed deployment. The project's AWS resources were deleted on November 19, 2026. Learners must deploy a new stack in their own account/Region and must not reuse IDs or URLs shown in screenshots.
+
 {{% notice warning %}}
 **Implementation status (15 November 2026):** The `dms-dev` application is deployed in `ap-southeast-1`, and the React frontend is available through Amplify. Real Cognito sign-in, authenticated API access, S3 upload/download, document metadata, Favorites, Trash/restore, and two-user sharing have been observed.
 {{% /notice %}}

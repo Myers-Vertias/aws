@@ -14,21 +14,37 @@ Frontend services target the deployed AWS API. The `dms-dev` stack update comple
 
 Move document reads/writes to the backend and test upload/download and all existing features.
 
-## Implementation steps
+## Feature verification walkthrough
 
-1. The service layer calls API Gateway for document lists/details, favorites, sharing, Trash, metadata updates, and deletion.
-2. Upload uses three steps: request a presigned URL, PUT directly to S3 with Content-Type, then call the completion endpoint for Lambda to verify the object and write metadata to DynamoDB. The `x-amz-meta-document-id` metadata is already embedded in the presigned URL, so the frontend must not send it again as a header.
-3. Downloads use a presigned URL issued by the API after its permission check. API routes require a Cognito ID token.
-4. The frontend production build succeeded. Cognito sign-up/sign-in, API presigned URL issuance, direct upload of `Konoka.png` to S3, and its appearance in the document list with `Active` status were verified, confirming the completion API/DynamoDB metadata flow. Downloading `Konoka.png` through a presigned URL also succeeded; the browser marked the 183 KB file as done and it opened successfully.
-5. Added an unauthenticated `OPTIONS /{proxy+}` route for CORS preflight; stack `dms-dev` reached `UPDATE_COMPLETE`. When S3 PUT returned 403, its response identified an unsigned request header. Since the URL already contained the metadata, the frontend was changed to send only Content-Type. The subsequent upload succeeded.
-6. Marked `Konoka.png` as a favorite; it appeared on the Favorites page with the star enabled.
-7. Re-uploaded `Konoka.png` after an earlier accidental permanent deletion. Used the Move to Trash action from Documents; the file appeared in Trash with its filename, PNG format, and 183.2 KB size.
-8. Successfully restored `Konoka.png` from Trash. The Trash list became empty and the document reappeared in Documents with `Active` status.
-9. Shared `Konoka.png` with a second Cognito account. After signing in as the recipient, the document appeared under **Shared With Me**, including its filename, PNG format, 183.2 KB size, and owner. This verifies the sharing API and the recipient's shared-document query.
-10. From the recipient account, opened the document details and downloaded `Konoka.png` using an S3 presigned URL. The browser marked `Konoka (1).png` (183 KB) as complete, confirming that the recipient can access the file contents.
-11. Updated `Konoka.png` metadata by changing its category to **Work** and description to **ảnh Konoka**. After saving, the detail page showed the new values; the screenshot also confirms the category and tags are no longer duplicated.
-12. Configured `VITE_S3_BUCKET_NAME` in `.env.local` with the `dms-dev` stack bucket so the S3 path on the detail page no longer uses the sample bucket name.
-13. With the local frontend signed in, opened Documents and inspected Network. Both `GET /documents?view=owned&status=active` requests returned **HTTP 200**, and `Konoka.png` appeared in the list.
+The application repository already contains the frontend/API integration. If you are using this source version, you do not need to rewrite the service layer. Complete section 5.8.1 first, then follow the actions below. The screenshots at the end of this page show results from the earlier verification run.
+
+### Step 1: Sign in and upload a test file
+
+Sign in with a confirmed Cognito account. In **Documents**, upload a supported sample file smaller than 20 MiB. Wait for the upload to finish. The expected result is that the file appears in the list with `Active` status.
+
+The app performs this flow: the frontend requests a presigned URL from the API, the browser PUTs the file directly to S3, and the frontend calls the completion API. Lambda verifies the object and writes its metadata to DynamoDB. Do not upload the file manually in the S3 Console as a substitute for this test.
+
+### Step 2: Download the uploaded file
+
+Select the file and choose **Download**. The API validates the Cognito ID token and access permission before issuing a presigned URL. The expected result is that the file downloads and opens. Do not share the presigned URL because it grants temporary access.
+
+### Step 3: Update metadata and add the file to Favorites
+
+Open the file details, choose the metadata edit action, change its category, description, or tags, and save. Reload the details page to confirm the values persist. Select the star control to add the file to **Favorites**, then open Favorites and confirm it appears.
+
+### Step 4: Move the file to Trash and restore it
+
+From **Documents**, move the file to **Trash**. Open Trash and confirm the file appears there and is no longer in the active list. Choose **Restore**, return to Documents, and confirm the file is back with `Active` status.
+
+### Step 5: Test sharing with a second account
+
+Sign in as the owner, open the file's sharing action, and enter the email address of a second registered Cognito account. Sign out, then sign in as the recipient. Open **Shared With Me**, confirm the file appears, and try downloading it. The recipient should be able to download, but should not be able to edit or delete the owner's file. Section 5.10.2 records this workflow separately.
+
+### Step 6: Check the API request and remaining features
+
+Open Developer Tools → **Network**, refresh Documents, and select `GET /documents?view=owned&status=active`. An authenticated request should return HTTP `200`. Also check category filtering, tag search, and language selection as described in section 5.10.3.
+
+If upload returns `403`, inspect CORS and request headers in section 5.5.2. This project signs `x-amz-meta-document-id` into the presigned URL, so the frontend sends only `Content-Type` with the PUT request and does not resend the metadata header.
 
 ## Screenshots and remaining evidence
 

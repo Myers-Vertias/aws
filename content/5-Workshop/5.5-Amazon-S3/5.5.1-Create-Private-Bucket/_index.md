@@ -1,5 +1,5 @@
 ---
-title: "Create a Private S3 Bucket"
+title: "Verify the Private S3 Bucket"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ This page records the deployed implementation and observed results. Any unverifi
 
 ## Objective
 
-Create the file bucket with public access blocked and encryption enabled.
+Verify the document bucket created by SAM has public access blocked and encryption enabled.
 
 ## Implementation steps
 
-1. Deploy the SAM stack from section 5.1.3; the template creates the Documents bucket and generates its unique name. Do not create a duplicate bucket or use the example name.
-2. In CloudFormation → stack → Outputs, get `DocumentsBucketName`; use Resources to open `DocumentsBucket` in the S3 Console.
-3. In Permissions, confirm all four Block Public Access controls are enabled and there is no public bucket policy/ACL. In Properties, confirm default SSE-S3 (AES-256) encryption.
-4. Keep the bucket private. Enable versioning only if version lifecycle and deletion of all object versions/delete markers are also planned.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Deploy the SAM stack from section 5.1.3
+
+Deploy the SAM stack from section 5.1.3; the template creates the Documents bucket and generates its unique name. Do not create a duplicate bucket or use the example name.
+
+### Step 2: In CloudFormation → stack → Outputs, get
+
+In CloudFormation → stack → Outputs, get `DocumentsBucketName`; use Resources to open `DocumentsBucket` in the S3 Console.
+
+### Step 3: In Permissions, confirm all four Block Public Access
+
+In Permissions, confirm all four Block Public Access controls are enabled and there is no public bucket policy/ACL. In Properties, confirm default SSE-S3 (AES-256) encryption.
+
+### Step 4: Keep the bucket private
+
+Keep the bucket private. Enable versioning only if version lifecycle and deletion of all object versions/delete markers are also planned.
 
 ## Deployment evidence
 

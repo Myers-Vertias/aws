@@ -14,21 +14,37 @@ Service frontend gọi AWS API đã triển khai. Stack `dms-dev` cập nhật t
 
 Chuyển đọc/ghi tài liệu sang backend và kiểm thử upload/download cùng các feature hiện có.
 
-## Các bước thực hiện
+## Hướng dẫn kiểm tra các tính năng
 
-1. Service layer gọi API Gateway cho danh sách/chi tiết tài liệu, favorites, chia sẻ, thùng rác, metadata và xóa.
-2. Upload theo ba bước: lấy presigned URL, PUT trực tiếp lên S3 với Content-Type, rồi gọi API hoàn tất để Lambda kiểm tra object và ghi metadata vào DynamoDB. Metadata `x-amz-meta-document-id` đã nằm trong presigned URL nên frontend không gửi lặp lại header này.
-3. Download dùng presigned URL do API cấp sau khi kiểm tra quyền. API yêu cầu Cognito ID token.
-4. Frontend production build đã thành công. Đã đăng ký/đăng nhập bằng Cognito, lấy presigned URL từ API, tải `Konoka.png` trực tiếp lên S3 và thấy tài liệu xuất hiện trong danh sách với trạng thái `Active`, xác nhận bước hoàn tất metadata qua API/DynamoDB. Tải xuống `Konoka.png` bằng presigned URL cũng thành công; trình duyệt báo tải xong và file mở được.
-5. Đã thêm route `OPTIONS /{proxy+}` không yêu cầu xác thực để xử lý CORS preflight; stack `dms-dev` cập nhật `UPDATE_COMPLETE`. Khi PUT S3 trả 403, phản hồi cho biết request có header chưa được ký. URL đã chứa metadata, nên frontend được sửa để chỉ gửi Content-Type. Upload sau đó thành công.
-6. Đã đánh dấu `Konoka.png` là yêu thích; tài liệu xuất hiện trong mục Favorites với biểu tượng sao bật.
-7. Đã upload lại `Konoka.png` sau lần xóa vĩnh viễn ngoài ý muốn. Dùng thao tác chuyển vào Thùng rác từ Kho tài liệu; file xuất hiện trong Thùng rác với tên, định dạng PNG và kích thước 183.2 KB.
-8. Khôi phục `Konoka.png` từ Thùng rác thành công. Danh sách Thùng rác trở về trạng thái trống và tài liệu xuất hiện lại trong Kho tài liệu với trạng thái `Hoạt động`.
-9. Chia sẻ `Konoka.png` tới tài khoản Cognito thứ hai. Sau khi đăng nhập bằng tài khoản nhận, tài liệu xuất hiện trong mục **Được chia sẻ với tôi**, hiển thị tên tệp, định dạng PNG, kích thước 183.2 KB và chủ sở hữu. Điều này xác nhận API chia sẻ và truy vấn danh sách tài liệu nhận đã hoạt động.
-10. Từ tài khoản nhận, mở chi tiết tài liệu và tải `Konoka.png` bằng S3 Presigned URL. Trình duyệt báo tải xuống hoàn tất với tệp `Konoka (1).png`, dung lượng 183 KB, xác nhận người nhận có quyền truy cập nội dung file.
-11. Sửa metadata `Konoka.png`: cập nhật danh mục thành **Công việc** và mô tả thành **ảnh Konoka**. Sau khi lưu, trang chi tiết hiển thị các giá trị mới; ảnh chụp cũng xác nhận danh mục và thẻ không còn bị lặp.
-12. Cấu hình `VITE_S3_BUCKET_NAME` trong `.env.local` theo bucket của stack `dms-dev` để đường dẫn S3 trên trang chi tiết không còn dùng tên bucket mẫu.
-13. Khi frontend local đang đăng nhập, mở Kho tài liệu và kiểm tra Network. Cả hai request `GET /documents?view=owned&status=active` đều trả về **HTTP 200**, đồng thời `Konoka.png` xuất hiện trong danh sách.
+Repo ứng dụng đã có frontend kết nối API; nếu dùng đúng mã nguồn này thì không cần tự viết lại service. Hoàn thành mục 5.8.1 trước, rồi làm từng thao tác dưới đây. Các ảnh ở cuối trang là kết quả lần kiểm thử trước, dùng để đối chiếu giao diện và trạng thái.
+
+### Bước 1: Đăng nhập và tải một file thử nghiệm
+
+Đăng nhập bằng tài khoản Cognito đã xác nhận. Trong **Kho tài liệu**, chọn tải lên một file mẫu được hỗ trợ và nhỏ hơn 20 MiB. Chờ quá trình hoàn tất. Kết quả cần thấy là file xuất hiện trong danh sách với trạng thái `Active`.
+
+Luồng bên dưới tự động diễn ra: frontend xin presigned URL từ API, trình duyệt PUT nội dung trực tiếp lên S3, sau đó frontend gọi API hoàn tất. Lambda xác minh object rồi ghi metadata vào DynamoDB. Không tải file trực tiếp lên bucket bằng Console để thay cho bước này.
+
+### Bước 2: Tải file lên S3 và kiểm tra chức năng tải xuống
+
+Chọn file trong danh sách rồi chọn **Download**. API kiểm tra Cognito ID token và quyền truy cập trước khi cấp presigned URL. Kết quả cần thấy là file được tải về và mở được. Không chia sẻ presigned URL vì URL có quyền truy cập tạm thời.
+
+### Bước 3: Sửa metadata và đánh dấu yêu thích
+
+Mở trang chi tiết của file, chọn sửa metadata, cập nhật danh mục, mô tả hoặc thẻ rồi lưu. Tải lại trang chi tiết để xác nhận các giá trị vẫn còn. Dùng nút hình sao để thêm file vào **Favorites**, mở trang Favorites và xác nhận file xuất hiện.
+
+### Bước 4: Chuyển file vào Thùng rác rồi khôi phục
+
+Từ **Kho tài liệu**, chọn đưa file vào **Thùng rác**. Mở Thùng rác và xác nhận file xuất hiện ở đó, không còn trong danh sách đang hoạt động. Chọn **Khôi phục**, quay lại Kho tài liệu và xác nhận file trở lại trạng thái `Active`.
+
+### Bước 5: Kiểm thử chia sẻ bằng tài khoản thứ hai
+
+Đăng nhập bằng tài khoản owner, mở chia sẻ của file và nhập email tài khoản recipient đã đăng ký Cognito. Đăng xuất owner rồi đăng nhập recipient. Mở **Được chia sẻ với tôi**, xác nhận file xuất hiện và thử tải xuống. Kết quả mong đợi là recipient tải được file nhưng không có quyền sửa hoặc xóa file của owner. Thao tác này cũng được ghi riêng ở mục 5.10.2.
+
+### Bước 6: Kiểm tra request API và các tính năng còn lại
+
+Mở Developer Tools → **Network**, tải lại Kho tài liệu và chọn request `GET /documents?view=owned&status=active`. Request của phiên đăng nhập cần trả HTTP `200`. Kiểm tra thêm lọc theo danh mục, tìm theo thẻ và chuyển ngôn ngữ theo mục 5.10.3.
+
+Nếu upload trả `403`, kiểm tra lỗi CORS/header ở mục 5.5.2. Với luồng của project, presigned URL đã ký metadata `x-amz-meta-document-id`; frontend chỉ gửi `Content-Type` khi PUT, không tự gửi lại header metadata này.
 
 ## Vị trí ảnh chụp màn hình
 

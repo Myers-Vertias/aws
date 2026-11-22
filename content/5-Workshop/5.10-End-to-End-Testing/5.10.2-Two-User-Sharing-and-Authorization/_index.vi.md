@@ -6,10 +6,24 @@ Xác nhận người sở hữu có thể chia sẻ tài liệu với tài kho�
 
 ## Các bước thực hiện
 
-1. Đăng nhập bằng tài khoản người sở hữu và tải một tài liệu lên hệ thống.
-2. Chia sẻ tài liệu với email của tài khoản người nhận.
-3. Đăng xuất, đăng nhập bằng tài khoản người nhận.
-4. Mở mục **Được chia sẻ với tôi**, xác nhận tài liệu xuất hiện, sau đó tải xuống.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Đăng nhập bằng tài khoản người sở hữu và tải một tài liệu
+
+Đăng nhập bằng tài khoản người sở hữu và tải một tài liệu lên hệ thống.
+
+### Bước 2: Chia sẻ tài liệu với email của tài khoản người nhận
+
+Chia sẻ tài liệu với email của tài khoản người nhận.
+
+### Bước 3: Đăng xuất, đăng nhập bằng tài khoản người nhận
+
+Đăng xuất, đăng nhập bằng tài khoản người nhận.
+
+### Bước 4: Mở mục Được chia sẻ với tôi, xác nhận tài liệu xuất hiện
+
+Mở mục **Được chia sẻ với tôi**, xác nhận tài liệu xuất hiện, sau đó tải xuống.
 
 ## Kết quả đã xác minh
 

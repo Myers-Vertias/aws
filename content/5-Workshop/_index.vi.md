@@ -10,6 +10,19 @@ pre: " <b> 5. </b> "
 
 Workshop này hướng dẫn xây dựng UniCloud DMS từ frontend React/Vite hiện có đến ứng dụng quản lý tài liệu được backend AWS hỗ trợ.
 
+## Cách làm theo Workshop
+
+Nếu lần đầu cài đặt, hãy đọc theo thứ tự dưới đây. Các mục 5.3–5.7 giải thích và giúp kiểm tra dịch vụ; **không cần tạo thủ công từng dịch vụ trong Console**, vì SAM tạo các tài nguyên được mô tả trong mục 5.1.3.
+
+1. Hoàn thành [5.1 Điều kiện tiên quyết](5.1-Prerequisites/) để cài công cụ và chuẩn bị tài khoản AWS.
+2. Đọc [5.2 Thiết kế Backend](5.2-Backend-Design/) để hiểu luồng dữ liệu và mô hình trước khi deploy.
+3. Làm theo [5.1.3 Quy trình triển khai Backend bằng AWS SAM](5.1-Prerequisites/5.1.3-Backend-Deployment-Runbook/) để tạo backend và ghi lại các Outputs.
+4. Dùng các mục 5.3–5.7 để đối chiếu Cognito, DynamoDB, S3, Lambda và API Gateway với stack đã tạo.
+5. Làm theo [5.8 Tích hợp Frontend](5.8-Frontend-Integration/) và [5.9 AWS Amplify Hosting](5.9-Amplify-Hosting/), rồi chạy kiểm tra ở mục 5.10.
+6. Chỉ làm [5.12 Dọn dẹp](5.12-Cleanup/) sau khi đã lưu minh chứng và không còn cần ứng dụng hoạt động.
+
+Các ảnh ở phần 5 ghi nhận cấu hình của lần triển khai đã hoàn tất trước đây. Tài nguyên AWS của dự án được dọn ngày 19/11/2026, nên người làm theo cần deploy stack mới bằng account/Region của mình và không dùng lại ID/URL trong ảnh.
+
 {{% notice warning %}}
 **Trạng thái triển khai (15 tháng 11 năm 2026):** Ứng dụng `dms-dev` đã triển khai tại `ap-southeast-1`; frontend React đang được phục vụ qua Amplify. Đã quan sát đăng nhập Cognito thật, gọi API có xác thực, upload/download S3, lưu metadata, Favorites, Thùng rác/khôi phục và chia sẻ giữa hai tài khoản.
 {{% /notice %}}

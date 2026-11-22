@@ -16,11 +16,28 @@ Implement create/list/detail/update operations using the authenticated caller an
 
 ## Implementation steps
 
-1. Open `backend/src/index.mjs` and use the API Gateway dispatcher to route by method/path; read the caller `sub` from authorizer-verified JWT claims. Never accept an owner ID from the frontend body.
-2. Query the owner's list with `OwnerIndex` and fetch details by `documentId`; check ownership or an active share record before returning data.
-3. The upload-completion API verifies the S3 object with `HeadObject`, then writes its metadata item to the Documents table. Keep metadata and bytes separate: DynamoDB stores file details, while S3 stores file contents.
-4. PATCH metadata accepts only `description`, `category`, and `tags`; validate types/limits and allow only the owner to update an active file. Return consistent DTO/error JSON with HTTP status.
-5. After code changes, run `sam validate --lint` and `sam build` from `backend/`, then deploy using section 5.1.3 after reviewing the change set.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Open backend/src/index.mjs and use the API Gateway
+
+Open `backend/src/index.mjs` and use the API Gateway dispatcher to route by method/path; read the caller `sub` from authorizer-verified JWT claims. Never accept an owner ID from the frontend body.
+
+### Step 2: Query the owner's list with OwnerIndex and fetch details
+
+Query the owner's list with `OwnerIndex` and fetch details by `documentId`; check ownership or an active share record before returning data.
+
+### Step 3: Verify the uploaded S3 object before saving metadata
+
+The upload-completion API verifies the S3 object with `HeadObject`, then writes its metadata item to the Documents table. Keep metadata and bytes separate: DynamoDB stores file details, while S3 stores file contents.
+
+### Step 4: Limit PATCH updates to approved metadata fields
+
+PATCH metadata accepts only `description`, `category`, and `tags`; validate types/limits and allow only the owner to update an active file. Return consistent DTO/error JSON with HTTP status.
+
+### Step 5: After code changes, run sam validate --lint and sam build
+
+After code changes, run `sam validate --lint` and `sam build` from `backend/`, then deploy using section 5.1.3 after reviewing the change set.
 
 ### Example: read identity from JWT claims
 

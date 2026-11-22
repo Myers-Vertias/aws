@@ -16,10 +16,24 @@ Record actual outcomes for the sign-in, metadata, upload, view, and download flo
 
 ## Implementation steps
 
-1. Open the frontend configured in section 5.8.1, sign in with the Cognito lab account, and open Documents.
-2. Select a supported sample under 20 MiB and upload it. Wait for `Active`; file bytes go directly to the private S3 bucket, while metadata is written to DynamoDB through the API.
-3. Open details, update an allowed category/description/tag, and save. Return to the list and reopen details to confirm the saved values; use Download to retrieve the file through a presigned URL.
-4. To observe upload limits, select an unsupported extension and a file over 20 MiB. The form rejects the file before upload completes; the API also rejects oversized metadata before issuing a presigned URL.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Open the frontend configured in section 5.8.1, sign in
+
+Open the frontend configured in section 5.8.1, sign in with the Cognito lab account, and open Documents.
+
+### Step 2: Select a supported sample under 20 MiB and upload it
+
+Select a supported sample under 20 MiB and upload it. Wait for `Active`; file bytes go directly to the private S3 bucket, while metadata is written to DynamoDB through the API.
+
+### Step 3: Open details, update an allowed category/description/tag
+
+Open details, update an allowed category/description/tag, and save. Return to the list and reopen details to confirm the saved values; use Download to retrieve the file through a presigned URL.
+
+### Step 4: To observe upload limits, select an unsupported extension
+
+To observe upload limits, select an unsupported extension and a file over 20 MiB. The form rejects the file before upload completes; the API also rejects oversized metadata before issuing a presigned URL.
 
 ## Screenshots and remaining evidence
 

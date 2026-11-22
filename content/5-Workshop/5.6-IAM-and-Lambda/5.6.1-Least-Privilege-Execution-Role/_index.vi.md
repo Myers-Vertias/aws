@@ -16,10 +16,24 @@ Tạo execution role riêng cho Lambda và cấp quyền theo nhu cầu thực t
 
 ## Các bước thực hiện
 
-1. Tạo execution role theo mục 5.1.3 với trusted entity Lambda và policy `AWSLambdaBasicExecutionRole` để ghi CloudWatch Logs. Lấy ARN vì SAM yêu cầu parameter `LambdaExecutionRoleArn`.
-2. Deploy stack trước để sinh tên bảng, bucket và User Pool. Sau đó thay placeholder trong `backend/iam/lambda-runtime-policy.template.json` bằng đúng ARN/tên resource lấy từ Outputs và gắn policy runtime vào role.
-3. Mở IAM → Roles → role của Lambda → Permissions để xem policy. Giữ quyền ở đúng ba DynamoDB table/index, prefix tài liệu trong S3 và User Pool của project.
-4. Danh tính triển khai cần `iam:PassRole` giới hạn cho role này và Lambda. Không gắn quyền IAM rộng vào Lambda role.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Tạo execution role theo mục 5.1.3 với trusted entity
+
+Tạo execution role theo mục 5.1.3 với trusted entity Lambda và policy `AWSLambdaBasicExecutionRole` để ghi CloudWatch Logs. Lấy ARN vì SAM yêu cầu parameter `LambdaExecutionRoleArn`.
+
+### Bước 2: Deploy stack trước để sinh tên bảng, bucket và User Pool
+
+Deploy stack trước để sinh tên bảng, bucket và User Pool. Sau đó thay placeholder trong `backend/iam/lambda-runtime-policy.template.json` bằng đúng ARN/tên resource lấy từ Outputs và gắn policy runtime vào role.
+
+### Bước 3: Mở IAM → Roles → role của Lambda → Permissions để xem
+
+Mở IAM → Roles → role của Lambda → Permissions để xem policy. Giữ quyền ở đúng ba DynamoDB table/index, prefix tài liệu trong S3 và User Pool của project.
+
+### Bước 4: Danh tính triển khai cần iam:PassRole giới hạn cho role
+
+Danh tính triển khai cần `iam:PassRole` giới hạn cho role này và Lambda. Không gắn quyền IAM rộng vào Lambda role.
 
 ## Vị trí ảnh chụp màn hình
 

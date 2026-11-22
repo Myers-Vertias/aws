@@ -12,11 +12,11 @@ This section describes the lab procedure. Confirm AWS resources and results only
 
 ## Objective
 
-Create private file storage and configure CORS for browser transfers using short-lived presigned URLs.
+Verify the private file bucket created by SAM and configure CORS for browser transfers using short-lived presigned URLs.
 
 ## Practical modules
 
-- [5.5.1 Create a Private S3 Bucket](5.5.1-Create-Private-Bucket/)
+- [5.5.1 Verify the Private S3 Bucket](5.5.1-Create-Private-Bucket/)
 - [5.5.2 Configure CORS and Presigned URL Transfers](5.5.2-CORS-and-Presigned-URLs/)
 
 ## Note

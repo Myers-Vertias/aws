@@ -16,8 +16,8 @@ Expose the Lambda handlers through protected HTTP routes and verify valid and de
 
 ## Practical modules
 
-- [5.7.1 Create the HTTP API and Routes](5.7.1-Create-HTTP-API-and-Routes/)
-- [5.7.2 Configure JWT Authorization, CORS, and Tests](5.7.2-JWT-Authorizer-CORS-and-Testing/)
+- [5.7.1 Verify the HTTP API and Routes](5.7.1-Create-HTTP-API-and-Routes/)
+- [5.7.2 Verify JWT Authorization, CORS, and Tests](5.7.2-JWT-Authorizer-CORS-and-Testing/)
 
 ## Note
 

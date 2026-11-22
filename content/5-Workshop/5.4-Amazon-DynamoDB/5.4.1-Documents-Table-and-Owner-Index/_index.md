@@ -1,5 +1,5 @@
 ---
-title: "Create the Documents Table and Owner Index"
+title: "Verify the Documents Table and Owner Index"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ This page records the deployed implementation and observed results. Any unverifi
 
 ## Objective
 
-Create the main metadata table using the approved key design.
+Verify the main metadata table and owner index created by SAM against the approved key design.
 
 ## Implementation steps
 
-1. Deploy the SAM template from section 5.1.3; do not manually create a duplicate table. The template names it `<stack-name>-documents`, uses `PAY_PER_REQUEST`, and creates `OwnerIndex`.
-2. Open CloudFormation → the lab stack → Resources and select `DocumentsTable` to open DynamoDB. Alternatively, open DynamoDB → Tables and find `<stack-name>-documents` in the same Region.
-3. In Table details, confirm String partition key `documentId`, no sort key, On-demand capacity, and Active status. Open Indexes and confirm `OwnerIndex` has String partition key `ownerSub` and String sort key `createdAtDocumentId`.
-4. Record the table and index names for Lambda. Owner listings use Query on the GSI, not a full table Scan.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Deploy the SAM template from section 5.1.3
+
+Deploy the SAM template from section 5.1.3; do not manually create a duplicate table. The template names it `<stack-name>-documents`, uses `PAY_PER_REQUEST`, and creates `OwnerIndex`.
+
+### Step 2: Open CloudFormation → the lab stack → Resources and
+
+Open CloudFormation → the lab stack → Resources and select `DocumentsTable` to open DynamoDB. Alternatively, open DynamoDB → Tables and find `<stack-name>-documents` in the same Region.
+
+### Step 3: In Table details, confirm String partition key
+
+In Table details, confirm String partition key `documentId`, no sort key, On-demand capacity, and Active status. Open Indexes and confirm `OwnerIndex` has String partition key `ownerSub` and String sort key `createdAtDocumentId`.
+
+### Step 4: Record the table and index names for Lambda
+
+Record the table and index names for Lambda. Owner listings use Query on the GSI, not a full table Scan.
 
 ## Screenshot and remaining evidence
 

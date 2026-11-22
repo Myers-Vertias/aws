@@ -12,12 +12,12 @@ This section describes the lab procedure. Confirm AWS resources and results only
 
 ## Objective
 
-Create a development User Pool and public SPA app client, then integrate and test real authentication.
+Verify the User Pool and public SPA app client created by SAM, then test real authentication.
 
 ## Practical modules
 
-- [5.3.1 Create a Cognito User Pool](5.3.1-Create-User-Pool/)
-- [5.3.2 Configure the App Client and Test Authentication](5.3.2-App-Client-and-Authentication/)
+- [5.3.1 Verify the Cognito User Pool](5.3.1-Create-User-Pool/)
+- [5.3.2 Verify the App Client and Authentication](5.3.2-App-Client-and-Authentication/)
 
 ## Note
 

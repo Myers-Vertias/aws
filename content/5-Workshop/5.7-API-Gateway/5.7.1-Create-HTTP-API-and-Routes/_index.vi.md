@@ -1,5 +1,5 @@
 ---
-title: "Tạo HTTP API và Route"
+title: "Xác minh HTTP API và Route"
 date: 2026-10-16
 weight: 1
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Kết nối API Gateway route với Lambda integration tương ứng.
+Kiểm tra API Gateway routes và Lambda integrations do SAM tạo.
 
 ## Các bước thực hiện
 
-1. Deploy SAM stack tại mục 5.1.3; template tạo HTTP API, stage và Lambda integrations, không tạo API thủ công trùng.
-2. Trong CloudFormation → stack → Resources, mở `DocumentsApi` để vào API Gateway. Trong Routes, đối chiếu `GET /health`, `ANY /{proxy+}` và `OPTIONS /{proxy+}`; trong Integrations xác nhận health và document Lambda riêng.
-3. Mở Stages, xác nhận `$default`; lấy `ApiBaseUrl` từ Outputs. Template dùng payload format 2.0 và cấu hình timeout theo SAM.
-4. Nếu thay route hoặc handler, sửa `backend/template.yaml`, validate/build/deploy lại bằng SAM và xem change set. Giữ route khớp với `src/services`.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Deploy SAM stack tại mục 5.1.3
+
+Deploy SAM stack tại mục 5.1.3; template tạo HTTP API, stage và Lambda integrations, không tạo API thủ công trùng.
+
+### Bước 2: Trong CloudFormation → stack → Resources, mở DocumentsApi
+
+Trong CloudFormation → stack → Resources, mở `DocumentsApi` để vào API Gateway. Trong Routes, đối chiếu `GET /health`, `ANY /{proxy+}` và `OPTIONS /{proxy+}`; trong Integrations xác nhận health và document Lambda riêng.
+
+### Bước 3: Mở Stages, xác nhận $default
+
+Mở Stages, xác nhận `$default`; lấy `ApiBaseUrl` từ Outputs. Template dùng payload format 2.0 và cấu hình timeout theo SAM.
+
+### Bước 4: Nếu thay route hoặc handler, sửa backend/template.yaml
+
+Nếu thay route hoặc handler, sửa `backend/template.yaml`, validate/build/deploy lại bằng SAM và xem change set. Giữ route khớp với `src/services`.
 
 ## Route và integration đang triển khai
 

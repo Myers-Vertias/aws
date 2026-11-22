@@ -12,62 +12,137 @@ Triển khai backend UniCloud DMS theo một quy trình có thể lặp lại. A
 
 ## 1. Chuẩn bị tài khoản và profile
 
-1. Đăng nhập AWS Console bằng tài khoản lab được cấp và chọn một Region xuyên suốt. Dự án mẫu dùng `ap-southeast-1` (Singapore).
-2. Mở Billing and Cost Management, xem giá dịch vụ dự kiến và tạo AWS Budget cùng cảnh báo. Budget chỉ gửi thông báo, không tự dừng dịch vụ.
-3. Cấu hình AWS CLI bằng IAM Identity Center nếu tổ chức có SSO:
+### Bước 1: Xác nhận quyền triển khai và chọn AWS account
 
-   ```powershell
-   aws configure sso --profile unicloud-lab
-   aws sso login --profile unicloud-lab
-   aws sts get-caller-identity --profile unicloud-lab
-   ```
+Đăng nhập bằng tài khoản lab hoặc role do công ty/trường cấp, rồi chọn một Region cho toàn bộ workshop. Dự án mẫu dùng `ap-southeast-1` (Singapore). Danh tính triển khai cần quyền dùng CloudFormation, Lambda, Cognito, API Gateway, DynamoDB, S3 và CloudWatch, cùng quyền `iam:PassRole` giới hạn vào Lambda execution role của workshop. SAM cũng cần tạo/dùng bucket artifact riêng.
 
-   Nếu môi trường học tập không có SSO, dùng danh tính IAM được quản trị viên phê duyệt với quyền vừa đủ. Không dùng root access key, không chia sẻ access key và không chép credentials vào repository. Lệnh `get-caller-identity` phải trả về đúng tài khoản dự định triển khai trước khi tiếp tục.
+Nếu chưa có các quyền trên, nhờ quản trị viên cấp lab role hoặc permission set phù hợp trước khi làm tiếp. Không dùng root key hoặc cấp `AdministratorAccess` chỉ để vượt lỗi.
+
+### Bước 2: Kiểm tra chi phí dự kiến và tạo cảnh báo
+
+Mở **Billing and Cost Management**, xem giá các dịch vụ sẽ dùng và tạo AWS Budget với cảnh báo actual/forecast phù hợp. Budget chỉ gửi thông báo, không tự dừng tài nguyên hoặc giới hạn chi tiêu.
+
+### Bước 3: Cấu hình và xác nhận AWS CLI profile
+
+Cài AWS CLI v2 trước. Nếu tổ chức dùng IAM Identity Center, mở PowerShell và chạy lần lượt:
+
+```powershell
+aws configure sso --profile unicloud-lab
+aws sso login --profile unicloud-lab
+aws sts get-caller-identity --profile unicloud-lab
+```
+
+Khi được hỏi, nhập SSO start URL và SSO Region do quản trị viên cung cấp, rồi chọn account và permission set dành cho workshop. Nếu môi trường không có SSO, dùng profile của danh tính IAM đã được phê duyệt. Lệnh cuối phải trả về đúng account ID dự định triển khai; dừng lại nếu sai tài khoản. Không chia sẻ access key hoặc chép credentials vào repository.
 
 ## 2. Tạo Lambda execution role
 
 SAM template nhận role ARN qua parameter `LambdaExecutionRoleArn`, vì vậy tạo role trước khi deploy.
 
-1. Mở IAM Console → Roles → Create role. Chọn trusted entity AWS service và use case Lambda.
-2. Gắn policy `AWSLambdaBasicExecutionRole` để Lambda có thể ghi CloudWatch Logs.
-3. Đặt tên role development dễ nhận biết, ví dụ `unicloud-dms-lambda-dev`, rồi sao chép ARN của role. Ở bước khởi tạo, quyền ghi log là đủ để CloudFormation tạo Lambda; không gắn `AdministratorAccess`.
+
+### Bước 1: Tạo role tin cậy dịch vụ Lambda
+
+Trong AWS Console, mở **IAM → Roles → Create role**. Chọn trusted entity **AWS service**, rồi chọn use case **Lambda**. Thao tác này tạo trust relationship để Lambda có thể sử dụng role. Nếu đã được cấp sẵn role riêng cho workshop, dùng role đó và bỏ qua bước tạo mới.
+
+### Bước 2: Cấp quyền ghi CloudWatch Logs
+
+Trong danh sách permissions, tìm và gắn AWS-managed policy `AWSLambdaBasicExecutionRole`. Quyền này cho phép function ghi log; quyền truy cập bảng, bucket và User Pool sẽ được thêm riêng sau khi deploy.
+
+### Bước 3: Đặt tên và sao chép ARN
+
+Đặt tên role riêng cho lab, ví dụ `unicloud-dms-lambda-dev`, tạo role rồi mở trang chi tiết để sao chép **ARN**. Giữ ARN này để dùng ở bước deploy. Không gắn `AdministratorAccess`.
 
 ## 3. Kiểm tra và triển khai CloudFormation stack
 
-1. Mở terminal tại thư mục `backend` của repository. Chạy kiểm tra template và build package Lambda:
 
-   ```powershell
-   sam validate --lint
-   sam build
-   ```
+### Bước 1: Kiểm tra và build backend
 
-2. Thay `<ACCOUNT_ID>` và `<ROLE_NAME>` trong lệnh dưới đây trước khi chạy. Dùng một tên stack riêng cho lab; SAM sẽ dùng bucket artifact được quản lý để tải gói triển khai lên S3. Tham số frontend origin bên dưới cho phép chạy local trước; bổ sung origin Amplify ở lần cập nhật stack sau khi đã có domain frontend.
+Mở PowerShell tại thư mục `backend` của repo ứng dụng `serverless-document-management`. Chạy hai lệnh sau. Lệnh thứ nhất kiểm tra SAM template; lệnh thứ hai build mã Lambda trước khi tải lên AWS:
 
-   ```powershell
-   sam deploy `
+```powershell
+sam validate --lint
+sam build
+```
+
+
+### Bước 2: Điền account ID và role vào lệnh deploy
+
+Thay `<ACCOUNT_ID>` bằng account ID vừa xác nhận từ AWS CLI và `<ROLE_NAME>` bằng tên role Lambda đã tạo. Có thể đổi `unicloud-dms-workshop` thành tên stack riêng của mình, nhưng phải dùng nhất quán ở các bước sau. `--resolve-s3` yêu cầu SAM quản lý bucket artifact để tải gói deploy; đây không phải bucket lưu tài liệu. Các origin trong lệnh cho phép frontend chạy trên máy local. Sau khi có domain Amplify, sẽ thêm domain đó ở mục 5.
+
+```powershell
+sam deploy `
      --stack-name unicloud-dms-workshop `
      --region ap-southeast-1 `
      --profile unicloud-lab `
      --resolve-s3 `
      --confirm-changeset `
      --parameter-overrides "ParameterKey=LambdaExecutionRoleArn,ParameterValue=arn:aws:iam::<ACCOUNT_ID>:role/<ROLE_NAME> ParameterKey=AllowedFrontendOrigins,ParameterValue=http://localhost:5173,http://127.0.0.1:5173"
-   ```
+```
 
-3. Đọc change set do SAM/CloudFormation hiển thị. Chỉ xác nhận khi stack name, Region, tài nguyên và chi phí dự kiến đúng với lab. Theo dõi trạng thái tại AWS Console → CloudFormation → Stacks; chờ `CREATE_COMPLETE` hoặc `UPDATE_COMPLETE`.
-4. Mở tab Outputs của stack và lưu các giá trị `ApiBaseUrl`, `UserPoolId`, `UserPoolClientId`, `DocumentsTableName`, `SharesTableName`, `FavoritesTableName` và `DocumentsBucketName` vào ghi chú riêng. Không lưu token, password hay credentials.
+
+### Bước 3: Kiểm tra change set và chờ stack hoàn tất
+
+Đọc change set do SAM/CloudFormation hiển thị. So lại account, tên stack, Region, role ARN và các tài nguyên sắp tạo. Chỉ xác nhận nếu đúng lab. Sau đó mở **CloudFormation → Stacks**, chọn stack và chờ `CREATE_COMPLETE`. Nếu thấy `CREATE_FAILED` hoặc `ROLLBACK_COMPLETE`, mở tab **Events**, đọc resource đầu tiên báo lỗi và xử lý trước khi deploy lại.
+
+### Bước 4: Lưu Outputs để dùng cho các phần tiếp theo
+
+Trong trang stack, mở tab **Outputs**. Lưu `ApiBaseUrl`, `UserPoolId`, `UserPoolClientId`, `DocumentsTableName`, `SharesTableName`, `FavoritesTableName` và `DocumentsBucketName` vào ghi chú riêng. Đây là các giá trị riêng của stack mới; không lấy ID/URL từ ảnh minh chứng. Không lưu token, password hay credentials.
 
 Stack tạo Cognito User Pool và public app client, HTTP API có JWT authorizer, hai Lambda function, ba bảng DynamoDB on-demand, bucket S3 riêng tư mã hóa SSE-S3, cùng các permission/stage liên quan. Artifact bucket của SAM là tài nguyên triển khai riêng, không phải bucket tài liệu của ứng dụng.
 
 ## 4. Hoàn thiện quyền runtime của Lambda
 
-Sau khi CloudFormation tạo xong các resource, dùng outputs để điền chính xác account ID, Region, tên ba bảng, Documents bucket và User Pool ID vào `backend/iam/lambda-runtime-policy.template.json`. Gắn policy đã hoàn thiện vào role Lambda trong IAM. Policy chỉ cấp thao tác cần thiết trên các bảng/index của ứng dụng, prefix object `users/*/documents/*` trong bucket và Cognito User Pool này. Đây là bước sau deploy vì bucket và User Pool ID do CloudFormation sinh ra. Sau đó mới tiếp tục kết nối frontend.
+Sau khi CloudFormation tạo stack, role hiện chỉ có quyền ghi log. Hoàn thiện policy runtime để Lambda có thể truy cập đúng các bảng, object và User Pool của stack. Làm bước này sau deploy vì bucket và User Pool ID được CloudFormation sinh ra.
+
+### Bước 1: Điền thông tin của stack vào policy mẫu
+
+Mở `backend/iam/lambda-runtime-policy.template.json` trong repo ứng dụng. Thay placeholder bằng các giá trị dưới đây:
+
+- `<REGION>`: Region đã chọn, ví dụ `ap-southeast-1`.
+- `<ACCOUNT_ID>`: account ID từ `aws sts get-caller-identity`.
+- `<STACK_NAME>`: giá trị đã dùng cho `--stack-name`.
+- `<BUCKET_NAME>`: Output `DocumentsBucketName`.
+- `<USER_POOL_ID>`: Output `UserPoolId`.
+
+Tên bảng theo mẫu `<STACK_NAME>-documents`, `<STACK_NAME>-shares` và `<STACK_NAME>-favorites`. Đối chiếu với Outputs/Resources trước khi lưu, không đoán tên. Lưu policy đã điền thành file riêng và giữ file `.template.json` nguyên trạng.
+
+### Bước 2: Kiểm tra phạm vi quyền trước khi gắn
+
+Mở file policy đã điền, xác nhận không còn chuỗi placeholder dạng `<...>` và JSON vẫn hợp lệ. Policy chỉ nên cho phép các thao tác cần thiết trên ba bảng/index của ứng dụng, prefix `users/*/documents/*` của bucket và đúng User Pool này. Không đổi Resource thành `*`.
+
+### Bước 3: Gắn policy vào Lambda execution role
+
+Trong AWS Console, mở **IAM → Roles → role Lambda của workshop → Add permissions → Create inline policy → JSON**. Dán nội dung policy đã điền, chọn **Next**, đặt tên `DmsDocumentRuntimeAccess`, rồi tạo policy. Quay lại trang role và kiểm tra có cả `AWSLambdaBasicExecutionRole` lẫn `DmsDocumentRuntimeAccess`.
+
+Nếu quản trị viên đã gắn policy này cho role được cấp sẵn, chỉ kiểm tra nội dung và không tạo thêm bản trùng. Sau bước này, Lambda có quyền runtime để xử lý các request tài liệu.
 
 ## 5. Nối frontend và hosting
 
-1. Tại repository gốc, sao chép `.env.example` thành `.env.local` rồi điền Region, User Pool ID, App Client ID, API URL và Documents bucket từ CloudFormation Outputs. Đây là cấu hình công khai cho frontend, không đặt AWS secret key vào các biến `VITE_*`. Không commit `.env.local`.
-2. Chạy `npm ci`, `npm run build`, rồi `npm run dev` để phục vụ frontend local. Các thao tác với Cognito và API dùng được khi `.env.local` chứa đúng Outputs.
-3. Kết nối Amplify Hosting với repository ứng dụng và branch cần phát hành. Dùng `npm ci`, `npm run build`, artifact directory `dist`; cấu hình biến `VITE_*` bằng cùng outputs của stack.
-4. Sau khi Amplify cấp domain, cập nhật parameter `AllowedFrontendOrigins` trong CloudFormation/SAM để bao gồm chính xác `https://<amplify-domain>`, đồng thời giữ các origin local cần thiết. CORS ở API và S3 phải khớp origin thực tế.
+
+### Bước 1: Tạo file cấu hình frontend local
+
+Tại thư mục gốc repo ứng dụng, sao chép `.env.example` thành `.env.local`. Điền các biến theo CloudFormation Outputs; không để nguyên giá trị `replace-with-...`:
+
+| Biến | Giá trị cần điền |
+| --- | --- |
+| `VITE_AWS_REGION` | Region của stack |
+| `VITE_COGNITO_USER_POOL_ID` | Output `UserPoolId` |
+| `VITE_COGNITO_USER_POOL_CLIENT_ID` | Output `UserPoolClientId` |
+| `VITE_API_BASE_URL` | Output `ApiBaseUrl` |
+| `VITE_S3_BUCKET_NAME` | Output `DocumentsBucketName` |
+
+Các biến `VITE_*` được đóng gói vào trình duyệt nên chỉ điền ID/URL công khai, không thêm AWS secret key. Không commit `.env.local`.
+
+### Bước 2: Cài package và chạy frontend trên máy
+
+Từ thư mục gốc repo ứng dụng, chạy lần lượt `npm ci`, `npm run build` và `npm run dev`. Mở địa chỉ được Vite in ra, thường là `http://localhost:5173`. Sau khi sửa `.env.local`, dừng và khởi động lại Vite. Nếu đăng nhập/API lỗi, kiểm tra lại các giá trị Output trước khi tiếp tục.
+
+### Bước 3: Kết nối repository ứng dụng với Amplify
+
+Trong AWS Console, mở **AWS Amplify → Create new app → Host web app**, kết nối GitHub, chọn repository ứng dụng `serverless-document-management` và branch `main`. Xác nhận build command `npm ci && npm run build` và output directory `dist`. Thêm năm biến `VITE_*` ở bước 1 bằng Outputs của cùng stack. Không chọn repository báo cáo `aws`.
+
+### Bước 4: Thêm domain Amplify vào CORS
+
+Sau khi Amplify cấp domain HTTPS, sao chép origin đầy đủ, chỉ gồm scheme và hostname, ví dụ `https://main.xxxxx.amplifyapp.com`. Deploy lại stack với `AllowedFrontendOrigins` chứa origin chính xác này và giữ origin local nếu còn cần. Không thêm dấu `/` ở cuối. API Gateway và S3 CORS phải cùng cho phép origin đó; CORS không thay thế xác thực hay phân quyền.
 
 ## 6. Xem tài nguyên và chi phí
 

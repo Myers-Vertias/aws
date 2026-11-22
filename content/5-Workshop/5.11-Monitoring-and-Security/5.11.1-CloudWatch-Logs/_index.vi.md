@@ -16,12 +16,32 @@ Quan sát API access logs, Lambda runtime logs/metrics và cảnh báo lỗi mà
 
 ## Các bước thực hiện
 
-1. Trong AWS Console chọn `ap-southeast-1` → CloudWatch → Logs → Log groups; mở `/aws/lambda/<stack>-documents` hoặc `/aws/lambda/<stack>-health`.
-2. Chọn log stream gần thời điểm thao tác và đọc `START`, `END`, `REPORT`; dùng thời gian/function request ID để tìm lượt chạy. Không coi Lambda request ID là API Gateway request ID.
-3. Đặt retention phù hợp ở tab Retention để log không lưu vô thời hạn. Lambda tự xuất metrics `Invocations`, `Errors`, `Duration` trong CloudWatch → Metrics → AWS/Lambda ([tài liệu metrics Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
-4. Để có email khi Lambda lỗi, mở CloudWatch → Alarms → Create alarm → chọn `AWS/Lambda` / FunctionName / `Errors`; đặt thống kê Sum, period phù hợp, ngưỡng `>= 1`, rồi chọn hoặc tạo SNS email topic. Người nhận phải xác nhận subscription email trước khi nhận thông báo ([hướng dẫn SNS email alarm](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarm có thể phát sinh chi phí.
-5. Không log authorization header, JWT đầy đủ, presigned URL, nội dung file hay dữ liệu cá nhân nhạy cảm.
-6. Với HTTP API, tạo CloudWatch log group riêng, ví dụ `/aws/apigateway/<stack>-access`, và đặt retention. Trong API Gateway mở API → Monitor → Logging, chọn stage `$default` → Select → Edit; bật Access logging, nhập ARN của log group và chọn định dạng JSON có `$context.requestId`, `$context.routeKey`, `$context.httpMethod` và `$context.status`. Lưu cấu hình. Sau khi API nhận request, mở log group để xem access log. HTTP API access log ID và Lambda runtime request ID là hai ID khác nhau, không thể coi là cùng một ID.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Trong AWS Console chọn ap-southeast-1 → CloudWatch → Logs
+
+Trong AWS Console chọn `ap-southeast-1` → CloudWatch → Logs → Log groups; mở `/aws/lambda/<stack>-documents` hoặc `/aws/lambda/<stack>-health`.
+
+### Bước 2: Chọn log stream gần thời điểm thao tác và đọc START, END
+
+Chọn log stream gần thời điểm thao tác và đọc `START`, `END`, `REPORT`; dùng thời gian/function request ID để tìm lượt chạy. Không coi Lambda request ID là API Gateway request ID.
+
+### Bước 3: Đặt retention phù hợp ở tab Retention để log không lưu vô
+
+Đặt retention phù hợp ở tab Retention để log không lưu vô thời hạn. Lambda tự xuất metrics `Invocations`, `Errors`, `Duration` trong CloudWatch → Metrics → AWS/Lambda ([tài liệu metrics Lambda](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
+
+### Bước 4: Để có email khi Lambda lỗi, mở CloudWatch → Alarms →
+
+Để có email khi Lambda lỗi, mở CloudWatch → Alarms → Create alarm → chọn `AWS/Lambda` / FunctionName / `Errors`; đặt thống kê Sum, period phù hợp, ngưỡng `>= 1`, rồi chọn hoặc tạo SNS email topic. Người nhận phải xác nhận subscription email trước khi nhận thông báo ([hướng dẫn SNS email alarm](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarm có thể phát sinh chi phí.
+
+### Bước 5: Không log authorization header, JWT đầy đủ, presigned
+
+Không log authorization header, JWT đầy đủ, presigned URL, nội dung file hay dữ liệu cá nhân nhạy cảm.
+
+### Bước 6: Với HTTP API, tạo CloudWatch log group riêng, ví dụ
+
+Với HTTP API, tạo CloudWatch log group riêng, ví dụ `/aws/apigateway/<stack>-access`, và đặt retention. Trong API Gateway mở API → Monitor → Logging, chọn stage `$default` → Select → Edit; bật Access logging, nhập ARN của log group và chọn định dạng JSON có `$context.requestId`, `$context.routeKey`, `$context.httpMethod` và `$context.status`. Lưu cấu hình. Sau khi API nhận request, mở log group để xem access log. HTTP API access log ID và Lambda runtime request ID là hai ID khác nhau, không thể coi là cùng một ID.
 
 ## Vị trí ảnh chụp màn hình
 

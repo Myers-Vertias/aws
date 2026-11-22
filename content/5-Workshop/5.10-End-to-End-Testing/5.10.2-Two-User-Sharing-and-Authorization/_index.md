@@ -16,10 +16,24 @@ Verify that an owner can share a document with another account, and that the rec
 
 ## Steps performed
 
-1. Sign in as the document owner and upload a document.
-2. Share the document with the recipient account's email address.
-3. Sign in as the recipient account.
-4. Open **Shared With Me**, confirm the document appears, and select Download.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Sign in as the document owner and upload a document
+
+Sign in as the document owner and upload a document.
+
+### Step 2: Share the document with the recipient account's email
+
+Share the document with the recipient account's email address.
+
+### Step 3: Sign in as the recipient account
+
+Sign in as the recipient account.
+
+### Step 4: Open Shared With Me, confirm the document appears, and
+
+Open **Shared With Me**, confirm the document appears, and select Download.
 
 ## Verified result
 

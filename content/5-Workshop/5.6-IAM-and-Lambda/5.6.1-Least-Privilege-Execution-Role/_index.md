@@ -16,10 +16,24 @@ Create a dedicated Lambda execution role and grant permissions according to the 
 
 ## Implementation steps
 
-1. Create the execution role as described in section 5.1.3, with Lambda as the trusted entity and `AWSLambdaBasicExecutionRole` for CloudWatch Logs. Copy its ARN because SAM requires `LambdaExecutionRoleArn`.
-2. Deploy the stack to create the table, bucket, and User Pool names. Then replace the placeholders in `backend/iam/lambda-runtime-policy.template.json` with exact ARNs/names from Outputs and attach the runtime policy to the role.
-3. Open IAM → Roles → the Lambda role → Permissions to review the policy. Keep permissions scoped to the three DynamoDB tables/indexes, document prefix in S3, and this project's User Pool.
-4. The deployment identity needs `iam:PassRole` scoped to this role and Lambda. Do not attach broad IAM permissions to the Lambda role.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: Create the execution role as described in section 5.1.3
+
+Create the execution role as described in section 5.1.3, with Lambda as the trusted entity and `AWSLambdaBasicExecutionRole` for CloudWatch Logs. Copy its ARN because SAM requires `LambdaExecutionRoleArn`.
+
+### Step 2: Deploy the stack to create the table, bucket, and User
+
+Deploy the stack to create the table, bucket, and User Pool names. Then replace the placeholders in `backend/iam/lambda-runtime-policy.template.json` with exact ARNs/names from Outputs and attach the runtime policy to the role.
+
+### Step 3: Open IAM → Roles → the Lambda role → Permissions to
+
+Open IAM → Roles → the Lambda role → Permissions to review the policy. Keep permissions scoped to the three DynamoDB tables/indexes, document prefix in S3, and this project's User Pool.
+
+### Step 4: The deployment identity needs iam:PassRole scoped to this
+
+The deployment identity needs `iam:PassRole` scoped to this role and Lambda. Do not attach broad IAM permissions to the Lambda role.
 
 ## Screenshots
 

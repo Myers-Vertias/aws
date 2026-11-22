@@ -16,12 +16,32 @@ Inspect API access logs, Lambda runtime logs/metrics, and error alarms without e
 
 ## Implementation steps
 
-1. In the AWS Console, select `ap-southeast-1` → CloudWatch → Logs → Log groups; open `/aws/lambda/<stack>-documents` or `/aws/lambda/<stack>-health`.
-2. Select the log stream around the operation time and read `START`, `END`, and `REPORT`; use time/function request ID to locate an invocation. Do not treat the Lambda request ID as the API Gateway request ID.
-3. Set suitable retention in the Retention tab so logs are not stored indefinitely. Lambda publishes `Invocations`, `Errors`, and `Duration` in CloudWatch → Metrics → AWS/Lambda ([Lambda metrics guide](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
-4. To receive an email when Lambda errors occur, open CloudWatch → Alarms → Create alarm → select `AWS/Lambda` / FunctionName / `Errors`; use Sum, a suitable period, threshold `>= 1`, then select or create an SNS email topic. Recipients must confirm the email subscription ([SNS email alarm guide](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarms may incur charges.
-5. Do not log authorization headers, full JWTs, presigned URLs, file contents, or sensitive personal data.
-6. For an HTTP API, create a dedicated CloudWatch log group, for example `/aws/apigateway/<stack>-access`, and set its retention. In API Gateway, open the API → Monitor → Logging, select the `$default` stage → Select → Edit; enable Access logging, enter the log group ARN, and choose a JSON format containing `$context.requestId`, `$context.routeKey`, `$context.httpMethod`, and `$context.status`. Save the configuration. After the API receives a request, open the log group to inspect the access event. HTTP API access-log IDs and Lambda runtime request IDs are distinct and should not be treated as the same ID.
+Follow the steps in order. Read the action, its explanation, and the expected check before moving to the next step.
+
+
+### Step 1: In the AWS Console, select ap-southeast-1 → CloudWatch →
+
+In the AWS Console, select `ap-southeast-1` → CloudWatch → Logs → Log groups; open `/aws/lambda/<stack>-documents` or `/aws/lambda/<stack>-health`.
+
+### Step 2: Select the log stream around the operation time and read
+
+Select the log stream around the operation time and read `START`, `END`, and `REPORT`; use time/function request ID to locate an invocation. Do not treat the Lambda request ID as the API Gateway request ID.
+
+### Step 3: Set suitable retention in the Retention tab so logs are
+
+Set suitable retention in the Retention tab so logs are not stored indefinitely. Lambda publishes `Invocations`, `Errors`, and `Duration` in CloudWatch → Metrics → AWS/Lambda ([Lambda metrics guide](https://docs.aws.amazon.com/lambda/latest/dg/monitoring-metrics.html)).
+
+### Step 4: To receive an email when Lambda errors occur, open
+
+To receive an email when Lambda errors occur, open CloudWatch → Alarms → Create alarm → select `AWS/Lambda` / FunctionName / `Errors`; use Sum, a suitable period, threshold `>= 1`, then select or create an SNS email topic. Recipients must confirm the email subscription ([SNS email alarm guide](https://docs.aws.amazon.com/sns/latest/dg/sns-monitoring-using-cloudwatch.html)). Alarms may incur charges.
+
+### Step 5: Do not log authorization headers, full JWTs, presigned
+
+Do not log authorization headers, full JWTs, presigned URLs, file contents, or sensitive personal data.
+
+### Step 6: For an HTTP API, create a dedicated CloudWatch log group
+
+For an HTTP API, create a dedicated CloudWatch log group, for example `/aws/apigateway/<stack>-access`, and set its retention. In API Gateway, open the API → Monitor → Logging, select the `$default` stage → Select → Edit; enable Access logging, enter the log group ARN, and choose a JSON format containing `$context.requestId`, `$context.routeKey`, `$context.httpMethod`, and `$context.status`. Save the configuration. After the API receives a request, open the log group to inspect the access event. HTTP API access-log IDs and Lambda runtime request IDs are distinct and should not be treated as the same ID.
 
 ## Observed log evidence
 

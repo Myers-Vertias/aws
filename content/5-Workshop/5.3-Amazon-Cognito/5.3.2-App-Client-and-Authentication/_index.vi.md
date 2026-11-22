@@ -1,5 +1,5 @@
 ---
-title: "Cấu hình App Client và kiểm thử xác thực"
+title: "Kiểm tra App Client và xác thực"
 date: 2026-10-16
 weight: 2
 chapter: false
@@ -12,14 +12,28 @@ Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan s�
 
 ## Mục tiêu
 
-Cấu hình app client an toàn cho trình duyệt và xác minh luồng đăng ký/đăng nhập sau tích hợp.
+Kiểm tra app client SPA do SAM tạo và xác minh luồng đăng ký/đăng nhập sau tích hợp.
 
 ## Các bước thực hiện
 
-1. Mở User Pool do stack tạo → App integration → App clients, rồi chọn web client thuộc stack. Template đã tạo public SPA client với `GenerateSecret: false`; không tạo client secret.
-2. Lấy Client ID từ CloudFormation Outputs. Nếu ứng dụng dùng managed login thì khai báo callback/sign-out URL chính xác; frontend hiện tại gọi Cognito User Pools API trực tiếp nên không dùng redirect callback.
-3. Điền Pool ID, Client ID và Region vào `.env.local` theo mục 5.8.1. Service xác thực gọi Cognito cho đăng ký, xác nhận email, đăng nhập, làm mới session và đăng xuất.
-4. Giữ access/ID token trong phiên ứng dụng, không ghi token đầy đủ vào log, ảnh hay Git.
+Hoàn thành từng bước theo thứ tự. Đọc thao tác, phần giải thích và kết quả cần xác nhận trước khi chuyển sang bước kế tiếp.
+
+
+### Bước 1: Mở User Pool do stack tạo → App integration → App
+
+Mở User Pool do stack tạo → App integration → App clients, rồi chọn web client thuộc stack. Template đã tạo public SPA client với `GenerateSecret: false`; không tạo client secret.
+
+### Bước 2: Lấy Client ID từ CloudFormation Outputs
+
+Lấy Client ID từ CloudFormation Outputs. Nếu ứng dụng dùng managed login thì khai báo callback/sign-out URL chính xác; frontend hiện tại gọi Cognito User Pools API trực tiếp nên không dùng redirect callback.
+
+### Bước 3: Điền Pool ID, Client ID và Region vào .env.local theo mục
+
+Điền Pool ID, Client ID và Region vào `.env.local` theo mục 5.8.1. Service xác thực gọi Cognito cho đăng ký, xác nhận email, đăng nhập, làm mới session và đăng xuất.
+
+### Bước 4: Giữ access/ID token trong phiên ứng dụng, không ghi token
+
+Giữ access/ID token trong phiên ứng dụng, không ghi token đầy đủ vào log, ảnh hay Git.
 
 ## Cấu hình đã triển khai và xác minh
 
