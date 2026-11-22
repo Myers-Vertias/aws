@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.4. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Verify the tables and indexes created by SAM for owner document lists, sharing, and per-user favorites.

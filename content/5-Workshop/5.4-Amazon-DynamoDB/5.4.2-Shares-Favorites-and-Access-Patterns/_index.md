@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.4.2 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Verify the Shares and Favorites tables created by SAM as user-specific relationships and review their query paths.

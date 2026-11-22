@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.3.2 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra app client SPA do SAM tạo và xác minh luồng đăng ký/đăng nhập sau tích hợp.

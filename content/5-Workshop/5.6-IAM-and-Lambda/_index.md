@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Implement least-privilege roles and server-side handlers for metadata, file operations, document features, and authorization.

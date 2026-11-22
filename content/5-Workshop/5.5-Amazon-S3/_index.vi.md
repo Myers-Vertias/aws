@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra bucket file riêng tư do SAM tạo và cấu hình CORS để trình duyệt truyền file bằng presigned URL ngắn hạn.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.10. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Test core document flows, user isolation, sharing, Trash, and bilingual UI using real test accounts.

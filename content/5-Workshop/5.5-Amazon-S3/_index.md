@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.5. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Verify the private file bucket created by SAM and configure CORS for browser transfers using short-lived presigned URLs.

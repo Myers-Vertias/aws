@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.2. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Thống nhất kiến trúc mục tiêu, cách truy vấn DynamoDB, API contract và quy tắc phân quyền trước khi tạo tài nguyên AWS.

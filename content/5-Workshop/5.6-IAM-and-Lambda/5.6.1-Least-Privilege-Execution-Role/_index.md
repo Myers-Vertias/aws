@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.6.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Create a dedicated Lambda execution role and grant permissions according to the function's actual needs.

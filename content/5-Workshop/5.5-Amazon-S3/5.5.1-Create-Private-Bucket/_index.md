@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.5.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Verify the document bucket created by SAM has public access blocked and encryption enabled.

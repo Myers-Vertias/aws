@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.4.2 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra các bảng quan hệ Shares và Favorites do SAM tạo, rồi xác minh access pattern.

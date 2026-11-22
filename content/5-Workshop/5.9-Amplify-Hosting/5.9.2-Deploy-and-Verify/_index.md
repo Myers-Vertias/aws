@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.9.2 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Deploy the frontend and verify its real authentication and API calls.

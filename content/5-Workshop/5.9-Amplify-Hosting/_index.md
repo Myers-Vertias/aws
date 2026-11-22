@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.9. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Host the React/Vite frontend from its own application repository and verify the deployed HTTPS site.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.11. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Dùng CloudWatch log để truy vết lỗi và rà soát bảo mật, policy truy cập cùng chi phí tài nguyên.

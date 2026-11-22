@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.3. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Verify the User Pool and public SPA app client created by SAM, then test real authentication.

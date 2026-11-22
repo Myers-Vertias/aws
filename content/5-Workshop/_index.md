@@ -23,10 +23,6 @@ For a first-time setup, follow the sequence below. Sections 5.3–5.7 explain an
 
 The screenshots in section 5 record a previous completed deployment. The project's AWS resources were deleted on November 19, 2026. Learners must deploy a new stack in their own account/Region and must not reuse IDs or URLs shown in screenshots.
 
-{{% notice warning %}}
-**Implementation status (15 November 2026):** The `dms-dev` application is deployed in `ap-southeast-1`, and the React frontend is available through Amplify. Real Cognito sign-in, authenticated API access, S3 upload/download, document metadata, Favorites, Trash/restore, and two-user sharing have been observed.
-{{% /notice %}}
-
 ## Completed and verified
 
 - Created the Cognito User Pool and public web app client; signed up and signed in with real Cognito accounts.

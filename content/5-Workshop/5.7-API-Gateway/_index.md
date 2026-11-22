@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Expose the Lambda handlers through protected HTTP routes and verify valid and denied requests.

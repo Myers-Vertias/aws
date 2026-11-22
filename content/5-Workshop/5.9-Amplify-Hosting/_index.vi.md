@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.9. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Host frontend React/Vite từ repository của ứng dụng và xác minh website HTTPS đã triển khai.

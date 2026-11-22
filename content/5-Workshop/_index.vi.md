@@ -23,10 +23,6 @@ Nếu lần đầu cài đặt, hãy đọc theo thứ tự dưới đây. Các 
 
 Các ảnh ở phần 5 ghi nhận cấu hình của lần triển khai đã hoàn tất trước đây. Tài nguyên AWS của dự án được dọn ngày 19/11/2026, nên người làm theo cần deploy stack mới bằng account/Region của mình và không dùng lại ID/URL trong ảnh.
 
-{{% notice warning %}}
-**Trạng thái triển khai (15 tháng 11 năm 2026):** Ứng dụng `dms-dev` đã triển khai tại `ap-southeast-1`; frontend React đang được phục vụ qua Amplify. Đã quan sát đăng nhập Cognito thật, gọi API có xác thực, upload/download S3, lưu metadata, Favorites, Thùng rác/khôi phục và chia sẻ giữa hai tài khoản.
-{{% /notice %}}
-
 ## Đã triển khai và xác minh
 
 - Tạo Cognito User Pool và public web app client; đăng ký và đăng nhập bằng tài khoản Cognito thật.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.9.1 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kết nối Amplify tới repository chứa UniCloud DMS, không phải repository tài liệu workshop.

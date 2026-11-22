@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.1.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Prepare a development machine, run the frontend, and confirm that the backend can start locally before configuring AWS resources.

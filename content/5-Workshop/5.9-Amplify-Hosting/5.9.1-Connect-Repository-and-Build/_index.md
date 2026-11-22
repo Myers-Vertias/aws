@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.9.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Connect Amplify to the repository containing UniCloud DMS, not the workshop documentation repository.

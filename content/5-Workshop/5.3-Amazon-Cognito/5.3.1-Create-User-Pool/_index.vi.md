@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.3.1 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra User Pool do SAM tạo để xác thực tài khoản UniCloud DMS.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.5.1 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra bucket tài liệu do SAM tạo, bảo đảm public access bị chặn và mã hóa được bật.

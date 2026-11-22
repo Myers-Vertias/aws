@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.8. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Thay mock service bằng tích hợp Cognito/API nhưng giữ nguyên các trang và luồng React hiện có.

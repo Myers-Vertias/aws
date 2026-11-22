@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.8. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Replace mock services with Cognito/API integrations while preserving the existing React pages and workflows.

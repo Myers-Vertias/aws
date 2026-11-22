@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.11. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Use CloudWatch logs to trace failures and review security, access policies, and resource costs.

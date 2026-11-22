@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.6. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Triển khai role đặc quyền tối thiểu và handler phía server cho metadata, file, feature tài liệu và phân quyền.

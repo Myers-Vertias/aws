@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.12.1 </b> "
 ---
 
-{{% notice info %}}
-Trang này ghi nhận cấu hình đã triển khai và kết quả đã quan sát; hành vi chưa xác minh được nêu rõ.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Thu thập ảnh thật và bản ghi kiểm thử trước khi xóa tài nguyên.

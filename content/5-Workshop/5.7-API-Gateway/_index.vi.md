@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.7. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Cung cấp Lambda handler qua HTTP route được bảo vệ và xác minh request hợp lệ cũng như request bị từ chối.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.12. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Lưu minh chứng workshop thực tế trước, sau đó chỉ xóa tài nguyên lab và kiểm tra chi phí còn có thể phát sinh.

@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.7.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Verify the API Gateway routes and Lambda integrations created by SAM.

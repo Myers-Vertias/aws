@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Chuẩn bị ứng dụng React/Vite, công cụ phát triển, tài khoản AWS, Region và kiểm soát chi phí trước khi tạo tài nguyên.

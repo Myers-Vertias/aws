@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.4. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra các bảng và index do SAM tạo để hỗ trợ danh sách tài liệu theo owner, chia sẻ và yêu thích theo người dùng.

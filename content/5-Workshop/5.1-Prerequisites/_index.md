@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.1. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Prepare the local React/Vite app, development tools, AWS account, Region, and cost controls before creating resources.

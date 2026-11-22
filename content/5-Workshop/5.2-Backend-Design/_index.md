@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.2. </b> "
 ---
 
-{{% notice info %}}
-This section describes the lab procedure. Confirm AWS resources and results only after they have been created and verified.
-{{% /notice %}}
-
 ## Objective
 
 Agree on the target architecture, DynamoDB access patterns, API contract, and authorization rules before creating AWS resources.

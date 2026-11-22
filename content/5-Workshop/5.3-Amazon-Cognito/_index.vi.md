@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.3. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm tra User Pool và app client SPA do SAM tạo, sau đó kiểm thử xác thực thật.

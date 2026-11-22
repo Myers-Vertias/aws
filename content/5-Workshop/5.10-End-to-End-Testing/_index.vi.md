@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.10. </b> "
 ---
 
-{{% notice info %}}
-Nội dung mô tả quy trình thực hành. Chỉ xác nhận AWS resource và kết quả sau khi đã thực hiện và kiểm tra.
-{{% /notice %}}
-
 ## Mục tiêu
 
 Kiểm thử luồng tài liệu, tách biệt người dùng, chia sẻ, Thùng rác và UI song ngữ bằng tài khoản thử nghiệm thật.

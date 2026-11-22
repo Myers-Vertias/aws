@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.3.2 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Verify the browser-safe SPA app client created by SAM and test the sign-up/sign-in flow after integration.

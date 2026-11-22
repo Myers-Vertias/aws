@@ -6,10 +6,6 @@ chapter: false
 pre: " <b> 5.12.1 </b> "
 ---
 
-{{% notice info %}}
-This page records the deployed implementation and observed results. Any unverified behavior is identified explicitly.
-{{% /notice %}}
-
 ## Objective
 
 Collect genuine screenshots and test records before deleting resources.
