@@ -80,7 +80,6 @@ Lambda ghi application log có cấu trúc vào CloudWatch. Access log và metri
 
 ![Kiến trúc AWS đã triển khai cho UniCloud DMS](https://raw.githubusercontent.com/Myers-Vertias/aws/main/static/images/5-Workshop/5.2-Backend-Design/5.2.1-platform-architecture.jpg)
 
-[Mở file draw.io để chỉnh sửa](/images/5-Workshop/5.2-Backend-Design/5.2.1-architecture-deployed.drawio)
 
 Sơ đồ tách luồng người dùng khỏi luồng deploy GitHub-to-Amplify. Sơ đồ thể hiện JWT do Cognito cấp, các route của API Gateway HTTP API, Lambda documents và health, cả ba DynamoDB table, S3 private với trình duyệt truyền file trực tiếp qua presigned URL, Lambda execution role dùng chung và runtime log CloudWatch đã quan sát. Báo cáo không khẳng định đã đối chiếu API Gateway access log với từng route.
 
